@@ -1,6 +1,7 @@
 import React from "react";
-import { Box, Button, Heading, Grommet } from "grommet";
+import { Box, Button, Grommet, Heading } from "grommet";
 import AppBar from "../components/AppBar";
+import RegistrationForm from "../components/RegistrationForm";
 import { Notification } from "grommet-icons";
 
 const theme = {
@@ -27,19 +28,15 @@ function Register() {
           </Heading>
           <Button icon={<Notification />} onClick={() => {}} />
         </AppBar>
-        <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
-          <Box flex align="center" justify="center">
-            Register Page
-          </Box>
-          <Box
-            width="medium"
-            background="light-2"
-            elevation="small"
-            align="center"
-            justify="center"
-          >
-            sidebar
-          </Box>
+
+        <Box
+          direction="row"
+          overflow={{ horizontal: "hidden" }}
+          flex
+          align="center"
+          justify="center"
+        >
+          <RegistrationForm />
         </Box>
       </Box>
     </Grommet>

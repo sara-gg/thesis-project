@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Grommet } from "grommet";
 import Login from "./views/Login";
 import Register from "./views/Register";
 import Logout from "./views/Logout";
