@@ -10,7 +10,7 @@ import {
 } from "grommet";
 import { Hide, View } from "grommet-icons";
 import { connect } from "react-redux";
-import login from "../ApiService/ApiService";
+import ApiService from "../ApiService/ApiService";
 
 type Props = {
   isAuthenticated: boolean;
@@ -20,6 +20,7 @@ const initialState = {
   email: "",
   password: "",
 };
+
 const LoginForm = ({
   isAuthenticated,
   setIsAuthenticated,
@@ -38,7 +39,7 @@ const LoginForm = ({
     e.preventDefault();
     const { email, password } = state;
     const user = { email, password };
-    const res = await login(user);
+    const res = await ApiService.login(user);
 
     if (res.error) {
       alert(`${res.message}`);
