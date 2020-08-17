@@ -15,10 +15,6 @@ store.subscribe(() => {
   console.log(store.getState());
 });
 
-// store.dispatch({ type: "INCREMENT" });
-// store.dispatch({ type: "INCREMENT" });
-// store.dispatch({ type: "DECREMENT" });
-
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

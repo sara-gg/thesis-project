@@ -11,8 +11,7 @@ import {
 } from "grommet";
 import { Hide, View } from "grommet-icons";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import registerUser from "../ApiService/ApiService";
+import ApiService from "../ApiService/ApiService";
 
 type Props = {
   isAuthenticated: boolean;
@@ -71,7 +70,7 @@ const RegistrationForm = ({
       birthdate,
       gender,
     };
-    const res = await registerUser(user);
+    const res = await ApiService.registerUser(user);
 
     if (res.error) {
       alert(`${res.message}`);
