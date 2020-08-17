@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -10,33 +10,86 @@ import {
   TextInput,
 } from "grommet";
 import { Hide, View } from "grommet-icons";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import registerUser from "../ApiService/ApiService";
 
-function RegistrationForm() {
-  const [name, setName] = React.useState("");
-  const [surname, setSurname] = React.useState("");
-  const [username, setUsername] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [revealPassword, setRevealPassword] = React.useState(false);
-  const [birthdate, setBirthdate] = React.useState("");
-  const [gender, setGender] = React.useState("");
+type Props = {
+  isAuthenticated: boolean;
+  setIsAuthenticated: (b: boolean) => void;
+};
+
+const initialState = {
+  name: "",
+  surname: "",
+  username: "",
+  email: "",
+  password: "",
+  birthdate: "",
+  gender: "",
+};
+
+const RegistrationForm = ({
+  isAuthenticated,
+  setIsAuthenticated,
+}: Props): JSX.Element => {
+  const [revealPassword, setRevealPassword] = useState(false);
+  const [state, setState] = useState(initialState);
+  // const [name, setName] = useState("");
+  // const [surname, setSurname] = useState("");
+  // const [username, setUsername] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [birthdate, setBirthdate] = useState("");
+  // const [gender, setGender] = useState("");
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const {
+      name,
+      surname,
+      username,
+      email,
+      password,
+      birthdate,
+      gender,
+    } = state;
+    const user = {
+      name,
+      surname,
+      username,
+      email,
+      password,
+      birthdate,
+      gender,
+    };
+    const res = await registerUser(user);
+
+    if (res.error) {
+      alert(`${res.message}`);
+      setState(initialState);
+    } else {
+      const accessToken = res.token;
+      localStorage.setItem("accessToken", accessToken);
+      setIsAuthenticated(true);
+      if (isAuthenticated)
+        window.location.replace("http://localhost:3000/home");
+    }
+  };
 
   return (
     <Box width="medium">
       <Form
         onChange={(value) => console.log("Change", value)}
-        onReset={() => {
-          setName("");
-          setSurname("");
-          setUsername("");
-          setEmail("");
-          setPassword("");
-          setBirthdate("");
-          setGender("");
-        }}
-        onSubmit={(event: any) =>
-          console.log("Submit", event.value, event.touched)
-        }
+        onSubmit={handleSubmit}
       >
         <FormField
           name="name"
@@ -48,11 +101,7 @@ function RegistrationForm() {
           }
           required
         >
-          <TextInput
-            name="name"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-          />
+          <TextInput name="name" value={state.name} onChange={handleChange} />
         </FormField>
         <FormField
           name="surname"
@@ -66,8 +115,8 @@ function RegistrationForm() {
         >
           <TextInput
             name="surname"
-            value={surname}
-            onChange={(event) => setSurname(event.target.value)}
+            value={state.surname}
+            onChange={handleChange}
           />
         </FormField>
         <FormField
@@ -82,8 +131,8 @@ function RegistrationForm() {
         >
           <TextInput
             name="username"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
+            value={state.username}
+            onChange={handleChange}
           />
         </FormField>
         <FormField
@@ -105,8 +154,8 @@ function RegistrationForm() {
               { fixed: "." },
               { regexp: /^[\w]+$/, placeholder: "com" },
             ]}
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
+            value={state.email}
+            onChange={handleChange}
           />
         </FormField>
         <FormField
@@ -122,8 +171,8 @@ function RegistrationForm() {
           <TextInput
             plain
             type={revealPassword ? "text" : "password"}
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
+            value={state.password}
+            onChange={handleChange}
           />
           <Button
             icon={
@@ -145,8 +194,8 @@ function RegistrationForm() {
           <Select
             name="gender"
             options={["Female", "Male", "Prefer not to say"]}
-            value={gender}
-            onChange={(event) => setGender(event.option)}
+            value={state.gender}
+            onChange={handleChange}
           />
         </FormField>
         <br></br>
@@ -156,11 +205,24 @@ function RegistrationForm() {
         <br></br>
         <Box direction="row" justify="between" margin={{ top: "medium" }}>
           <Button label="Cancel" />
-          <Button type="reset" label="Reset" />
           <Button type="submit" label="Submit" primary />
         </Box>
       </Form>
     </Box>
   );
-}
-export default RegistrationForm;
+};
+
+const mapStateToProps = (state: any) => {
+  return {
+    isAuthenticated: state.isAuthenticated,
+  };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    setIsAuthenticated: (boolean: boolean) =>
+      dispatch({ type: "AUTHENTICATED", payload: boolean }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegistrationForm);
