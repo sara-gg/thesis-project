@@ -17,4 +17,16 @@ const registerUser = (user: any) => {
     .catch((err) => console.log("I got here", err));
 };
 
-export default registerUser;
+const login = (user: any) => {
+  return fetch(`${BASE_URL}/login`, {
+    method: "POST",
+    credentials: "include",
+    mode: "cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user),
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+};
+
+export default { registerUser, login };

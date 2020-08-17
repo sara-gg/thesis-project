@@ -80,8 +80,7 @@ const RegistrationForm = ({
       const accessToken = res.token;
       localStorage.setItem("accessToken", accessToken);
       setIsAuthenticated(true);
-      if (isAuthenticated)
-        window.location.replace("http://localhost:3000/home");
+      window.location.replace("http://localhost:3000/home");
     }
   };
 
