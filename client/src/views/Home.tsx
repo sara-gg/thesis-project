@@ -1,13 +1,7 @@
 import React from "react";
-import Logout from "../components/Logout";
 
 function Home() {
-  return (
-    <div>
-      Home page
-      <Logout />
-    </div>
-  );
+  return <div>Home page</div>;
 }
 
 export default Home;
