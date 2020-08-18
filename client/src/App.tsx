@@ -4,6 +4,7 @@ import Login from "./views/Login";
 import Register from "./views/Register";
 // import Logout from "./components/Logout";
 import NewProduct from "./views/NewProduct";
+import UserGallery from "./views/UserGallery";
 import Home from "./views/Home";
 import "./App.css";
 
@@ -15,6 +16,7 @@ function App() {
         <Route path="/register" render={(props) => <Register />} />
         {/* <Route path="/logout" render={(props) => <Logout />} /> */}
         <Route path="/newproduct" render={(props) => <NewProduct />} />
+        <Route path="/usergallery" render={(props) => <UserGallery />} />
         <Route path="/" render={() => <Home />} />
       </Switch>
     </Router>
