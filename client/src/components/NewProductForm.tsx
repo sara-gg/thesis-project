@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Button, Form, FormField, RangeInput, TextArea } from "grommet";
 import ApiService from "../ApiService/ApiService";
 import { connect } from "react-redux";
+import ImageUploader from "react-images-upload";
 
 interface FormState {
   title: string;
@@ -17,20 +18,32 @@ interface FormState {
 const initialState = {
   title: "",
   description: "",
-  images: [],
+  images: [] as string[],
   location: "",
   price: 0,
   quantity: 0,
   size: 0,
 };
 
-type Props = {
+interface StateProps {
   isAuthenticated: boolean;
+}
+
+interface DispatchProps {
   setIsAuthenticated: (b: boolean) => void;
-};
+}
+
+type Props = StateProps & DispatchProps
 
 const NewProductForm = ({ isAuthenticated, setIsAuthenticated }: Props) => {
   const [newProduct, setNewProduct] = useState(initialState);
+
+  const onDrop = (files: File[], pictures: string[]) => {
+    setNewProduct((prevState) => ({
+      ...prevState,
+      images: prevState.images.concat(pictures),
+    }));
+  };
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -75,9 +88,8 @@ const NewProductForm = ({ isAuthenticated, setIsAuthenticated }: Props) => {
 
   return (
     <Box direction="row" flex align="center" justify="center">
-      <Box width="medium">
+      <Box width="medium" margin="50px">
         <Form
-          onReset={(event: any) => console.log(event)}
           onChange={(value: FormState) => console.log("onChange", value)}
           onSubmit={handleSubmit}
         >
@@ -118,19 +130,27 @@ const NewProductForm = ({ isAuthenticated, setIsAuthenticated }: Props) => {
           <FormField label="Size" name="size" onChange={handleChange} />
           <Box direction="row" justify="between" margin={{ top: "medium" }}>
             <Button label="Cancel" />
-            <Button type="reset" label="Reset" />
             <Button type="submit" label="Update" primary />
           </Box>
         </Form>
       </Box>
-      <Box width="medium" background="light-2">
-        <div>upload image here</div>
+      <Box width="medium">
+        <ImageUploader
+          withIcon={true}
+          onChange={onDrop}
+          buttonText={"Upload image"}
+          withLabel={true}
+          label={"Upload images of your product here, accepted: jpg, gif, png"}
+          imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+          maxFileSize={5242880}
+          withPreview={true}
+        />
       </Box>
     </Box>
   );
 };
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: StateProps) => {
   return {
     isAuthenticated: state.isAuthenticated,
   };
