@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Button, Grommet, Heading } from "grommet";
 import AppBar from "../components/AppBar";
-import UserGalleryProductCard from "../components/UserGalleryProductCard";
-import { Home, Notification } from "grommet-icons";
-import productsData from "../mocks/product.data";
-import AddNewProduct from "../components/AddNewProduct";
+import { Home } from "grommet-icons";
 import history from "../utils/history";
+import Logout from "../components/Logout";
+import UserProductsGallery from "../containers/UserProductsGallery";
 
 const theme = {
   global: {
@@ -22,22 +21,7 @@ const theme = {
 
 function UserGallery() {
   // const [productsData, setProductData] = useState(productsData);
-
-  console.log(productsData);
-  const productList = () => {
-    if (productsData.length === 0) {
-      return <AddNewProduct />;
-    } else {
-      return (
-        <div>
-          <AddNewProduct />
-          {productsData.map((product: any) => (
-            <UserGalleryProductCard key={product.item_id} product={product} />
-          ))}
-        </div>
-      );
-    }
-  };
+  // productsData = [];
 
   return (
     <Grommet theme={theme}>
@@ -47,6 +31,7 @@ function UserGallery() {
           <Heading level="3" margin="none">
             User Gallery
           </Heading>
+          <Logout />
           <Button
             icon={<Home />}
             onClick={() => {
@@ -55,15 +40,7 @@ function UserGallery() {
           />
         </AppBar>
         <h1>Gallery Name</h1>
-        <Box
-          direction="row"
-          overflow={{ horizontal: "hidden" }}
-          flex
-          align="start"
-          justify="center"
-        >
-          {productList()}
-        </Box>
+        <UserProductsGallery />
       </Box>
     </Grommet>
   );

@@ -1,4 +1,4 @@
-const productsData = [
+let productsData = [
   {
     user_id: "001",
     category_id: "bedroom",
@@ -40,6 +40,62 @@ const productsData = [
     height: 45,
     depth: 70,
     width: 110,
+  },
+  {
+    user_id: "002",
+    category_id: "bathroom",
+    title: "Cool Bathroom Mirror",
+    description: `Black almost square bathroom mirror with shelf`,
+    images:
+      "https://cdn.rockettstgeorge.co.uk/media/catalog/product/b/l/black-almost-square-bathroom-mirror-with-shelf.jpg",
+    location: "London",
+    price: 95,
+    quantity: 1,
+    height: 50,
+    depth: 17,
+    width: 40,
+  },
+  {
+    user_id: "002",
+    category_id: "bathroom",
+    title: "Cool Bathroom Mirror",
+    description: `Black almost square bathroom mirror with shelf`,
+    images:
+      "https://cdn.rockettstgeorge.co.uk/media/catalog/product/b/l/black-almost-square-bathroom-mirror-with-shelf.jpg",
+    location: "London",
+    price: 95,
+    quantity: 1,
+    height: 50,
+    depth: 17,
+    width: 40,
+  },
+  {
+    user_id: "002",
+    category_id: "bathroom",
+    title: "Cool Bathroom Mirror",
+    description: `Black almost square bathroom mirror with shelf`,
+    images:
+      "https://cdn.rockettstgeorge.co.uk/media/catalog/product/b/l/black-almost-square-bathroom-mirror-with-shelf.jpg",
+    location: "London",
+    price: 95,
+    quantity: 1,
+    height: 50,
+    depth: 17,
+    width: 40,
+  },
+  {
+    user_id: "002",
+    category_id: "bathroom",
+    title: "Cool Bathroom Mirror",
+    description: `Black almost square bathroom mirror with shelf`,
+    images:
+      "https://cdn.rockettstgeorge.co.uk/media/catalog/product/b/l/black-almost-square-bathroom-mirror-with-shelf.jpg",
+    location: "London",
+    price: 95,
+    quantity: 1,
+    height: 50,
+    depth: 17,
+    width: 40,
   },
   {
     user_id: "002",

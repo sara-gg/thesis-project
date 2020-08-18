@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Text } from "grommet";
 import { AddCircle } from "grommet-icons";
+import history from "../utils/history";
 
 function AddNewProduct() {
   return (
@@ -15,7 +16,7 @@ function AddNewProduct() {
       align="center"
       justify="center"
       onClick={() => {
-        alert("I have been clicked!");
+        history.push("/newproduct");
       }}
     >
       <AddCircle size="xlarge" />

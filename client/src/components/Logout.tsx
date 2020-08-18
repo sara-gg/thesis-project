@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Button } from "grommet";
 import { connect } from "react-redux";
+import history from "../utils/history";
 
 type Props = {
   isAuthenticated: boolean;
@@ -12,8 +13,14 @@ const Logout = ({
   setIsAuthenticated,
 }: Props): JSX.Element => {
   const handleLogoutClick = () => {
+    alert("Logout has been clicked!");
     removeToken();
     handleAuth();
+  };
+
+  const handleLoginClick = () => {
+    alert("Login has been clicked!");
+    history.push("/login");
   };
 
   const removeToken = () => {
@@ -22,34 +29,32 @@ const Logout = ({
 
   const handleAuth = () => {
     setIsAuthenticated(false);
-    window.location.replace("http://localhost:3000/home");
+    history.push("/home");
   };
 
-  // const showButton = () => {
-  //   if (!isAuthenticated) {
-  //     return <button>Hohoho</button>;
-  //   } else {
-  //     return (
-  //       <Button
-  //         type="reset"
-  //         label="Login"
-  //         onClick={() => handleLoginClick()}
-  //         primary
-  //       />
-  //     );
-  //   }
-  // };
+  const showButton = () => {
+    if (isAuthenticated) {
+      return (
+        <Button
+          type="reset"
+          label="Logout"
+          onClick={() => handleLogoutClick()}
+          primary
+        />
+      );
+    } else {
+      return (
+        <Button
+          type="reset"
+          label="Login"
+          onClick={() => handleLoginClick()}
+          primary
+        />
+      );
+    }
+  };
 
-  return (
-    <Box>
-      <Button
-        type="reset"
-        label="Logout"
-        onClick={() => handleLogoutClick()}
-        primary
-      />
-    </Box>
-  );
+  return <Box>{showButton()}</Box>;
 };
 
 const mapStateToProps = (state: any) => {
