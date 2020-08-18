@@ -49,7 +49,6 @@ const View2 = () => {
 
 function FavouritesCarousel() {
   return (
-    
       <Carousel>
         <View0 />
         <View1 />
