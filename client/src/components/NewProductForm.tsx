@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Box, Button, Form, FormField, RangeInput, TextArea } from "grommet";
+import {
+  Box,
+  Button,
+  Form,
+  FormField,
+  RangeInput,
+  TextArea,
+  Select,
+} from "grommet";
 import ApiService from "../ApiService/ApiService";
 import { connect } from "react-redux";
 import ImageUploader from "react-images-upload";
@@ -11,7 +19,11 @@ interface FormState {
   location?: string;
   price: number;
   quantity: number;
-  size?: number;
+  height: number;
+  width: number;
+  depth: number;
+  materials: string;
+
   //size?: "small" | "medium" | "large" | "xlarge";
 }
 
@@ -22,8 +34,21 @@ const initialState = {
   location: "",
   price: 0,
   quantity: 0,
-  size: 0,
+  height: 0,
+  width: 0,
+  depth: 0,
+  materials: "",
 };
+
+const materialOptions = [
+  "wood",
+  "leather",
+  "metal",
+  "velvet",
+  "fabric",
+  "concrete",
+  "glass",
+];
 
 interface StateProps {
   isAuthenticated: boolean;
@@ -33,7 +58,7 @@ interface DispatchProps {
   setIsAuthenticated: (b: boolean) => void;
 }
 
-type Props = StateProps & DispatchProps
+type Props = StateProps & DispatchProps;
 
 const NewProductForm = ({ isAuthenticated, setIsAuthenticated }: Props) => {
   const [newProduct, setNewProduct] = useState(initialState);
@@ -62,7 +87,10 @@ const NewProductForm = ({ isAuthenticated, setIsAuthenticated }: Props) => {
       location,
       price,
       quantity,
-      size,
+      height,
+      width,
+      depth,
+      materials,
     } = newProduct;
     const product = {
       title,
@@ -71,7 +99,10 @@ const NewProductForm = ({ isAuthenticated, setIsAuthenticated }: Props) => {
       location,
       price,
       quantity,
-      size,
+      height,
+      width,
+      depth,
+      materials,
     };
     const res = await ApiService.createNewProduct(product);
 
@@ -94,7 +125,7 @@ const NewProductForm = ({ isAuthenticated, setIsAuthenticated }: Props) => {
           onSubmit={handleSubmit}
         >
           <FormField
-            label="Name"
+            label="Product name"
             name="title"
             value={newProduct.title}
             required
@@ -107,6 +138,13 @@ const NewProductForm = ({ isAuthenticated, setIsAuthenticated }: Props) => {
             value={newProduct.description}
             required
             component={TextArea}
+            onChange={handleChange}
+          />
+          <FormField
+            label="Location"
+            name="location"
+            value={newProduct.location}
+            required
             onChange={handleChange}
           />
           <FormField
@@ -127,7 +165,21 @@ const NewProductForm = ({ isAuthenticated, setIsAuthenticated }: Props) => {
             validate={{ regexp: /\d+\.?\d*$/, message: "decimals allowed" }}
             onChange={handleChange}
           />
-          <FormField label="Size" name="size" onChange={handleChange} />
+
+          <FormField label="Height(cm)" name="height" onChange={handleChange} />
+          <FormField label="Width(cm)" name="width" onChange={handleChange} />
+          <FormField label="Depth(cm)" name="depth" onChange={handleChange} />
+
+          <Select
+            name="materials"
+            placeholder="Select materials"
+            // multiple
+            closeOnChange={false}
+            value={newProduct.materials}
+            options={materialOptions}
+            onChange={handleChange}
+          />
+
           <Box direction="row" justify="between" margin={{ top: "medium" }}>
             <Button label="Cancel" />
             <Button type="submit" label="Update" primary />
