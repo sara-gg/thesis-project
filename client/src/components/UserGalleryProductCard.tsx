@@ -7,18 +7,6 @@ interface Props {
 }
 
 function UserGalleryProductCard({ product }: Props) {
-  // const handleDelete = () => {
-  //   if (
-  //     confirm(
-  //       "Are you sure you want to delete this item? This action can not be undone"
-  //     )
-  //   ) {
-  //     console.log("Thing was deleted.");
-  //   } else {
-  //     console.log("Thing was not deleted");
-  //   }
-  // };
-
   return (
     <Box
       height="medium"

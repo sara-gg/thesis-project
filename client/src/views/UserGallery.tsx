@@ -5,6 +5,7 @@ import UserGalleryProductCard from "../components/UserGalleryProductCard";
 import { Home, Notification } from "grommet-icons";
 import productsData from "../mocks/product.data";
 import AddNewProduct from "../components/AddNewProduct";
+import history from "../utils/history";
 
 const theme = {
   global: {
@@ -28,7 +29,7 @@ function UserGallery() {
       return <AddNewProduct />;
     } else {
       return (
-        <div flex-direction="row">
+        <div>
           <AddNewProduct />
           {productsData.map((product: any) => (
             <UserGalleryProductCard key={product.item_id} product={product} />
@@ -39,22 +40,27 @@ function UserGallery() {
   };
 
   return (
-    <Grommet theme={theme} full>
+    <Grommet theme={theme}>
       <Box fill>
         <AppBar>
           Hello There!
           <Heading level="3" margin="none">
             User Gallery
           </Heading>
-          <Button icon={<Home />} onClick={() => {}} />
+          <Button
+            icon={<Home />}
+            onClick={() => {
+              history.push("/home");
+            }}
+          />
         </AppBar>
         <h1>Gallery Name</h1>
         <Box
-          direction="column"
+          direction="row"
           overflow={{ horizontal: "hidden" }}
           flex
-          align="center"
-          justify="start"
+          align="start"
+          justify="center"
         >
           {productList()}
         </Box>

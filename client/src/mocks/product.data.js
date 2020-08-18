@@ -1,39 +1,59 @@
 const productsData = [
   {
-    item_id: "1234",
-    user_id: 1,
-    category_id: 2,
-    title: "Nike In-Season TR 9",
-    description: `SUPPORT FOR CARDIO AND TRAINING.
-    The Nike In-Season TR 9 is light, stable and features deep, comfortable footbed for superior impact absorption and energy return throughout your entire workout.
-    Benefits
-    Flat-to-the-ground “sit in” construction for medial and lateral arch support and containment.
-    Foot-to-foam construction in the footbed and a dual-density cushioning gives it bounce and makes it totally runnable.
-    An over-the-laces mid foot gore strap creates active containment and a more adaptive locked-in fit and feel.
-    A durable, multidirectional traction pattern at high wear areas on the outsole.
-    A memory foam sock liner provides the ultimate comfort.
-    Jelly pull tab on the heel has a durable finish and creates a nice detail.
-    Shown: Fire Pink/Washed Coral/White/Magic Ember
-    Style: AR4543-603`,
+    user_id: "001",
+    category_id: "bedroom",
+    title: "Fancy Bedroom Chair",
+    description: `Regal Bedroom Chair`,
     images:
-      "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/f6b402bc-53f0-4932-b5ec-c0bc52dad555/in-season-tr-9-womens-training-shoe-F6MRbL.jpg",
+      "https://lucas-furniture.co.uk/Photos/W653_Regal-Bedroom-Chair-5055299480113.jpg",
     location: "Barcelona",
-    price: 70,
+    price: 350,
     quantity: 1,
-    size: 35,
+    height: 83,
+    depth: 52,
+    width: 59,
   },
   {
-    item_id: "4321",
-    user_id: 1,
-    category_id: 2,
-    title: "Super beautiful black sandals",
-    description: `OMG they are so comfortable and prettyyyyyyyy, I feel like I am walking on Sunshine Woooo`,
+    user_id: "001",
+    category_id: "living-room",
+    title: "Nice Dining Table",
+    description: `Regal Oval Extending Dining Table`,
     images:
-      "https://www.bodrumsandals.com/wp-content/uploads/2018/03/handmade-leather-womens-black-sandals-2000-2.jpg",
-    location: "London",
-    price: 50,
+      "https://lucas-furniture.co.uk/Photos/W253_Regal-Oval-Extending-Table-5055299480786.jpg",
+    location: "Barcelona",
+    price: 470,
     quantity: 1,
-    size: 40,
+    height: 76,
+    depth: 107,
+    width: 220,
+  },
+  {
+    user_id: "001",
+    category_id: "living-room",
+    title: "Awesome coffee table",
+    description: `Regal Oval Coffee Table`,
+    images:
+      "https://lucas-furniture.co.uk/Photos/W253_Regal-Oval-Coffee-Table-5055299480892.jpg",
+    location: "Barcelona",
+    price: 210,
+    quantity: 1,
+    height: 45,
+    depth: 70,
+    width: 110,
+  },
+  {
+    user_id: "002",
+    category_id: "bathroom",
+    title: "Cool Bathroom Mirror",
+    description: `Black almost square bathroom mirror with shelf`,
+    images:
+      "https://cdn.rockettstgeorge.co.uk/media/catalog/product/b/l/black-almost-square-bathroom-mirror-with-shelf.jpg",
+    location: "London",
+    price: 95,
+    quantity: 1,
+    height: 50,
+    depth: 17,
+    width: 40,
   },
 ];
 
