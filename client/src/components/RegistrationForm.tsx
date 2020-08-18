@@ -26,6 +26,7 @@ const initialState = {
   password: "",
   birthdate: "",
   gender: "",
+  address: "",
 };
 
 const RegistrationForm = ({
@@ -42,7 +43,10 @@ const RegistrationForm = ({
   // const [birthdate, setBirthdate] = useState("");
   // const [gender, setGender] = useState("");
 
+  const daysInMonth = (month: any) => new Date(2019, month, 0).getDate();
+
   const handleChange = (e: any) => {
+    console.log(e.target.value);
     const { name, value } = e.target;
     setState((prevState) => ({
       ...prevState,
@@ -60,6 +64,7 @@ const RegistrationForm = ({
       password,
       birthdate,
       gender,
+      address,
     } = state;
     const user = {
       name,
@@ -69,7 +74,9 @@ const RegistrationForm = ({
       password,
       birthdate,
       gender,
+      address,
     };
+    console.log(user);
     const res = await ApiService.registerUser(user);
 
     if (res.error) {
@@ -171,6 +178,7 @@ const RegistrationForm = ({
             type={revealPassword ? "text" : "password"}
             value={state.password}
             onChange={handleChange}
+            name="password"
           />
           <Button
             icon={
@@ -179,15 +187,65 @@ const RegistrationForm = ({
             onClick={() => setRevealPassword(!revealPassword)}
           />
         </FormField>
-        {/* <Box fill align="center" justify="start" pad="large">
-                <Box width="medium" gap="medium">
-                  <DateInput
-                    format="dd/mm/yyyy"
-                    value={birthdate}
-                    onChange={(event: any) => setBirthdate(event)}
-                  />
-                </Box>
-              </Box> */}
+        <FormField
+          name="address"
+          label={
+            <Box direction="row">
+              <Text>Location</Text>
+              <Text color="status-critical"> *</Text>
+            </Box>
+          }
+          required
+        >
+          <TextInput
+            name="address"
+            value={state.address}
+            onChange={handleChange}
+          />
+        </FormField>
+        <Box width="medium">
+          <MaskedInput
+          // mask={[
+          //   { regexp: /^[\w\-_.]+$/, placeholder: "example" },
+          //   { fixed: "@" },
+          //   { regexp: /^[\w]+$/, placeholder: "my" },
+          //   { fixed: "." },
+          //   { regexp: /^[\w]+$/, placeholder: "com" },
+          // ]}
+            mask={[
+              {
+                length: [1, 2],
+                options: Array.from({ length: 12 }, (v, k) => k + 1),
+                regexp: /^1[0,1-2]$|^0?[1-9]$|^0$/,
+                placeholder: "mm",
+              },
+              { fixed: "/" },
+              {
+                length: [1, 2],
+                options: Array.from(
+                  {
+                    length: daysInMonth(
+                      parseInt(state.birthdate.split("/")[0], 10)
+                    ),
+                  },
+                  (v, k) => k + 1
+                ),
+                regexp: /^[1-2][0-9]$|^3[0-1]$|^0?[1-9]$|^0$/,
+                placeholder: "dd",
+              },
+              { fixed: "/" },
+              {
+                length: 4,
+                options: Array.from({ length: 100 }, (v, k) => 2019 - k),
+                regexp: /^[1-2]$|^19$|^20$|^19[0-9]$|^20[0-9]$|^19[0-9][0-9]$|^20[0-9][0-9]$/,
+                placeholder: "yyyy",
+              },
+            ]}
+            name="birthdate"
+            value={state.birthdate}
+            onChange={handleChange}
+          />
+        </Box>
         <FormField label="Gender" name="gender">
           <Select
             name="gender"
