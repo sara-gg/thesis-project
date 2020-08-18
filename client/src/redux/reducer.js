@@ -1,5 +1,4 @@
 const initialState = {
-  //count: 0,
   isAuthenticated: false,
   // shoppingCart: [],
 };

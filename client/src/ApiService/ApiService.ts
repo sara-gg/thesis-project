@@ -17,7 +17,7 @@ const registerUser = (user: any) => {
     .catch((err) => console.log("I got here", err));
 };
 
-const login = (user: any) => {
+const login = async (user: any) => {
   return fetch(`${BASE_URL}/login`, {
     method: "POST",
     credentials: "include",
@@ -29,4 +29,16 @@ const login = (user: any) => {
     .catch((err) => console.log(err));
 };
 
-export default { registerUser, login };
+const createNewProduct = async (product: object) => {
+  return fetch(`${BASE_URL}/product`, {
+    method: "POST",
+    credentials: "include",
+    mode: "cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(product),
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+};
+
+export default { registerUser, login, createNewProduct };

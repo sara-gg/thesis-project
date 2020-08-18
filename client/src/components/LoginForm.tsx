@@ -20,6 +20,7 @@ const initialState = {
   email: "",
   password: "",
 };
+
 const LoginForm = ({
   isAuthenticated,
   setIsAuthenticated,
