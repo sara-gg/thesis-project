@@ -1,34 +1,11 @@
 import React from "react";
-import { Box, Button, Grommet, Heading } from "grommet";
-import AppBar from "../components/AppBar";
+import { Box } from "grommet";
 import RegistrationForm from "../components/RegistrationForm";
-import { Notification } from "grommet-icons";
-
-const theme = {
-  global: {
-    colors: {
-      brand: "#228BE6",
-    },
-    font: {
-      family: "Roboto",
-      size: "18px",
-      height: "20px",
-    },
-  },
-};
 
 function Register() {
   return (
-    <Grommet theme={theme} full>
+   
       <Box fill>
-        <AppBar>
-          Hello Grommet!
-          <Heading level="3" margin="none">
-            Register page
-          </Heading>
-          <Button icon={<Notification />} onClick={() => {}} />
-        </AppBar>
-
         <Box
           direction="row"
           overflow={{ horizontal: "hidden" }}
@@ -39,7 +16,7 @@ function Register() {
           <RegistrationForm />
         </Box>
       </Box>
-    </Grommet>
+
   );
 }
 
