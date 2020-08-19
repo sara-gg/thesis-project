@@ -5,6 +5,16 @@ import { Home } from "grommet-icons";
 import history from "../utils/history";
 import Logout from "../components/Logout";
 import UserProductsGallery from "../containers/UserProductsGallery";
+import { connect } from "react-redux";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+  useHistory,
+  useLocation,
+} from "react-router-dom";
 
 const theme = {
   global: {
@@ -19,31 +29,69 @@ const theme = {
   },
 };
 
-function UserGallery() {
-  // const [productsData, setProductData] = useState(productsData);
-  // productsData = [];
+type Props = {
+  isAuthenticated: boolean;
+};
 
-  return (
-    <Grommet theme={theme}>
-      <Box fill>
-        <AppBar>
-          Hello There!
-          <Heading level="3" margin="none">
-            User Gallery
-          </Heading>
-          <Logout />
-          <Button
-            icon={<Home />}
-            onClick={() => {
-              history.push("/home");
-            }}
-          />
-        </AppBar>
-        <h1>Gallery Name</h1>
-        <UserProductsGallery />
-      </Box>
-    </Grommet>
-  );
-}
+const UserGallery = ({ isAuthenticated }: Props): JSX.Element => {
+  if (isAuthenticated) {
+    return (
+      <Grommet theme={theme}>
+        <Box fill>
+          <AppBar>
+            Hello There!
+            <Heading level="3" margin="none">
+              User Gallery
+            </Heading>
+            <Logout />
+            <Button
+              icon={<Home />}
+              onClick={() => {
+                history.push("/home");
+              }}
+            />
+          </AppBar>
+          <Box>
+            <h1>Gallery Name</h1>
+            <UserProductsGallery />
+          </Box>
+        </Box>
+      </Grommet>
+    );
+  } else {
+    return <Redirect to={{ pathname: "/login" }} />;
+  }
 
-export default UserGallery;
+  // return (
+  //   <Grommet theme={theme}>
+  //     <Box fill>
+  //       <AppBar>
+  //         Hello There!
+  //         <Heading level="3" margin="none">
+  //           User Gallery
+  //         </Heading>
+  //         <Logout />
+  //         <Button
+  //           icon={<Home />}
+  //           onClick={() => {
+  //             history.push("/home");
+  //           }}
+  //         />
+  //       </AppBar>
+  //       {handleUserGalleryRender()}
+  //       <Box>
+  //         <h1>Gallery Name</h1>
+  //         <UserProductsGallery />
+  //       </Box>
+  //     </Box>
+  //   </Grommet>
+  // );
+};
+
+const mapStateToProps = (state: any) => {
+  return {
+    isAuthenticated: state.isAuthenticated,
+  };
+};
+
+export default connect(mapStateToProps, null)(UserGallery);
