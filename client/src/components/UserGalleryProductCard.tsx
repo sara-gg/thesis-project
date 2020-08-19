@@ -1,12 +1,14 @@
 import React from "react";
 import { Box, Button, Image, Text } from "grommet";
 import { Edit, Trash } from "grommet-icons";
+import { Product } from "../models/product";
 
 interface Props {
-  product: any;
+  product: Product;
+  readonly?: boolean
 }
 
-function UserGalleryProductCard({ product }: Props) {
+function UserGalleryProductCard({ product, readonly }: Props) {
   return (
     <Box
       height="medium"
@@ -27,7 +29,10 @@ function UserGalleryProductCard({ product }: Props) {
       </Box>
       <Box direction="row" gap="medium">
         <Button icon={<Edit color="brand" />} onClick={() => {}} />
+        {
+          readonly ? '' :
         <Button icon={<Trash />} onClick={() => {}} />
+        }
       </Box>
     </Box>
   );

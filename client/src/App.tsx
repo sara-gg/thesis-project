@@ -6,8 +6,13 @@ import NewProduct from "./views/NewProduct";
 import UserGallery from "./views/UserGallery";
 import Home from "./views/Home";
 import "./App.css";
+import CategoryPage from "./components/CategoryPage";
 
 function App() {
+  const category = {
+    id: 1,
+    name: 'Bedroom'
+  }
   return (
     <Router>
       <Switch>
@@ -23,9 +28,11 @@ function App() {
         <Route path="/usergallery">
           <UserGallery isAuthenticated />
         </Route>
+        <Route path="/category" render={(props) => <CategoryPage category={category} />} />
         <Route path="/">
           <Home />
         </Route>
+
       </Switch>
     </Router>
   );
