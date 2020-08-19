@@ -21,13 +21,6 @@ function Login() {
   return (
     <Grommet theme={theme} full>
       <Box fill>
-        <AppBar>
-          Hello There!
-          <Heading level="3" margin="none">
-            Login Page
-          </Heading>
-          <Button icon={<Notification />} onClick={() => {}} />
-        </AppBar>
 
         <Box
           direction="row"

@@ -21,14 +21,6 @@ function Register() {
   return (
     <Grommet theme={theme} full>
       <Box fill>
-        <AppBar>
-          Hello Grommet!
-          <Heading level="3" margin="none">
-            Register page
-          </Heading>
-          <Button icon={<Notification />} onClick={() => {}} />
-        </AppBar>
-
         <Box
           direction="row"
           overflow={{ horizontal: "hidden" }}

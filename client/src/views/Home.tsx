@@ -10,12 +10,13 @@ import RightCard from "../components/RightCard";
 const styles = {
   color: "white",
   background: "#af8e7a",
+  justify: "center",
 };
 
 function Home() {
   return (
     <div>
-      {/* <CategoriesBar /> */}
+       <CategoriesBar /> 
       <Box
         justify="center"
         height="large"
@@ -25,8 +26,9 @@ function Home() {
         }}
       >
         <Box style={styles}>
-          <Heading>Welcome to our unnamed website!</Heading>
-          Join our community. Here people come together to make, sell, buy and
+          <Heading>Welcome to Chairish!</Heading>
+          Join our community. <br/>
+          Here people come together to make, sell, buy and
           collect unique, upcycled furniture.
           <br />
           <br />

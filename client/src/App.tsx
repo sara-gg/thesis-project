@@ -12,8 +12,7 @@ import "./App.css";
 function App() {
   return (
     <Router history={history}>
-      {/* <AppBar /> */}
-
+     <AppBar />
       <Switch>
         <Route path="/login" render={() => <Login />} />
         <Route path="/register" render={(props) => <Register />} />

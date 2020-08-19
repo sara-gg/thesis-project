@@ -1,6 +1,8 @@
 import React from "react";
-import { Box, Button, Heading } from "grommet";
-import { Notification } from "grommet-icons";
+import { Box, Button, Heading, Image } from "grommet";
+import { Cart } from "grommet-icons";
+import { NavLink } from "react-router-dom";
+import logo from "../assets/logo.png";
 
 const AppBar = (props: any) => (
   <Box
@@ -11,16 +13,15 @@ const AppBar = (props: any) => (
     background="#af8e7a"
     pad={{ left: "medium", right: "small", vertical: "small" }}
     elevation="medium"
-    style={{ zIndex: "1" }}
+    style={{ zIndex: "1", height: "90px" }}
     {...props}
   >
-    <AppBar>
-      Hello There!
-      <Heading level="3" margin="none">
-        Login Page
-      </Heading>
-      <Button icon={<Notification />} onClick={() => {}} />
-    </AppBar>
+    <NavLink exact to={"/"}>
+      <Image src={logo} />
+    </NavLink>
+
+    <Heading level="3" margin="none"></Heading>
+    <Button icon={<Cart />} onClick={() => {}} />
   </Box>
 );
 

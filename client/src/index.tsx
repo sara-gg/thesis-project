@@ -10,6 +10,8 @@ import { createStore, applyMiddleware } from "redux";
 import reducer from "./reducers/reducer";
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
+import { Grommet } from 'grommet';
+import myTheme from "./styles/theme"
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
@@ -20,7 +22,9 @@ store.subscribe(() => {
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
+    <Grommet theme={myTheme}> 
       <App />
+      </Grommet>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
