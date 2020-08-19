@@ -11,7 +11,6 @@ const RightCard = () => (
     ]}
     columns={["50%", "flex"]}
     rows={["large"]}
-    margin="4%"
   >
     <Box gridArea="main" background="white" align="center" justify="center">
       <Heading>Bedroom inspo</Heading>

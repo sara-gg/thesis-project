@@ -11,7 +11,7 @@ const LeftCard = () => (
     ]}
     columns={["50%", "flex"]}
     rows={["large"]}
-    margin="4%"
+    margin="4% 0 0 0"
   >
     <Box
       gridArea="image"

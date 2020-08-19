@@ -1,6 +1,6 @@
 import React from "react";
 import Logout from "../components/Logout";
-import { Box, Button, Heading, Image } from "grommet";
+import { Box, Button, Heading } from "grommet";
 import bedroomImg from "../assets/bedroom-hero.jpeg";
 import AppBar from "../components/AppBar";
 import FavouritesCarousel from "../components/FavouritesCarousel";
@@ -34,13 +34,13 @@ function Home() {
       >
         <Box style={styles}>
         <Heading>Welcome to our unnamed website!</Heading>
-        Join our community. Here people come together to make, sell, buy and collect unique furniture items.
+        Join our community. Here people come together to make, sell, buy and collect unique, upcycled furniture.
         <br/>
         <br/>
         </Box>
         
       </Box>
-      <Box justify="center" align="center" background="white" margin="2%">
+      <Box justify="center" align="center" background="white" margin-top="2%" margin-bottom="4%">
         <Heading size="medium">Our favourite products</Heading>
       </Box>
       <FavouritesCarousel />

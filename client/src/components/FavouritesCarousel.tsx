@@ -19,7 +19,7 @@ const data = [
 const View0 = () => {
   const imgs = data.slice(0, 3);
   return (
-    <Box direction="row" justify="between" width="100%">
+    <Box direction="row" justify="between" width="100%" margin="0 0 4% 0">
       {imgs.map((img) => (
         <Image key={img} src={img} fit="contain" />
       ))}
@@ -29,7 +29,7 @@ const View0 = () => {
 const View1 = () => {
   const imgs = data.slice(3, 6);
   return (
-    <Box direction="row" width="100%">
+    <Box direction="row" width="100%" margin="0 0 4% 0">
       {imgs.map((img) => (
         <Image key={img} src={img} fit="contain" />
       ))}
@@ -39,7 +39,7 @@ const View1 = () => {
 const View2 = () => {
   const imgs = data.slice(6);
   return (
-    <Box direction="row" width="100%">
+    <Box direction="row" width="100%" margin="0 0 4% 0">
       {imgs.map((img) => (
         <Image key={img} src={img} fit="contain" />
       ))}
