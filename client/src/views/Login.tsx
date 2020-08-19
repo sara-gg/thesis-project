@@ -37,7 +37,7 @@ function Login() {
           align="center"
           justify="center"
         >
-          <LoginForm history={history} />
+          <LoginForm />
         </Box>
       </Box>
     </Grommet>

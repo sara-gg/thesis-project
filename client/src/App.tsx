@@ -21,7 +21,7 @@ function App() {
           <NewProduct />
         </Route>
         <Route path="/usergallery">
-          <UserGallery />
+          <UserGallery isAuthenticated />
         </Route>
         <Route path="/">
           <Home />

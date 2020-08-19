@@ -13,7 +13,7 @@ import {
 import { Hide, View } from "grommet-icons";
 import { connect } from "react-redux";
 import ApiService from "../ApiService/ApiService";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import history from "../utils/history";
 
 //RouteComponentProps
@@ -21,7 +21,6 @@ import history from "../utils/history";
 type Props = {
   isAuthenticated: boolean;
   setIsAuthenticated: (b: boolean) => void;
-  history: any;
 };
 const initialState = {
   email: "",
@@ -31,10 +30,9 @@ const initialState = {
 const LoginForm = ({
   isAuthenticated,
   setIsAuthenticated,
-  history,
-}: // history,
-Props): JSX.Element => {
+}: Props): JSX.Element => {
   console.log("isAuthenticated when loading", isAuthenticated);
+  let history = useHistory();
   const [revealPassword, setRevealPassword] = useState(false);
   const [state, setState] = useState(initialState);
 
@@ -62,7 +60,7 @@ Props): JSX.Element => {
       setIsAuthenticated(true);
       console.log("logging in!");
       console.log("isAuthenticated after login", isAuthenticated);
-      history.push("/home");
+      history.push("/usergallery");
       // return <Redirect to="/home" />;
     }
   };

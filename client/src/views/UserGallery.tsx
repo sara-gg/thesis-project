@@ -2,19 +2,10 @@ import React from "react";
 import { Box, Button, Grommet, Heading } from "grommet";
 import AppBar from "../components/AppBar";
 import { Home } from "grommet-icons";
-import history from "../utils/history";
 import Logout from "../components/Logout";
 import UserProductsGallery from "../containers/UserProductsGallery";
 import { connect } from "react-redux";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-  useHistory,
-  useLocation,
-} from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 const theme = {
   global: {
@@ -34,6 +25,8 @@ type Props = {
 };
 
 const UserGallery = ({ isAuthenticated }: Props): JSX.Element => {
+  let history = useHistory();
+
   if (isAuthenticated) {
     return (
       <Grommet theme={theme}>
