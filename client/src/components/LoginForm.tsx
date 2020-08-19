@@ -96,6 +96,7 @@ const LoginForm = ({
             type={revealPassword ? "text" : "password"}
             value={state.password}
             onChange={handleChange}
+            name="password"
           />
           <Button
             icon={
