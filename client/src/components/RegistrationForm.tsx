@@ -12,15 +12,17 @@ import {
 import { Hide, View } from "grommet-icons";
 import { connect } from "react-redux";
 import ApiService from "../ApiService/ApiService";
+import { inputRegister } from "../actions";
 
 type Props = {
   isAuthenticated: boolean;
   setIsAuthenticated: (b: boolean) => void;
+  inputRegister: ({name, value}: { [name: string]: string; }) => void;
 };
 
 const initialState = {
   name: "",
-  surname: "",
+  lastname: "",
   username: "",
   email: "",
   password: "",
@@ -32,6 +34,7 @@ const initialState = {
 const RegistrationForm = ({
   isAuthenticated,
   setIsAuthenticated,
+  inputRegister,
 }: Props): JSX.Element => {
   const [revealPassword, setRevealPassword] = useState(false);
   const [state, setState] = useState(initialState);
@@ -48,17 +51,14 @@ const RegistrationForm = ({
   const handleChange = (e: any) => {
     console.log(e.target.value);
     const { name, value } = e.target;
-    setState((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    inputRegister({name, value});
   };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const {
       name,
-      surname,
+      lastname,
       username,
       email,
       password,
@@ -68,7 +68,7 @@ const RegistrationForm = ({
     } = state;
     const user = {
       name,
-      surname,
+      lastname,
       username,
       email,
       password,
@@ -109,18 +109,18 @@ const RegistrationForm = ({
           <TextInput name="name" value={state.name} onChange={handleChange} />
         </FormField>
         <FormField
-          name="surname"
+          name="lastname"
           label={
             <Box direction="row">
-              <Text>Surname</Text>
+              <Text>Lastname</Text>
               <Text color="status-critical"> *</Text>
             </Box>
           }
           required
         >
           <TextInput
-            name="surname"
-            value={state.surname}
+            name="lastname"
+            value={state.lastname}
             onChange={handleChange}
           />
         </FormField>
@@ -205,13 +205,6 @@ const RegistrationForm = ({
         </FormField>
         <Box width="medium">
           <MaskedInput
-          // mask={[
-          //   { regexp: /^[\w\-_.]+$/, placeholder: "example" },
-          //   { fixed: "@" },
-          //   { regexp: /^[\w]+$/, placeholder: "my" },
-          //   { fixed: "." },
-          //   { regexp: /^[\w]+$/, placeholder: "com" },
-          // ]}
             mask={[
               {
                 length: [1, 2],
@@ -278,6 +271,8 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     setIsAuthenticated: (boolean: boolean) =>
       dispatch({ type: "AUTHENTICATED", payload: boolean }),
+    inputRegister: ({name, value}: { [name: string]: string; }) => 
+      dispatch({type: "INPUT_REGISTER", payload: {name, value}})
   };
 };
 
