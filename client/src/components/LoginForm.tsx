@@ -9,14 +9,10 @@ import {
   TextInput,
 } from "grommet";
 
-// INVESTIGATE
 import { Hide, View } from "grommet-icons";
 import { connect } from "react-redux";
 import ApiService from "../ApiService/ApiService";
-import { Redirect, useHistory } from "react-router-dom";
-import history from "../utils/history";
-
-//RouteComponentProps
+import { useHistory } from "react-router-dom";
 
 type Props = {
   isAuthenticated: boolean;

@@ -3,24 +3,10 @@ import { Box, Button, Grommet, Heading } from "grommet";
 import AppBar from "../components/AppBar";
 import LoginForm from "../components/LoginForm";
 import { Notification } from "grommet-icons";
-import history from "../utils/history";
-
-const theme = {
-  global: {
-    colors: {
-      brand: "pink",
-    },
-    font: {
-      family: "Roboto",
-      size: "18px",
-      height: "20px",
-    },
-  },
-};
 
 function Login() {
   return (
-    <Grommet theme={theme} full>
+    <Grommet full>
       <Box fill>
         <AppBar>
           Hello There!
