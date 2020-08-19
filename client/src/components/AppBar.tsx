@@ -1,5 +1,6 @@
 import React from "react";
-import { Box } from "grommet";
+import { Box, Button, Heading } from "grommet";
+import { Notification } from "grommet-icons";
 
 const AppBar = (props: any) => (
   <Box
@@ -12,7 +13,15 @@ const AppBar = (props: any) => (
     elevation="medium"
     style={{ zIndex: "1" }}
     {...props}
-  />
+  >
+    <AppBar>
+      Hello There!
+      <Heading level="3" margin="none">
+        Login Page
+      </Heading>
+      <Button icon={<Notification />} onClick={() => {}} />
+    </AppBar>
+  </Box>
 );
 
 export default AppBar;
