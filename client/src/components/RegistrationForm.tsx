@@ -17,7 +17,15 @@ import { inputRegister } from "../actions";
 type Props = {
   isAuthenticated: boolean;
   setIsAuthenticated: (b: boolean) => void;
-  inputRegister: ({name, value}: { [name: string]: string; }) => void;
+  inputRegister: ({ name, value }: { [name: string]: string }) => void;
+  name: string;
+  lastname: string;
+  username: string;
+  email: string;
+  password: string;
+  birthdate: string;
+  gender: string;
+  address: string;
 };
 
 const initialState = {
@@ -35,6 +43,14 @@ const RegistrationForm = ({
   isAuthenticated,
   setIsAuthenticated,
   inputRegister,
+  name,
+  lastname,
+  username,
+  email,
+  password,
+  birthdate,
+  gender,
+  address,
 }: Props): JSX.Element => {
   const [revealPassword, setRevealPassword] = useState(false);
   const [state, setState] = useState(initialState);
@@ -51,7 +67,7 @@ const RegistrationForm = ({
   const handleChange = (e: any) => {
     console.log(e.target.value);
     const { name, value } = e.target;
-    inputRegister({name, value});
+    inputRegister({ name, value });
   };
 
   const handleSubmit = async (e: any) => {
@@ -106,7 +122,7 @@ const RegistrationForm = ({
           }
           required
         >
-          <TextInput name="name" value={state.name} onChange={handleChange} />
+          <TextInput name="name" value={name} onChange={handleChange} />
         </FormField>
         <FormField
           name="lastname"
@@ -118,11 +134,7 @@ const RegistrationForm = ({
           }
           required
         >
-          <TextInput
-            name="lastname"
-            value={state.lastname}
-            onChange={handleChange}
-          />
+          <TextInput name="lastname" value={lastname} onChange={handleChange} />
         </FormField>
         <FormField
           name="username"
@@ -134,11 +146,7 @@ const RegistrationForm = ({
           }
           required
         >
-          <TextInput
-            name="username"
-            value={state.username}
-            onChange={handleChange}
-          />
+          <TextInput name="username" value={username} onChange={handleChange} />
         </FormField>
         <FormField
           name="email"
@@ -159,7 +167,7 @@ const RegistrationForm = ({
               { fixed: "." },
               { regexp: /^[\w]+$/, placeholder: "com" },
             ]}
-            value={state.email}
+            value={email}
             onChange={handleChange}
           />
         </FormField>
@@ -176,7 +184,7 @@ const RegistrationForm = ({
           <TextInput
             plain
             type={revealPassword ? "text" : "password"}
-            value={state.password}
+            value={password}
             onChange={handleChange}
             name="password"
           />
@@ -197,11 +205,7 @@ const RegistrationForm = ({
           }
           required
         >
-          <TextInput
-            name="address"
-            value={state.address}
-            onChange={handleChange}
-          />
+          <TextInput name="address" value={address} onChange={handleChange} />
         </FormField>
         <Box width="medium">
           <MaskedInput
@@ -235,7 +239,7 @@ const RegistrationForm = ({
               },
             ]}
             name="birthdate"
-            value={state.birthdate}
+            value={birthdate}
             onChange={handleChange}
           />
         </Box>
@@ -243,7 +247,7 @@ const RegistrationForm = ({
           <Select
             name="gender"
             options={["Female", "Male", "Prefer not to say"]}
-            value={state.gender}
+            value={gender}
             onChange={handleChange}
           />
         </FormField>
@@ -263,6 +267,14 @@ const RegistrationForm = ({
 
 const mapStateToProps = (state: any) => {
   return {
+    name: state.name,
+    lastname: state.lastname,
+    username: state.username,
+    email: state.email,
+    password: state.password,
+    birthdate: state.birthdate,
+    gender: state.gender,
+    address: state.address,
     isAuthenticated: state.isAuthenticated,
   };
 };
@@ -271,8 +283,8 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     setIsAuthenticated: (boolean: boolean) =>
       dispatch({ type: "AUTHENTICATED", payload: boolean }),
-    inputRegister: ({name, value}: { [name: string]: string; }) => 
-      dispatch({type: "INPUT_REGISTER", payload: {name, value}})
+    inputRegister: ({ name, value }: { [name: string]: string }) =>
+      dispatch({ type: "INPUT_REGISTER", payload: { name, value } }),
   };
 };
 
