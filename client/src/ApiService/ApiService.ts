@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3079";
+const BASE_URL = "http://localhost:3001";
 
 const registerUser = (user: any) => {
   return fetch(`${BASE_URL}/register`, {
