@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Search } from "grommet-icons";
+import './SearchBar.css';
 
 const SearchBar = () => {
   const [searchValue, setSearchValue] = useState('');
@@ -22,7 +23,7 @@ const SearchBar = () => {
   }
 
   return (
-    <div>
+    <div className='container'>
       <input
         placeholder='eg: wooden table'
         value={searchValue}
@@ -32,6 +33,7 @@ const SearchBar = () => {
       <Search
         onClick={searchHandler}
         size="medium"
+        className='search-icon'
       />
     </div>
   );
