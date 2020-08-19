@@ -7,8 +7,13 @@ import UserGallery from "./views/UserGallery";
 import Home from "./views/Home";
 import history from "./utils/history";
 import "./App.css";
+import CategoryPage from "./components/CategoryPage";
 
 function App() {
+  const category = {
+    id: 1,
+    name: 'Bedroom'
+  }
   return (
     <Router history={history}>
       <Switch>
@@ -17,6 +22,7 @@ function App() {
         {/* <Route path="/logout" render={(props) => <Logout />} /> */}
         <Route path="/newproduct" render={(props) => <NewProduct />} />
         <Route path="/usergallery" render={(props) => <UserGallery />} />
+        <Route path="/category" render={(props) => <CategoryPage category={category} />} />
         <Route path="/" render={() => <Home />} />
       </Switch>
     </Router>

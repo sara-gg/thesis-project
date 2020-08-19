@@ -8,6 +8,9 @@ import { mockCategories } from "./mocks/mockCategories";
 import UserGalleryProductCard from "../components/UserGalleryProductCard";
 
 const renderCategoryPage = () => {}
+
+// const mockApiService = jasmine.createSpyObj('apiService', ['getProductsForCategory']);
+
 describe("<CategoryPage />", () => {
 
   let category: Category;
@@ -22,7 +25,8 @@ describe("<CategoryPage />", () => {
   beforeEach(() => {
     category = Object.create(mockCategories[0]);
     productList = Object.create(MockProducts);
-    component = create(<CategoryPage products={productList}/>)
+    component = create(<CategoryPage category={category}/>)
+    // mockApiService.getProductsForCategory.and.returnValue(productList)
     updateElements();
   });
 
@@ -45,9 +49,9 @@ describe("<CategoryPage />", () => {
 
   test("render products create list of product", () => {
     const expectedProducts = [
-      <UserGalleryProductCard product = {productList[0]} key={0} />,
-      <UserGalleryProductCard product = {productList[1]} key={1} />,
-      <UserGalleryProductCard product = {productList[2]} key={2} />,
+      <UserGalleryProductCard product = {productList[0]} key={0} readonly={true} />,
+      <UserGalleryProductCard product = {productList[1]} key={1} readonly={true} />,
+      <UserGalleryProductCard product = {productList[2]} key={2} readonly={true}/>,
     ]
 
     const actual = renderProducts(productList)

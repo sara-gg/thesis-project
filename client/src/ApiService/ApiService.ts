@@ -1,4 +1,7 @@
-const BASE_URL = "http://localhost:3079";
+import { Category } from "../models/category";
+
+const BASE_URL = "http://localhost:3001";
+
 
 const registerUser = (user: any) => {
   return fetch(`${BASE_URL}/register`, {
@@ -41,4 +44,14 @@ const createNewProduct = async (product: object) => {
     .catch((err) => console.log(err));
 };
 
-export default { registerUser, login, createNewProduct };
+const getProductsForCategory = (category: Category) => {
+  return fetch(`${BASE_URL}/products?category_id=${category.id}`, {
+    method: "GET",
+    credentials: "include",
+    mode: "cors",
+  })
+  .then((res) => res.json())
+  .catch((err) => console.error)
+}
+
+export default { registerUser, login, createNewProduct, getProductsForCategory };

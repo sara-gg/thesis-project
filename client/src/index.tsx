@@ -6,10 +6,12 @@ import * as serviceWorker from "./serviceWorker";
 
 // REDUX SPECIFIC IMPORTS
 import { Provider } from "react-redux";
-import { createStore } from "redux";
-import reducer from "./redux/reducer";
+import { createStore, applyMiddleware } from "redux";
+import reducer from "./reducers/reducer";
+import thunk from 'redux-thunk';
+import logger from 'redux-logger';
 
-const store = createStore(reducer);
+const store = createStore(reducer, applyMiddleware(thunk));
 
 store.subscribe(() => {
   console.log(store.getState());

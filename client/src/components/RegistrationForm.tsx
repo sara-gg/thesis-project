@@ -12,25 +12,45 @@ import {
 import { Hide, View } from "grommet-icons";
 import { connect } from "react-redux";
 import ApiService from "../ApiService/ApiService";
+import { inputRegister } from "../actions";
 
 type Props = {
   isAuthenticated: boolean;
   setIsAuthenticated: (b: boolean) => void;
+  inputRegister: ({ name, value }: { [name: string]: string }) => void;
+  name: string;
+  lastname: string;
+  username: string;
+  email: string;
+  password: string;
+  birthdate: string;
+  gender: string;
+  address: string;
 };
 
 const initialState = {
   name: "",
-  surname: "",
+  lastname: "",
   username: "",
   email: "",
   password: "",
   birthdate: "",
   gender: "",
+  address: "",
 };
 
 const RegistrationForm = ({
   isAuthenticated,
   setIsAuthenticated,
+  inputRegister,
+  name,
+  lastname,
+  username,
+  email,
+  password,
+  birthdate,
+  gender,
+  address,
 }: Props): JSX.Element => {
   const [revealPassword, setRevealPassword] = useState(false);
   const [state, setState] = useState(initialState);
@@ -42,34 +62,37 @@ const RegistrationForm = ({
   // const [birthdate, setBirthdate] = useState("");
   // const [gender, setGender] = useState("");
 
+  const daysInMonth = (month: any) => new Date(2019, month, 0).getDate();
+
   const handleChange = (e: any) => {
+    console.log(e.target.value);
     const { name, value } = e.target;
-    setState((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    inputRegister({ name, value });
   };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const {
       name,
-      surname,
+      lastname,
       username,
       email,
       password,
       birthdate,
       gender,
+      address,
     } = state;
     const user = {
       name,
-      surname,
+      lastname,
       username,
       email,
       password,
       birthdate,
       gender,
+      address,
     };
+    console.log(user);
     const res = await ApiService.registerUser(user);
 
     if (res.error) {
@@ -99,23 +122,19 @@ const RegistrationForm = ({
           }
           required
         >
-          <TextInput name="name" value={state.name} onChange={handleChange} />
+          <TextInput name="name" value={name} onChange={handleChange} />
         </FormField>
         <FormField
-          name="surname"
+          name="lastname"
           label={
             <Box direction="row">
-              <Text>Surname</Text>
+              <Text>Lastname</Text>
               <Text color="status-critical"> *</Text>
             </Box>
           }
           required
         >
-          <TextInput
-            name="surname"
-            value={state.surname}
-            onChange={handleChange}
-          />
+          <TextInput name="lastname" value={lastname} onChange={handleChange} />
         </FormField>
         <FormField
           name="username"
@@ -127,11 +146,7 @@ const RegistrationForm = ({
           }
           required
         >
-          <TextInput
-            name="username"
-            value={state.username}
-            onChange={handleChange}
-          />
+          <TextInput name="username" value={username} onChange={handleChange} />
         </FormField>
         <FormField
           name="email"
@@ -152,7 +167,7 @@ const RegistrationForm = ({
               { fixed: "." },
               { regexp: /^[\w]+$/, placeholder: "com" },
             ]}
-            value={state.email}
+            value={email}
             onChange={handleChange}
           />
         </FormField>
@@ -169,8 +184,9 @@ const RegistrationForm = ({
           <TextInput
             plain
             type={revealPassword ? "text" : "password"}
-            value={state.password}
+            value={password}
             onChange={handleChange}
+            name="password"
           />
           <Button
             icon={
@@ -179,20 +195,59 @@ const RegistrationForm = ({
             onClick={() => setRevealPassword(!revealPassword)}
           />
         </FormField>
-        {/* <Box fill align="center" justify="start" pad="large">
-                <Box width="medium" gap="medium">
-                  <DateInput
-                    format="dd/mm/yyyy"
-                    value={birthdate}
-                    onChange={(event: any) => setBirthdate(event)}
-                  />
-                </Box>
-              </Box> */}
+        <FormField
+          name="address"
+          label={
+            <Box direction="row">
+              <Text>Location</Text>
+              <Text color="status-critical"> *</Text>
+            </Box>
+          }
+          required
+        >
+          <TextInput name="address" value={address} onChange={handleChange} />
+        </FormField>
+        <Box width="medium">
+          <MaskedInput
+            mask={[
+              {
+                length: [1, 2],
+                options: Array.from({ length: 12 }, (v, k) => k + 1),
+                regexp: /^1[0,1-2]$|^0?[1-9]$|^0$/,
+                placeholder: "mm",
+              },
+              { fixed: "/" },
+              {
+                length: [1, 2],
+                options: Array.from(
+                  {
+                    length: daysInMonth(
+                      parseInt(state.birthdate.split("/")[0], 10)
+                    ),
+                  },
+                  (v, k) => k + 1
+                ),
+                regexp: /^[1-2][0-9]$|^3[0-1]$|^0?[1-9]$|^0$/,
+                placeholder: "dd",
+              },
+              { fixed: "/" },
+              {
+                length: 4,
+                options: Array.from({ length: 100 }, (v, k) => 2019 - k),
+                regexp: /^[1-2]$|^19$|^20$|^19[0-9]$|^20[0-9]$|^19[0-9][0-9]$|^20[0-9][0-9]$/,
+                placeholder: "yyyy",
+              },
+            ]}
+            name="birthdate"
+            value={birthdate}
+            onChange={handleChange}
+          />
+        </Box>
         <FormField label="Gender" name="gender">
           <Select
             name="gender"
             options={["Female", "Male", "Prefer not to say"]}
-            value={state.gender}
+            value={gender}
             onChange={handleChange}
           />
         </FormField>
@@ -212,6 +267,14 @@ const RegistrationForm = ({
 
 const mapStateToProps = (state: any) => {
   return {
+    name: state.name,
+    lastname: state.lastname,
+    username: state.username,
+    email: state.email,
+    password: state.password,
+    birthdate: state.birthdate,
+    gender: state.gender,
+    address: state.address,
     isAuthenticated: state.isAuthenticated,
   };
 };
@@ -220,6 +283,8 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     setIsAuthenticated: (boolean: boolean) =>
       dispatch({ type: "AUTHENTICATED", payload: boolean }),
+    inputRegister: ({ name, value }: { [name: string]: string }) =>
+      dispatch({ type: "INPUT_REGISTER", payload: { name, value } }),
   };
 };
 
