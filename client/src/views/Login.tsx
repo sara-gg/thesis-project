@@ -3,6 +3,7 @@ import { Box, Button, Grommet, Heading } from "grommet";
 import AppBar from "../components/AppBar";
 import LoginForm from "../components/LoginForm";
 import { Notification } from "grommet-icons";
+import history from "../utils/history";
 
 const theme = {
   global: {
@@ -36,7 +37,7 @@ function Login() {
           align="center"
           justify="center"
         >
-          <LoginForm />
+          <LoginForm history={history} />
         </Box>
       </Box>
     </Grommet>

@@ -168,6 +168,7 @@ const RegistrationForm = ({
         >
           <TextInput
             plain
+            name="password"
             type={revealPassword ? "text" : "password"}
             value={state.password}
             onChange={handleChange}

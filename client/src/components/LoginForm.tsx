@@ -8,13 +8,20 @@ import {
   Text,
   TextInput,
 } from "grommet";
+
+// INVESTIGATE
 import { Hide, View } from "grommet-icons";
 import { connect } from "react-redux";
 import ApiService from "../ApiService/ApiService";
+import { Redirect } from "react-router-dom";
+import history from "../utils/history";
+
+//RouteComponentProps
 
 type Props = {
   isAuthenticated: boolean;
   setIsAuthenticated: (b: boolean) => void;
+  history: any;
 };
 const initialState = {
   email: "",
@@ -24,9 +31,13 @@ const initialState = {
 const LoginForm = ({
   isAuthenticated,
   setIsAuthenticated,
-}: Props): JSX.Element => {
+  history,
+}: // history,
+Props): JSX.Element => {
+  console.log("isAuthenticated when loading", isAuthenticated);
   const [revealPassword, setRevealPassword] = useState(false);
   const [state, setState] = useState(initialState);
+
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setState((prevState) => ({
@@ -45,10 +56,14 @@ const LoginForm = ({
       alert(`${res.message}`);
       setState(initialState);
     } else {
-      const { accessToken } = res;
+      console.log("res", res);
+      const accessToken = res;
       localStorage.setItem("accessToken", accessToken);
       setIsAuthenticated(true);
-      window.location.replace("http://localhost:3000/home");
+      console.log("logging in!");
+      console.log("isAuthenticated after login", isAuthenticated);
+      history.push("/home");
+      // return <Redirect to="/home" />;
     }
   };
 
@@ -93,6 +108,7 @@ const LoginForm = ({
         >
           <TextInput
             plain
+            name="password"
             type={revealPassword ? "text" : "password"}
             value={state.password}
             onChange={handleChange}

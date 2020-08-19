@@ -11,13 +11,13 @@ import "./App.css";
 function App() {
   return (
     <Router history={history}>
+      {/* // <Router> */}
       <Switch>
-        <Route path="/login" render={() => <Login />} />
-        <Route path="/register" render={(props) => <Register />} />
-        {/* <Route path="/logout" render={(props) => <Logout />} /> */}
-        <Route path="/newproduct" render={(props) => <NewProduct />} />
-        <Route path="/usergallery" render={(props) => <UserGallery />} />
-        <Route path="/" render={() => <Home />} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+        <Route path="/newproduct" component={NewProduct} />
+        <Route path="/usergallery" component={UserGallery} />
+        <Route path="/" component={Home} />
       </Switch>
     </Router>
   );
