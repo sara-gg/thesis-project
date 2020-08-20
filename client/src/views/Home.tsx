@@ -1,13 +1,10 @@
 import React from "react";
 import { Box, Heading } from "grommet";
 import bedroomImg from "../assets/bedroom-hero.jpeg";
-import CategoriesBar from "../components/CategoriesBar";
 import FavouritesCarousel from "../components/FavouritesCarousel";
 import LeftCard from "../components/LeftCard";
 import RightCard from "../components/RightCard";
-import SearchBar from "../components/SearchBar/SearchBar";
-import { Notification } from "grommet-icons";
-import AppBar from "../components/AppBar";
+import CategoriesBar from "../components/CategoriesBar";
 
 const styles = {
   color: "white",
@@ -20,15 +17,6 @@ function Home() {
   return (
     <div>
       <CategoriesBar />
-      <AppBar>
-        Hello There!
-        <Heading level="3" margin="none">
-          Login Page
-        </Heading>
-        <Button icon={<Notification />} onClick={() => { }} />
-        <SearchBar />
-      </AppBar>
-
       <Box
         justify="center"
         height="large"

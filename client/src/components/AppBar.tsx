@@ -4,6 +4,7 @@ import { Cart } from "grommet-icons";
 import logo from "../assets/logo.png";
 import { useHistory } from "react-router-dom";
 import Logout from "../components/Logout";
+import SearchBar from "../components/SearchBar/SearchBar";
 
 const AppBar = () => {
   let history = useHistory();
@@ -25,6 +26,7 @@ const AppBar = () => {
           history.push("/home");
         }}
       />
+      <SearchBar />
       <Button
         onClick={() => {
           history.push("/usergallery");
