@@ -1,13 +1,18 @@
 import React, {useEffect, useState} from "react";
 import { Box, Heading } from "grommet";
+
 import { NavLink, Route } from "react-router-dom";
 import CategoryPage from "./CategoryPage"
 import "./CategoriesBar.scss";
 import { Category } from "../models/category";
 import ApiService from "../ApiService/ApiService";
+import "../styles/CategoriesBar.scss";
+
+
 
 const styles = {
   color: "#444444",
+  paddingLeft: "20px",
 };
 
 const CategoriesBar = () => {
@@ -25,9 +30,9 @@ const CategoriesBar = () => {
     tag="header"
     direction="row"
     align="center"
-    justify="between"
+    justify="around"
     background="white"
-    pad={{ left: "medium", right: "small", vertical: "small" }}
+    pad={{ left: "medium", right: "medium", vertical: "small" }}
     elevation="medium"
     style={{ zIndex: 1 }}
   >

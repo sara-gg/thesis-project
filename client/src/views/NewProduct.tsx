@@ -4,11 +4,9 @@ import NewProductForm from "../components/NewProductForm";
 
 const NewProduct = () => {
   return (
-    <Grommet full plain>
-      <Box fill align="center" justify="center">
-        <NewProductForm />
-      </Box>
-    </Grommet>
+    <Box fill align="center" justify="center" margin="5% 0">
+      <NewProductForm />
+    </Box>
   );
 };
 

@@ -1,9 +1,11 @@
 import React from "react";
-import { Box, Button, Image } from "grommet";
+import { Box, Button, Heading, Image } from "grommet";
 import { Cart } from "grommet-icons";
 import logo from "../assets/logo.png";
 import { useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Logout from "../components/Logout";
+import "../styles/AppBar.scss";
 
 const AppBar = () => {
   let history = useHistory();
@@ -14,31 +16,38 @@ const AppBar = () => {
       direction="row"
       align="center"
       justify="between"
-      background="#AD855E"
+      background="offwhite"
       pad={{ left: "medium", right: "small", vertical: "small" }}
       elevation="medium"
-      style={{ zIndex: 1, height: "90px" }}
+      className="appbar"
     >
       <Button
         icon={<Image src={logo} />}
         onClick={() => {
-          history.push("/home");
+          history.push("/");
         }}
       />
-      <Button
-        onClick={() => {
-          history.push("/usergallery");
-        }}
+      <Box
+        direction="row"
+        align="center"
+        justify="between"
+        className="right-appbar"
       >
-        Go to User Gallery
-      </Button>
-      <Button
-        icon={<Cart />}
-        onClick={() => {
-          history.push("/login");
-        }}
-      />
-      <Logout />
+        <NavLink exact to="/usergallery">
+          <Heading level="4" color="text" className="navbar-header">
+            User Gallery
+          </Heading>
+        </NavLink>
+
+        <Logout />
+
+        <Button
+          icon={<Cart />}
+          onClick={() => {
+            history.push("/login");
+          }}
+        />
+      </Box>
     </Box>
   );
 };

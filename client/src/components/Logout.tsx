@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button } from "grommet";
+import { Box, Button, Heading } from "grommet";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 type Props = {
@@ -29,7 +29,7 @@ const Logout = ({
 
   const handleAuth = () => {
     setIsAuthenticated(false);
-    history.push("/home");
+    history.push("/");
   };
 
   const showButton = () => {
@@ -37,19 +37,25 @@ const Logout = ({
       return (
         <Button
           type="reset"
-          label="Logout"
           onClick={() => handleLogoutClick()}
-          primary
-        />
+          className="login-button"
+        >
+          <Heading level="4" color="text" className="navbar-header">
+            Logout
+          </Heading>
+        </Button>
       );
     } else {
       return (
         <Button
           type="reset"
-          label="Login"
           onClick={() => handleLoginClick()}
-          primary
-        />
+          className="login-button"
+        >
+          <Heading level="4" color="text" className="navbar-header">
+            Login
+          </Heading>
+        </Button>
       );
     }
   };
