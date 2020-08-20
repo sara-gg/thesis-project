@@ -32,17 +32,17 @@ const getProductsForCategory = (category: Category):Promise<any> => {
     credentials: "include",
     mode: "cors",
   })
-    .then((res) => res.json())
-    .catch((err) => console.error)
+  .then((res) => res.json())
+  .catch((err) => console.error(err))
 }
 
 const getCategories = () : Promise <any[]> => {
-  return new Promise(res => res(
-    [{ name: "Bedroom", id: 1 },
-    { name: "Living room", id: 2 },
-    { name: "Kitchen", id: 3 },
-    { name: "Bathroom", id: 4 }]
-  )) 
+  return fetch(`${BASE_URL}/categories`, {
+    method: "GET",
+    credentials: "include",
+    mode: "cors",
+  }).then((res) => res.json())
+  .catch((err) => console.error(err))
 }
 
 export default { login, createNewProduct, getProductsForCategory, getCategories };
