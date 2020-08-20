@@ -5,7 +5,6 @@ import { NavLink, Route } from "react-router-dom";
 import CategoryPage from "./CategoryPage";
 import { Category } from "../models/category";
 import ApiService from "../ApiService/ApiService";
-import "../styles/CategoriesBar.scss";
 
 const styles = {
   color: "#444444",
