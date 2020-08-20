@@ -8,6 +8,7 @@ interface RootState {
   gender: string,
   address: string,
   isAuthenticated: boolean,
+  telephone: number,
 }
 
 const initialState: RootState = {
@@ -20,6 +21,7 @@ const initialState: RootState = {
   gender: "",
   address: "",
   isAuthenticated: false,
+  telephone: 0,
 };
 
 const reducer = (state = initialState, action: any) => {
@@ -31,7 +33,7 @@ const reducer = (state = initialState, action: any) => {
       };
     case "AUTHENTICATED":
       return {
-        ...state, 
+        ...state,
         isAuthenticated: action.payload,
       };
 

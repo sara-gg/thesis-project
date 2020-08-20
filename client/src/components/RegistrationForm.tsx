@@ -12,7 +12,6 @@ import {
 import { Hide, View } from "grommet-icons";
 import { connect } from "react-redux";
 import ApiService from "../ApiService/ApiService";
-import { inputRegister } from "../actions";
 
 type Props = {
   isAuthenticated: boolean;
@@ -26,17 +25,7 @@ type Props = {
   birthdate: string;
   gender: string;
   address: string;
-};
-
-const initialState = {
-  name: "",
-  lastname: "",
-  username: "",
-  email: "",
-  password: "",
-  birthdate: "",
-  gender: "",
-  address: "",
+  telephone?: number;
 };
 
 const RegistrationForm = ({
@@ -51,9 +40,20 @@ const RegistrationForm = ({
   birthdate,
   gender,
   address,
+  telephone,
 }: Props): JSX.Element => {
   const [revealPassword, setRevealPassword] = useState(false);
-  const [state, setState] = useState(initialState);
+  const [state, setState] = useState({
+    name,
+    lastname,
+    username,
+    email,
+    password,
+    birthdate,
+    gender,
+    address,
+    telephone,
+  });
 
   const daysInMonth = (month: any) => new Date(2019, month, 0).getDate();
 
@@ -65,16 +65,6 @@ const RegistrationForm = ({
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const {
-      name,
-      lastname,
-      username,
-      email,
-      password,
-      birthdate,
-      gender,
-      address,
-    } = state;
     const user = {
       name,
       lastname,
@@ -84,19 +74,33 @@ const RegistrationForm = ({
       birthdate,
       gender,
       address,
+      telephone,
     };
-    console.log(user);
+    // const user = {
+    //   name: "Amina",
+    //   lastname: "Antoniazzi",
+    //   username: "Amina",
+    //   email: "amina@hotmail.com",
+    //   password: "1234",
+    //   birthdate: "10-12-1992",
+    //   address: "Fake street 123",
+    //   gender: "female",
+    //   telephone: 1132816483
+    // };
+    console.log('user:', user);
     const res = await ApiService.registerUser(user);
 
-    if (res.error) {
-      alert(`${res.message}`);
-      setState(initialState);
-    } else {
-      const accessToken = res.token;
-      localStorage.setItem("accessToken", accessToken);
-      setIsAuthenticated(true);
-      window.location.replace("http://localhost:3000/home");
-    }
+    console.log('res:', res);
+
+    // if (res.error) {
+    //   alert(`${res.message}`);
+    //   setState(initialState);
+    // } else {
+    //   const accessToken = res.token;
+    //   localStorage.setItem("accessToken", accessToken);
+    //   setIsAuthenticated(true);
+    //   window.location.replace("http://localhost:3000/home");
+    // }
   };
 
   return (
@@ -187,6 +191,18 @@ const RegistrationForm = ({
             }
             onClick={() => setRevealPassword(!revealPassword)}
           />
+        </FormField>
+        <FormField
+          name="telephone"
+          label={
+            <Box direction="row">
+              <Text>Telephone</Text>
+              <Text color="status-critical"> *</Text>
+            </Box>
+          }
+          required
+        >
+          <TextInput name="telephone" value={telephone} onChange={handleChange} />
         </FormField>
         <FormField
           name="address"
