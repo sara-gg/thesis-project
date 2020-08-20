@@ -12,12 +12,15 @@ const registerUser = (user: any) => {
     body: JSON.stringify(user),
   })
     .then((res) => {
+      console.log('res:', res)
       return res.json();
     })
     .then((token) => {
       return token;
     })
-    .catch((err) => console.log("I got here", err));
+    .catch((err) => {
+      console.log("I got here", err)
+    });
 };
 
 const login = async (user: any) => {
@@ -50,8 +53,8 @@ const getProductsForCategory = (category: Category) => {
     credentials: "include",
     mode: "cors",
   })
-  .then((res) => res.json())
-  .catch((err) => console.error)
+    .then((res) => res.json())
+    .catch((err) => console.error)
 }
 
 export default { registerUser, login, createNewProduct, getProductsForCategory };
