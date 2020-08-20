@@ -4,19 +4,18 @@ import RegistrationForm from "../components/RegistrationForm";
 
 function Register() {
   return (
-   
-      <Box fill>
-        <Box
-          direction="row"
-          overflow={{ horizontal: "hidden" }}
-          flex
-          align="center"
-          justify="center"
-        >
-          <RegistrationForm />
-        </Box>
+    <Box fill>
+      <Box
+        direction="row"
+        overflow={{ horizontal: "hidden" }}
+        flex
+        align="center"
+        justify="center"
+        margin="5% 0"
+      >
+        <RegistrationForm />
       </Box>
-
+    </Box>
   );
 }
 
