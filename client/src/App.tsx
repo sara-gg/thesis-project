@@ -26,7 +26,7 @@ function App() {
         <Route path="/usergallery">
           <UserGallery isAuthenticated />
         </Route>
-        <Route path={`/products`} component={CategoryPage}/>
+        <Route path={`/category/products`} component={CategoryPage}/>
         <Route path="/">
           <Home />
         </Route>
