@@ -5,6 +5,7 @@ import Register from "./views/Register";
 import NewProduct from "./views/NewProduct";
 import UserGallery from "./views/UserGallery";
 import AppBar from "./components/AppBar";
+import Foot from "./views/Footer"
 import ProductDetails from "./views/ProductDetails";
 import Home from "./views/Home";
 import "./App.css";
@@ -28,9 +29,6 @@ function App() {
           <UserGallery isAuthenticated />
         </Route>
         <Route path={`/category/products`} component={CategoryPage} />
-        {/* <Route path="/category">
-          <CategoryPage category={category} />
-        </Route> */}
         <Route path="/productdetails">
           <ProductDetails />
         </Route>
@@ -38,6 +36,7 @@ function App() {
           <Home />
         </Route>
       </Switch>
+      <Foot />
     </Router>
   );
 }
