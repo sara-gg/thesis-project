@@ -52,7 +52,7 @@ const LoginForm = ({
       const accessToken = res;
       localStorage.setItem("accessToken", accessToken);
       setIsAuthenticated(true);
-      history.back();
+      history.push("/usergallery");
     }
   };
 

@@ -6,10 +6,32 @@ import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import Logout from "../components/Logout";
 import SearchBar from "../components/SearchBar/SearchBar";
+import { connect } from "react-redux";
 import "../styles/AppBar.scss";
 
-const AppBar = () => {
+type Props = {
+  isAuthenticated: boolean;
+};
+
+const AppBar = ({ isAuthenticated }: Props): JSX.Element => {
   let history = useHistory();
+
+  const handleRenderRegister = () => {
+    if (!isAuthenticated) {
+      return (
+        <Button
+          type="reset"
+          label="Register"
+          onClick={() => {
+            history.push("/register");
+          }}
+          primary
+        />
+      );
+    } else {
+      return;
+    }
+  };
 
   return (
     <Box
@@ -29,11 +51,6 @@ const AppBar = () => {
         }}
       />
       <SearchBar />
-      <Button
-        onClick={() => {
-          history.push("/usergallery");
-        }}
-      />
       <Box
         direction="row"
         align="center"
@@ -53,26 +70,18 @@ const AppBar = () => {
           }}
         />
 
-        <Button
-          type="reset"
-          label="Register"
-          onClick={() => {
-            history.push("/register");
-          }}
-          primary
-        />
+        {handleRenderRegister()}
 
         <Logout />
-
-        <Button
-          icon={<Cart />}
-          onClick={() => {
-            history.push("/login");
-          }}
-        />
       </Box>
     </Box>
   );
 };
 
-export default AppBar;
+const mapStateToProps = (state: any) => {
+  return {
+    isAuthenticated: state.isAuthenticated,
+  };
+};
+
+export default connect(mapStateToProps, null)(AppBar);

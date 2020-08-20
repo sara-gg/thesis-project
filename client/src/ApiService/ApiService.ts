@@ -2,7 +2,6 @@ import { Category } from "../models/category";
 
 const BASE_URL = "http://localhost:3001";
 
-
 const registerUser = (user: any) => {
   return fetch(`${BASE_URL}/register`, {
     method: "POST",
@@ -12,14 +11,14 @@ const registerUser = (user: any) => {
     body: JSON.stringify(user),
   })
     .then((res) => {
-      console.log('res:', res)
+      console.log("res:", res);
       return res.json();
     })
     .then((token) => {
       return token;
     })
     .catch((err) => {
-      console.log("I got here", err)
+      console.log("I got here", err);
     });
 };
 
@@ -47,23 +46,46 @@ const createNewProduct = async (product: object) => {
     .catch((err) => console.log(err));
 };
 
-const getProductsForCategory = (category: Category):Promise<any> => {
+const getProductsForCategory = (category: Category): Promise<any> => {
   return fetch(`${BASE_URL}/products?category_id=${category.id}`, {
     method: "GET",
     credentials: "include",
     mode: "cors",
   })
     .then((res) => res.json())
-    .catch((err) => console.error)
-}
+    .catch((err) => console.error);
+};
 
-const getCategories = () : Promise <any[]> => {
-  return new Promise(res => res(
-    [{ name: "Bedroom", id: 1 },
-    { name: "Living room", id: 2 },
-    { name: "Kitchen", id: 3 },
-    { name: "Bathroom", id: 4 }]
-  )) 
-}
+const getCategories = (): Promise<any[]> => {
+  return new Promise((res) =>
+    res([
+      { name: "Bedroom", id: 1 },
+      { name: "Living room", id: 2 },
+      { name: "Kitchen", id: 3 },
+      { name: "Bathroom", id: 4 },
+    ])
+  );
+};
 
-export default { registerUser, login, createNewProduct, getProductsForCategory, getCategories };
+const getAllProducts = (): Promise<any> => {
+  return fetch(`${BASE_URL}/products`, {
+    method: "GET",
+    credentials: "include",
+    mode: "cors",
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res);
+      return res;
+    })
+    .catch((err) => console.error);
+};
+
+export default {
+  registerUser,
+  login,
+  createNewProduct,
+  getProductsForCategory,
+  getCategories,
+  getAllProducts,
+};
