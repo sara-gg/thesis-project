@@ -10,10 +10,6 @@ import "./App.css";
 import CategoryPage from "./components/CategoryPage";
 
 function App() {
-  const category = {
-    id: 1,
-    name: "Bedroom",
-  };
   return (
     <Router>
       <AppBar />
@@ -30,9 +26,7 @@ function App() {
         <Route path="/usergallery">
           <UserGallery isAuthenticated />
         </Route>
-        <Route path="/category">
-          <CategoryPage category={category} />
-        </Route>
+        <Route path={`/category/products`} component={CategoryPage}/>
         <Route path="/">
           <Home />
         </Route>

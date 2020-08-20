@@ -1,22 +1,32 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Box, Heading } from "grommet";
-import { NavLink } from "react-router-dom";
+
+import { NavLink, Route } from "react-router-dom";
+import CategoryPage from "./CategoryPage"
+import "./CategoriesBar.scss";
+import { Category } from "../models/category";
+import ApiService from "../ApiService/ApiService";
 import "../styles/CategoriesBar.scss";
 
-const categories = [
-  { name: "Bedroom", id: 0 },
-  { name: "Living room", id: 1 },
-  { name: "Kitchen", id: 2 },
-  { name: "Bathroom", id: 3 },
-];
+
 
 const styles = {
   color: "#444444",
   paddingLeft: "20px",
 };
 
-const CategoriesBar = (props: any) => (
-  <Box
+const CategoriesBar = () => {
+
+  const [categories, setCategories] = useState<Category[]>([]);
+
+ 
+  useEffect(() => {
+    ApiService.getCategories().then((res) => {
+      setCategories(res)
+    })
+  }, []);
+
+  return (<Box
     tag="header"
     direction="row"
     align="center"
@@ -26,14 +36,14 @@ const CategoriesBar = (props: any) => (
     elevation="medium"
     style={{ zIndex: 1 }}
   >
-    {categories.map((category) => (
-      <NavLink exact to={`/category/${category.id}`}>
+    {categories && categories.length > 0 ? categories.map((category) => (
+      <NavLink exact to={`/category/products?category=${JSON.stringify(category)}`}>
         <Heading level="4" style={styles} className="navbar-header">
           {category.name}
         </Heading>
       </NavLink>
-    ))}
+    )) : 'loading'}
   </Box>
-);
+)};
 
 export default CategoriesBar;
