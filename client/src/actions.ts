@@ -28,6 +28,7 @@ export interface User {
   birthdate: string;
   gender: string;
   address: string;
+  telephone: string;
 }
 
 export function submitRegisterDetails(user: User): any {

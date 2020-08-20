@@ -252,7 +252,7 @@ const RegistrationForm = ({
         </Text>
         <br></br>
         <Box direction="row" justify="between" margin={{ top: "medium" }}>
-          <Button label="Cancel" />
+          {/* <Button label="Cancel" /> */}
           <Button type="submit" label="Submit" primary />
         </Box>
       </Form>
@@ -270,6 +270,7 @@ const mapStateToProps = (state: any) => {
     birthdate: state.birthdate,
     gender: state.gender,
     address: state.address,
+    telephone: state.telephone,
     isAuthenticated: state.isAuthenticated,
   };
 };
