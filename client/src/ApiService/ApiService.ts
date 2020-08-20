@@ -47,7 +47,7 @@ const createNewProduct = async (product: object) => {
     .catch((err) => console.log(err));
 };
 
-const getProductsForCategory = (category: Category) => {
+const getProductsForCategory = (category: Category):Promise<any> => {
   return fetch(`${BASE_URL}/products?category_id=${category.id}`, {
     method: "GET",
     credentials: "include",
@@ -57,4 +57,13 @@ const getProductsForCategory = (category: Category) => {
     .catch((err) => console.error)
 }
 
-export default { registerUser, login, createNewProduct, getProductsForCategory };
+const getCategories = () : Promise <any[]> => {
+  return new Promise(res => res(
+    [{ name: "Bedroom", id: 1 },
+    { name: "Living room", id: 2 },
+    { name: "Kitchen", id: 3 },
+    { name: "Bathroom", id: 4 }]
+  )) 
+}
+
+export default { registerUser, login, createNewProduct, getProductsForCategory, getCategories };

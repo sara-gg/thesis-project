@@ -1,19 +1,13 @@
 import React from "react";
-import { Box, Heading } from "grommet";
+import { Box, Heading, Text } from "grommet";
 import bedroomImg from "../assets/bedroom-hero.jpeg";
 import FavouritesCarousel from "../components/FavouritesCarousel";
 import LeftCard from "../components/LeftCard";
 import RightCard from "../components/RightCard";
 import CategoriesBar from "../components/CategoriesBar";
-
-const styles = {
-  color: "white",
-  background: "#AD855E",
-  justify: "center",
-};
+import "../styles/Home.scss";
 
 function Home() {
-
   return (
     <div>
       <CategoriesBar />
@@ -25,13 +19,13 @@ function Home() {
           image: `url(${bedroomImg})`,
         }}
       >
-        <Box style={styles}>
+        <Box className="home-header-container">
           <Heading>Welcome to Furniss!</Heading>
-          Join our community. <br />
-          Here people come together to make, sell, buy and collect unique,
-          upcycled furniture.
-          <br />
-          <br />
+          <Text className="home-header-description">
+            Join our community. <br />
+            Here people come together to make, sell, buy and collect unique,
+            upcycled furniture.
+          </Text>
         </Box>
       </Box>
       <Box

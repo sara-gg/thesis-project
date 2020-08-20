@@ -2,13 +2,16 @@ const myTheme = {
   global: {
     colors: {
       brand: "#AD855E",
-      white: "#F3EDE6",
+      offwhite: "#F3EDE6",
+      blue: "#34425E",
+      grey: "#777A89",
+      beige: "#E1BE86",
       text: {
         light: "#444444",
       },
       focus: "#E1BE86",
       control: {
-        light: "#34425E",
+        light: "#E1BE86",
       },
     },
     font: {
