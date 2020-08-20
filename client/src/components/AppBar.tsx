@@ -21,12 +21,15 @@ const AppBar = ({ isAuthenticated }: Props): JSX.Element => {
       return (
         <Button
           type="reset"
-          label="Register"
+          className="login-button"
           onClick={() => {
             history.push("/register");
           }}
-          primary
-        />
+        >
+          <Heading level="4" color="text" className="navbar-header">
+            Register
+          </Heading>
+        </Button>
       );
     } else {
       return;
@@ -37,8 +40,9 @@ const AppBar = ({ isAuthenticated }: Props): JSX.Element => {
     <Box
       tag="header"
       direction="row"
+      width="100%"
       align="center"
-      justify="between"
+      justify="around"
       background="offwhite"
       pad={{ left: "medium", right: "small", vertical: "small" }}
       elevation="medium"
@@ -54,8 +58,10 @@ const AppBar = ({ isAuthenticated }: Props): JSX.Element => {
       <Box
         direction="row"
         align="center"
-        justify="between"
+        justify="center"
         className="right-appbar"
+        gap="medium"
+        margin="large"
       >
         <NavLink exact to="/usergallery">
           <Heading level="4" color="text" className="navbar-header">

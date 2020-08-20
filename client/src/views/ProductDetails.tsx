@@ -17,7 +17,7 @@ function ProductDetails() {
       const productId = urlParams.get("id");
       if (productId) {
         const filteredProduct = products.filter(
-          (product) => product.id === +productId
+          (product) => product.id === +productId //coercing productId to type number
         )[0];
         setProduct(filteredProduct);
       }
