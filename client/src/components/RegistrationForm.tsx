@@ -25,7 +25,7 @@ type Props = {
   birthdate: string;
   gender: string;
   address: string;
-  telephone?: number;
+  telephone?: string;
 };
 
 const RegistrationForm = ({
@@ -76,17 +76,6 @@ const RegistrationForm = ({
       address,
       telephone,
     };
-    // const user = {
-    //   name: "Amina",
-    //   lastname: "Antoniazzi",
-    //   username: "Amina",
-    //   email: "amina@hotmail.com",
-    //   password: "1234",
-    //   birthdate: "10-12-1992",
-    //   address: "Fake street 123",
-    //   gender: "female",
-    //   telephone: 1132816483
-    // };
     console.log('user:', user);
     const res = await ApiService.registerUser(user);
 
