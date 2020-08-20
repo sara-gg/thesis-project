@@ -1,10 +1,10 @@
 import React from "react";
 import { Box, Heading, Text } from "grommet";
 import bedroomImg from "../assets/bedroom-hero.jpeg";
-import CategoriesBar from "../components/CategoriesBar";
 import FavouritesCarousel from "../components/FavouritesCarousel";
 import LeftCard from "../components/LeftCard";
 import RightCard from "../components/RightCard";
+import CategoriesBar from "../components/CategoriesBar";
 import "../styles/Home.scss";
 
 function Home() {

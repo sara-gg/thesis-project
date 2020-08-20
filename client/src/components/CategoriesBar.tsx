@@ -1,12 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Heading } from "grommet";
 
 import { NavLink, Route } from "react-router-dom";
 import CategoryPage from "./CategoryPage"
-import "./CategoriesBar.scss";
 import { Category } from "../models/category";
 import ApiService from "../ApiService/ApiService";
-import "../styles/CategoriesBar.scss";
 
 
 
@@ -19,7 +17,7 @@ const CategoriesBar = () => {
 
   const [categories, setCategories] = useState<Category[]>([]);
 
- 
+
   useEffect(() => {
     ApiService.getCategories().then((res) => {
       setCategories(res)
@@ -44,6 +42,7 @@ const CategoriesBar = () => {
       </NavLink>
     )) : 'loading'}
   </Box>
-)};
+  )
+};
 
 export default CategoriesBar;

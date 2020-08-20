@@ -5,6 +5,7 @@ import logo from "../assets/logo.png";
 import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import Logout from "../components/Logout";
+import SearchBar from "../components/SearchBar/SearchBar";
 import "../styles/AppBar.scss";
 
 const AppBar = () => {
@@ -25,6 +26,12 @@ const AppBar = () => {
         icon={<Image src={logo} />}
         onClick={() => {
           history.push("/");
+        }}
+      />
+      <SearchBar />
+      <Button
+        onClick={() => {
+          history.push("/usergallery");
         }}
       />
       <Box
