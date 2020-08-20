@@ -46,6 +46,22 @@ const AppBar = () => {
           </Heading>
         </NavLink>
 
+        <Button
+          icon={<Cart />}
+          onClick={() => {
+            history.push("/login");
+          }}
+        />
+
+        <Button
+          type="reset"
+          label="Register"
+          onClick={() => {
+            history.push("/register");
+          }}
+          primary
+        />
+
         <Logout />
 
         <Button
