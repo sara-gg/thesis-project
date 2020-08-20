@@ -38,6 +38,14 @@ const AppBar = () => {
           history.push("/login");
         }}
       />
+      <Button
+        type="reset"
+        label="Register"
+        onClick={() => {
+          history.push("/register");
+        }}
+        primary
+      />
       <Logout />
     </Box>
   );
