@@ -11,6 +11,7 @@ import {
 import ApiService from "../ApiService/ApiService";
 import { connect } from "react-redux";
 import ImageUploader from "react-images-upload";
+import { setNewProductDetails } from "../actions";
 
 interface FormState {
   title: string;
@@ -27,19 +28,6 @@ interface FormState {
   //size?: "small" | "medium" | "large" | "xlarge";
 }
 
-const initialState = {
-  title: "",
-  description: "",
-  images: [] as string[],
-  location: "",
-  price: 0,
-  quantity: 0,
-  height: 0,
-  width: 0,
-  depth: 0,
-  materials: "",
-};
-
 const materialOptions = [
   "wood",
   "leather",
@@ -50,18 +38,34 @@ const materialOptions = [
   "glass",
 ];
 
-interface StateProps {
-  isAuthenticated: boolean;
-}
-
-interface DispatchProps {
-  setIsAuthenticated: (b: boolean) => void;
-}
-
 type Props = StateProps & DispatchProps;
 
-const NewProductForm = ({ isAuthenticated, setIsAuthenticated }: Props) => {
-  const [newProduct, setNewProduct] = useState(initialState);
+const NewProductForm = ({
+  isAuthenticated,
+  setIsAuthenticated,
+  title,
+  description,
+  images,
+  location,
+  price,
+  quantity,
+  height,
+  width,
+  depth,
+  materials,
+}: Props) => {
+  const [newProduct, setNewProduct] = useState({
+    title,
+    description,
+    images,
+    location,
+    price,
+    quantity,
+    height,
+    width,
+    depth,
+    materials,
+  });
 
   const onDrop = (files: File[], pictures: string[]) => {
     setNewProduct((prevState) => ({
@@ -71,27 +75,18 @@ const NewProductForm = ({ isAuthenticated, setIsAuthenticated }: Props) => {
   };
 
   const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setNewProduct((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    const {
+      name,
+      value,
+    }: {
+      name: string;
+      value: string | number | string[];
+    } = e.target;
+    setNewProductDetails({ name, value });
   };
 
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    const {
-      title,
-      description,
-      images,
-      location,
-      price,
-      quantity,
-      height,
-      width,
-      depth,
-      materials,
-    } = newProduct;
     const product = {
       title,
       description,
@@ -108,7 +103,7 @@ const NewProductForm = ({ isAuthenticated, setIsAuthenticated }: Props) => {
 
     if (res.error) {
       alert(`${res.message}`);
-      setNewProduct(initialState);
+      //setNewProduct(initialState);
     } else {
       const accessToken = res.token;
       localStorage.setItem("accessToken", accessToken);
@@ -127,7 +122,7 @@ const NewProductForm = ({ isAuthenticated, setIsAuthenticated }: Props) => {
           <FormField
             label="Product name"
             name="title"
-            value={newProduct.title}
+            value={title}
             required
             validate={{ regexp: /^[a-z]/i }}
             onChange={handleChange}
@@ -135,7 +130,7 @@ const NewProductForm = ({ isAuthenticated, setIsAuthenticated }: Props) => {
           <FormField
             label="Description"
             name="description"
-            value={newProduct.description}
+            value={description}
             required
             component={TextArea}
             onChange={handleChange}
@@ -143,14 +138,14 @@ const NewProductForm = ({ isAuthenticated, setIsAuthenticated }: Props) => {
           <FormField
             label="Location"
             name="location"
-            value={newProduct.location}
+            value={location}
             required
             onChange={handleChange}
           />
           <FormField
-            label={`Quantity: ${newProduct.quantity}`}
+            label={`Quantity: ${quantity}`}
             name="quantity"
-            value={newProduct.quantity}
+            value={quantity}
             component={RangeInput}
             pad
             min={1}
@@ -160,7 +155,7 @@ const NewProductForm = ({ isAuthenticated, setIsAuthenticated }: Props) => {
           <FormField
             label="Price"
             name="price"
-            value={newProduct.price}
+            value={price}
             required
             validate={{ regexp: /\d+\.?\d*$/, message: "decimals allowed" }}
             onChange={handleChange}
@@ -175,7 +170,7 @@ const NewProductForm = ({ isAuthenticated, setIsAuthenticated }: Props) => {
             placeholder="Select materials"
             // multiple
             closeOnChange={false}
-            value={newProduct.materials}
+            value={materials}
             options={materialOptions}
             onChange={handleChange}
           />
@@ -202,11 +197,39 @@ const NewProductForm = ({ isAuthenticated, setIsAuthenticated }: Props) => {
   );
 };
 
+interface StateProps {
+  isAuthenticated: boolean;
+  title: string;
+  description: string;
+  images: string[];
+  location?: string;
+  price: number;
+  quantity: number;
+  height: number;
+  width: number;
+  depth: number;
+  materials: string;
+}
+
 const mapStateToProps = (state: StateProps) => {
   return {
+    title: state.title,
+    description: state.description,
+    images: state.images,
+    location: state.location,
+    price: state.price,
+    quantity: state.quantity,
+    height: state.height,
+    width: state.width,
+    depth: state.depth,
+    materials: state.materials,
     isAuthenticated: state.isAuthenticated,
   };
 };
+
+interface DispatchProps {
+  setIsAuthenticated: (b: boolean) => void;
+}
 
 const mapDispatchToProps = (dispatch: any) => {
   return {

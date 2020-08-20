@@ -51,3 +51,15 @@ export function submitRegisterDetails(user: User): any {
       });
   };
 }
+
+export function setNewProductDetails({
+  name,
+  value,
+}: {
+  [name: string]: string | number | string[];
+}) {
+  return {
+    type: "SET_NEW_PRODUCT",
+    payload: { name, value },
+  };
+}
