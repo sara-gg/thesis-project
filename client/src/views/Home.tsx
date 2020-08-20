@@ -1,44 +1,22 @@
 import React from "react";
-import Logout from "../components/Logout";
-import { Box, Button, Heading } from "grommet";
+import { Box, Heading } from "grommet";
 import bedroomImg from "../assets/bedroom-hero.jpeg";
-import AppBar from "../components/AppBar";
+import CategoriesBar from "../components/CategoriesBar";
 import FavouritesCarousel from "../components/FavouritesCarousel";
 import LeftCard from "../components/LeftCard";
 import RightCard from "../components/RightCard";
-import { Cart } from "grommet-icons";
-import { useHistory } from "react-router-dom";
 
 const styles = {
   color: "white",
-  background: "#af8e7a",
+  background: "#AD855E",
+  justify: "center",
 };
 
 function Home() {
-  let history = useHistory();
+
   return (
     <div>
-      <AppBar>
-        Hello There!
-        <Heading level="3" margin="none">
-          Home Page
-        </Heading>
-        <Logout />
-        <Button
-          onClick={() => {
-            history.push("/usergallery");
-          }}
-        >
-          Go to User Gallery
-        </Button>
-        <Button
-          icon={<Cart />}
-          onClick={() => {
-            history.push("/login");
-          }}
-        />
-      </AppBar>
-
+      <CategoriesBar />
       <Box
         justify="center"
         height="large"
@@ -48,9 +26,10 @@ function Home() {
         }}
       >
         <Box style={styles}>
-          <Heading>Welcome to our unnamed website!</Heading>
-          Join our community. Here people come together to make, sell, buy and
-          collect unique, upcycled furniture.
+          <Heading>Welcome to Furniss!</Heading>
+          Join our community. <br />
+          Here people come together to make, sell, buy and collect unique,
+          upcycled furniture.
           <br />
           <br />
         </Box>

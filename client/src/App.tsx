@@ -4,6 +4,7 @@ import Login from "./views/Login";
 import Register from "./views/Register";
 import NewProduct from "./views/NewProduct";
 import UserGallery from "./views/UserGallery";
+import AppBar from "./components/AppBar";
 import Home from "./views/Home";
 import "./App.css";
 import CategoryPage from "./components/CategoryPage";
@@ -11,10 +12,11 @@ import CategoryPage from "./components/CategoryPage";
 function App() {
   const category = {
     id: 1,
-    name: 'Bedroom'
-  }
+    name: "Bedroom",
+  };
   return (
     <Router>
+      <AppBar />
       <Switch>
         <Route path="/login">
           <Login />
@@ -28,11 +30,12 @@ function App() {
         <Route path="/usergallery">
           <UserGallery isAuthenticated />
         </Route>
-        <Route path="/category" render={(props) => <CategoryPage category={category} />} />
+        <Route path="/category">
+          <CategoryPage category={category} />
+        </Route>
         <Route path="/">
           <Home />
         </Route>
-
       </Switch>
     </Router>
   );

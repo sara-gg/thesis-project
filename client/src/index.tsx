@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import { Grommet } from 'grommet';
+import myTheme from "./styles/theme"
 
 // REDUX SPECIFIC IMPORTS
 import reducer from "./reducers/reducer";
@@ -18,7 +20,6 @@ declare global {
 }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
 const store = createStore(reducer, composeEnhancers());
 
 store.subscribe(() => {
@@ -28,7 +29,9 @@ store.subscribe(() => {
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
+    <Grommet theme={myTheme}> 
       <App />
+      </Grommet>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
