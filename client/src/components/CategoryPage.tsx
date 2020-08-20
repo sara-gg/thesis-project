@@ -4,7 +4,8 @@ import { Product } from "../models/product";
 import { Category } from "../models/category";
 import ApiService from "../ApiService/ApiService";
 import { Redirect } from 'react-router'
-
+import "./CategoryPage.scss"
+import CategoriesBar from "./CategoriesBar"
 const qs = require('qs');
 
 type CategoryProps = {
@@ -44,6 +45,7 @@ const CategoryPage = ({ category, location }: CategoryProps) => {
   }
   return (
     <div className="categoryPage">
+      <CategoriesBar />
       <h1 className="category-header">{category.name}</h1>
       <div className="category-dashboard">
         {products && products.length > 0
