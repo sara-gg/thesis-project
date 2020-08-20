@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Button, Image, Text } from "grommet";
 import { Edit, Trash } from "grommet-icons";
 import { Product } from "../models/product";
@@ -9,6 +9,10 @@ interface Props {
 }
 
 function UserGalleryProductCard({ product, readonly }: Props) {
+
+  const [editmode, setEditMode] = useState(false);
+
+
   return (
     <Box
       height="medium"
@@ -28,10 +32,12 @@ function UserGalleryProductCard({ product, readonly }: Props) {
         <Text size="small">{product.price} €</Text>
       </Box>
       <Box direction="row" gap="medium">
-        <Button icon={<Edit color="brand" />} onClick={() => {}} />
         {
           readonly ? '' :
+          <>
+        <Button icon={<Edit color="brand" />} onClick={() => {}} />
         <Button icon={<Trash />} onClick={() => {}} />
+        </>
         }
       </Box>
     </Box>

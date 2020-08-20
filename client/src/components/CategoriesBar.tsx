@@ -32,7 +32,7 @@ const CategoriesBar = () => {
     style={{ zIndex: 1 }}
   >
     {categories && categories.length > 0 ? categories.map((category) => (
-      <NavLink exact to={`category/products?category=${JSON.stringify(category)}`}>
+      <NavLink exact to={`/category/products?category=${JSON.stringify(category)}`}>
         <Heading level="4" style={styles} className="navbar-header">
           {category.name}
         </Heading>

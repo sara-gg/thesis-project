@@ -28,17 +28,15 @@ const CategoryPage = ({ category, location }: CategoryProps) => {
 
   const query = qs.parse(location.search)['?category'];
 
- 
-
   category = JSON.parse(query)
-
+  
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     ApiService.getProductsForCategory(category).then((res) => {
       setProducts(res.rows);
     })
-  }, [])
+  }, [location])
 
   if(!query) {
     return (<Redirect to='/'/>)
