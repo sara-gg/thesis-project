@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Box, Heading } from "grommet";
 
 import { NavLink, Route } from "react-router-dom";
-import CategoryPage from "./CategoryPage";
+import CategoryPage from "./CategoryPage"
 import { Category } from "../models/category";
 import ApiService from "../ApiService/ApiService";
+
+
+
 
 const styles = {
   color: "#444444",
