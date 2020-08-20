@@ -53,7 +53,16 @@ const RegistrationForm = ({
   address,
 }: Props): JSX.Element => {
   const [revealPassword, setRevealPassword] = useState(false);
-  const [state, setState] = useState(initialState);
+  const [state, setState] = useState({
+    name,
+    lastname,
+    username,
+    email,
+    password,
+    birthdate,
+    gender,
+    address,
+  });
 
   const daysInMonth = (month: any) => new Date(2019, month, 0).getDate();
 
@@ -65,16 +74,6 @@ const RegistrationForm = ({
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const {
-      name,
-      lastname,
-      username,
-      email,
-      password,
-      birthdate,
-      gender,
-      address,
-    } = state;
     const user = {
       name,
       lastname,
