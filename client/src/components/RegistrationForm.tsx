@@ -11,13 +11,18 @@ import {
 } from "grommet";
 import { Hide, View } from "grommet-icons";
 import { connect } from "react-redux";
-import ApiService from "../ApiService/ApiService";
-import { inputRegister } from "../actions";
+import {
+  setIsAuthenticated,
+  setRegisterDetails,
+  submitRegisterDetails,
+  User,
+} from "../actions";
 
 type Props = {
   isAuthenticated: boolean;
   setIsAuthenticated: (b: boolean) => void;
-  inputRegister: ({ name, value }: { [name: string]: string }) => void;
+  setRegisterDetails: ({ name, value }: { [name: string]: string }) => void;
+  submitRegisterDetails: (user: User) => any;
   name: string;
   lastname: string;
   username: string;
@@ -28,21 +33,11 @@ type Props = {
   address: string;
 };
 
-const initialState = {
-  name: "",
-  lastname: "",
-  username: "",
-  email: "",
-  password: "",
-  birthdate: "",
-  gender: "",
-  address: "",
-};
-
 const RegistrationForm = ({
   isAuthenticated,
   setIsAuthenticated,
-  inputRegister,
+  setRegisterDetails,
+  submitRegisterDetails,
   name,
   lastname,
   username,
@@ -53,23 +48,12 @@ const RegistrationForm = ({
   address,
 }: Props): JSX.Element => {
   const [revealPassword, setRevealPassword] = useState(false);
-  const [state, setState] = useState({
-    name,
-    lastname,
-    username,
-    email,
-    password,
-    birthdate,
-    gender,
-    address,
-  });
 
   const daysInMonth = (month: any) => new Date(2019, month, 0).getDate();
 
   const handleChange = (e: any) => {
-    console.log(e.target.value);
     const { name, value } = e.target;
-    inputRegister({ name, value });
+    setRegisterDetails({ name, value });
   };
 
   const handleSubmit = async (e: any) => {
@@ -84,18 +68,12 @@ const RegistrationForm = ({
       gender,
       address,
     };
-    console.log(user);
-    const res = await ApiService.registerUser(user);
-
-    if (res.error) {
-      alert(`${res.message}`);
-      setState(initialState);
-    } else {
-      const accessToken = res.token;
-      localStorage.setItem("accessToken", accessToken);
-      setIsAuthenticated(true);
-      window.location.replace("http://localhost:3000/home");
-    }
+    submitRegisterDetails(user)
+      .then((accessToken: string) => {
+        localStorage.setItem("accessToken", accessToken);
+        window.location.replace("http://localhost:3000/home");
+      })
+      .catch(console.log);
   };
 
   return (
@@ -213,9 +191,7 @@ const RegistrationForm = ({
                 length: [1, 2],
                 options: Array.from(
                   {
-                    length: daysInMonth(
-                      parseInt(state.birthdate.split("/")[0], 10)
-                    ),
+                    length: daysInMonth(parseInt(birthdate.split("/")[0], 10)),
                   },
                   (v, k) => k + 1
                 ),
@@ -271,13 +247,8 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    setIsAuthenticated: (boolean: boolean) =>
-      dispatch({ type: "AUTHENTICATED", payload: boolean }),
-    inputRegister: ({ name, value }: { [name: string]: string }) =>
-      dispatch({ type: "INPUT_REGISTER", payload: { name, value } }),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(RegistrationForm);
+export default connect(mapStateToProps, {
+  setIsAuthenticated,
+  setRegisterDetails,
+  submitRegisterDetails,
+})(RegistrationForm);

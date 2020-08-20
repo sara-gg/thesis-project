@@ -24,7 +24,7 @@ const initialState: RootState = {
 
 const reducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case "INPUT_REGISTER":
+    case "SET_REGISTER_DETAILS":
       return {
         ...state,
         [action.payload.name]: action.payload.value,

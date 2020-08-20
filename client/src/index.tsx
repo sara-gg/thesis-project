@@ -8,10 +8,10 @@ import myTheme from "./styles/theme"
 
 // REDUX SPECIFIC IMPORTS
 import reducer from "./reducers/reducer";
-// import thunk from 'redux-thunk';
-// import logger from 'redux-logger';
+import thunk from 'redux-thunk';
+import logger from 'redux-logger';
 import { Provider } from "react-redux";
-import { createStore, compose } from "redux";
+import { createStore, compose, applyMiddleware } from "redux";
 
 declare global {
   interface Window {
@@ -20,11 +20,12 @@ declare global {
 }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducer, composeEnhancers());
+const store = createStore(reducer, applyMiddleware(thunk, logger));
 
-store.subscribe(() => {
-  console.log(store.getState());
-});
+//composeEnhancers(),
+// store.subscribe(() => {
+//   console.log(store.getState());
+// });
 
 ReactDOM.render(
   <React.StrictMode>
