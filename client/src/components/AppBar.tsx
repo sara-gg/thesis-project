@@ -5,6 +5,7 @@ import logo from "../assets/logo.png";
 import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import Logout from "../components/Logout";
+import SearchBar from "../components/SearchBar/SearchBar";
 import "../styles/AppBar.scss";
 
 const AppBar = () => {
@@ -27,6 +28,12 @@ const AppBar = () => {
           history.push("/");
         }}
       />
+      <SearchBar />
+      <Button
+        onClick={() => {
+          history.push("/usergallery");
+        }}
+      />
       <Box
         direction="row"
         align="center"
@@ -38,6 +45,22 @@ const AppBar = () => {
             User Gallery
           </Heading>
         </NavLink>
+
+        <Button
+          icon={<Cart />}
+          onClick={() => {
+            history.push("/login");
+          }}
+        />
+
+        <Button
+          type="reset"
+          label="Register"
+          onClick={() => {
+            history.push("/register");
+          }}
+          primary
+        />
 
         <Logout />
 
