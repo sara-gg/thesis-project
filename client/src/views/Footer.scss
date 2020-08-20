@@ -1,0 +1,48 @@
+footer {
+  display: flex;
+  padding: 1rem;
+  font-size: medium;
+  background-color: #ad855e;
+  flex-direction: column;
+
+  .foot-info {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    margin-bottom: 0.5rem;
+  }
+  .about{
+    width: 25rem;
+    word-spacing: 0.5rem;
+    line-height: 1.7rem;
+  }
+
+  .find-us {
+    display: flex;
+    flex-direction: column;
+    .icon {
+      padding: 0.5rem;
+    }
+    .icon:hover {
+      cursor: pointer;
+    }
+  }
+
+  .help-and-advice {
+
+    p { 
+      padding: 0;
+      margin: 0.3rem;
+    }
+
+    p:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }  
+
+  .license {
+    border-top: solid 1px burlywood;
+    padding: 0.5rem;
+  }
+}

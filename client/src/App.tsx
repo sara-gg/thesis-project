@@ -5,6 +5,7 @@ import Register from "./views/Register";
 import NewProduct from "./views/NewProduct";
 import UserGallery from "./views/UserGallery";
 import AppBar from "./components/AppBar";
+import Foot from "./views/Footer"
 import Home from "./views/Home";
 import "./App.css";
 import CategoryPage from "./components/CategoryPage";
@@ -31,6 +32,7 @@ function App() {
           <Home />
         </Route>
       </Switch>
+      <Foot />
     </Router>
   );
 }
