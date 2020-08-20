@@ -1,9 +1,14 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom"
+
 import { Search } from "grommet-icons";
+
 import './SearchBar.css';
+
 
 const SearchBar = () => {
   const [searchValue, setSearchValue] = useState('');
+  const history = useHistory();
 
   const handleChange = (e: any) => {
     setSearchValue(e.target.value);
@@ -19,7 +24,7 @@ const SearchBar = () => {
   }
 
   const redirectToGallery = () => {
-    window.location.replace(`http://localhost:3000/product?${searchValue}`);
+    history.push(`http://localhost:3000/product?${searchValue}`);
   }
 
   return (
