@@ -3,9 +3,13 @@ import UserGalleryProductCard from "./UserGalleryProductCard";
 import { Product } from "../models/product";
 import { Category } from "../models/category";
 import ApiService from "../ApiService/ApiService";
+import { Redirect } from 'react-router'
+
+const qs = require('qs');
 
 type CategoryProps = {
   category: Category;
+  location: any;
 };
 
 export const renderProducts = (productList: Product[]) => {
@@ -19,10 +23,13 @@ export const renderProducts = (productList: Product[]) => {
   return productsResult;
 };
 
-const CategoryPage = ({ category }: CategoryProps) => {
+const CategoryPage = ({ category, location }: CategoryProps) => {
 
+  const query = qs.parse(location.search)['?category'];
 
-  // redirect if no category
+ 
+
+  category = JSON.parse(query)
 
   const [products, setProducts] = useState([]);
 
@@ -32,6 +39,9 @@ const CategoryPage = ({ category }: CategoryProps) => {
     })
   }, [])
 
+  if(!query) {
+    return (<Redirect to='/'/>)
+  }
   return (
     <div className="categoryPage">
       <h1 className="category-header">{category.name}</h1>
