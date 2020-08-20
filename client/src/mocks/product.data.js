@@ -1,9 +1,10 @@
 let productsData = [
   {
     user_id: "001",
+    id: "001",
     category_id: "bedroom",
     title: "Fancy Bedroom Chair",
-    description: `Regal Bedroom Chair`,
+    description: `Regal Bedroom Chair Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
     images:
       "https://lucas-furniture.co.uk/Photos/W653_Regal-Bedroom-Chair-5055299480113.jpg",
     location: "Barcelona",
@@ -15,9 +16,10 @@ let productsData = [
   },
   {
     user_id: "001",
+    id: "002",
     category_id: "living-room",
     title: "Nice Dining Table",
-    description: `Regal Oval Extending Dining Table`,
+    description: `Regal Oval Extending Dining Table Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
     images:
       "https://lucas-furniture.co.uk/Photos/W253_Regal-Oval-Extending-Table-5055299480786.jpg",
     location: "Barcelona",
@@ -29,9 +31,10 @@ let productsData = [
   },
   {
     user_id: "001",
+    id: "003",
     category_id: "living-room",
     title: "Awesome coffee table",
-    description: `Regal Oval Coffee Table`,
+    description: `Regal Oval Coffee Table Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
     images:
       "https://lucas-furniture.co.uk/Photos/W253_Regal-Oval-Coffee-Table-5055299480892.jpg",
     location: "Barcelona",
@@ -43,9 +46,10 @@ let productsData = [
   },
   {
     user_id: "002",
+    id: "004",
     category_id: "bathroom",
     title: "Cool Bathroom Mirror",
-    description: `Black almost square bathroom mirror with shelf`,
+    description: `Black almost square bathroom mirror with shelf Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
     images:
       "https://cdn.rockettstgeorge.co.uk/media/catalog/product/b/l/black-almost-square-bathroom-mirror-with-shelf.jpg",
     location: "London",
@@ -57,9 +61,10 @@ let productsData = [
   },
   {
     user_id: "002",
+    id: "005",
     category_id: "bathroom",
     title: "Cool Bathroom Mirror",
-    description: `Black almost square bathroom mirror with shelf`,
+    description: `Black almost square bathroom mirror with shelf Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
     images:
       "https://cdn.rockettstgeorge.co.uk/media/catalog/product/b/l/black-almost-square-bathroom-mirror-with-shelf.jpg",
     location: "London",
@@ -71,9 +76,10 @@ let productsData = [
   },
   {
     user_id: "002",
+    id: "006",
     category_id: "bathroom",
     title: "Cool Bathroom Mirror",
-    description: `Black almost square bathroom mirror with shelf`,
+    description: `Black almost square bathroom mirror with shelf Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
     images:
       "https://cdn.rockettstgeorge.co.uk/media/catalog/product/b/l/black-almost-square-bathroom-mirror-with-shelf.jpg",
     location: "London",
@@ -85,9 +91,10 @@ let productsData = [
   },
   {
     user_id: "002",
+    id: "007",
     category_id: "bathroom",
     title: "Cool Bathroom Mirror",
-    description: `Black almost square bathroom mirror with shelf`,
+    description: `Black almost square bathroom mirror with shelf Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
     images:
       "https://cdn.rockettstgeorge.co.uk/media/catalog/product/b/l/black-almost-square-bathroom-mirror-with-shelf.jpg",
     location: "London",
@@ -99,9 +106,10 @@ let productsData = [
   },
   {
     user_id: "002",
+    id: "007",
     category_id: "bathroom",
     title: "Cool Bathroom Mirror",
-    description: `Black almost square bathroom mirror with shelf`,
+    description: `Black almost square bathroom mirror with shelf Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
     images:
       "https://cdn.rockettstgeorge.co.uk/media/catalog/product/b/l/black-almost-square-bathroom-mirror-with-shelf.jpg",
     location: "London",

@@ -6,6 +6,7 @@ import NewProduct from "./views/NewProduct";
 import UserGallery from "./views/UserGallery";
 import AppBar from "./components/AppBar";
 import Foot from "./views/Footer"
+import ProductDetails from "./views/ProductDetails";
 import Home from "./views/Home";
 import "./App.css";
 import CategoryPage from "./components/CategoryPage";
@@ -27,7 +28,10 @@ function App() {
         <Route path="/usergallery">
           <UserGallery isAuthenticated />
         </Route>
-        <Route path={`/category/products`} component={CategoryPage}/>
+        <Route path={`/category/products`} component={CategoryPage} />
+        <Route path="/productdetails">
+          <ProductDetails />
+        </Route>
         <Route path="/">
           <Home />
         </Route>
