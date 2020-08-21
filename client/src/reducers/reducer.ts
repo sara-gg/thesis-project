@@ -11,7 +11,8 @@ interface RootState {
   telephone: string,
   title: string,
   description: string,
-  images: string[],
+  images: string,
+  // images: string[],
   location: string,
   price: number,
   quantity: number,
@@ -19,6 +20,7 @@ interface RootState {
   width: number,
   depth: number,
   materials: string,
+  category_id: number,
 }
 
 const initialState: RootState = {
@@ -34,7 +36,8 @@ const initialState: RootState = {
   telephone: "",
   title: "",
   description: "",
-  images: [] as string[],
+  // images: [] as string[],
+  images: "",
   location: "",
   price: 0,
   quantity: 0,
@@ -42,6 +45,7 @@ const initialState: RootState = {
   width: 0,
   depth: 0,
   materials: "",
+  category_id: 0,
 };
 
 const reducer = (state = initialState, action: any) => {

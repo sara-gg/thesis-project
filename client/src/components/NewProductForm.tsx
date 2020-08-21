@@ -15,14 +15,15 @@ import ImageUploader from "react-images-upload";
 interface FormState {
   title: string;
   description: string;
-  images: string[];
+  images: string;   // Allows just one picture for the MVP then change to -> images: string[];
   location?: string;
   price: number;
   quantity: number;
   height: number;
   width: number;
   depth: number;
-  materials: string;
+  material: string;
+  category_id: string;
 
   //size?: "small" | "medium" | "large" | "xlarge";
 }
@@ -30,14 +31,15 @@ interface FormState {
 const initialState = {
   title: "",
   description: "",
-  images: [] as string[],
+  images: "", // Allows just one picture for the MVP then change to -> images: [] as string[],
   location: "",
   price: 0,
   quantity: 0,
   height: 0,
   width: 0,
   depth: 0,
-  materials: "",
+  material: "",
+  category_id: "",
 };
 
 const materialOptions = [
@@ -49,6 +51,8 @@ const materialOptions = [
   "concrete",
   "glass",
 ];
+
+const categoryOptions = [0, 1, 2, 3];
 
 interface StateProps {
   isAuthenticated: boolean;
@@ -63,7 +67,7 @@ type Props = StateProps & DispatchProps;
 const NewProductForm = ({ isAuthenticated, setIsAuthenticated }: Props) => {
   const [newProduct, setNewProduct] = useState(initialState);
 
-  const onDrop = (files: File[], pictures: string[]) => {
+  const onDrop = (files: File[], pictures: string) => {   // after MVP change -> files: File[], pictures: string[]
     setNewProduct((prevState) => ({
       ...prevState,
       images: prevState.images.concat(pictures),
@@ -75,6 +79,15 @@ const NewProductForm = ({ isAuthenticated, setIsAuthenticated }: Props) => {
     setNewProduct((prevState) => ({
       ...prevState,
       [name]: value,
+    }));
+  };
+
+  const handleSelectChange = (e: any) => {
+    const { name } = e.target;
+    const { option } = e;
+    setNewProduct((prevState) => ({
+      ...prevState,
+      [name]: option,
     }));
   };
 
@@ -90,7 +103,8 @@ const NewProductForm = ({ isAuthenticated, setIsAuthenticated }: Props) => {
       height,
       width,
       depth,
-      materials,
+      material,
+      category_id,
     } = newProduct;
     const product = {
       title,
@@ -102,19 +116,12 @@ const NewProductForm = ({ isAuthenticated, setIsAuthenticated }: Props) => {
       height,
       width,
       depth,
-      materials,
+      material,
+      category_id,
     };
-    const res = await ApiService.createNewProduct(product);
+    await ApiService.createNewProduct(product);
 
-    if (res.error) {
-      alert(`${res.message}`);
-      setNewProduct(initialState);
-    } else {
-      const accessToken = res.token;
-      localStorage.setItem("accessToken", accessToken);
-      setIsAuthenticated(true);
-      window.location.replace("http://localhost:3000/home");
-    }
+    window.location.replace("http://localhost:3000/newproduct");
   };
 
   return (
@@ -171,25 +178,35 @@ const NewProductForm = ({ isAuthenticated, setIsAuthenticated }: Props) => {
           <FormField label="Depth(cm)" name="depth" onChange={handleChange} />
 
           <Select
-            name="materials"
-            placeholder="Select materials"
+            name="material"
+            placeholder="Select material"
             // multiple
-            closeOnChange={false}
-            value={newProduct.materials}
+            closeOnChange={true}
+            value={newProduct.material}
             options={materialOptions}
-            onChange={handleChange}
+            onChange={handleSelectChange}
+          />
+
+          <Select
+            name="category_id"
+            placeholder="category"
+            // multiple
+            closeOnChange={true}
+            value={newProduct.category_id}
+            options={categoryOptions}
+            onChange={handleSelectChange}
           />
 
           <Box direction="row" justify="between" margin={{ top: "medium" }}>
-            <Button label="Cancel" />
-            <Button type="submit" label="Update" primary />
+            {/* <Button label="Cancel" /> */}
+            <Button type="submit" label="Publish" primary />
           </Box>
         </Form>
       </Box>
       <Box width="medium">
         <ImageUploader
           withIcon={true}
-          onChange={onDrop}
+          // onChange={onDrop}    // comentedfor MVP
           buttonText={"Upload image"}
           withLabel={true}
           label={"Upload images of your product here, accepted: jpg, gif, png"}

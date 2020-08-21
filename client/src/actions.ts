@@ -47,8 +47,10 @@ export function submitRegisterDetails(user: User): any {
       .then((res) => res.json())
       .then((res) => {
         if (res.error) {
+          console.log('res.error', res.error)
           throw new Error(`${res.message}`);
         } else {
+          console.log('SII')
           const accessToken = res.token;
           dispatch(setIsAuthenticated(true));
           return accessToken;

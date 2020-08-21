@@ -32,7 +32,7 @@ type Props = {
   birthdate: string;
   gender: string;
   address: string;
-  telephone?: string;
+  telephone: string;
 };
 
 const RegistrationForm = ({
@@ -78,23 +78,12 @@ const RegistrationForm = ({
       address,
       telephone,
     };
-    console.log('user:', user);
-    const res = await ApiService.registerUser(user);
 
-    console.log('res:', res);
-
-    // if (res.error) {
-    //   alert(`${res.message}`);
-    //   setState(initialState);
-    // } else {
-    //   const accessToken = res.token;
-    // submitRegisterDetails(user)
-    //   .then((accessToken: string) => {
-    //     localStorage.setItem("accessToken", accessToken);
-    //     window.location.replace("http://localhost:3000/home");
-    //   })
-    //   .catch(console.log);
-    // }
+    submitRegisterDetails(user)
+      .then((accessToken: string) => {
+        localStorage.setItem("accessToken", accessToken);
+        window.location.replace("http://localhost:3000/newproduct");
+      })
   };
 
   return (
