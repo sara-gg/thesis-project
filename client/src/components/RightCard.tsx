@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import "../styles/homeCard.scss";
 
 const RightCard = () => {
-  let history = useHistory();
+  // let history = useHistory();
 
   return (
     <Grid

@@ -14,7 +14,7 @@ import CategoryPage from "./components/CategoryPage";
 function App() {
   return (
     <Router>
-      <AppBar />
+      <AppBar isAuthenticated />
       <Switch>
         <Route path="/login">
           <Login />

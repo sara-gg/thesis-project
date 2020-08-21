@@ -6,17 +6,43 @@ import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import Logout from "../components/Logout";
 import SearchBar from "../components/SearchBar/SearchBar";
+import { connect } from "react-redux";
 import "../styles/AppBar.scss";
 
-const AppBar = () => {
+type Props = {
+  isAuthenticated: boolean;
+};
+
+const AppBar = ({ isAuthenticated }: Props): JSX.Element => {
   let history = useHistory();
+
+  const handleRenderRegister = () => {
+    if (!isAuthenticated) {
+      return (
+        <Button
+          type="reset"
+          className="login-button"
+          onClick={() => {
+            history.push("/register");
+          }}
+        >
+          <Heading level="4" color="text" className="navbar-header">
+            Register
+          </Heading>
+        </Button>
+      );
+    } else {
+      return;
+    }
+  };
 
   return (
     <Box
       tag="header"
       direction="row"
+      width="100%"
       align="center"
-      justify="between"
+      justify="around"
       background="offwhite"
       pad={{ left: "medium", right: "small", vertical: "small" }}
       elevation="medium"
@@ -29,16 +55,13 @@ const AppBar = () => {
         }}
       />
       <SearchBar />
-      <Button
-        onClick={() => {
-          history.push("/usergallery");
-        }}
-      />
       <Box
         direction="row"
         align="center"
-        justify="between"
+        justify="center"
         className="right-appbar"
+        gap="medium"
+        margin="large"
       >
         <NavLink exact to="/usergallery">
           <Heading level="4" color="text" className="navbar-header">
@@ -53,26 +76,18 @@ const AppBar = () => {
           }}
         />
 
-        <Button
-          type="reset"
-          label="Register"
-          onClick={() => {
-            history.push("/register");
-          }}
-          primary
-        />
+        {handleRenderRegister()}
 
         <Logout />
-
-        <Button
-          icon={<Cart />}
-          onClick={() => {
-            history.push("/login");
-          }}
-        />
       </Box>
     </Box>
   );
 };
 
-export default AppBar;
+const mapStateToProps = (state: any) => {
+  return {
+    isAuthenticated: state.isAuthenticated,
+  };
+};
+
+export default connect(mapStateToProps, null)(AppBar);

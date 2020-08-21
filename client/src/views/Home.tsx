@@ -5,6 +5,7 @@ import FavouritesCarousel from "../components/FavouritesCarousel";
 import LeftCard from "../components/LeftCard";
 import RightCard from "../components/RightCard";
 import CategoriesBar from "../components/CategoriesBar";
+import SearchBar from "../components/SearchBar/SearchBar";
 import "../styles/Home.scss";
 
 function Home() {
