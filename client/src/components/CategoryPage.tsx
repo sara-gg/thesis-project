@@ -3,10 +3,10 @@ import UserGalleryProductCard from "./UserGalleryProductCard";
 import { Product } from "../models/product";
 import { Category } from "../models/category";
 import ApiService from "../ApiService/ApiService";
-import { Redirect } from 'react-router'
-import "./CategoryPage.scss"
-import CategoriesBar from "./CategoriesBar"
-const qs = require('qs');
+import { Redirect } from "react-router";
+import "./CategoryPage.scss";
+import CategoriesBar from "./CategoriesBar";
+const qs = require("qs");
 
 type CategoryProps = {
   category: Category;
@@ -17,29 +17,29 @@ export const renderProducts = (productList: Product[]) => {
   let productsResult: JSX.Element[] = [];
 
   productList.forEach((product, index) => {
+    console.log("productList product", product);
     productsResult.push(
-      <UserGalleryProductCard product={product} key={index} readonly={true} />
+      <UserGalleryProductCard product={product} key={index} />
     );
   });
   return productsResult;
 };
 
 const CategoryPage = ({ category, location }: CategoryProps) => {
+  const query = qs.parse(location.search)["?category"];
 
-  const query = qs.parse(location.search)['?category'];
+  category = JSON.parse(query);
 
-  category = JSON.parse(query)
-  
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     ApiService.getProductsForCategory(category).then((res) => {
       setProducts(res.rows);
-    })
-  }, [location])
+    });
+  }, [location]);
 
-  if(!query) {
-    return (<Redirect to='/'/>)
+  if (!query) {
+    return <Redirect to="/" />;
   }
   return (
     <div className="categoryPage">

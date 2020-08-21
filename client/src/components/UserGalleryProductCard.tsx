@@ -10,7 +10,8 @@ interface Props {
 }
 
 function UserGalleryProductCard({ product, readonly }: Props) {
-  const [editmode, setEditMode] = useState(false);
+  console.log("Product details product", product);
+  // const [editmode, setEditMode] = useState(false);
 
   let history = useHistory();
 
@@ -38,24 +39,25 @@ function UserGalleryProductCard({ product, readonly }: Props) {
         <Text size="small">{product.location}</Text>
         <Text size="small">{product.price} €</Text>
       </Box>
-      <Box direction="row" gap="medium">
-        <Button
-          icon={<Edit color="brand" />}
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-        />
-        {readonly ? (
-          ""
-        ) : (
+
+      {readonly ? (
+        ""
+      ) : (
+        <Box direction="row" gap="medium">
+          <Button
+            icon={<Edit color="brand" />}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          />
           <Button
             icon={<Trash />}
             onClick={(e) => {
               e.stopPropagation();
             }}
           />
-        )}
-      </Box>
+        </Box>
+      )}
     </Box>
   );
 }
