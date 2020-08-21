@@ -11,11 +11,12 @@ import {
 import ApiService from "../ApiService/ApiService";
 import { connect } from "react-redux";
 import ImageUploader from "react-images-upload";
+import { useHistory } from "react-router-dom";
 
 interface FormState {
   title: string;
   description: string;
-  images: string;   // Allows just one picture for the MVP then change to -> images: string[];
+  images: string; // Allows just one picture for the MVP then change to -> images: string[];
   location?: string;
   price: number;
   quantity: number;
@@ -65,9 +66,11 @@ interface DispatchProps {
 type Props = StateProps & DispatchProps;
 
 const NewProductForm = ({ isAuthenticated, setIsAuthenticated }: Props) => {
+  let history = useHistory();
   const [newProduct, setNewProduct] = useState(initialState);
 
-  const onDrop = (files: File[], pictures: string) => {   // after MVP change -> files: File[], pictures: string[]
+  const onDrop = (files: File[], pictures: string) => {
+    // after MVP change -> files: File[], pictures: string[]
     setNewProduct((prevState) => ({
       ...prevState,
       images: prevState.images.concat(pictures),
@@ -121,7 +124,7 @@ const NewProductForm = ({ isAuthenticated, setIsAuthenticated }: Props) => {
     };
     await ApiService.createNewProduct(product);
 
-    window.location.replace("http://localhost:3000/newproduct");
+    history.push("/userGallery");
   };
 
   return (

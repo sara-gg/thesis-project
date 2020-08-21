@@ -11,13 +11,13 @@ import {
 } from "grommet";
 import { Hide, View } from "grommet-icons";
 import { connect } from "react-redux";
-import ApiService from "../ApiService/ApiService";
 import {
   setIsAuthenticated,
   setRegisterDetails,
   submitRegisterDetails,
   User,
 } from "../actions";
+import { useHistory } from "react-router-dom";
 
 type Props = {
   isAuthenticated: boolean;
@@ -51,6 +51,7 @@ const RegistrationForm = ({
   telephone,
 }: Props): JSX.Element => {
   const [revealPassword, setRevealPassword] = useState(false);
+  let history = useHistory();
 
   const daysInMonth = (month: any) => new Date(2019, month, 0).getDate();
 
@@ -63,7 +64,7 @@ const RegistrationForm = ({
     const { name } = e.target;
     const { option } = e;
     setRegisterDetails({ name, option });
-  }
+  };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -79,11 +80,10 @@ const RegistrationForm = ({
       telephone,
     };
 
-    submitRegisterDetails(user)
-      .then((accessToken: string) => {
-        localStorage.setItem("accessToken", accessToken);
-        window.location.replace("http://localhost:3000/newproduct");
-      })
+    submitRegisterDetails(user).then((accessToken: string) => {
+      localStorage.setItem("accessToken", accessToken);
+      history.push("/home");
+    });
   };
 
   return (
@@ -183,7 +183,11 @@ const RegistrationForm = ({
             </Box>
           }
         >
-          <TextInput name="telephone" value={telephone} onChange={handleChange} />
+          <TextInput
+            name="telephone"
+            value={telephone}
+            onChange={handleChange}
+          />
         </FormField>
         <FormField
           name="address"

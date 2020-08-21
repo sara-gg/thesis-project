@@ -43,14 +43,16 @@ const LoginForm = ({
     e.preventDefault();
     const { email, password } = state;
     const user = { email, password };
-    console.log('user', user)
+    console.log("user", user);
     const res = await ApiService.login(user);
 
     if (res.error) {
       alert(`${res.message}`);
       setState(initialState);
     } else {
+      console.log("login res", res);
       const accessToken = res;
+      console.log("accessToken", accessToken);
       localStorage.setItem("accessToken", accessToken);
       setIsAuthenticated(true);
       history.push("/usergallery");
