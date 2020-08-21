@@ -11,11 +11,11 @@ import {
 } from "grommet";
 import { Hide, View } from "grommet-icons";
 import { connect } from "react-redux";
+import { User } from "../models/user";
 import {
   setIsAuthenticated,
   setRegisterDetails,
   submitRegisterDetails,
-  User,
 } from "../actions";
 import { useHistory } from "react-router-dom";
 

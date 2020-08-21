@@ -38,7 +38,7 @@ function App({ setIsAuthenticated }: Props): JSX.Element {
         <Route path="/usergallery">
           <UserGallery />
         </Route>
-        <Route path={`/category/products`} component={CategoryPage} />
+        <Route path={`/products`} component={CategoryPage} />
         <Route path="/productdetails">
           <ProductDetails />
         </Route>
