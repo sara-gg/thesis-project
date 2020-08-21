@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import { Box } from "grommet";
 import UserGalleryProductCard from "../components/UserGalleryProductCard";
-import productsData from "../mocks/product.data";
 import AddNewProduct from "../components/AddNewProduct";
+import { RootState } from "../models/rootstate";
+import ApiService from "../ApiService/ApiService";
 
-function UserProductsGallery() {
+type Props = {
+  id: number;
+};
+
+function UserProductsGallery({ id }: Props): JSX.Element {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    ApiService.getProductsForUser(id).then((res) => {
+      console.log("res.rows in UserProductsGallery", res.rows);
+      setProducts(res.rows);
+    });
+  }, []);
+
   const productList = () => {
-    if (productsData.length === 0) {
+    if (products.length === 0) {
       return <AddNewProduct />;
     } else {
       return (
@@ -18,7 +33,7 @@ function UserProductsGallery() {
           align="center"
           justify="center"
         >
-          {productsData.map((product: any) => (
+          {products.map((product: any) => (
             <UserGalleryProductCard key={product.item_id} product={product} />
           ))}
         </Box>
@@ -34,4 +49,11 @@ function UserProductsGallery() {
   );
 }
 
-export default UserProductsGallery;
+const mapStateToProps = (state: RootState) => {
+  console.log("state", state);
+  return {
+    id: state.id,
+  };
+};
+
+export default connect(mapStateToProps, {})(UserProductsGallery);

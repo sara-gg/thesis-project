@@ -15,18 +15,18 @@ import ApiService from "../ApiService/ApiService";
 import { useHistory } from "react-router-dom";
 
 type Props = {
+  id: Number;
+  name: String;
+  lastname: String;
   isAuthenticated: boolean;
-  setIsAuthenticated: (b: boolean) => void;
+  setUserData: (i: Number, n: String, l: String, b: boolean) => void;
 };
 const initialState = {
   email: "",
   password: "",
 };
 
-const LoginForm = ({
-  isAuthenticated,
-  setIsAuthenticated,
-}: Props): JSX.Element => {
+const LoginForm = ({ setUserData }: Props): JSX.Element => {
   let history = useHistory();
   const [revealPassword, setRevealPassword] = useState(false);
   const [state, setState] = useState(initialState);
@@ -43,16 +43,18 @@ const LoginForm = ({
     e.preventDefault();
     const { email, password } = state;
     const user = { email, password };
-    console.log('user', user)
+    console.log("user", user);
     const res = await ApiService.login(user);
 
     if (res.error) {
       alert(`${res.message}`);
       setState(initialState);
     } else {
-      const accessToken = res;
+      console.log("login res", res);
+      const { accessToken } = res;
+      console.log("accessToken", accessToken);
       localStorage.setItem("accessToken", accessToken);
-      setIsAuthenticated(true);
+      setUserData(res.user.id, res.user.name, res.user.lastname, true);
       history.push("/usergallery");
     }
   };
@@ -123,15 +125,28 @@ const LoginForm = ({
     </Box>
   );
 };
+
 const mapStateToProps = (state: any) => {
   return {
+    id: state.id,
+    name: state.name,
+    lastname: state.lastname,
     isAuthenticated: state.isAuthenticated,
   };
 };
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    setIsAuthenticated: (boolean: boolean) =>
-      dispatch({ type: "AUTHENTICATED", payload: boolean }),
+    setUserData: (
+      id: Number,
+      name: String,
+      lastname: String,
+      boolean: boolean
+    ) =>
+      dispatch({
+        type: "SET_USER_DATA",
+        payload: { id, name, lastname, boolean },
+      }),
   };
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
