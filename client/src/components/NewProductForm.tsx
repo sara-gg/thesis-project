@@ -5,28 +5,16 @@ import {
   Form,
   FormField,
   RangeInput,
+  Text,
   TextArea,
+  TextInput,
   Select,
 } from "grommet";
 import ApiService from "../ApiService/ApiService";
 import { connect } from "react-redux";
 import ImageUploader from "react-images-upload";
-import { setNewProductDetails } from "../actions";
+import { setNewProductDetails, setIsAuthenticated } from "../actions";
 
-interface FormState {
-  title: string;
-  description: string;
-  images: string[];
-  location?: string;
-  price: number;
-  quantity: number;
-  height: number;
-  width: number;
-  depth: number;
-  materials: string;
-
-  //size?: "small" | "medium" | "large" | "xlarge";
-}
 
 const materialOptions = [
   "wood",
@@ -43,6 +31,7 @@ type Props = StateProps & DispatchProps;
 const NewProductForm = ({
   isAuthenticated,
   setIsAuthenticated,
+  setNewProductDetails,
   title,
   description,
   images,
@@ -82,7 +71,14 @@ const NewProductForm = ({
       name: string;
       value: string | number | string[];
     } = e.target;
-    setNewProductDetails({ name, value });
+    if (!value) {
+      const option = e.option;
+      console.log(e.option)
+      setNewProductDetails({ name, option });
+    } else {
+      console.log(value);
+      setNewProductDetails({ name, value });
+    } 
   };
 
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
@@ -116,17 +112,29 @@ const NewProductForm = ({
     <Box direction="row" flex align="center" justify="center">
       <Box width="medium" margin="50px">
         <Form
-          onChange={(value: FormState) => console.log("onChange", value)}
+          onChange={(value) => console.log("Change", value)}
           onSubmit={handleSubmit}
         >
           <FormField
+            name="title"
+            label={
+              <Box direction="row">
+                <Text>Product name</Text>
+                <Text color="status-critical"> *</Text>
+              </Box>
+            }
+            required
+          >
+            <TextInput name="title" value={title} onChange={handleChange} />
+          </FormField>
+          {/* <FormField
             label="Product name"
             name="title"
             value={title}
             required
             validate={{ regexp: /^[a-z]/i }}
             onChange={handleChange}
-          />
+          /> */}
           <FormField
             label="Description"
             name="description"
@@ -229,13 +237,22 @@ const mapStateToProps = (state: StateProps) => {
 
 interface DispatchProps {
   setIsAuthenticated: (b: boolean) => void;
+  setNewProductDetails: ({
+    name,
+    value,
+  }: {
+    [name: string]: string | number | string[];
+  }) => any;
 }
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    setIsAuthenticated: (boolean: boolean) =>
-      dispatch({ type: "AUTHENTICATED", payload: boolean }),
-  };
-};
+// const mapDispatchToProps = (dispatch: any) => {
+//   return {
+//     setIsAuthenticated: (boolean: boolean) =>
+//       dispatch({ type: "AUTHENTICATED", payload: boolean }),
+//   };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewProductForm);
+export default connect(mapStateToProps, {
+  setNewProductDetails,
+  setIsAuthenticated,
+})(NewProductForm);

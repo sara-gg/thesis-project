@@ -1,23 +1,23 @@
 interface RootState {
-  name: string,
-  lastname: string,
-  username: string,
-  email: string,
-  password: string,
-  birthdate: string,
-  gender: string,
-  address: string,
-  isAuthenticated: boolean,
-  title: string,
-  description: string,
-  images: string[],
-  location: string,
-  price: number,
-  quantity: number,
-  height: number,
-  width: number,
-  depth: number,
-  materials: string,
+  name: string;
+  lastname: string;
+  username: string;
+  email: string;
+  password: string;
+  birthdate: string;
+  gender: string;
+  address: string;
+  isAuthenticated: boolean;
+  title: string;
+  description: string;
+  images: string[];
+  location: string;
+  price: number;
+  quantity: number;
+  height: number;
+  width: number;
+  depth: number;
+  materials: string;
 }
 
 const initialState: RootState = {
@@ -51,8 +51,13 @@ const reducer = (state = initialState, action: any) => {
       };
     case "AUTHENTICATED":
       return {
-        ...state, 
+        ...state,
         isAuthenticated: action.payload,
+      };
+    case "SET_NEW_PRODUCT":
+      return {
+        ...state,
+        [action.payload.name]: action.payload.value,
       };
 
     default:

@@ -63,3 +63,38 @@ export function setNewProductDetails({
     payload: { name, value },
   };
 }
+
+interface Product {
+  title: string;
+  description: string;
+  images: string[];
+  location?: string;
+  price: number;
+  quantity: number;
+  height: number;
+  width: number;
+  depth: number;
+  materials: string;
+}
+
+export function submitNewProduct(product: Product): any {
+  return function (dispatch: any): Promise<any> {
+    return fetch(`${BASE_URL}/product`, {
+      method: "POST",
+      credentials: "include",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(product),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.error) {
+          throw new Error(`${res.message}`);
+        } else {
+          const accessToken = res.token;
+          dispatch(setIsAuthenticated(true));
+          return accessToken;
+        }
+      });
+  };
+}
