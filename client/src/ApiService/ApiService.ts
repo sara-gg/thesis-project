@@ -32,8 +32,9 @@ const createNewProduct = async (product: object) => {
     .catch((err) => console.log(err));
 };
 
-const getProductsForCategory = (category: Category): Promise<any> => {
-  return fetch(`${BASE_URL}/products?category_id=${category.id}`, {
+const getProductsForCategory = (categoryId: number): Promise<any> => {
+  console.log("id from API", categoryId)
+  return fetch(`${BASE_URL}/products?category_id=${categoryId}`, {
     method: "GET",
     credentials: "include",
     mode: "cors",
