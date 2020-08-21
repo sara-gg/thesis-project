@@ -2,25 +2,24 @@ import React, { useEffect, useState } from "react";
 import { Box, Heading } from "grommet";
 
 import { NavLink, Route } from "react-router-dom";
-import CategoryPage from "./CategoryPage"
+import CategoryPage from "./CategoryPage";
 import { Category } from "../models/category";
 import ApiService from "../ApiService/ApiService";
-
-
-
+import { getCategories } from "../actions";
+import { connect } from "react-redux";
 
 const styles = {
   color: "#444444",
   paddingLeft: "20px",
 };
 
-const CategoriesBar = () => {
-  const [categories, setCategories] = useState<Category[]>([]);
+type Props = StateProps & DispatchProps;
+
+const CategoriesBar = ({ getCategories, categories }: Props) => {
+  // const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
-    ApiService.getCategories().then((res) => {
-      setCategories(res);
-    });
+    getCategories();
   }, []);
 
   return (
@@ -50,4 +49,20 @@ const CategoriesBar = () => {
   );
 };
 
-export default CategoriesBar;
+interface StateProps {
+  categories: Category[];
+}
+
+const mapStateToProps = (state: StateProps) => {
+  return {
+    categories: state.categories,
+  };
+};
+
+interface DispatchProps {
+  getCategories: () => void;
+}
+
+export default connect(mapStateToProps, {
+  getCategories,
+})(CategoriesBar);

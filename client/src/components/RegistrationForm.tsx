@@ -11,12 +11,11 @@ import {
 } from "grommet";
 import { Hide, View } from "grommet-icons";
 import { connect } from "react-redux";
-import ApiService from "../ApiService/ApiService";
+import { User } from "../models/user";
 import {
   setIsAuthenticated,
   setRegisterDetails,
   submitRegisterDetails,
-  User,
 } from "../actions";
 
 type Props = {
@@ -63,7 +62,7 @@ const RegistrationForm = ({
     const { name } = e.target;
     const { option } = e;
     setRegisterDetails({ name, option });
-  }
+  };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -79,11 +78,10 @@ const RegistrationForm = ({
       telephone,
     };
 
-    submitRegisterDetails(user)
-      .then((accessToken: string) => {
-        localStorage.setItem("accessToken", accessToken);
-        window.location.replace("http://localhost:3000/newproduct");
-      })
+    submitRegisterDetails(user).then((accessToken: string) => {
+      localStorage.setItem("accessToken", accessToken);
+      window.location.replace("http://localhost:3000/newproduct");
+    });
   };
 
   return (
@@ -183,7 +181,11 @@ const RegistrationForm = ({
             </Box>
           }
         >
-          <TextInput name="telephone" value={telephone} onChange={handleChange} />
+          <TextInput
+            name="telephone"
+            value={telephone}
+            onChange={handleChange}
+          />
         </FormField>
         <FormField
           name="address"

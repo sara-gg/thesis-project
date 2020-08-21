@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Button,
@@ -13,12 +13,23 @@ import {
 import ApiService from "../ApiService/ApiService";
 import { connect } from "react-redux";
 import ImageUploader from "react-images-upload";
-import { setNewProductDetails, setIsAuthenticated } from "../actions";
+import { useHistory } from "react-router-dom";
+import { NewProduct } from "../models/newProduct";
+import { Category } from "../models/category";
+import {
+  setNewProductDetails,
+  setIsAuthenticated,
+  submitNewProduct,
+  setProductImages,
+  getCategories,
+  setCategoryName,
+} from "../actions";
 
-interface FormState {
+interface StateProps {
+  isAuthenticated: boolean;
   title: string;
   description: string;
-  images: string;   // Allows just one picture for the MVP then change to -> images: string[];
+  images: string[];
   location?: string;
   price: number;
   quantity: number;
@@ -27,8 +38,22 @@ interface FormState {
   depth: number;
   material: string;
   category_id: string;
+  categoryName: string;
+  categories: Category[];
+}
 
-  //size?: "small" | "medium" | "large" | "xlarge";
+interface DispatchProps {
+  setIsAuthenticated: (b: boolean) => void;
+  setNewProductDetails: ({
+    name,
+    value,
+  }: {
+    [name: string]: string | number | string[];
+  }) => any;
+  submitNewProduct: (product: NewProduct) => any;
+  setProductImages: (payload: string) => void;
+  getCategories: () => void;
+  setCategoryName: (value: string) => any;
 }
 
 const initialState = {
@@ -43,19 +68,9 @@ const initialState = {
   depth: 0,
   material: "",
   category_id: "",
+  categories: [],
+
 };
-
-const materialOptions = [
-  "wood",
-  "leather",
-  "metal",
-  "velvet",
-  "fabric",
-  "concrete",
-  "glass",
-];
-
-const categoryOptions = [0, 1, 2, 3];
 
 type Props = StateProps & DispatchProps;
 
@@ -63,6 +78,10 @@ const NewProductForm = ({
   isAuthenticated,
   setIsAuthenticated,
   setNewProductDetails,
+  submitNewProduct,
+  setProductImages,
+  getCategories,
+  setCategoryName,
   title,
   description,
   images,
@@ -74,6 +93,8 @@ const NewProductForm = ({
   depth,
   material,
   category_id,
+  categories,
+  categoryName,
 }: Props) => {
   const [newProduct, setNewProduct] = useState({
     title,
@@ -86,10 +107,35 @@ const NewProductForm = ({
     width,
     depth,
     material,
-      category_id,
+    category_id,
   });
 
-  const onDrop = (files: File[], pictures: string) => {   // after MVP change -> files: File[], pictures: string[]
+  let history = useHistory();
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
+  const materialOptions = [
+    "wood",
+    "leather",
+    "metal",
+    "velvet",
+    "fabric",
+    "concrete",
+    "glass",
+  ];
+
+  const categoryNamesToIds: { [name: string]: number } = {};
+
+  categories.forEach((category) => {
+    categoryNamesToIds[category.name] = category.id;
+  });
+  const categoryOptions = Object.keys(categoryNamesToIds);
+
+  const onDrop = (files: File[], pictures: string) => {
+    // after MVP change -> files: File[], pictures: string[]
+
     setNewProduct((prevState) => ({
       ...prevState,
       images: prevState.images.concat(pictures),
@@ -104,40 +150,23 @@ const NewProductForm = ({
       name: string;
       value: string | number | string[];
     } = e.target;
-    if (!value) {
-      const option = e.option;
-      console.log(e.option)
-      setNewProductDetails({ name, option });
-    } else {
-      console.log(value);
-      setNewProductDetails({ name, value });
-    } 
+    setNewProductDetails({ name, value });
   };
 
   const handleSelectChange = (e: any) => {
     const { name } = e.target;
     const { option } = e;
-    setNewProduct((prevState) => ({
-      ...prevState,
-      [name]: option,
-    }));
+    const categoryId = categoryNamesToIds[option];
+
+    setNewProductDetails({
+      name,
+      option: categoryId,
+    });
+    setCategoryName(option);
   };
 
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    const {
-      title,
-      description,
-      images,
-      location,
-      price,
-      quantity,
-      height,
-      width,
-      depth,
-      material,
-      category_id,
-    } = newProduct;
     const product = {
       title,
       description,
@@ -153,7 +182,7 @@ const NewProductForm = ({
     };
     await ApiService.createNewProduct(product);
 
-    window.location.replace("http://localhost:3000/newproduct");
+    history.push("/usergallery");
   };
 
   return (
@@ -226,7 +255,7 @@ const NewProductForm = ({
             placeholder="Select material"
             // multiple
             closeOnChange={true}
-            value={newProduct.material}
+            value={material}
             options={materialOptions}
             onChange={handleSelectChange}
           />
@@ -236,7 +265,7 @@ const NewProductForm = ({
             placeholder="category"
             // multiple
             closeOnChange={true}
-            value={newProduct.category_id}
+            value={categoryName}
             options={categoryOptions}
             onChange={handleSelectChange}
           />
@@ -263,21 +292,6 @@ const NewProductForm = ({
   );
 };
 
-interface StateProps {
-  isAuthenticated: boolean;
-  title: string;
-  description: string;
-  images: string[];
-  location?: string;
-  price: number;
-  quantity: number;
-  height: number;
-  width: number;
-  depth: number;
-  material: string,
-  category_id: string,
-}
-
 const mapStateToProps = (state: StateProps) => {
   return {
     title: state.title,
@@ -291,28 +305,17 @@ const mapStateToProps = (state: StateProps) => {
     depth: state.depth,
     material: state.material,
     category_id: state.category_id,
+    categories: state.categories,
+    categoryName: state.categoryName,
     isAuthenticated: state.isAuthenticated,
   };
 };
 
-interface DispatchProps {
-  setIsAuthenticated: (b: boolean) => void;
-  setNewProductDetails: ({
-    name,
-    value,
-  }: {
-    [name: string]: string | number | string[];
-  }) => any;
-}
-
-// const mapDispatchToProps = (dispatch: any) => {
-//   return {
-//     setIsAuthenticated: (boolean: boolean) =>
-//       dispatch({ type: "AUTHENTICATED", payload: boolean }),
-//   };
-// };
-
 export default connect(mapStateToProps, {
   setNewProductDetails,
   setIsAuthenticated,
+  submitNewProduct,
+  setProductImages,
+  getCategories,
+  setCategoryName,
 })(NewProductForm);
