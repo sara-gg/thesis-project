@@ -15,16 +15,16 @@ const login = async (user: any) => {
 };
 
 const createNewProduct = async (product: object) => {
-  console.log('product', product);
+  console.log("product", product);
   const token = localStorage.getItem("accessToken");
-  console.log('token', token)
+  console.log("token", token);
   return fetch(`${BASE_URL}/product`, {
     method: "POST",
     credentials: "include",
     mode: "cors",
     headers: {
       "Content-Type": "application/json",
-      'Authorization': `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(product),
   })
@@ -39,16 +39,38 @@ const getProductsForCategory = (category: Category): Promise<any> => {
     mode: "cors",
   })
     .then((res) => res.json())
-    .catch((err) => console.error(err))
-}
+    .catch((err) => console.error);
+};
 
 const getCategories = (): Promise<any[]> => {
-  return fetch(`${BASE_URL}/categories`, {
+  return new Promise((res) =>
+    res([
+      { name: "Bedroom", id: 1 },
+      { name: "Living room", id: 2 },
+      { name: "Kitchen", id: 3 },
+      { name: "Bathroom", id: 4 },
+    ])
+  );
+};
+
+const getAllProducts = (): Promise<any> => {
+  return fetch(`${BASE_URL}/products`, {
     method: "GET",
     credentials: "include",
     mode: "cors",
-  }).then((res) => res.json())
-    .catch((err) => console.error(err))
-}
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res);
+      return res;
+    })
+    .catch((err) => console.error);
+};
 
-export default { login, createNewProduct, getProductsForCategory, getCategories };
+export default {
+  login,
+  createNewProduct,
+  getProductsForCategory,
+  getCategories,
+  getAllProducts,
+};
