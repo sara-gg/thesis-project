@@ -11,6 +11,7 @@ import {
 } from "grommet";
 import { Hide, View } from "grommet-icons";
 import { connect } from "react-redux";
+import ApiService from "../ApiService/ApiService";
 import {
   setIsAuthenticated,
   setRegisterDetails,
@@ -31,6 +32,7 @@ type Props = {
   birthdate: string;
   gender: string;
   address: string;
+  telephone: string;
 };
 
 const RegistrationForm = ({
@@ -46,6 +48,7 @@ const RegistrationForm = ({
   birthdate,
   gender,
   address,
+  telephone,
 }: Props): JSX.Element => {
   const [revealPassword, setRevealPassword] = useState(false);
 
@@ -55,6 +58,12 @@ const RegistrationForm = ({
     const { name, value } = e.target;
     setRegisterDetails({ name, value });
   };
+
+  const handleSelectChange = (e: any) => {
+    const { name } = e.target;
+    const { option } = e;
+    setRegisterDetails({ name, option });
+  }
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -67,13 +76,14 @@ const RegistrationForm = ({
       birthdate,
       gender,
       address,
+      telephone,
     };
+
     submitRegisterDetails(user)
       .then((accessToken: string) => {
         localStorage.setItem("accessToken", accessToken);
-        window.location.replace("http://localhost:3000/home");
+        window.location.replace("http://localhost:3000/newproduct");
       })
-      .catch(console.log);
   };
 
   return (
@@ -166,6 +176,16 @@ const RegistrationForm = ({
           />
         </FormField>
         <FormField
+          name="telephone"
+          label={
+            <Box direction="row">
+              <Text>Telephone</Text>
+            </Box>
+          }
+        >
+          <TextInput name="telephone" value={telephone} onChange={handleChange} />
+        </FormField>
+        <FormField
           name="address"
           label={
             <Box direction="row">
@@ -216,7 +236,7 @@ const RegistrationForm = ({
             name="gender"
             options={["Female", "Male", "Prefer not to say"]}
             value={gender}
-            onChange={handleChange}
+            onChange={handleSelectChange}
           />
         </FormField>
         <br></br>
@@ -225,7 +245,7 @@ const RegistrationForm = ({
         </Text>
         <br></br>
         <Box direction="row" justify="between" margin={{ top: "medium" }}>
-          <Button label="Cancel" />
+          {/* <Button label="Cancel" /> */}
           <Button type="submit" label="Submit" primary />
         </Box>
       </Form>
@@ -243,6 +263,7 @@ const mapStateToProps = (state: any) => {
     birthdate: state.birthdate,
     gender: state.gender,
     address: state.address,
+    telephone: state.telephone,
     isAuthenticated: state.isAuthenticated,
   };
 };

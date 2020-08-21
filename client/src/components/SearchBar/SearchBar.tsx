@@ -24,7 +24,7 @@ const SearchBar = () => {
   }
 
   const redirectToGallery = () => {
-    history.push(`http://localhost:3000/product?${searchValue}`);
+    history.push(searchValue);
   }
 
   return (
