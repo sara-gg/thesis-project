@@ -3,12 +3,16 @@ const BASE_URL = process.env.BASE_URL || "http://localhost:3001";
 export function setRegisterDetails({
   name,
   value,
+  option
 }: {
   [name: string]: string;
 }) {
+  console.log('name', name)
+  console.log('value', value)
+  console.log('option', option)
   return {
     type: "SET_REGISTER_DETAILS",
-    payload: { name, value },
+    payload: value ? { name, value } : { name, option },
   };
 }
 

@@ -47,10 +47,17 @@ const initialState: RootState = {
 const reducer = (state = initialState, action: any) => {
   switch (action.type) {
     case "SET_REGISTER_DETAILS":
-      return {
-        ...state,
-        [action.payload.name]: action.payload.value,
-      };
+      if (action.payload.option) {
+        return {
+          ...state,
+          [action.payload.name]: action.payload.option,
+        };
+      } else {
+        return {
+          ...state,
+          [action.payload.name]: action.payload.value,
+        };
+      }
     case "AUTHENTICATED":
       return {
         ...state,

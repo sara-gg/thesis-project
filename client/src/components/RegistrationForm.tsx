@@ -59,6 +59,12 @@ const RegistrationForm = ({
     setRegisterDetails({ name, value });
   };
 
+  const handleSelectChange = (e: any) => {
+    const { name } = e.target;
+    const { option } = e;
+    setRegisterDetails({ name, option });
+  }
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const user = {
@@ -185,10 +191,8 @@ const RegistrationForm = ({
           label={
             <Box direction="row">
               <Text>Telephone</Text>
-              <Text color="status-critical"> *</Text>
             </Box>
           }
-          required
         >
           <TextInput name="telephone" value={telephone} onChange={handleChange} />
         </FormField>
@@ -243,7 +247,7 @@ const RegistrationForm = ({
             name="gender"
             options={["Female", "Male", "Prefer not to say"]}
             value={gender}
-            onChange={handleChange}
+            onChange={handleSelectChange}
           />
         </FormField>
         <br></br>
