@@ -3,12 +3,16 @@ const BASE_URL = process.env.BASE_URL || "http://localhost:3001";
 export function setRegisterDetails({
   name,
   value,
+  option
 }: {
   [name: string]: string;
 }) {
+  console.log('name', name)
+  console.log('value', value)
+  console.log('option', option)
   return {
     type: "SET_REGISTER_DETAILS",
-    payload: { name, value },
+    payload: value ? { name, value } : { name, option },
   };
 }
 
@@ -28,6 +32,7 @@ export interface User {
   birthdate: string;
   gender: string;
   address: string;
+  telephone: string;
 }
 
 export function submitRegisterDetails(user: User): any {
@@ -42,8 +47,10 @@ export function submitRegisterDetails(user: User): any {
       .then((res) => res.json())
       .then((res) => {
         if (res.error) {
+          console.log('res.error', res.error)
           throw new Error(`${res.message}`);
         } else {
+          console.log('SII')
           const accessToken = res.token;
           dispatch(setIsAuthenticated(true));
           return accessToken;

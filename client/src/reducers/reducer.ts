@@ -8,9 +8,11 @@ interface RootState {
   gender: string,
   address: string,
   isAuthenticated: boolean,
+  telephone: string,
   title: string,
   description: string,
-  images: string[],
+  images: string,
+  // images: string[],
   location: string,
   price: number,
   quantity: number,
@@ -18,6 +20,7 @@ interface RootState {
   width: number,
   depth: number,
   materials: string,
+  category_id: number,
 }
 
 const initialState: RootState = {
@@ -30,9 +33,11 @@ const initialState: RootState = {
   gender: "",
   address: "",
   isAuthenticated: false,
+  telephone: "",
   title: "",
   description: "",
-  images: [] as string[],
+  // images: [] as string[],
+  images: "",
   location: "",
   price: 0,
   quantity: 0,
@@ -40,18 +45,26 @@ const initialState: RootState = {
   width: 0,
   depth: 0,
   materials: "",
+  category_id: 0,
 };
 
 const reducer = (state = initialState, action: any) => {
   switch (action.type) {
     case "SET_REGISTER_DETAILS":
-      return {
-        ...state,
-        [action.payload.name]: action.payload.value,
-      };
+      if (action.payload.option) {
+        return {
+          ...state,
+          [action.payload.name]: action.payload.option,
+        };
+      } else {
+        return {
+          ...state,
+          [action.payload.name]: action.payload.value,
+        };
+      }
     case "AUTHENTICATED":
       return {
-        ...state, 
+        ...state,
         isAuthenticated: action.payload,
       };
 

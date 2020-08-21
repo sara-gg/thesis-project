@@ -43,6 +43,7 @@ const LoginForm = ({
     e.preventDefault();
     const { email, password } = state;
     const user = { email, password };
+    console.log('user', user)
     const res = await ApiService.login(user);
 
     if (res.error) {
@@ -52,7 +53,7 @@ const LoginForm = ({
       const accessToken = res;
       localStorage.setItem("accessToken", accessToken);
       setIsAuthenticated(true);
-      history.back();
+      history.push("/usergallery");
     }
   };
 
@@ -115,7 +116,7 @@ const LoginForm = ({
         </Text>
         <br></br>
         <Box direction="row" justify="between" margin={{ top: "medium" }}>
-          <Button label="Cancel" />
+          {/* <Button label="Cancel" /> */}
           <Button type="submit" label="Submit" primary />
         </Box>
       </Form>
