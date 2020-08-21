@@ -1,4 +1,5 @@
 import { Category } from "../models/category";
+import { User } from "../models/user";
 
 const BASE_URL = "http://localhost:3001";
 
@@ -67,10 +68,22 @@ const getAllProducts = (): Promise<any> => {
     .catch((err) => console.error);
 };
 
+const getProductsForUser = (id: Number): Promise<any> => {
+  console.log(id);
+  return fetch(`${BASE_URL}/products?category_id=${id}`, {
+    method: "GET",
+    credentials: "include",
+    mode: "cors",
+  })
+    .then((res) => res.json())
+    .catch((err) => console.error);
+};
+
 export default {
   login,
   createNewProduct,
   getProductsForCategory,
   getCategories,
   getAllProducts,
+  getProductsForUser,
 };

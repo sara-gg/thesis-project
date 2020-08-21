@@ -231,7 +231,7 @@ const mapStateToProps = (state: StateProps) => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     setIsAuthenticated: (boolean: boolean) =>
-      dispatch({ type: "AUTHENTICATED", payload: boolean }),
+      dispatch({ type: "SET_USER_DATA", payload: boolean }),
   };
 };
 

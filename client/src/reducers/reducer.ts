@@ -1,29 +1,7 @@
-interface RootState {
-  name: string,
-  lastname: string,
-  username: string,
-  email: string,
-  password: string,
-  birthdate: string,
-  gender: string,
-  address: string,
-  isAuthenticated: boolean,
-  telephone: string,
-  title: string,
-  description: string,
-  images: string,
-  // images: string[],
-  location: string,
-  price: number,
-  quantity: number,
-  height: number,
-  width: number,
-  depth: number,
-  materials: string,
-  category_id: number,
-}
+import { RootState } from "../models/rootstate";
 
 const initialState: RootState = {
+  id: 0,
   name: "",
   lastname: "",
   username: "",
@@ -66,6 +44,14 @@ const reducer = (state = initialState, action: any) => {
       return {
         ...state,
         isAuthenticated: action.payload,
+      };
+    case "SET_USER_DATA":
+      return {
+        ...state,
+        id: action.payload.id,
+        name: action.payload.name,
+        isAuthenticated: action.payload,
+        lastname: action.payload.lastname,
       };
 
     default:
