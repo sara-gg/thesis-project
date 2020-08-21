@@ -82,7 +82,7 @@ const RegistrationForm = ({
     submitRegisterDetails(user)
       .then((accessToken: string) => {
         localStorage.setItem("accessToken", accessToken);
-        window.location.replace("http://localhost:3000/newproduct");
+        window.location.replace("http://localhost:3000/home");
       })
   };
 
