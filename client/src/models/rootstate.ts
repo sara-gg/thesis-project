@@ -20,6 +20,8 @@ export interface RootState {
   height: number;
   width: number;
   depth: number;
-  materials: string;
-  category_id: number;
+  material: string;
+  categoryName: string;
+  categories: [];
+  category_id: string;
 }
