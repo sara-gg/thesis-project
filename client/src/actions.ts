@@ -151,3 +151,31 @@ export function getProductsForCategory(categoryId: number): any {
       .catch((err) => console.error);
   };
 }
+
+export function filterCategoryProducts(category_id: number, material: String, location: String): any {
+  return function (dispatch: any): Promise<any> {
+    let ApiUrl = `${BASE_URL}/products?category_id=${category_id}`
+    if (material && location) {
+      ApiUrl += `&material=${material}`
+    } else if (material) {
+      ApiUrl += `&material=${material}`
+    } else if (location) {
+      ApiUrl += `&location=${location}`
+    } 
+    console.log(ApiUrl)
+    return fetch(ApiUrl, {
+      method: "GET",
+      credentials: "include",
+      mode: "cors",
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        dispatch(setCategoryProducts(res.rows));
+        dispatch(setCategoryProductsCount(res.count));
+      })
+      .catch((err) => console.error);
+  };
+}
+
+

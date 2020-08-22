@@ -62,7 +62,7 @@ const CategoryPage = ({ categories, category, location, getProductsForCategory, 
   return (
     <div className="categoryPage">
       <CategoriesBar/>
-      <CategoryHeader categoryName={categoryNamesToIds[categoryId]} categoryProductsCount={categoryProductsCount}/>
+      <CategoryHeader categoryName={categoryNamesToIds[categoryId]} categoryId={categoryId} categoryProductsCount={categoryProductsCount}/>
       <h1 className="category-header">{categoryNamesToIds[categoryId]}</h1>
       <div className="category-dashboard">
         {categoryProducts && categoryProducts.length > 0

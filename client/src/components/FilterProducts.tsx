@@ -10,10 +10,21 @@ import {
   Text,
 } from "grommet";
 import { Close } from "grommet-icons";
+import { connect } from "react-redux";
 import { Materials } from "../models/materials";
+import { filterCategoryProducts, getProductsForCategory } from "../actions";
 
+interface DispatchProps {
+  filterCategoryProducts: (
+    category_id: number,
+    material?: string,
+    location?: string
+  ) => Promise<any>;
+  getProductsForCategory: (id: number) => Promise<any>;
+}
 type Props = {
   onClose: () => void;
+  categoryId: number;
 };
 
 const materialOptions: Array<Materials> = [
@@ -32,21 +43,32 @@ materialOptions.forEach((material) => {
   materialNamesToLabels.push({ label: material, value: material });
 });
 
-function FilterProducts({ onClose }: Props) {
-  const [materials, setMaterials] = useState<string | object>(materialNamesToLabels[0]);
+function FilterProducts({
+  onClose,
+  filterCategoryProducts,
+  categoryId,
+  getProductsForCategory,
+}: any) {
+  const [materials, setMaterials] = useState<Array<string>>([]);
+  const [location, setLocation] = useState<string>("");
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
+    console.log(categoryId, materials[0], location);
+    filterCategoryProducts(categoryId, materials[0], location);
   };
-
+  const handleReset = (event: any) => {
+    event.preventDefault();
+    getProductsForCategory(categoryId);
+  };
   const handleMaterials = (event: any) => {
     const { value, option } = event;
     setMaterials(value);
-    if (value) {
-     // props.searchList(event.target.value);
-    } else {
-     // props.emptySearch();
-    }
+  };
+
+  const handleLocation = (event: any) => {
+    const value = event.target.value;
+    setLocation(value);
   };
 
   return (
@@ -67,46 +89,41 @@ function FilterProducts({ onClose }: Props) {
       </Box>
       <Form
         onSubmit={handleSubmit}
-        //({ value, touched }) => console.log('Submit', value, touched)
+        onChange={(value) => console.log("Change", value)}
       >
-        <FormField label="Toggle" name="toggle" htmlFor="check-box-toggle">
-          <Box pad={{ horizontal: "small", vertical: "xsmall" }}>
-            <CheckBox
-              id="check-box-toggle"
-              name="toggle"
-              label="CheckBox"
-              toggle
-            />
-          </Box>
-        </FormField>
-        <FormField label="Default" name="checkbox" htmlFor="check-box" required>
-          <Box pad={{ horizontal: "small", vertical: "xsmall" }}>
-            <CheckBox id="check-box" name="checkbox" label="Required" />
-          </Box>
-        </FormField>
         <FormField
           label="Materials"
           name="checkboxgroup"
           htmlFor="check-box-group"
-          required
         >
           <Box pad={{ horizontal: "small", vertical: "xsmall" }}>
             <CheckBoxGroup
               options={materialNamesToLabels}
-              onChange={({ value, option }: any) => console.log(value, option)}
+              onChange={handleMaterials}
+              value={materials}
             />
           </Box>
         </FormField>
         <FormField
           label="Location"
           name="location"
-          //value={location}
-          required
-          // onChange={handleChange}
+          value={location}
+          onChange={handleLocation}
         />
+        <Box direction="row" justify="between" margin={{ top: "medium" }}>
+          <Button label="Clear all" onClick={handleReset} />
+          <Button type="submit" label="Publish" primary />
+        </Box>
       </Form>
     </Box>
   );
 }
 
-export default FilterProducts;
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps, {
+  getProductsForCategory,
+  filterCategoryProducts,
+})(FilterProducts);

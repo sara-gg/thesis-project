@@ -10,11 +10,13 @@ import "../styles/CategoryHeader.scss";
 type Props = {
   categoryName: string;
   categoryProductsCount: number;
+  categoryId: number;
 };
 
 const CategoryHeader = ({
   categoryName,
   categoryProductsCount,
+  categoryId,
 }: Props): JSX.Element => {
   let history = useHistory();
 
@@ -42,7 +44,7 @@ const CategoryHeader = ({
         <NavLink exact to="/">
           Home /
         </NavLink>
-        Shop Bedroom items ({`${categoryProductsCount}`})
+          {categoryName} items ({`${categoryProductsCount}`})
       </Text>
 
       <Box
@@ -65,7 +67,7 @@ const CategoryHeader = ({
           open={open}
           onOpen={onOpen}
           onClose={onClose}
-          dropContent={<FilterProducts onClose={onClose} />}
+          dropContent={<FilterProducts onClose={onClose} categoryId={categoryId}/>}
           dropProps={{ align: { top: "bottom" } }}
         />
       </Box>

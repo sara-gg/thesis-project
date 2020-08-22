@@ -83,18 +83,6 @@ const getProductsForUser = (id: Number): Promise<any> => {
     .catch((err) => console.error);
 };
 
-const filterProductsByMaterial = (material: String): Promise<any> => {
-  console.log(material);
-  return fetch(`${BASE_URL}/products?material=${material}`, {
-    method: "GET",
-    credentials: "include",
-    mode: "cors",
-  })
-    .then((res) => res.json())
-    .catch((err) => console.error);
-};
-
-
 export default {
   login,
   createNewProduct,
