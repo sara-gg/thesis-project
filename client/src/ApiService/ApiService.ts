@@ -1,5 +1,6 @@
 import { Category } from "../models/category";
 import { User } from "../models/user";
+import { Product } from "../models/product";
 
 const BASE_URL = "http://localhost:3001";
 
@@ -15,19 +16,21 @@ const login = async (user: any) => {
     .catch((err) => console.log(err));
 };
 
-const createNewProduct = async (product: object) => {
-  console.log("product", product);
+const createNewProduct = async (product: Product, form: any, image?: File) => {
   const token = localStorage.getItem("accessToken");
-  console.log("token", token);
+  let formData = new FormData(form)
+  if(image) {
+    formData.append('images', image)
+  }
+  formData.set('category_id', product.category_id);
   return fetch(`${BASE_URL}/product`, {
     method: "POST",
     credentials: "include",
     mode: "cors",
     headers: {
-      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(product),
+    body: formData,
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
