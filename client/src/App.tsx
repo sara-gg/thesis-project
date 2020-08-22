@@ -10,6 +10,7 @@ import ProductDetails from "./views/ProductDetails";
 import Home from "./views/Home";
 import "./App.css";
 import CategoryPage from "./components/CategoryPage";
+import Basket from "./views/Basket";
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
         </Route>
         <Route path="/usergallery">
           <UserGallery isAuthenticated />
+        </Route>
+        <Route path="/basket_products">
+          <Basket isAuthenticated />
         </Route>
         <Route path={`/category/products`} component={CategoryPage} />
         <Route path="/productdetails">

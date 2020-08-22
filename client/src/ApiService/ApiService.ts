@@ -64,7 +64,22 @@ const getAllProducts = (): Promise<any> => {
       console.log(res);
       return res;
     })
-    .catch((err) => console.error);
+    .catch((err) => console.error(err));
+};
+
+const getBasketProducts = (): Promise<any> => {
+  const token = localStorage.getItem("accessToken");
+  return fetch(`${BASE_URL}/basket_products`, {
+    method: "GET",
+    credentials: "include",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then(res => res.json())
+    .catch(err => console.error(err));
 };
 
 export default {
@@ -73,4 +88,5 @@ export default {
   getProductsForCategory,
   getCategories,
   getAllProducts,
+  getBasketProducts,
 };

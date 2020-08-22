@@ -119,9 +119,10 @@ const NewProductForm = ({ isAuthenticated, setIsAuthenticated }: Props) => {
       material,
       category_id,
     };
+    console.log(product);
     await ApiService.createNewProduct(product);
 
-    window.location.replace("http://localhost:3000/newproduct");
+    // window.location.replace("http://localhost:3000/newproduct");
   };
 
   return (
