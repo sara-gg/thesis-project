@@ -11,6 +11,9 @@ import ProductDetails from "./views/ProductDetails";
 import Home from "./views/Home";
 import "./App.css";
 import CategoryPage from "./components/CategoryPage";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Box, Button } from "grommet";
 
 type Props = {
   // id: Number;
@@ -36,6 +39,7 @@ function App({ setUserData }: Props): JSX.Element {
   return (
     <Router>
       <AppBar isAuthenticated />
+      <ToastContainer />
       <Switch>
         <Route path="/login">
           <Login />

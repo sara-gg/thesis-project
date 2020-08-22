@@ -5,6 +5,7 @@ import UserProductsGallery from "../containers/UserProductsGallery";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { RootState } from "../models/rootstate";
+import ReviewList from "../containers/ReviewList";
 
 type Props = {
   isAuthenticated: boolean;
@@ -60,6 +61,18 @@ function UserGallery({ isAuthenticated, name }: Props): JSX.Element {
           background="offwhite"
         >
           <UserProductsGallery />
+        </Box>
+        <Box
+          alignSelf="center"
+          width="90%"
+          margin="medium"
+          justify="center"
+          align="center"
+          gap="small"
+          pad="medium"
+          background="offwhite"
+        >
+          <ReviewList />
         </Box>
       </Box>
     );

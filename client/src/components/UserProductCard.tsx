@@ -3,16 +3,61 @@ import { Box, Button, Image, Text } from "grommet";
 import { Edit, Trash } from "grommet-icons";
 import { Product } from "../models/product";
 import { useHistory } from "react-router-dom";
+import ApiService from "../ApiService/ApiService";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 interface Props {
   product: Product;
   readonly?: boolean;
 }
 
+// interface DeleteProps {
+//   e: React.MouseEvent<HTMLButtonElement, MouseEvent>;
+//   id: number;
+// }
+
 function UserProductCard({ product, readonly }: Props) {
   console.log("Product details product", product);
 
   let history = useHistory();
+  const deleteNotification = () =>
+    toast("Your product is being deleted forever");
+
+  const handleEdit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.stopPropagation();
+    deleteNotification();
+    // history.push("/editproduct");
+  };
+
+  const handleDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.stopPropagation();
+    confirmAlert({
+      title: "Confirm to delete",
+      message:
+        "Are you sure you want to delete this product? This action can not be undone.",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => {
+            deleteNotification();
+            deleteProduct(product.id);
+          },
+        },
+        {
+          label: "No",
+          onClick: () => {},
+        },
+      ],
+    });
+    history.push("/usergallery");
+  };
+
+  const deleteProduct = (id: number) => {
+    return ApiService.deleteProduct(id);
+  };
 
   return (
     <Box
@@ -44,13 +89,13 @@ function UserProductCard({ product, readonly }: Props) {
         <Button
           icon={<Edit color="brand" />}
           onClick={(e) => {
-            e.stopPropagation();
+            handleEdit(e);
           }}
         />
         <Button
           icon={<Trash color="darkred" />}
           onClick={(e) => {
-            e.stopPropagation();
+            handleDelete(e);
           }}
         />
       </Box>

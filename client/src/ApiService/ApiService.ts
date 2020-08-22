@@ -16,9 +16,7 @@ const login = async (user: any) => {
 };
 
 const createNewProduct = async (product: object) => {
-  console.log("product", product);
   const token = localStorage.getItem("accessToken");
-  console.log("token", token);
   return fetch(`${BASE_URL}/product`, {
     method: "POST",
     credentials: "include",
@@ -34,7 +32,6 @@ const createNewProduct = async (product: object) => {
 };
 
 const getProductsForCategory = (categoryId: number): Promise<any> => {
-  console.log("id from API", categoryId)
   return fetch(`${BASE_URL}/products?category_id=${categoryId}`, {
     method: "GET",
     credentials: "include",
@@ -83,6 +80,22 @@ const getProductsForUser = (id: Number): Promise<any> => {
     .catch((err) => console.error);
 };
 
+const deleteProduct = (id: Number): Promise<any> => {
+  console.log("clicked deleteProduct in ApiService with id", id);
+  const token = localStorage.getItem("accessToken");
+  return fetch(`${BASE_URL}/product/${id}`, {
+    method: "DELETE",
+    credentials: "include",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((res) => res.json())
+    .catch((err) => console.error);
+};
+
 export default {
   login,
   createNewProduct,
@@ -90,4 +103,5 @@ export default {
   getCategories,
   getAllProducts,
   getProductsForUser,
+  deleteProduct,
 };
