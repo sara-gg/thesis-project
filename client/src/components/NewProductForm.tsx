@@ -69,7 +69,6 @@ const initialState = {
   material: "",
   category_id: "",
   categories: [],
-
 };
 
 type Props = StateProps & DispatchProps;
@@ -153,7 +152,7 @@ const NewProductForm = ({
     setNewProductDetails({ name, value });
   };
 
-  const handleSelectChange = (e: any) => {
+  const handleCategoryChange = (e: any) => {
     const { name } = e.target;
     const { option } = e;
     const categoryId = categoryNamesToIds[option];
@@ -163,6 +162,15 @@ const NewProductForm = ({
       option: categoryId,
     });
     setCategoryName(option);
+  };
+
+  const handleSelectChange = (e: any) => {
+    const { name } = e.target;
+    const { option } = e;
+    setNewProductDetails({
+      name,
+      option,
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
@@ -267,7 +275,7 @@ const NewProductForm = ({
             closeOnChange={true}
             value={categoryName}
             options={categoryOptions}
-            onChange={handleSelectChange}
+            onChange={handleCategoryChange}
           />
 
           <Box direction="row" justify="between" margin={{ top: "medium" }}>
