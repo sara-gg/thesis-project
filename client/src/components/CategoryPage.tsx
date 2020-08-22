@@ -23,11 +23,30 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  
   getProductsForCategory: (categoryId: number) => Promise<any>;
 }
 
 type Props = StateProps & CategoryProps & DispatchProps;
+
+// export const renderProducts = (productList: Product[], label?: string) => {
+//   let productsResult: any[]= [];
+
+//   productList.forEach((product, index) => {
+//     console.log("productList product", product);
+//     if (label) {
+//       productsResult
+//       .sort((a, b) => (a.product.price) - (b.product.price))
+//       .push(
+//         <UserGalleryProductCard product={product} key={index}/>
+//       )
+//     } else {
+//        productsResult.push(
+//         <UserGalleryProductCard product={product} key={index}/>
+//       )
+//     };
+//   })
+//   return productsResult;
+// }
 
 export const renderProducts = (productList: Product[]) => {
   let productsResult: JSX.Element[] = [];
@@ -62,8 +81,8 @@ const CategoryPage = ({ categories, category, location, getProductsForCategory, 
   return (
     <div className="categoryPage">
       <CategoriesBar/>
-      <CategoryHeader categoryName={categoryNamesToIds[categoryId]} categoryId={categoryId} categoryProductsCount={categoryProductsCount}/>
-      <h1 className="category-header">{categoryNamesToIds[categoryId]}</h1>
+      <CategoryHeader categoryName={categoryNamesToIds[categoryId]} categoryId={categoryId} categoryProductsCount={categoryProductsCount} renderProducts={renderProducts}/>
+      <h1>{categoryNamesToIds[categoryId]}</h1>
       <div className="category-dashboard">
         {categoryProducts && categoryProducts.length > 0
           ? renderProducts(categoryProducts)

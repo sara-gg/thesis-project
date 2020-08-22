@@ -152,17 +152,21 @@ export function getProductsForCategory(categoryId: number): any {
   };
 }
 
-export function filterCategoryProducts(category_id: number, material: String, location: String): any {
+export function filterCategoryProducts(
+  category_id: number,
+  material: String,
+  location: String
+): any {
   return function (dispatch: any): Promise<any> {
-    let ApiUrl = `${BASE_URL}/products?category_id=${category_id}`
+    let ApiUrl = `${BASE_URL}/products?category_id=${category_id}`;
     if (material && location) {
-      ApiUrl += `&material=${material}`
+      ApiUrl += `&material=${material}`;
     } else if (material) {
-      ApiUrl += `&material=${material}`
+      ApiUrl += `&material=${material}`;
     } else if (location) {
-      ApiUrl += `&location=${location}`
-    } 
-    console.log(ApiUrl)
+      ApiUrl += `&location=${location}`;
+    }
+    console.log(ApiUrl);
     return fetch(ApiUrl, {
       method: "GET",
       credentials: "include",
@@ -178,4 +182,37 @@ export function filterCategoryProducts(category_id: number, material: String, lo
   };
 }
 
+export function SortProductsForCategory(
+  categoryId: number,
+  label: string,
+  direction: string
+): any {
+  return function (dispatch: any): Promise<any> {
+    return fetch(`${BASE_URL}/products?category_id=${categoryId}`, {
+      method: "GET",
+      credentials: "include",
+      mode: "cors",
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
 
+        if (direction === "up") {
+          dispatch(
+            setCategoryProducts(
+              res.rows.sort((a: Product, b: Product) => a.price - b.price)
+            )
+          );
+        } else if (direction === "down") {
+          dispatch(
+            setCategoryProducts(
+              res.rows.sort((a: Product, b: Product) => b.price - a.price)
+            )
+          );
+        }
+
+        dispatch(setCategoryProductsCount(res.count));
+      })
+      .catch((err) => console.error);
+  };
+}

@@ -13,6 +13,7 @@ import { Close } from "grommet-icons";
 import { connect } from "react-redux";
 import { Materials } from "../models/materials";
 import { filterCategoryProducts, getProductsForCategory } from "../actions";
+import "../styles/FilterForm.scss";
 
 interface DispatchProps {
   filterCategoryProducts: (
@@ -74,12 +75,14 @@ function FilterProducts({
   return (
     <Box
       direction="column"
-      fill
+      width="100vw"
       align="center"
       justify="around"
       background="offwhite"
       pad={{ left: "medium", right: "small", vertical: "small" }}
       elevation="medium"
+      basis="full"
+      className="filter-container"
     >
       <Box direction="row" justify="between" align="center">
         <Heading level={3} margin="small">
@@ -88,6 +91,7 @@ function FilterProducts({
         <Button icon={<Close />} onClick={onClose} />
       </Box>
       <Form
+        className="filter-form"
         onSubmit={handleSubmit}
         onChange={(value) => console.log("Change", value)}
       >
@@ -110,7 +114,7 @@ function FilterProducts({
           value={location}
           onChange={handleLocation}
         />
-        <Box direction="row" justify="between" margin={{ top: "medium" }}>
+        <Box direction="column" justify="between" margin={{ top: "medium" }}>
           <Button label="Clear all" onClick={handleReset} />
           <Button type="submit" label="Publish" primary />
         </Box>

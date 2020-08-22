@@ -9,7 +9,7 @@ interface Props {
   readonly?: boolean;
 }
 
-function UserGalleryProductCard({ product, readonly }: Props) {
+function CategoryProductCard({ product, readonly }: Props) {
   console.log("Product details product", product);
   // const [editmode, setEditMode] = useState(false);
 
@@ -63,4 +63,4 @@ function UserGalleryProductCard({ product, readonly }: Props) {
   );
 }
 
-export default UserGalleryProductCard;
+export default CategoryProductCard;
