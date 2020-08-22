@@ -5,6 +5,7 @@ import { Category } from "../models/category";
 import ApiService from "../ApiService/ApiService";
 import { Redirect } from "react-router";
 import "./CategoryPage.scss";
+import { connect } from "react-redux";
 import CategoriesBar from "./CategoriesBar";
 const qs = require("qs");
 
@@ -12,6 +13,12 @@ type CategoryProps = {
   category: Category;
   location: any;
 };
+
+interface StateProps {
+  categories: Category[];
+}
+
+type Props = StateProps & CategoryProps;
 
 export const renderProducts = (productList: Product[]) => {
   let productsResult: JSX.Element[] = [];
@@ -25,26 +32,30 @@ export const renderProducts = (productList: Product[]) => {
   return productsResult;
 };
 
-const CategoryPage = ({ category, location }: CategoryProps) => {
-  const query = qs.parse(location.search)["?category"];
-
-  category = JSON.parse(query);
+const CategoryPage = ({ categories, category, location }: Props) => {
+  const categoryId = qs.parse(location.search)["?categoryId"];
 
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    ApiService.getProductsForCategory(category).then((res) => {
+    ApiService.getProductsForCategory(categoryId).then((res) => {
       setProducts(res.rows);
     });
   }, [location]);
 
-  if (!query) {
+  const categoryNamesToIds: { [categoryId: number]: string } = {};
+
+  categories.forEach((category) => {
+    categoryNamesToIds[category.id] = category.name;
+  });
+
+  if (!categoryId) {
     return <Redirect to="/" />;
   }
   return (
     <div className="categoryPage">
       <CategoriesBar />
-      <h1 className="category-header">{category.name}</h1>
+      <h1 className="category-header">{categoryNamesToIds[categoryId]}</h1>
       <div className="category-dashboard">
         {products && products.length > 0
           ? renderProducts(products)
@@ -54,4 +65,10 @@ const CategoryPage = ({ category, location }: CategoryProps) => {
   );
 };
 
-export default CategoryPage;
+const mapStateToProps = (state: StateProps) => {
+  return {
+    categories: state.categories,
+  };
+};
+
+export default connect(mapStateToProps, {})(CategoryPage);

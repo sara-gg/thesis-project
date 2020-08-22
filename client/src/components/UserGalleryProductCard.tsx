@@ -36,6 +36,7 @@ function UserGalleryProductCard({ product, readonly }: Props) {
       </Box>
       <Box direction="column" gap="small">
         <Text>{product.title}</Text>
+        <Text size="small">{product.quantity}</Text>
         <Text size="small">{product.location}</Text>
         <Text size="small">{product.price} €</Text>
       </Box>
