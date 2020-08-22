@@ -37,28 +37,8 @@ function UserGalleryProductCard({ product, readonly }: Props) {
       <Box direction="column" gap="small">
         <Text>{product.title}</Text>
         <Text size="small">{product.quantity}</Text>
-        <Text size="small">{product.location}</Text>
         <Text size="small">{product.price} €</Text>
       </Box>
-
-      {readonly ? (
-        ""
-      ) : (
-        <Box direction="row" gap="medium">
-          <Button
-            icon={<Edit color="brand" />}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          />
-          <Button
-            icon={<Trash />}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          />
-        </Box>
-      )}
     </Box>
   );
 }

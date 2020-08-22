@@ -32,7 +32,6 @@ function ProductDetails() {
     <Box>
       {product && (
         <Box>
-          {console.log(product)}
           <CategoriesBar />
           <Box
             direction="row"

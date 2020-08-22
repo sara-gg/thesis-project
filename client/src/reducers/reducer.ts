@@ -19,7 +19,7 @@ const initialState: RootState = {
   images: "",
   location: "",
   price: 0,
-  quantity: 1,
+  quantity: 0,
   height: 0,
   width: 0,
   depth: 0,

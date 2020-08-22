@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Box, Text } from "grommet";
-import UserGalleryProductCard from "../components/UserGalleryProductCard";
+import UserProductCard from "../components/UserProductCard";
 import AddNewProduct from "../components/AddNewProduct";
 import { RootState } from "../models/rootstate";
 import ApiService from "../ApiService/ApiService";
@@ -27,7 +27,6 @@ function UserProductsGallery({ id }: Props): JSX.Element {
       return (
         <Box>
           <Text> Add products to your gallery to start to sell! </Text>
-          <AddNewProduct />;
         </Box>
       );
     } else {
@@ -40,26 +39,19 @@ function UserProductsGallery({ id }: Props): JSX.Element {
           align="center"
           justify="center"
         >
-          <AddNewProduct />
           {products.map((product: any) => {
             if (product.quantity === 0) {
               return (
                 <div className="soldProduct">
-                  <Text size="large" color="red" className="soldProductText">
+                  {/* <Text size="large" color="red" className="soldProductText">
                     SOLD
-                  </Text>
-                  <UserGalleryProductCard
-                    key={product.item_id}
-                    product={product}
-                  />
+                  </Text> */}
+                  <UserProductCard key={product.item_id} product={product} />
                 </div>
               );
             } else {
               return (
-                <UserGalleryProductCard
-                  key={product.item_id}
-                  product={product}
-                />
+                <UserProductCard key={product.item_id} product={product} />
               );
             }
           })}
@@ -70,6 +62,7 @@ function UserProductsGallery({ id }: Props): JSX.Element {
 
   return (
     <Box direction="column" flex align="center" justify="center">
+      <AddNewProduct />
       {productList()}
     </Box>
   );
