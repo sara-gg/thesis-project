@@ -13,13 +13,24 @@ import "./App.css";
 import CategoryPage from "./components/CategoryPage";
 
 type Props = {
-  setIsAuthenticated: (b: boolean) => void;
+  // id: Number;
+  // name: String;
+  // lastname: String;
+  // isAuthenticated: boolean;
+  setUserData: (i: Number, n: String, l: String, b: boolean) => void;
 };
 
-function App({ setIsAuthenticated }: Props): JSX.Element {
+function App({ setUserData }: Props): JSX.Element {
   const userToken = localStorage.getItem("accessToken");
+  const userId: any = localStorage.getItem("userId");
+  const userName: any = localStorage.getItem("userName");
+  // const userData = JSON.parse(jsonUserData);
+  console.log("App user token", userToken);
+  console.log("App user id", userId);
+  console.log("App user name", userName);
+
   if (userToken) {
-    setIsAuthenticated(true);
+    setUserData(parseInt(userId), JSON.parse(userName), "", true);
   }
 
   return (
@@ -53,10 +64,15 @@ function App({ setIsAuthenticated }: Props): JSX.Element {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    setIsAuthenticated: (boolean: boolean) =>
+    setUserData: (
+      id: Number,
+      name: String,
+      lastname: String,
+      boolean: boolean
+    ) =>
       dispatch({
-        type: "AUTHENTICATED",
-        payload: boolean,
+        type: "SET_USER_DATA",
+        payload: { id, name, lastname, boolean },
       }),
   };
 };

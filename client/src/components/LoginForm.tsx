@@ -15,10 +15,10 @@ import ApiService from "../ApiService/ApiService";
 import { useHistory } from "react-router-dom";
 
 type Props = {
-  id: Number;
-  name: String;
-  lastname: String;
-  isAuthenticated: boolean;
+  // id: Number;
+  // name: String;
+  // lastname: String;
+  // isAuthenticated: boolean;
   setUserData: (i: Number, n: String, l: String, b: boolean) => void;
 };
 const initialState = {
@@ -50,10 +50,11 @@ const LoginForm = ({ setUserData }: Props): JSX.Element => {
       alert(`${res.message}`);
       setState(initialState);
     } else {
-      console.log("login res", res);
       const { accessToken } = res;
-      console.log("accessToken", accessToken);
       localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("userId", JSON.stringify(res.user.id));
+      localStorage.setItem("userName", JSON.stringify(res.user.name));
+
       setUserData(res.user.id, res.user.name, res.user.lastname, true);
       history.push("/usergallery");
     }

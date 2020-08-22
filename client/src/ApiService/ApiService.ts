@@ -70,7 +70,7 @@ const getAllProducts = (): Promise<any> => {
 
 const getProductsForUser = (id: Number): Promise<any> => {
   console.log(id);
-  return fetch(`${BASE_URL}/products?category_id=${id}`, {
+  return fetch(`${BASE_URL}/products?user_id=${id}`, {
     method: "GET",
     credentials: "include",
     mode: "cors",
