@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Button, Image, Text } from "grommet";
-import { Edit, Trash } from "grommet-icons";
+import { Edit, Trash, Location } from "grommet-icons";
 import { Product } from "../models/product";
 import { useHistory } from "react-router-dom";
 
@@ -17,9 +17,9 @@ function CategoryProductCard({ product, readonly }: Props) {
 
   return (
     <Box
-      height="medium"
-      width="small"
-      elevation="medium"
+      //height="medium"
+      width="500px"
+      //elevation="medium"
       margin="medium"
       pad="medium"
       hoverIndicator="true"
@@ -31,34 +31,25 @@ function CategoryProductCard({ product, readonly }: Props) {
         });
       }}
     >
-      <Box height="small" width="small">
-        <Image fit="cover" src={`${product.images}`} />
-      </Box>
-      <Box direction="column" gap="small">
-        <Text>{product.title}</Text>
-        <Text size="small">{product.quantity}</Text>
-        <Text size="small">{product.location}</Text>
-        <Text size="small">{product.price} €</Text>
-      </Box>
+      <Image
+        fit="cover"
+        height="360px"
+        fill="horizontal"
+        src={`${product.images}`}
+      />
 
-      {readonly ? (
-        ""
-      ) : (
-        <Box direction="row" gap="medium">
-          <Button
-            icon={<Edit color="brand" />}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          />
-          <Button
-            icon={<Trash />}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          />
+      <Box pad="2% 0 0 0" direction="column">
+        <Box direction="row" flex justify="between">
+          <Text>
+            <span className="product-title">{product.title} </span>(
+            {product.quantity})
+          </Text>
+          <Text>{product.price} €</Text>
         </Box>
-      )}
+        <Text size="small">
+          seller {product.user_id} <Location /> {product.location}
+        </Text>
+      </Box>
     </Box>
   );
 }

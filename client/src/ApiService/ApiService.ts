@@ -83,6 +83,18 @@ const getProductsForUser = (id: Number): Promise<any> => {
     .catch((err) => console.error);
 };
 
+
+const getUserDetails = (id: Number): Promise<any> => {
+  console.log(id);
+  return fetch(`${BASE_URL}/products?user_id=${id}`, {
+    method: "GET",
+    credentials: "include",
+    mode: "cors",
+  })
+    .then((res) => res.json())
+    .catch((err) => console.error);
+};
+
 export default {
   login,
   createNewProduct,
