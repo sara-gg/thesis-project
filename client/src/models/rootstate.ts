@@ -24,4 +24,6 @@ export interface RootState {
   categoryName: string;
   categories: [];
   category_id: string;
+  categoryProducts: [];
+  categoryProductsCount: number;
 }

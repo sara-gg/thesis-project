@@ -4,21 +4,30 @@ import { Product } from "../models/product";
 import { Category } from "../models/category";
 import ApiService from "../ApiService/ApiService";
 import { Redirect } from "react-router";
-import "./CategoryPage.scss";
+import "../styles/CategoryPage.scss";
 import { connect } from "react-redux";
 import CategoriesBar from "./CategoriesBar";
+import CategoryHeader from "./CategoryHeader";
+import {getProductsForCategory} from "../actions";
 const qs = require("qs");
 
-type CategoryProps = {
+interface CategoryProps {
   category: Category;
   location: any;
 };
 
 interface StateProps {
   categories: Category[];
+  categoryProducts: Product[],
+  categoryProductsCount: number,
 }
 
-type Props = StateProps & CategoryProps;
+interface DispatchProps {
+  
+  getProductsForCategory: (categoryId: number) => Promise<any>;
+}
+
+type Props = StateProps & CategoryProps & DispatchProps;
 
 export const renderProducts = (productList: Product[]) => {
   let productsResult: JSX.Element[] = [];
@@ -32,20 +41,18 @@ export const renderProducts = (productList: Product[]) => {
   return productsResult;
 };
 
-const CategoryPage = ({ categories, category, location }: Props) => {
+const CategoryPage = ({ categories, category, location, getProductsForCategory, categoryProducts, categoryProductsCount }: any) => {
   const categoryId = qs.parse(location.search)["?categoryId"];
 
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    ApiService.getProductsForCategory(categoryId).then((res) => {
-      setProducts(res.rows);
-    });
+    getProductsForCategory(categoryId)
   }, [location]);
 
   const categoryNamesToIds: { [categoryId: number]: string } = {};
 
-  categories.forEach((category) => {
+  categories.forEach((category: Category) => {
     categoryNamesToIds[category.id] = category.name;
   });
 
@@ -54,11 +61,12 @@ const CategoryPage = ({ categories, category, location }: Props) => {
   }
   return (
     <div className="categoryPage">
-      <CategoriesBar />
+      <CategoriesBar/>
+      <CategoryHeader categoryName={categoryNamesToIds[categoryId]} categoryProductsCount={categoryProductsCount}/>
       <h1 className="category-header">{categoryNamesToIds[categoryId]}</h1>
       <div className="category-dashboard">
-        {products && products.length > 0
-          ? renderProducts(products)
+        {categoryProducts && categoryProducts.length > 0
+          ? renderProducts(categoryProducts)
           : "no products"}
       </div>
     </div>
@@ -68,7 +76,9 @@ const CategoryPage = ({ categories, category, location }: Props) => {
 const mapStateToProps = (state: StateProps) => {
   return {
     categories: state.categories,
+    categoryProducts: state.categoryProducts,
+    categoryProductsCount: state.categoryProductsCount,
   };
 };
 
-export default connect(mapStateToProps, {})(CategoryPage);
+export default connect(mapStateToProps, {getProductsForCategory})(CategoryPage);

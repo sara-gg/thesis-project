@@ -1,6 +1,7 @@
 import { NewProduct } from "./models/newProduct";
 import { User } from "./models/user";
 import { Category } from "./models/category";
+import { Product } from "./models/product";
 const BASE_URL = process.env.BASE_URL || "http://localhost:3001";
 
 export function setRegisterDetails({
@@ -97,6 +98,13 @@ export function setCategories(payload: Category) {
   };
 }
 
+export function setCategoryName(payload: string) {
+  return {
+    type: "SET_CATEGORY_NAME",
+    payload,
+  };
+}
+
 export function getCategories(): any {
   return function (dispatch: any): Promise<any> {
     return fetch(`${BASE_URL}/categories`, {
@@ -113,9 +121,33 @@ export function getCategories(): any {
   };
 }
 
-export function setCategoryName(payload: string) {
+export function setCategoryProducts(payload: []) {
   return {
-    type: "SET_CATEGORY_NAME",
+    type: "SET_CATEGORY_PRODUCTS",
     payload,
+  };
+}
+
+export function setCategoryProductsCount(payload: number) {
+  return {
+    type: "SET_CATEGORY_PRODUCTS_COUNT",
+    payload,
+  };
+}
+
+export function getProductsForCategory(categoryId: number): any {
+  return function (dispatch: any): Promise<any> {
+    return fetch(`${BASE_URL}/products?category_id=${categoryId}`, {
+      method: "GET",
+      credentials: "include",
+      mode: "cors",
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        dispatch(setCategoryProducts(res.rows));
+        dispatch(setCategoryProductsCount(res.count));
+      })
+      .catch((err) => console.error);
   };
 }
