@@ -1,12 +1,10 @@
 export interface Product {
-  id: number;
-  user_id: number;
+  id?: number;
   category_id: string;
   title: string;
   description: string;
-  created_at: string;
-  images: string;
-  location: string;
+  images: File;
+  location: string | undefined;
   price: number;
   quantity: number;
   height?: number;
