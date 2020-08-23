@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router";
-import CategoryProductCard from "./CategoryProductCard";
-import CategoriesBar from "./CategoriesBar";
-import CategoryHeader from "./CategoryHeader";
+import CategoryProductCard from "../components/CategoryProductCard";
+import CategoriesBar from "../components/CategoriesBar";
+import CategoryHeader from "../components/CategoryHeader";
 import { connect } from "react-redux";
 import { getProductsForCategory } from "../actions";
 import { Product } from "../models/product";
 import { Category } from "../models/category";
-import SkeletonCategoryProductCard from "./SkeletonCategoryProductCard";
+import SkeletonCategoryProductCard from "../components/SkeletonCategoryProductCard";
 import { Box, Heading } from "grommet";
 import "../styles/SkeletonCategoryProductCard.scss";
 import "../styles/CategoryPage.scss";

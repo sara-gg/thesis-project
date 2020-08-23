@@ -7,11 +7,11 @@ import {
   Pinterest,
   Youtube,
 } from "grommet-icons";
-import "./Footer.scss";
+import "../styles/Footer.scss";
 
 const Foot = () => {
   return (
-    <Footer direction="column" pad={{"horizontal": "none", "vertical": "medium"}}>
+    <Footer direction="column" pad={{ horizontal: "none", vertical: "medium" }}>
       <Box className="foot-info" direction="row" gap="xlarge">
         <Grid className="about" alignSelf="start">
           <h3>About Us</h3>
