@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
-import UserGalleryProductCard from "./UserGalleryProductCard";
-import { Product } from "../models/product";
-import { Category } from "../models/category";
-import { Box, Heading } from "grommet";
 import { Redirect } from "react-router";
-import "../styles/CategoryPage.scss";
-import { connect } from "react-redux";
+import CategoryProductCard from "./CategoryProductCard";
 import CategoriesBar from "./CategoriesBar";
 import CategoryHeader from "./CategoryHeader";
+import { connect } from "react-redux";
 import { getProductsForCategory } from "../actions";
+import { Product } from "../models/product";
+import { Category } from "../models/category";
+import SkeletonCategoryProductCard from "./SkeletonCategoryProductCard";
+import { Box, Heading } from "grommet";
+import "../styles/SkeletonCategoryProductCard.scss";
+import "../styles/CategoryPage.scss";
+
 const qs = require("qs");
 
 interface CategoryProps {
@@ -28,34 +31,12 @@ interface DispatchProps {
 
 type Props = StateProps & CategoryProps & DispatchProps;
 
-// export const renderProducts = (productList: Product[], label?: string) => {
-//   let productsResult: any[]= [];
-
-//   productList.forEach((product, index) => {
-//     console.log("productList product", product);
-//     if (label) {
-//       productsResult
-//       .sort((a, b) => (a.product.price) - (b.product.price))
-//       .push(
-//         <UserGalleryProductCard product={product} key={index}/>
-//       )
-//     } else {
-//        productsResult.push(
-//         <UserGalleryProductCard product={product} key={index}/>
-//       )
-//     };
-//   })
-//   return productsResult;
-// }
-
 export const renderProducts = (productList: Product[]) => {
   let productsResult: JSX.Element[] = [];
 
   productList.forEach((product, index) => {
     console.log("productList product", product);
-    productsResult.push(
-      <UserGalleryProductCard product={product} key={index} />
-    );
+    productsResult.push(<CategoryProductCard product={product} key={index} />);
   });
   return productsResult;
 };
@@ -69,12 +50,16 @@ const CategoryPage = ({
   categoryProductsCount,
 }: any) => {
   const categoryId = qs.parse(location.search)["?categoryId"];
-
+  const [isLoadingProducts, setIsLoadingProducts] = useState(false);
   // const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    getProductsForCategory(categoryId);
-  }, [location]);
+    setIsLoadingProducts(true);
+    const timer = setTimeout(() => {
+    getProductsForCategory(categoryId).then(() => {
+      setIsLoadingProducts(false);
+    })
+  }, 2000)}, [location]);
 
   const categoryNamesToIds: { [categoryId: number]: string } = {};
 
@@ -105,7 +90,8 @@ const CategoryPage = ({
         justify="between"
         wrap
       >
-        {categoryProducts && categoryProducts.length > 0
+        {isLoadingProducts && <SkeletonCategoryProductCard duration={2}/>}
+        {!isLoadingProducts && categoryProducts && categoryProducts.length > 0
           ? renderProducts(categoryProducts)
           : "no products"}
       </Box>
