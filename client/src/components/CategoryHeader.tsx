@@ -1,6 +1,6 @@
 import React from "react";
-import { Box, Button, DropButton, Heading, Image, Menu, Text } from "grommet";
-import { Sort, Filter, Descend } from "grommet-icons";
+import { Box, DropButton, Menu, Text } from "grommet";
+import { Filter, Descend } from "grommet-icons";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
@@ -49,11 +49,12 @@ const CategoryHeader = ({
       direction="row"
       width="100%"
       align="center"
-      justify="around"
+      justify="between"
       background="offwhite"
-      pad={{ left: "medium", right: "small", vertical: "small" }}
+      pad={{ vertical: "small", left: "medium", right: "medium" }}
       elevation="medium"
       className="category-header"
+      style={{ zIndex: 2 }}
     >
       <Text color="text">
         <NavLink exact to="/">
@@ -62,14 +63,7 @@ const CategoryHeader = ({
         {categoryName} items ({`${categoryProductsCount}`})
       </Text>
 
-      <Box
-        direction="row"
-        align="center"
-        justify="center"
-        className="right-appbar"
-        gap="medium"
-        margin="large"
-      >
+      <Box direction="row" align="center" justify="center">
         <DropButton
           icon={<Filter />}
           open={open}

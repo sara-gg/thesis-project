@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Box, Heading } from "grommet";
-import '../styles/CategoriesBar.scss';
+import "../styles/CategoriesBar.scss";
 import { NavLink, Route } from "react-router-dom";
-import CategoryPage from "./CategoryPage";
+import CategoryPage from "../views/CategoryPage";
 import { Category } from "../models/category";
 import ApiService from "../ApiService/ApiService";
 import { getCategories } from "../actions";
@@ -29,9 +29,10 @@ const CategoriesBar = ({ getCategories, categories }: Props) => {
       align="center"
       justify="around"
       background="white"
-      pad={{ left: "medium", right: "medium", vertical: "small" }}
+      pad={{ left: "medium", right: "medium" }}
       elevation="medium"
       style={{ zIndex: 1 }}
+      className="categories-bar-container"
     >
       {categories && categories.length > 0
         ? categories.map((category) => (

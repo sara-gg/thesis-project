@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Heading, Image } from "grommet";
+import { Box, Button, DropButton, Heading, Image } from "grommet";
 import { Cart } from "grommet-icons";
 import logo from "../assets/logo.png";
 import { useHistory } from "react-router-dom";
@@ -42,26 +42,22 @@ const AppBar = ({ isAuthenticated }: Props): JSX.Element => {
       direction="row"
       width="100%"
       align="center"
-      justify="around"
-      background="offwhite"
-      pad={{ left: "medium", right: "small", vertical: "small" }}
-      elevation="medium"
+      justify="between"
+      background="white"
+      pad={{ left: "small", right: "small", vertical: "small" }}
       className="appbar"
     >
-      <Button
-        icon={<Image src={logo} />}
-        onClick={() => {
-          history.push("/");
-        }}
-      />
       <SearchBar />
+      <NavLink exact to="/">
+        <Image src={logo} height="50px" />
+      </NavLink>
+
       <Box
         direction="row"
         align="center"
-        justify="center"
+        justify="end"
         className="right-appbar"
         gap="medium"
-        margin="large"
       >
         <NavLink exact to="/usergallery">
           <Heading level="4" color="text" className="navbar-header">
@@ -69,16 +65,16 @@ const AppBar = ({ isAuthenticated }: Props): JSX.Element => {
           </Heading>
         </NavLink>
 
+        {handleRenderRegister()}
+
+        <Logout />
+
         <Button
           icon={<Cart />}
           onClick={() => {
             history.push("/login");
           }}
         />
-
-        {handleRenderRegister()}
-
-        <Logout />
       </Box>
     </Box>
   );
