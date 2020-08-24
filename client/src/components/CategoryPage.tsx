@@ -4,7 +4,7 @@ import { Product } from "../models/product";
 import { Category } from "../models/category";
 import ApiService from "../ApiService/ApiService";
 import { Redirect } from "react-router";
-import "./CategoryPage.scss";
+import "../styles/CategoryPage.scss";
 import { connect } from "react-redux";
 import CategoriesBar from "./CategoriesBar";
 const qs = require("qs");

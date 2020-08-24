@@ -2,21 +2,32 @@ import React from "react";
 import { Box, Button, Heading } from "grommet";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+
 type Props = {
   isAuthenticated: boolean;
-  setIsAuthenticated: (b: boolean) => void;
+  setUserData: (
+    i: number,
+    n: string,
+    l: string,
+    u: string,
+    e: string,
+    bd: string,
+    g: string,
+    a: string,
+    b: boolean
+  ) => void;
 };
 
-const Logout = ({
-  isAuthenticated,
-  setIsAuthenticated,
-}: Props): JSX.Element => {
+const Logout = ({ isAuthenticated, setUserData }: Props): JSX.Element => {
   let history = useHistory();
 
   const handleLogoutClick = () => {
-    alert("You are being logged out!");
-    removeToken();
-    handleAuth();
+    toast("You are being logged out");
+    setTimeout(() => {
+      removeToken();
+      handleAuth();
+    }, 3000);
   };
 
   const handleLoginClick = () => {
@@ -26,13 +37,11 @@ const Logout = ({
   const removeToken = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("userId");
-    localStorage.removeItem("userName");
-    localStorage.removeItem("userData");
   };
 
   const handleAuth = () => {
-    setIsAuthenticated(false);
-    history.push("/");
+    setUserData(0, "", "", "", "", "", "", "", false);
+    window.location.assign("http://localhost:3000/home");
   };
 
   const showButton = () => {
@@ -73,8 +82,31 @@ const mapStateToProps = (state: any) => {
 };
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    setIsAuthenticated: (boolean: boolean) =>
-      dispatch({ type: "AUTHENTICATED", payload: boolean }),
+    setUserData: (
+      id: number,
+      name: string,
+      lastname: string,
+      username: string,
+      email: string,
+      birthdate: string,
+      gender: string,
+      address: string,
+      boolean: boolean
+    ) =>
+      dispatch({
+        type: "SET_USER_DATA",
+        payload: {
+          id,
+          name,
+          lastname,
+          username,
+          email,
+          birthdate,
+          gender,
+          address,
+          boolean,
+        },
+      }),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Logout);

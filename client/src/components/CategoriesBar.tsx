@@ -34,8 +34,17 @@ const CategoriesBar = ({ getCategories, categories }: Props) => {
     >
       {categories && categories.length > 0
         ? categories.map((category) => (
-            <NavLink exact to={`/products?categoryId=${category.id}`}>
-              <Heading level="4" style={styles} className="navbar-header">
+            <NavLink
+              exact
+              to={`/products?categoryId=${category.id}`}
+              key={category.id}
+            >
+              <Heading
+                level="4"
+                style={styles}
+                className="navbar-header"
+                key={category.id}
+              >
                 {category.name}
               </Heading>
             </NavLink>

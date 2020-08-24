@@ -18,6 +18,7 @@ import {
   submitRegisterDetails,
 } from "../actions";
 import { useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 type Props = {
   isAuthenticated: boolean;
@@ -86,175 +87,200 @@ const RegistrationForm = ({
     });
   };
 
-  return (
-    <Box width="medium">
-      <Form
-        onChange={(value) => console.log("Change", value)}
-        onSubmit={handleSubmit}
-      >
-        <FormField
-          name="name"
-          label={
-            <Box direction="row">
-              <Text>Name</Text>
-              <Text color="status-critical"> *</Text>
-            </Box>
-          }
-          required
+  if (!isAuthenticated) {
+    return (
+      <Box width="medium">
+        <Form
+          onChange={(value) => console.log("Change", value)}
+          onSubmit={handleSubmit}
         >
-          <TextInput name="name" value={name} onChange={handleChange} />
-        </FormField>
-        <FormField
-          name="lastname"
-          label={
-            <Box direction="row">
-              <Text>Lastname</Text>
-              <Text color="status-critical"> *</Text>
-            </Box>
-          }
-          required
-        >
-          <TextInput name="lastname" value={lastname} onChange={handleChange} />
-        </FormField>
-        <FormField
-          name="username"
-          label={
-            <Box direction="row">
-              <Text>Username</Text>
-              <Text color="status-critical"> *</Text>
-            </Box>
-          }
-          required
-        >
-          <TextInput name="username" value={username} onChange={handleChange} />
-        </FormField>
-        <FormField
-          name="email"
-          label={
-            <Box direction="row">
-              <Text>Email</Text>
-              <Text color="status-critical"> *</Text>
-            </Box>
-          }
-          required
-        >
-          <MaskedInput
-            name="email"
-            mask={[
-              { regexp: /^[\w\-_.]+$/, placeholder: "example" },
-              { fixed: "@" },
-              { regexp: /^[\w]+$/, placeholder: "my" },
-              { fixed: "." },
-              { regexp: /^[\w]+$/, placeholder: "com" },
-            ]}
-            value={email}
-            onChange={handleChange}
-          />
-        </FormField>
-        <FormField
-          name="password"
-          label={
-            <Box direction="row">
-              <Text>Password</Text>
-              <Text color="status-critical"> *</Text>
-            </Box>
-          }
-          required
-        >
-          <TextInput
-            plain
-            name="password"
-            type={revealPassword ? "text" : "password"}
-            value={password}
-            onChange={handleChange}
-          />
-          <Button
-            icon={
-              revealPassword ? <View size="medium" /> : <Hide size="medium" />
+          <FormField
+            name="name"
+            label={
+              <Box direction="row">
+                <Text>Name</Text>
+                <Text color="status-critical"> *</Text>
+              </Box>
             }
-            onClick={() => setRevealPassword(!revealPassword)}
-          />
-        </FormField>
-        <FormField
-          name="telephone"
-          label={
+            required
+          >
+            <TextInput name="name" value={name} onChange={handleChange} />
+          </FormField>
+          <FormField
+            name="lastname"
+            label={
+              <Box direction="row">
+                <Text>Lastname</Text>
+                <Text color="status-critical"> *</Text>
+              </Box>
+            }
+            required
+          >
+            <TextInput
+              name="lastname"
+              value={lastname}
+              onChange={handleChange}
+            />
+          </FormField>
+          <FormField
+            name="username"
+            label={
+              <Box direction="row">
+                <Text>Username</Text>
+                <Text color="status-critical"> *</Text>
+              </Box>
+            }
+            required
+          >
+            <TextInput
+              name="username"
+              value={username}
+              onChange={handleChange}
+            />
+          </FormField>
+          <FormField
+            name="email"
+            label={
+              <Box direction="row">
+                <Text>Email</Text>
+                <Text color="status-critical"> *</Text>
+              </Box>
+            }
+            required
+          >
+            <MaskedInput
+              name="email"
+              mask={[
+                { regexp: /^[\w\-_.]+$/, placeholder: "example" },
+                { fixed: "@" },
+                { regexp: /^[\w]+$/, placeholder: "my" },
+                { fixed: "." },
+                { regexp: /^[\w]+$/, placeholder: "com" },
+              ]}
+              value={email}
+              onChange={handleChange}
+            />
+          </FormField>
+          <FormField
+            name="password"
+            label={
+              <Box direction="row">
+                <Text>Password</Text>
+                <Text color="status-critical"> *</Text>
+              </Box>
+            }
+            required
+          >
             <Box direction="row">
-              <Text>Telephone</Text>
+              <TextInput
+                plain
+                name="password"
+                type={revealPassword ? "text" : "password"}
+                value={password}
+                onChange={handleChange}
+              />
+              <Button
+                icon={
+                  revealPassword ? (
+                    <View size="medium" />
+                  ) : (
+                    <Hide size="medium" />
+                  )
+                }
+                onClick={() => setRevealPassword(!revealPassword)}
+              />
             </Box>
-          }
-        >
-          <TextInput
+          </FormField>
+          <FormField
             name="telephone"
-            value={telephone}
-            onChange={handleChange}
-          />
-        </FormField>
-        <FormField
-          name="address"
-          label={
-            <Box direction="row">
-              <Text>Location</Text>
-              <Text color="status-critical"> *</Text>
-            </Box>
-          }
-          required
-        >
-          <TextInput name="address" value={address} onChange={handleChange} />
-        </FormField>
-        <Box width="medium">
-          <MaskedInput
-            mask={[
-              {
-                length: [1, 2],
-                options: Array.from({ length: 12 }, (v, k) => k + 1),
-                regexp: /^1[0,1-2]$|^0?[1-9]$|^0$/,
-                placeholder: "mm",
-              },
-              { fixed: "/" },
-              {
-                length: [1, 2],
-                options: Array.from(
+            label={
+              <Box direction="row">
+                <Text>Telephone</Text>
+              </Box>
+            }
+          >
+            <TextInput
+              name="telephone"
+              value={telephone}
+              onChange={handleChange}
+            />
+          </FormField>
+          <FormField
+            name="address"
+            label={
+              <Box direction="row">
+                <Text>Location</Text>
+                <Text color="status-critical"> *</Text>
+              </Box>
+            }
+            required
+          >
+            <TextInput name="address" value={address} onChange={handleChange} />
+          </FormField>
+          <Box>
+            <Text margin={{ horizontal: "small", vertical: "small" }}>
+              Date of birth
+            </Text>
+            <Box margin={{ vertical: "small" }} width="medium">
+              <MaskedInput
+                mask={[
                   {
-                    length: daysInMonth(parseInt(birthdate.split("/")[0], 10)),
+                    length: [1, 2],
+                    options: Array.from({ length: 12 }, (v, k) => k + 1),
+                    regexp: /^1[0,1-2]$|^0?[1-9]$|^0$/,
+                    placeholder: "mm",
                   },
-                  (v, k) => k + 1
-                ),
-                regexp: /^[1-2][0-9]$|^3[0-1]$|^0?[1-9]$|^0$/,
-                placeholder: "dd",
-              },
-              { fixed: "/" },
-              {
-                length: 4,
-                options: Array.from({ length: 100 }, (v, k) => 2019 - k),
-                regexp: /^[1-2]$|^19$|^20$|^19[0-9]$|^20[0-9]$|^19[0-9][0-9]$|^20[0-9][0-9]$/,
-                placeholder: "yyyy",
-              },
-            ]}
-            name="birthdate"
-            value={birthdate}
-            onChange={handleChange}
-          />
-        </Box>
-        <FormField label="Gender" name="gender">
-          <Select
-            name="gender"
-            options={["Female", "Male", "Prefer not to say"]}
-            value={gender}
-            onChange={handleSelectChange}
-          />
-        </FormField>
-        <br></br>
-        <Text margin={{ left: "small" }} size="small" color="status-critical">
-          * Required Field
-        </Text>
-        <br></br>
-        <Box direction="row" justify="between" margin={{ top: "medium" }}>
-          {/* <Button label="Cancel" /> */}
-          <Button type="submit" label="Submit" primary />
-        </Box>
-      </Form>
-    </Box>
-  );
+                  { fixed: "/" },
+                  {
+                    length: [1, 2],
+                    options: Array.from(
+                      {
+                        length: daysInMonth(
+                          parseInt(birthdate.split("/")[0], 10)
+                        ),
+                      },
+                      (v, k) => k + 1
+                    ),
+                    regexp: /^[1-2][0-9]$|^3[0-1]$|^0?[1-9]$|^0$/,
+                    placeholder: "dd",
+                  },
+                  { fixed: "/" },
+                  {
+                    length: 4,
+                    options: Array.from({ length: 100 }, (v, k) => 2019 - k),
+                    regexp: /^[1-2]$|^19$|^20$|^19[0-9]$|^20[0-9]$|^19[0-9][0-9]$|^20[0-9][0-9]$/,
+                    placeholder: "yyyy",
+                  },
+                ]}
+                name="birthdate"
+                value={birthdate}
+                onChange={handleChange}
+              />
+            </Box>
+          </Box>
+          <FormField label="Gender" name="gender">
+            <Select
+              name="gender"
+              options={["Female", "Male", "Prefer not to say"]}
+              value={gender}
+              onChange={handleSelectChange}
+            />
+          </FormField>
+          <br></br>
+          <Text margin={{ left: "small" }} size="small" color="status-critical">
+            * Required Field
+          </Text>
+          <br></br>
+          <Box direction="row" justify="between" margin={{ top: "medium" }}>
+            {/* <Button label="Cancel" /> */}
+            <Button type="submit" label="Submit" primary />
+          </Box>
+        </Form>
+      </Box>
+    );
+  } else {
+    return <Redirect to={{ pathname: "/home" }} />;
+  }
 };
 
 const mapStateToProps = (state: any) => {

@@ -67,7 +67,22 @@ const getAllProducts = (): Promise<any> => {
     .then((res) => {
       return res;
     })
-    .catch((err) => console.error);
+    .catch((err) => console.error(err));
+};
+
+const getBasketProducts = (): Promise<any> => {
+  const token = localStorage.getItem("accessToken");
+  return fetch(`${BASE_URL}/basket_products`, {
+    method: "GET",
+    credentials: "include",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then(res => res.json())
+    .catch(err => console.error(err));
 };
 
 const getProductsForUser = (id: Number): Promise<any> => {
@@ -83,6 +98,21 @@ const getProductsForUser = (id: Number): Promise<any> => {
 const deleteProduct = (id: Number): Promise<any> => {
   const token = localStorage.getItem("accessToken");
   return fetch(`${BASE_URL}/product/${id}`, {
+    method: "DELETE",
+    credentials: "include",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((res) => res.json())
+    .catch((err) => console.error);
+};
+
+const deleteBasketProduct = (id: Number): Promise<any> => {
+  const token = localStorage.getItem("accessToken");
+  return fetch(`${BASE_URL}/basket_products/${id}`, {
     method: "DELETE",
     credentials: "include",
     mode: "cors",
@@ -116,7 +146,9 @@ export default {
   getProductsForCategory,
   getCategories,
   getAllProducts,
+  getBasketProducts,
   getProductsForUser,
+  deleteBasketProduct,
   deleteProduct,
-  getUserData,
+  getUserData
 };
