@@ -8,9 +8,8 @@ import BillingDetailsFields from "./prebuilt/BillingDetailsFields";
 import SubmitButton from "./prebuilt/SubmitButton";
 import CheckoutError from "./prebuilt/CheckoutError";
 
-import { Button } from "grommet";
-
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+
 
 const CardElementContainer = styled.div`
   height: 40px;
@@ -85,8 +84,14 @@ const CheckoutForm = ({ price, onSuccessfulCheckout }) => {
     },
   }
 
+  const formStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  }
+
   return (
-    <form onSubmit={handleFormSubmit}>
+    <form onSubmit={handleFormSubmit} style={formStyle}>
       <Row>
         <BillingDetailsFields />
       </Row>

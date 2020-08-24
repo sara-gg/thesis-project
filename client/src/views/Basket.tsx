@@ -8,14 +8,13 @@ import UserGalleryProductCard from "../components/UserGalleryProductCard";
 import { Product } from "../models/product";
 import { Box, Text } from "grommet";
 import { useHistory } from "react-router-dom";
-import PaymentForm from '../components/Payment/pages/PaymentForm';
+import PaymentForm from '../components/Payment/PaymentForm';
 
 
 const renderProducts = (productList: Product[]) => {
   let productsResult: JSX.Element[] = [];
 
   productList.forEach((product, index) => {
-    console.log("productList product", product);
     productsResult.push(
       <UserGalleryProductCard product={product} key={index} />
     );
@@ -31,7 +30,6 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
   const [basketProducts, setBasketProducts] = useState<Product[]>([]);
   const [amoutToPay, setAmoutToPay] = useState(0);
   let history = useHistory();
-  console.log(basketProducts)
 
   useEffect(() => {
     ApiService.getBasketProducts()

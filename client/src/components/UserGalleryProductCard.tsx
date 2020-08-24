@@ -44,21 +44,21 @@ function UserGalleryProductCard({ product, readonly }: Props) {
       {readonly ? (
         ""
       ) : (
-        <Box direction="row" gap="medium">
-          <Button
-            icon={<Edit color="brand" />}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          />
-          <Button
-            icon={<Trash />}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          />
-        </Box>
-      )}
+          <Box direction="row" gap="medium">
+            <Button
+              icon={<Edit color="brand" />}
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            />
+            <Button
+              icon={<Trash />}
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            />
+          </Box>
+        )}
     </Box>
   );
 }

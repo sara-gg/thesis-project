@@ -1,13 +1,10 @@
-import Router from "next/router";
 import React from 'react';
 import { useHistory } from "react-router-dom";
 
-
-import Layout from "../components/Layout";
-import CheckoutForm from "../components/CheckoutForm";
+import Layout from "./sub-components/Layout";
+import CheckoutForm from "./sub-components/CheckoutForm";
 
 const PaymentForm = ({ amoutToPay }) => {
-  console.log('amoutToPay', amoutToPay)
   let history = useHistory();
 
   return (
@@ -15,8 +12,7 @@ const PaymentForm = ({ amoutToPay }) => {
       <CheckoutForm
         price={amoutToPay}
         onSuccessfulCheckout={() => {
-          console.log('MONEY IN THE BANK!!')
-          history.push("/home");
+          history.push("/successful_payment");
         }}
       />
     </Layout>

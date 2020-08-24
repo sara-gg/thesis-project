@@ -12,12 +12,13 @@ import Home from "./views/Home";
 import "./App.css";
 import CategoryPage from "./components/CategoryPage";
 import Basket from "./views/Basket";
+import SuccessfulPayment from "./views/SuccessfulPayment";
 
 // Stripe
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 
-const stripePromise = loadStripe("pk_test_51HIYqeHvILi8NO5PWxHkN04ZQxZcdDIxVUPh5nVfaQRMXC4UJiptUx4uWyCJHWfGfih2AhoSB4wgI2xKskMCECs800otDuHmjG");
+const stripePromise = loadStripe('pk_test_51HIYqeHvILi8NO5PWxHkN04ZQxZcdDIxVUPh5nVfaQRMXC4UJiptUx4uWyCJHWfGfih2AhoSB4wgI2xKskMCECs800otDuHmjG');
 
 
 
@@ -61,6 +62,9 @@ function App({ setUserData }: Props): JSX.Element {
           </Route>
           <Route path="/basket_products">
             <Basket isAuthenticated />
+          </Route>
+          <Route path="/successful_payment">
+            <SuccessfulPayment />
           </Route>
           <Route path={`/products`} component={CategoryPage} />
           <Route path="/productdetails">

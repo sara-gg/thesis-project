@@ -98,6 +98,21 @@ const getProductsForUser = (id: Number): Promise<any> => {
     .catch((err) => console.error);
 };
 
+const deleteBasketProduct = (id: Number): Promise<any> => {
+  const token = localStorage.getItem("accessToken");
+  return fetch(`${BASE_URL}/basket_products/${id}`, {
+    method: "DELETE",
+    credentials: "include",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((res) => res.json())
+    .catch((err) => console.error);
+};
+
 export default {
   login,
   createNewProduct,
@@ -106,4 +121,5 @@ export default {
   getAllProducts,
   getBasketProducts,
   getProductsForUser,
+  deleteBasketProduct
 };
