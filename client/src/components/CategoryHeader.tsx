@@ -39,8 +39,12 @@ const CategoryHeader = ({
     setOpen(false);
   };
 
-  const handleSort = (direction: "up" | "down") => {
-    SortProductsForCategory(categoryId, "price", direction);
+  const handlePriceSort = (direction: "up" | "down", price: "price") => {
+    SortProductsForCategory(categoryId, direction, price);
+  };
+
+  const handleDateSort = (direction: "up" | "down", updatedAt: "updatedAt" ) => {
+    SortProductsForCategory( categoryId, direction, updatedAt);
   };
 
   return (
@@ -87,13 +91,19 @@ const CategoryHeader = ({
             {
               label: "Price - low to high",
               onClick: (e: any) => {
-                handleSort("up");
+                handlePriceSort("up", "price");
               },
             },
             {
               label: "Price - high to low",
               onClick: (e: any) => {
-                handleSort("down");
+                handlePriceSort("down", "price");
+              },
+            },
+            {
+              label: "Most recent",
+              onClick: (e: any) => {
+                handleDateSort("down", "updatedAt");
               },
             },
           ]}

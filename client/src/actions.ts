@@ -184,10 +184,13 @@ export function filterCategoryProducts(
 
 export function SortProductsForCategory(
   categoryId: number,
-  label: string,
-  direction: string
+  direction: string,
+  price?: "price" | null,
+  updatedAt?: "updatedAt" | null
 ): any {
   return function (dispatch: any): Promise<any> {
+    const id = { categoryId };
+    console.log(id);
     return fetch(`${BASE_URL}/products?category_id=${categoryId}`, {
       method: "GET",
       credentials: "include",
@@ -197,16 +200,25 @@ export function SortProductsForCategory(
       .then((res) => {
         console.log(res);
 
-        if (direction === "up") {
+        if (price && direction === "up") {
           dispatch(
             setCategoryProducts(
               res.rows.sort((a: Product, b: Product) => a.price - b.price)
             )
           );
-        } else if (direction === "down") {
+        } else if (price && direction === "down") {
           dispatch(
             setCategoryProducts(
               res.rows.sort((a: Product, b: Product) => b.price - a.price)
+            )
+          );
+        } else if (updatedAt && direction === "down") {
+          dispatch(
+            setCategoryProducts(
+              res.rows.sort(
+                (a: Product, b: Product) =>
+                  +new Date(a.updatedAt) - +new Date(b.updatedAt)
+              )
             )
           );
         }

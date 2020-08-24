@@ -16,6 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ApiService from "../ApiService/ApiService";
 import CategoriesBar from "../components/CategoriesBar";
 import { Product } from "../models/product";
+import ReactImageMagnify from 'react-image-magnify';
 import "../styles/ProductDetails.scss";
 import {
   FacebookShareButton,
