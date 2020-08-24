@@ -10,25 +10,11 @@ import {
 } from "grommet";
 
 import { Hide, View } from "grommet-icons";
-import { connect } from "react-redux";
 import ApiService from "../ApiService/ApiService";
 import { toast } from "react-toastify";
 
 // import { useHistory } from "react-router-dom";
 
-// type Props = {
-//   setUserData: (
-//     i: number,
-//     n: string,
-//     l: string,
-//     u: string,
-//     e: string,
-//     bd: string,
-//     g: string,
-//     a: string,
-//     b: boolean
-//   ) => void;
-// };
 const initialState = {
   email: "",
   password: "",
@@ -105,19 +91,21 @@ const LoginForm = (): JSX.Element => {
           }
           required
         >
-          <TextInput
-            plain
-            name="password"
-            type={revealPassword ? "text" : "password"}
-            value={state.password}
-            onChange={handleChange}
-          />
-          <Button
-            icon={
-              revealPassword ? <View size="medium" /> : <Hide size="medium" />
-            }
-            onClick={() => setRevealPassword(!revealPassword)}
-          />
+          <Box direction="row">
+            <TextInput
+              plain
+              name="password"
+              type={revealPassword ? "text" : "password"}
+              value={state.password}
+              onChange={handleChange}
+            />
+            <Button
+              icon={
+                revealPassword ? <View size="medium" /> : <Hide size="medium" />
+              }
+              onClick={() => setRevealPassword(!revealPassword)}
+            />
+          </Box>
         </FormField>
         <br />
         <Text margin={{ left: "small" }} size="small" color="status-critical">
@@ -125,42 +113,11 @@ const LoginForm = (): JSX.Element => {
         </Text>
         <br></br>
         <Box direction="row" justify="between" margin={{ top: "medium" }}>
-          {/* <Button label="Cancel" /> */}
           <Button type="submit" label="Submit" primary />
         </Box>
       </Form>
     </Box>
   );
 };
-
-// const mapDispatchToProps = (dispatch: any) => {
-//   return {
-//     setUserData: (
-//       id: number,
-//       name: string,
-//       lastname: string,
-//       username: string,
-//       email: string,
-//       birthdate: string,
-//       gender: string,
-//       address: string,
-//       boolean: boolean
-//     ) =>
-//       dispatch({
-//         type: "SET_USER_DATA",
-//         payload: {
-//           id,
-//           name,
-//           lastname,
-//           username,
-//           email,
-//           birthdate,
-//           gender,
-//           address,
-//           boolean,
-//         },
-//       }),
-//   };
-// };
 
 export default LoginForm;
