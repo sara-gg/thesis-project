@@ -44,7 +44,7 @@ const AppBar = ({ isAuthenticated }: Props): JSX.Element => {
       align="center"
       justify="between"
       background="white"
-      pad={{ left: "small", right: "small", vertical: "small" }}
+      pad={{ left: "medium", right: "medium", vertical: "small" }}
       className="appbar"
     >
       <SearchBar />

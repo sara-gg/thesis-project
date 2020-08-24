@@ -4,6 +4,7 @@ import { Location } from "grommet-icons";
 import Skeleton from "react-loading-skeleton";
 import { Product } from "../models/product";
 import { useHistory } from "react-router-dom";
+import '../styles/CategoryProductCard.scss';
 
 interface Props {
   product: Product;
@@ -15,7 +16,6 @@ function CategoryProductCard({ product, readonly }: Props) {
 
   return (
     <Box
-      //height="medium"
       width="500px"
       //elevation="medium"
       margin="medium"
@@ -29,19 +29,19 @@ function CategoryProductCard({ product, readonly }: Props) {
         });
       }}
     >
-      {
+      <Box height="360px">
         <Image
           fit="cover"
           height="360px"
           fill="horizontal"
           src={`${product.images}`}
         />
-      }
+      </Box>
 
       <Box pad="2% 0 0 0" direction="column">
-        <Box direction="row" flex justify="between">
+        <Box direction="row" gap="medium" justify="between">
           <Text>
-            <span className="product-title">{product.title} </span>(
+            <span className="category-product-title">{product.title} </span>(
             {product.quantity})
           </Text>
           {<Text>{product.price} €</Text>}
