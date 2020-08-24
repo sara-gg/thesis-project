@@ -13,6 +13,9 @@ import "./App.css";
 import CategoryPage from "./components/CategoryPage";
 import Basket from "./views/Basket";
 import SuccessfulPayment from "./views/SuccessfulPayment";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ApiService from "./ApiService/ApiService";
 
 // Stripe
 import { Elements } from '@stripe/react-stripe-js';
@@ -23,24 +26,41 @@ const stripePromise = loadStripe('pk_test_51HIYqeHvILi8NO5PWxHkN04ZQxZcdDIxVUPh5
 
 
 type Props = {
-  // id: Number;
-  // name: String;
-  // lastname: String;
-  // isAuthenticated: boolean;
-  setUserData: (i: Number, n: String, l: String, b: boolean) => void;
+  setUserData: (
+    i: number,
+    n: string,
+    l: string,
+    u: string,
+    e: string,
+    bd: string,
+    g: string,
+    a: string,
+    b: boolean
+  ) => void;
 };
 
 function App({ setUserData }: Props): JSX.Element {
   const userToken = localStorage.getItem("accessToken");
   const userId: any = localStorage.getItem("userId");
-  const userName: any = localStorage.getItem("userName");
-  // const userData = JSON.parse(jsonUserData);
-  console.log("App user token", userToken);
-  console.log("App user id", userId);
-  console.log("App user name", userName);
 
-  if (userToken) {
-    setUserData(parseInt(userId), JSON.parse(userName), "", true);
+  const getAllUserData = (userId: number) => {
+    ApiService.getUserData(userId).then((res) => {
+      setUserData(
+        res.id,
+        res.name,
+        res.lastname,
+        res.username,
+        res.email,
+        res.birthdate,
+        res.gender,
+        res.address,
+        true
+      );
+    });
+  };
+
+  if (userToken && userId) {
+    getAllUserData(userId);
   }
 
   return (
@@ -76,21 +96,53 @@ function App({ setUserData }: Props): JSX.Element {
         </Switch>
         <Foot />
       </Elements>
-    </Router>
+    </Router >
   );
 }
+
+// const mapDispatchToProps = (dispatch: any) => {
+//   return {
+//     setUserData: (
+//       id: Number,
+//       name: String,
+//       lastname: String,
+//       boolean: boolean
+//     ) =>
+//       dispatch({
+//         type: "SET_USER_DATA",
+//         payload: { id, name, lastname, boolean },
+//       }),
+//   };
+// };
+
+// export default connect(null, mapDispatchToProps)(App);
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     setUserData: (
-      id: Number,
-      name: String,
-      lastname: String,
+      id: number,
+      name: string,
+      lastname: string,
+      username: string,
+      email: string,
+      birthdate: string,
+      gender: string,
+      address: string,
       boolean: boolean
     ) =>
       dispatch({
         type: "SET_USER_DATA",
-        payload: { id, name, lastname, boolean },
+        payload: {
+          id,
+          name,
+          lastname,
+          username,
+          email,
+          birthdate,
+          gender,
+          address,
+          boolean,
+        },
       }),
   };
 };

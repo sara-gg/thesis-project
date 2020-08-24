@@ -12,22 +12,28 @@ import {
 import { Hide, View } from "grommet-icons";
 import { connect } from "react-redux";
 import ApiService from "../ApiService/ApiService";
-import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+// import { useHistory } from "react-router-dom";
 
-type Props = {
-  // id: Number;
-  // name: String;
-  // lastname: String;
-  // isAuthenticated: boolean;
-  setUserData: (i: Number, n: String, l: String, b: boolean) => void;
-};
+// type Props = {
+//   setUserData: (
+//     i: number,
+//     n: string,
+//     l: string,
+//     u: string,
+//     e: string,
+//     bd: string,
+//     g: string,
+//     a: string,
+//     b: boolean
+//   ) => void;
+// };
 const initialState = {
   email: "",
   password: "",
 };
 
-const LoginForm = ({ setUserData }: Props): JSX.Element => {
-  let history = useHistory();
+const LoginForm = (): JSX.Element => {
   const [revealPassword, setRevealPassword] = useState(false);
   const [state, setState] = useState(initialState);
 
@@ -43,29 +49,27 @@ const LoginForm = ({ setUserData }: Props): JSX.Element => {
     e.preventDefault();
     const { email, password } = state;
     const user = { email, password };
-    console.log("user", user);
     const res = await ApiService.login(user);
 
-    if (res.error) {
-      alert(`${res.message}`);
+    if (!res) {
+      toast(`Sorry, incorrect email or password!`);
+    } else if (res.error) {
+      toast(`${res.message}`);
       setState(initialState);
     } else {
       const { accessToken } = res;
+      const userId = res.user.id;
+      const userData = await ApiService.getUserData(userId);
+      console.log({ userData });
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("userId", JSON.stringify(res.user.id));
-      localStorage.setItem("userName", JSON.stringify(res.user.name));
-
-      setUserData(res.user.id, res.user.name, res.user.lastname, true);
-      history.push("/usergallery");
+      window.location.replace("http://localhost:3000/home");
     }
   };
 
   return (
     <Box width="medium">
-      <Form
-        onChange={(value) => console.log("Change", value)}
-        onSubmit={handleSubmit}
-      >
+      <Form onSubmit={handleSubmit}>
         <FormField
           name="email"
           label={
@@ -127,27 +131,34 @@ const LoginForm = ({ setUserData }: Props): JSX.Element => {
   );
 };
 
-const mapStateToProps = (state: any) => {
-  return {
-    id: state.id,
-    name: state.name,
-    lastname: state.lastname,
-    isAuthenticated: state.isAuthenticated,
-  };
-};
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    setUserData: (
-      id: Number,
-      name: String,
-      lastname: String,
-      boolean: boolean
-    ) =>
-      dispatch({
-        type: "SET_USER_DATA",
-        payload: { id, name, lastname, boolean },
-      }),
-  };
-};
+// const mapDispatchToProps = (dispatch: any) => {
+//   return {
+//     setUserData: (
+//       id: number,
+//       name: string,
+//       lastname: string,
+//       username: string,
+//       email: string,
+//       birthdate: string,
+//       gender: string,
+//       address: string,
+//       boolean: boolean
+//     ) =>
+//       dispatch({
+//         type: "SET_USER_DATA",
+//         payload: {
+//           id,
+//           name,
+//           lastname,
+//           username,
+//           email,
+//           birthdate,
+//           gender,
+//           address,
+//           boolean,
+//         },
+//       }),
+//   };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default LoginForm;

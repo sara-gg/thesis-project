@@ -2,6 +2,8 @@ import React from "react";
 import { Box, Button, Heading } from "grommet";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+
 type Props = {
   isAuthenticated: boolean;
   setIsAuthenticated: (b: boolean) => void;
@@ -14,7 +16,7 @@ const Logout = ({
   let history = useHistory();
 
   const handleLogoutClick = () => {
-    alert("You are being logged out!");
+    toast("You are being logged out");
     removeToken();
     handleAuth();
   };
@@ -25,6 +27,7 @@ const Logout = ({
 
   const removeToken = () => {
     localStorage.removeItem("accessToken");
+    localStorage.removeItem("userId");
   };
 
   const handleAuth = () => {

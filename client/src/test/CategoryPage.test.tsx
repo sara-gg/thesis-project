@@ -1,6 +1,6 @@
 import React from "react";
 import { create, ReactTestRenderer, ReactTestInstance } from "react-test-renderer";
-import CategoryPage, { renderProducts } from "../components/CategoryPage"
+import CategoryPage, { renderProducts } from "../views/CategoryPage"
 import { Category } from "../models/category";
 import { Product } from "../models/product";
 import { MockProducts } from "./mocks/mock-products";

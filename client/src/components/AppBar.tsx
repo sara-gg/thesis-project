@@ -45,7 +45,6 @@ const AppBar = ({ isAuthenticated }: Props): JSX.Element => {
       justify="around"
       background="offwhite"
       pad={{ left: "medium", right: "small", vertical: "small" }}
-      elevation="medium"
       className="appbar"
     >
       <Button

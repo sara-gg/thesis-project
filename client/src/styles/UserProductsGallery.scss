@@ -1,10 +1,16 @@
 .soldProduct {
   opacity: 0.5;
-  border: 1px solid black;
   display: flex;
   align-items: center;
 }
 
 .soldProductText {
   background-color: beige;
+}
+
+.product-title {
+  text-transform: lowercase;
+  font-variant: small-caps;
+  font-size: 30px;
+  letter-spacing: 2px;
 }

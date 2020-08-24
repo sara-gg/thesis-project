@@ -29,7 +29,7 @@ interface StateProps {
   isAuthenticated: boolean;
   title: string;
   description: string;
-  images: string; // Allows just one picture for the MVP then change to -> images: string[];
+  images: File; // Allows just one picture for the MVP then change to -> images: string[];
   location?: string;
   price: number;
   quantity: number;
@@ -59,7 +59,7 @@ interface DispatchProps {
 const initialState = {
   title: "",
   description: "",
-  images: "", // Allows just one picture for the MVP then change to -> images: [] as string[],
+  images: null, // Allows just one picture for the MVP then change to -> images: [] as string[],
   location: "",
   price: 0,
   quantity: 0,
@@ -108,6 +108,7 @@ const NewProductForm = ({
     material,
     category_id,
   });
+  const [productImage, setProductImage] = useState<File>()
 
   let history = useHistory();
 
@@ -132,13 +133,9 @@ const NewProductForm = ({
   });
   const categoryOptions = Object.keys(categoryNamesToIds);
 
-  const onDrop = (files: File[], pictures: string) => {
+  const onDrop = (files: File[], pictures: string[]) => {
     // after MVP change -> files: File[], pictures: string[]
-
-    setNewProduct((prevState) => ({
-      ...prevState,
-      images: prevState.images.concat(pictures),
-    }));
+    setProductImage(files[0]);
   };
 
   const handleChange = (e: any) => {
@@ -175,21 +172,8 @@ const NewProductForm = ({
 
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    const product = {
-      title,
-      description,
-      images,
-      location,
-      price,
-      quantity,
-      height,
-      width,
-      depth,
-      material,
-      category_id,
-    };
-    console.log(product);
-    await ApiService.createNewProduct(product);
+    newProduct.category_id = category_id;
+    await ApiService.createNewProduct(newProduct, e.target, productImage);
 
     history.push("/usergallery");
   };
@@ -288,7 +272,7 @@ const NewProductForm = ({
       <Box width="medium">
         <ImageUploader
           withIcon={true}
-          // onChange={onDrop}    // comentedfor MVP
+          onChange={onDrop}    // comentedfor MVP
           buttonText={"Upload image"}
           withLabel={true}
           label={"Upload images of your product here, accepted: jpg, gif, png"}

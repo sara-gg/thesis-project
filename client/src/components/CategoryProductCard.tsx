@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Box, Button, Image, Text } from "grommet";
-import { Edit, Trash, Location } from "grommet-icons";
+import { Location } from "grommet-icons";
+import Skeleton from "react-loading-skeleton";
 import { Product } from "../models/product";
 import { useHistory } from "react-router-dom";
 
@@ -9,12 +10,14 @@ interface Props {
   readonly?: boolean;
 }
 
-function UserGalleryProductCard({ product, readonly }: Props) {
+function CategoryProductCard({ product, readonly }: Props) {
   let history = useHistory();
 
   return (
     <Box
+      //height="medium"
       width="500px"
+      //elevation="medium"
       margin="medium"
       pad="medium"
       hoverIndicator="true"
@@ -26,12 +29,14 @@ function UserGalleryProductCard({ product, readonly }: Props) {
         });
       }}
     >
-      <Image
-        fit="cover"
-        height="360px"
-        fill="horizontal"
-        src={`${product.images}`}
-      />
+      {
+        <Image
+          fit="cover"
+          height="360px"
+          fill="horizontal"
+          src={`${product.images}`}
+        />
+      }
 
       <Box pad="2% 0 0 0" direction="column">
         <Box direction="row" flex justify="between">
@@ -39,7 +44,7 @@ function UserGalleryProductCard({ product, readonly }: Props) {
             <span className="product-title">{product.title} </span>(
             {product.quantity})
           </Text>
-          <Text>{product.price} €</Text>
+          {<Text>{product.price} €</Text>}
         </Box>
         <Text size="small">
           seller <Location /> {product.location}
@@ -49,4 +54,4 @@ function UserGalleryProductCard({ product, readonly }: Props) {
   );
 }
 
-export default UserGalleryProductCard;
+export default CategoryProductCard;

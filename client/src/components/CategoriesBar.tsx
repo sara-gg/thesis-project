@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Box, Heading } from "grommet";
-
+import "../styles/CategoriesBar.scss";
 import { NavLink, Route } from "react-router-dom";
-import CategoryPage from "./CategoryPage";
 import { Category } from "../models/category";
-import ApiService from "../ApiService/ApiService";
 import { getCategories } from "../actions";
 import { connect } from "react-redux";
 
@@ -35,8 +33,17 @@ const CategoriesBar = ({ getCategories, categories }: Props) => {
     >
       {categories && categories.length > 0
         ? categories.map((category) => (
-            <NavLink exact to={`/products?categoryId=${category.id}`}>
-              <Heading level="4" style={styles} className="navbar-header">
+            <NavLink
+              exact
+              to={`/products?categoryId=${category.id}`}
+              key={category.id}
+            >
+              <Heading
+                level="4"
+                style={styles}
+                className="navbar-header"
+                key={category.id}
+              >
                 {category.name}
               </Heading>
             </NavLink>
