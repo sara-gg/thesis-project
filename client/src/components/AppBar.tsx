@@ -68,13 +68,16 @@ const AppBar = ({ isAuthenticated }: Props): JSX.Element => {
         {handleRenderRegister()}
 
         <Logout />
-
+        {/* TODO: add logic for badge to check basket */}
         <Button
-          icon={<Cart />}
           onClick={() => {
             history.push("/login");
           }}
-        />
+          className="badge"
+          data-badge="6"
+        >
+          <Cart />
+        </Button>
       </Box>
     </Box>
   );

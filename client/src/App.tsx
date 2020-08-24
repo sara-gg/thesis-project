@@ -15,6 +15,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ApiService from "./ApiService/ApiService";
 
+const TEST = process.env.TEST;
+
 type Props = {
   setUserData: (
     i: number,
