@@ -13,6 +13,7 @@ import logger from 'redux-logger';
 import { Provider } from "react-redux";
 import { createStore, compose, applyMiddleware } from "redux";
 
+
 declare global {
   interface Window {
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
@@ -20,7 +21,8 @@ declare global {
 }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducer, composeEnhancers(applyMiddleware( thunk, logger)) );
+const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk, logger)));
+
 
 //composeEnhancers(),
 // store.subscribe(() => {
@@ -30,8 +32,8 @@ const store = createStore(reducer, composeEnhancers(applyMiddleware( thunk, logg
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-    <Grommet theme={myTheme}> 
-      <App />
+      <Grommet theme={myTheme}>
+        <App />
       </Grommet>
     </Provider>
   </React.StrictMode>,

@@ -13,6 +13,14 @@ import "./App.css";
 import CategoryPage from "./components/CategoryPage";
 import Basket from "./views/Basket";
 
+// Stripe
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe("pk_test_51HIYqeHvILi8NO5PWxHkN04ZQxZcdDIxVUPh5nVfaQRMXC4UJiptUx4uWyCJHWfGfih2AhoSB4wgI2xKskMCECs800otDuHmjG");
+
+
+
 type Props = {
   // id: Number;
   // name: String;
@@ -36,32 +44,34 @@ function App({ setUserData }: Props): JSX.Element {
 
   return (
     <Router>
-      <AppBar isAuthenticated />
-      <Switch>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/register">
-          <Register />
-        </Route>
-        <Route path="/newproduct">
-          <NewProduct />
-        </Route>
-        <Route path="/usergallery">
-          <UserGallery />
-        </Route>
-        <Route path="/basket_products">
-          <Basket isAuthenticated />
-        </Route>
-        <Route path={`/products`} component={CategoryPage} />
-        <Route path="/productdetails">
-          <ProductDetails />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
-      <Foot />
+      <Elements stripe={stripePromise}>
+        <AppBar isAuthenticated />
+        <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/register">
+            <Register />
+          </Route>
+          <Route path="/newproduct">
+            <NewProduct />
+          </Route>
+          <Route path="/usergallery">
+            <UserGallery />
+          </Route>
+          <Route path="/basket_products">
+            <Basket isAuthenticated />
+          </Route>
+          <Route path={`/products`} component={CategoryPage} />
+          <Route path="/productdetails">
+            <ProductDetails />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+        <Foot />
+      </Elements>
     </Router>
   );
 }
