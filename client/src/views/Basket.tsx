@@ -10,6 +10,9 @@ import { Box, Text } from "grommet";
 import { useHistory } from "react-router-dom";
 import PaymentForm from '../components/Payment/PaymentForm';
 
+type Props = {
+  isAuthenticated: boolean;
+};
 
 const renderProducts = (productList: Product[]) => {
   let productsResult: JSX.Element[] = [];
@@ -20,10 +23,6 @@ const renderProducts = (productList: Product[]) => {
     );
   });
   return productsResult;
-};
-
-type Props = {
-  isAuthenticated: boolean;
 };
 
 function Basket({ isAuthenticated }: Props): JSX.Element {
@@ -42,6 +41,7 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
     setAmoutToPay(total);
   }, [basketProducts]);
 
+  alert(`isAuthenticated: ${isAuthenticated}`)
   if (isAuthenticated) {
     return (
       <div>
