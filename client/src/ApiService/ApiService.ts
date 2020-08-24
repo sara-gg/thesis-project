@@ -1,5 +1,3 @@
-import { Category } from "../models/category";
-import { User } from "../models/user";
 import { Product } from "../models/product";
 
 const BASE_URL = "http://localhost:3001";
@@ -18,11 +16,11 @@ const login = async (user: any) => {
 
 const createNewProduct = async (product: Product, form: any, image?: File) => {
   const token = localStorage.getItem("accessToken");
-  let formData = new FormData(form)
-  if(image) {
-    formData.append('images', image)
+  let formData = new FormData(form);
+  if (image) {
+    formData.append("images", image);
   }
-  formData.set('category_id', product.category_id);
+  formData.set("category_id", product.category_id);
   return fetch(`${BASE_URL}/product`, {
     method: "POST",
     credentials: "include",
@@ -37,7 +35,6 @@ const createNewProduct = async (product: Product, form: any, image?: File) => {
 };
 
 const getProductsForCategory = (categoryId: number): Promise<any> => {
-  console.log("id from API", categoryId)
   return fetch(`${BASE_URL}/products?category_id=${categoryId}`, {
     method: "GET",
     credentials: "include",
@@ -55,7 +52,6 @@ const getCategories = (): Promise<any[]> => {
   })
     .then((res) => res.json())
     .then((res) => {
-      console.log(res);
       return res;
     })
     .catch((err) => console.error);
@@ -69,14 +65,12 @@ const getAllProducts = (): Promise<any> => {
   })
     .then((res) => res.json())
     .then((res) => {
-      console.log(res);
       return res;
     })
     .catch((err) => console.error);
 };
 
 const getProductsForUser = (id: Number): Promise<any> => {
-  console.log(id);
   return fetch(`${BASE_URL}/products?user_id=${id}`, {
     method: "GET",
     credentials: "include",
@@ -86,16 +80,34 @@ const getProductsForUser = (id: Number): Promise<any> => {
     .catch((err) => console.error);
 };
 
-
-const getUserDetails = (id: Number): Promise<any> => {
-  console.log(id);
-  return fetch(`${BASE_URL}/products?user_id=${id}`, {
-    method: "GET",
+const deleteProduct = (id: Number): Promise<any> => {
+  const token = localStorage.getItem("accessToken");
+  return fetch(`${BASE_URL}/product/${id}`, {
+    method: "DELETE",
     credentials: "include",
     mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
   })
     .then((res) => res.json())
     .catch((err) => console.error);
+};
+
+const getUserData = (id: Number): Promise<any> => {
+  const token = localStorage.getItem("accessToken");
+  return fetch(`${BASE_URL}/user/${id}`, {
+    method: "GET",
+    credentials: "include",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((res) => res.json())
+    .catch((err) => console.error(err));
 };
 
 export default {
@@ -105,4 +117,6 @@ export default {
   getCategories,
   getAllProducts,
   getProductsForUser,
+  deleteProduct,
+  getUserData,
 };

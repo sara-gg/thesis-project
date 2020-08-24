@@ -35,7 +35,6 @@ export const renderProducts = (productList: Product[]) => {
   let productsResult: JSX.Element[] = [];
 
   productList.forEach((product, index) => {
-    console.log("productList product", product);
     productsResult.push(<CategoryProductCard product={product} key={index} />);
   });
   return productsResult;
@@ -51,7 +50,6 @@ const CategoryPage = ({
 }: any) => {
   const categoryId = qs.parse(location.search)["?categoryId"];
   const [isLoadingProducts, setIsLoadingProducts] = useState(false);
-  // const [products, setProducts] = useState([]);
 
   useEffect(() => {
     setIsLoadingProducts(true);

@@ -19,7 +19,7 @@ const initialState: RootState = {
   images: "",
   location: "",
   price: 0,
-  quantity: 1,
+  quantity: 0,
   height: 0,
   width: 0,
   depth: 0,
@@ -72,8 +72,13 @@ const reducer = (state = initialState, action: any) => {
         ...state,
         id: action.payload.id,
         name: action.payload.name,
-        isAuthenticated: action.payload,
         lastname: action.payload.lastname,
+        username: action.payload.username,
+        email: action.payload.email,
+        birthdate: action.payload.birthdate,
+        gender: action.payload.gender,
+        address: action.payload.address,
+        isAuthenticated: action.payload,
       };
 
     case "SET_CATEGORIES":
@@ -95,7 +100,7 @@ const reducer = (state = initialState, action: any) => {
         ...state,
         categoryProducts: action.payload,
       };
-      case "SET_CATEGORY_PRODUCTS_COUNT":
+    case "SET_CATEGORY_PRODUCTS_COUNT":
       return {
         ...state,
         categoryProductsCount: action.payload,
