@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box, Heading } from "grommet";
-
+import '../styles/CategoriesBar.scss';
 import { NavLink, Route } from "react-router-dom";
 import CategoryPage from "./CategoryPage";
 import { Category } from "../models/category";

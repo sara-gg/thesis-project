@@ -27,6 +27,8 @@ const initialState: RootState = {
   category_id: "",
   categories: [],
   categoryName: "",
+  categoryProducts: [],
+  categoryProductsCount: 0,
 };
 
 const reducer = (state = initialState, action: any) => {
@@ -86,6 +88,17 @@ const reducer = (state = initialState, action: any) => {
       return {
         ...state,
         categoryName: action.payload,
+      };
+
+    case "SET_CATEGORY_PRODUCTS":
+      return {
+        ...state,
+        categoryProducts: action.payload,
+      };
+      case "SET_CATEGORY_PRODUCTS_COUNT":
+      return {
+        ...state,
+        categoryProductsCount: action.payload,
       };
     default:
       return state;

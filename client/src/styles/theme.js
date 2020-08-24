@@ -6,6 +6,7 @@ const myTheme = {
       blue: "#34425E",
       grey: "#777A89",
       beige: "#E1BE86",
+      headings: "#444444",
       text: {
         light: "#444444",
       },
