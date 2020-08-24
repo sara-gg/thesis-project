@@ -10,7 +10,7 @@ import Foot from "./views/Footer";
 import ProductDetails from "./views/ProductDetails";
 import Home from "./views/Home";
 import "./App.css";
-import CategoryPage from "./components/CategoryPage";
+import CategoryPage from "./views/CategoryPage";
 
 type Props = {
   // id: Number;

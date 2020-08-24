@@ -56,10 +56,11 @@ const CategoryPage = ({
   useEffect(() => {
     setIsLoadingProducts(true);
     const timer = setTimeout(() => {
-    getProductsForCategory(categoryId).then(() => {
-      setIsLoadingProducts(false);
-    })
-  }, 2000)}, [location]);
+      getProductsForCategory(categoryId).then(() => {
+        setIsLoadingProducts(false);
+      });
+    }, 2000);
+  }, [location]);
 
   const categoryNamesToIds: { [categoryId: number]: string } = {};
 
@@ -90,7 +91,7 @@ const CategoryPage = ({
         justify="between"
         wrap
       >
-        {isLoadingProducts && <SkeletonCategoryProductCard duration={2}/>}
+        {isLoadingProducts && <SkeletonCategoryProductCard duration={2} />}
         {!isLoadingProducts && categoryProducts && categoryProducts.length > 0
           ? renderProducts(categoryProducts)
           : "no products"}
