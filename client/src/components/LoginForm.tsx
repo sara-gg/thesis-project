@@ -12,28 +12,28 @@ import {
 import { Hide, View } from "grommet-icons";
 import { connect } from "react-redux";
 import ApiService from "../ApiService/ApiService";
-import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+// import { useHistory } from "react-router-dom";
 
-type Props = {
-  setUserData: (
-    i: number,
-    n: string,
-    l: string,
-    u: string,
-    e: string,
-    bd: string,
-    g: string,
-    a: string,
-    b: boolean
-  ) => void;
-};
+// type Props = {
+//   setUserData: (
+//     i: number,
+//     n: string,
+//     l: string,
+//     u: string,
+//     e: string,
+//     bd: string,
+//     g: string,
+//     a: string,
+//     b: boolean
+//   ) => void;
+// };
 const initialState = {
   email: "",
   password: "",
 };
 
-const LoginForm = ({ setUserData }: Props): JSX.Element => {
-  let history = useHistory();
+const LoginForm = (): JSX.Element => {
   const [revealPassword, setRevealPassword] = useState(false);
   const [state, setState] = useState(initialState);
 
@@ -50,39 +50,20 @@ const LoginForm = ({ setUserData }: Props): JSX.Element => {
     const { email, password } = state;
     const user = { email, password };
     const res = await ApiService.login(user);
-    const userId = res.user.id;
-    const userData = await ApiService.getUserData(userId);
 
-    if (res.error) {
-      alert(`${res.message}`);
+    if (!res) {
+      toast(`Sorry, incorrect email or password!`);
+    } else if (res.error) {
+      toast(`${res.message}`);
       setState(initialState);
     } else {
       const { accessToken } = res;
+      const userId = res.user.id;
+      const userData = await ApiService.getUserData(userId);
+      console.log({ userData });
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("userId", JSON.stringify(res.user.id));
-      const {
-        id,
-        name,
-        lastname,
-        username,
-        email,
-        birthdate,
-        gender,
-        address,
-      } = userData;
-
-      setUserData(
-        id,
-        name,
-        lastname,
-        username,
-        email,
-        birthdate,
-        gender,
-        address,
-        true
-      );
-      history.push("/usergallery");
+      window.location.replace("http://localhost:3000/home");
     }
   };
 
@@ -150,34 +131,34 @@ const LoginForm = ({ setUserData }: Props): JSX.Element => {
   );
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    setUserData: (
-      id: number,
-      name: string,
-      lastname: string,
-      username: string,
-      email: string,
-      birthdate: string,
-      gender: string,
-      address: string,
-      boolean: boolean
-    ) =>
-      dispatch({
-        type: "SET_USER_DATA",
-        payload: {
-          id,
-          name,
-          lastname,
-          username,
-          email,
-          birthdate,
-          gender,
-          address,
-          boolean,
-        },
-      }),
-  };
-};
+// const mapDispatchToProps = (dispatch: any) => {
+//   return {
+//     setUserData: (
+//       id: number,
+//       name: string,
+//       lastname: string,
+//       username: string,
+//       email: string,
+//       birthdate: string,
+//       gender: string,
+//       address: string,
+//       boolean: boolean
+//     ) =>
+//       dispatch({
+//         type: "SET_USER_DATA",
+//         payload: {
+//           id,
+//           name,
+//           lastname,
+//           username,
+//           email,
+//           birthdate,
+//           gender,
+//           address,
+//           boolean,
+//         },
+//       }),
+//   };
+// };
 
-export default connect(null, mapDispatchToProps)(LoginForm);
+export default LoginForm;
