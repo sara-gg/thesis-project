@@ -24,7 +24,6 @@ export const renderProducts = (productList: Product[]) => {
   let productsResult: JSX.Element[] = [];
 
   productList.forEach((product, index) => {
-    console.log("productList product", product);
     productsResult.push(
       <UserGalleryProductCard product={product} key={index} />
     );

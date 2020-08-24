@@ -20,8 +20,6 @@ interface Props {
 // }
 
 function UserProductCard({ product, readonly }: Props) {
-  console.log("Product details product", product);
-
   let history = useHistory();
   const deleteNotification = () =>
     toast("Your product is being deleted forever");

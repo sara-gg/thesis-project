@@ -70,8 +70,13 @@ const reducer = (state = initialState, action: any) => {
         ...state,
         id: action.payload.id,
         name: action.payload.name,
-        isAuthenticated: action.payload,
         lastname: action.payload.lastname,
+        username: action.payload.username,
+        email: action.payload.email,
+        birthdate: action.payload.birthdate,
+        gender: action.payload.gender,
+        address: action.payload.address,
+        isAuthenticated: action.payload,
       };
 
     case "SET_CATEGORIES":

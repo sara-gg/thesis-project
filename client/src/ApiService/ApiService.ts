@@ -1,6 +1,3 @@
-import { Category } from "../models/category";
-import { User } from "../models/user";
-
 const BASE_URL = "http://localhost:3001";
 
 const login = async (user: any) => {
@@ -70,7 +67,6 @@ const getAllProducts = (): Promise<any> => {
 };
 
 const getProductsForUser = (id: Number): Promise<any> => {
-  console.log(id);
   return fetch(`${BASE_URL}/products?user_id=${id}`, {
     method: "GET",
     credentials: "include",
@@ -96,6 +92,22 @@ const deleteProduct = (id: Number): Promise<any> => {
     .catch((err) => console.error);
 };
 
+const getUserData = (id: Number): Promise<any> => {
+  const token = localStorage.getItem("accessToken");
+  console.log("accessToken in apiservice getuserdata", token);
+  return fetch(`${BASE_URL}/user/${id}`, {
+    method: "GET",
+    credentials: "include",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((res) => res.json())
+    .catch((err) => console.error(err));
+};
+
 export default {
   login,
   createNewProduct,
@@ -104,4 +116,5 @@ export default {
   getAllProducts,
   getProductsForUser,
   deleteProduct,
+  getUserData,
 };

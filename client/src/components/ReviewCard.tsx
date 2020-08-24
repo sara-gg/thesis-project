@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Text } from "grommet";
+import renderReviewRating from "../helpers/functions";
 
 function ReviewCard() {
+  const rating = Math.ceil((Math.random() * 10) / 2);
   return (
     <Box
       background="white"
@@ -11,7 +13,7 @@ function ReviewCard() {
       alignSelf="center"
       margin={{ vertical: "small", horizontal: "large" }}
     >
-      <Text>rating</Text>
+      {renderReviewRating(rating)}
       <Text size="small">This is a review description</Text>
     </Box>
   );

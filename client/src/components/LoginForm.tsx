@@ -15,11 +15,17 @@ import ApiService from "../ApiService/ApiService";
 import { useHistory } from "react-router-dom";
 
 type Props = {
-  // id: Number;
-  // name: String;
-  // lastname: String;
-  // isAuthenticated: boolean;
-  setUserData: (i: Number, n: String, l: String, b: boolean) => void;
+  setUserData: (
+    i: number,
+    n: string,
+    l: string,
+    u: string,
+    e: string,
+    bd: string,
+    g: string,
+    a: string,
+    b: boolean
+  ) => void;
 };
 const initialState = {
   email: "",
@@ -43,8 +49,9 @@ const LoginForm = ({ setUserData }: Props): JSX.Element => {
     e.preventDefault();
     const { email, password } = state;
     const user = { email, password };
-    console.log("user", user);
     const res = await ApiService.login(user);
+    const userId = res.user.id;
+    const userData = await ApiService.getUserData(userId);
 
     if (res.error) {
       alert(`${res.message}`);
@@ -53,9 +60,28 @@ const LoginForm = ({ setUserData }: Props): JSX.Element => {
       const { accessToken } = res;
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("userId", JSON.stringify(res.user.id));
-      localStorage.setItem("userName", JSON.stringify(res.user.name));
+      const {
+        id,
+        name,
+        lastname,
+        username,
+        email,
+        birthdate,
+        gender,
+        address,
+      } = userData;
 
-      setUserData(res.user.id, res.user.name, res.user.lastname, true);
+      setUserData(
+        id,
+        name,
+        lastname,
+        username,
+        email,
+        birthdate,
+        gender,
+        address,
+        true
+      );
       history.push("/usergallery");
     }
   };
@@ -127,27 +153,34 @@ const LoginForm = ({ setUserData }: Props): JSX.Element => {
   );
 };
 
-const mapStateToProps = (state: any) => {
-  return {
-    id: state.id,
-    name: state.name,
-    lastname: state.lastname,
-    isAuthenticated: state.isAuthenticated,
-  };
-};
 const mapDispatchToProps = (dispatch: any) => {
   return {
     setUserData: (
-      id: Number,
-      name: String,
-      lastname: String,
+      id: number,
+      name: string,
+      lastname: string,
+      username: string,
+      email: string,
+      birthdate: string,
+      gender: string,
+      address: string,
       boolean: boolean
     ) =>
       dispatch({
         type: "SET_USER_DATA",
-        payload: { id, name, lastname, boolean },
+        payload: {
+          id,
+          name,
+          lastname,
+          username,
+          email,
+          birthdate,
+          gender,
+          address,
+          boolean,
+        },
       }),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default connect(null, mapDispatchToProps)(LoginForm);
