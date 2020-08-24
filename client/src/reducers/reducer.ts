@@ -68,6 +68,7 @@ const reducer = (state = initialState, action: any) => {
         images: action.payload,
       };
     case "SET_USER_DATA":
+      console.log(action.payload);
       return {
         ...state,
         id: action.payload.id,
@@ -78,7 +79,7 @@ const reducer = (state = initialState, action: any) => {
         birthdate: action.payload.birthdate,
         gender: action.payload.gender,
         address: action.payload.address,
-        isAuthenticated: action.payload,
+        isAuthenticated: action.payload.boolean,
       };
 
     case "SET_CATEGORIES":

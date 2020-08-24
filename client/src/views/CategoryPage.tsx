@@ -83,12 +83,7 @@ const CategoryPage = ({
           {categoryNamesToIds[categoryId]}
         </Heading>
       </Box>
-      <Box
-        className="category-dashboard"
-        direction="row"
-        justify="between"
-        wrap
-      >
+      <Box className="category-dashboard" direction="row" justify="around" wrap>
         {isLoadingProducts && <SkeletonCategoryProductCard duration={2} />}
         {!isLoadingProducts && categoryProducts && categoryProducts.length > 0
           ? renderProducts(categoryProducts)

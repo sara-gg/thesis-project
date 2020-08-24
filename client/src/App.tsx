@@ -10,7 +10,7 @@ import Foot from "./views/Footer";
 import ProductDetails from "./views/ProductDetails";
 import Home from "./views/Home";
 import "./App.css";
-import CategoryPage from "./components/CategoryPage";
+import CategoryPage from "./views/CategoryPage";
 import Basket from "./views/Basket";
 import SuccessfulPayment from "./views/SuccessfulPayment";
 import { ToastContainer } from "react-toastify";
@@ -18,12 +18,12 @@ import "react-toastify/dist/ReactToastify.css";
 import ApiService from "./ApiService/ApiService";
 
 // Stripe
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
-const stripePromise = loadStripe('pk_test_51HIYqeHvILi8NO5PWxHkN04ZQxZcdDIxVUPh5nVfaQRMXC4UJiptUx4uWyCJHWfGfih2AhoSB4wgI2xKskMCECs800otDuHmjG');
-
-
+const stripePromise = loadStripe(
+  "pk_test_51HIYqeHvILi8NO5PWxHkN04ZQxZcdDIxVUPh5nVfaQRMXC4UJiptUx4uWyCJHWfGfih2AhoSB4wgI2xKskMCECs800otDuHmjG"
+);
 
 type Props = {
   setUserData: (
@@ -96,7 +96,7 @@ function App({ setUserData }: Props): JSX.Element {
         </Switch>
         <Foot />
       </Elements>
-    </Router >
+    </Router>
   );
 }
 
