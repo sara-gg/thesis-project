@@ -13,6 +13,8 @@ import { Hide, View } from "grommet-icons";
 import ApiService from "../ApiService/ApiService";
 import { toast } from "react-toastify";
 
+// import { useHistory } from "react-router-dom";
+
 const initialState = {
   email: "",
   password: "",
@@ -48,6 +50,7 @@ const LoginForm = (): JSX.Element => {
       console.log({ userData });
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("userId", JSON.stringify(res.user.id));
+      // we should call here the setIsAuthenticated action
       window.location.replace("http://localhost:3000/home");
     }
   };

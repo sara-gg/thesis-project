@@ -10,10 +10,20 @@ import Foot from "./views/Footer";
 import ProductDetails from "./views/ProductDetails";
 import Home from "./views/Home";
 import "./App.css";
-import CategoryPage from "./views/CategoryPage";
+import CategoryPage from "./components/CategoryPage";
+import Basket from "./views/Basket";
+import SuccessfulPayment from "./views/SuccessfulPayment";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ApiService from "./ApiService/ApiService";
+
+// Stripe
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe('pk_test_51HIYqeHvILi8NO5PWxHkN04ZQxZcdDIxVUPh5nVfaQRMXC4UJiptUx4uWyCJHWfGfih2AhoSB4wgI2xKskMCECs800otDuHmjG');
+
+
 
 type Props = {
   setUserData: (
@@ -55,31 +65,38 @@ function App({ setUserData }: Props): JSX.Element {
 
   return (
     <Router>
-      <AppBar isAuthenticated />
-      <ToastContainer />
-      <Switch>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/register">
-          <Register />
-        </Route>
-        <Route path="/newproduct">
-          <NewProduct />
-        </Route>
-        <Route path="/usergallery">
-          <UserGallery />
-        </Route>
-        <Route path={`/products`} component={CategoryPage} />
-        <Route path="/productdetails">
-          <ProductDetails />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
-      <Foot />
-    </Router>
+      <Elements stripe={stripePromise}>
+        <AppBar isAuthenticated />
+        <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/register">
+            <Register />
+          </Route>
+          <Route path="/newproduct">
+            <NewProduct />
+          </Route>
+          <Route path="/usergallery">
+            <UserGallery />
+          </Route>
+          <Route path="/basket_products">
+            <Basket isAuthenticated />
+          </Route>
+          <Route path="/successful_payment">
+            <SuccessfulPayment />
+          </Route>
+          <Route path={`/products`} component={CategoryPage} />
+          <Route path="/productdetails">
+            <ProductDetails />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+        <Foot />
+      </Elements>
+    </Router >
   );
 }
 
