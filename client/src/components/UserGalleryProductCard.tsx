@@ -10,16 +10,11 @@ interface Props {
 }
 
 function UserGalleryProductCard({ product, readonly }: Props) {
-  console.log("Product details product", product);
-  // const [editmode, setEditMode] = useState(false);
-
   let history = useHistory();
 
   return (
     <Box
-      //height="medium"
       width="500px"
-      //elevation="medium"
       margin="medium"
       pad="medium"
       hoverIndicator="true"

@@ -25,6 +25,9 @@ const Logout = ({
 
   const removeToken = () => {
     localStorage.removeItem("accessToken");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userData");
   };
 
   const handleAuth = () => {

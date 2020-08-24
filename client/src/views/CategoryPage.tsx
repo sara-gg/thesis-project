@@ -35,7 +35,6 @@ export const renderProducts = (productList: Product[]) => {
   let productsResult: JSX.Element[] = [];
 
   productList.forEach((product, index) => {
-    console.log("productList product", product);
     productsResult.push(<CategoryProductCard product={product} key={index} />);
   });
   return productsResult;
@@ -51,15 +50,15 @@ const CategoryPage = ({
 }: any) => {
   const categoryId = qs.parse(location.search)["?categoryId"];
   const [isLoadingProducts, setIsLoadingProducts] = useState(false);
-  // const [products, setProducts] = useState([]);
 
   useEffect(() => {
     setIsLoadingProducts(true);
     const timer = setTimeout(() => {
-    getProductsForCategory(categoryId).then(() => {
-      setIsLoadingProducts(false);
-    })
-  }, 2000)}, [location]);
+      getProductsForCategory(categoryId).then(() => {
+        setIsLoadingProducts(false);
+      });
+    }, 2000);
+  }, [location]);
 
   const categoryNamesToIds: { [categoryId: number]: string } = {};
 
@@ -90,7 +89,7 @@ const CategoryPage = ({
         justify="between"
         wrap
       >
-        {isLoadingProducts && <SkeletonCategoryProductCard duration={2}/>}
+        {isLoadingProducts && <SkeletonCategoryProductCard duration={2} />}
         {!isLoadingProducts && categoryProducts && categoryProducts.length > 0
           ? renderProducts(categoryProducts)
           : "no products"}

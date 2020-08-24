@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box, Button, Image, Text } from "grommet";
 import { Location } from "grommet-icons";
-import Skeleton from 'react-loading-skeleton';
+import Skeleton from "react-loading-skeleton";
 import { Product } from "../models/product";
 import { useHistory } from "react-router-dom";
 
@@ -11,8 +11,6 @@ interface Props {
 }
 
 function CategoryProductCard({ product, readonly }: Props) {
-  console.log("Product details product", product);
-
   let history = useHistory();
 
   return (
@@ -31,12 +29,14 @@ function CategoryProductCard({ product, readonly }: Props) {
         });
       }}
     >
-      {<Image
-        fit="cover"
-        height="360px"
-        fill="horizontal"
-        src={`${product.images}`}
-      />}
+      {
+        <Image
+          fit="cover"
+          height="360px"
+          fill="horizontal"
+          src={`${product.images}`}
+        />
+      }
 
       <Box pad="2% 0 0 0" direction="column">
         <Box direction="row" flex justify="between">
