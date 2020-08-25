@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import CategoriesBar from "../components/CategoriesBar";
 import "../styles/Basket.scss";
 import ApiService from "../ApiService/ApiService";
-import UserGalleryProductCard from "../components/UserGalleryProductCard";
+import BasketProductCard from "../components/BasketProductCard";
 import { Product } from "../models/product";
 import { Box, Text } from "grommet";
 import { useHistory } from "react-router-dom";
@@ -24,7 +24,7 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
 
     productList.forEach((product, index) => {
       productsResult.push(
-        <UserGalleryProductCard
+        <BasketProductCard
           product={product}
           key={index}
           basketProducts={basketProducts}

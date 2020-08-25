@@ -10,8 +10,10 @@ import "react-toastify/dist/ReactToastify.css";
 interface Props {
   product: Product;
   readonly?: boolean;
+  basketProducts: any;
+  setBasketProducts: (p: any) => void;
 }
-function UserGalleryProductCard({ product, readonly }: Props) {
+function BasketProductCard({ product, readonly, setBasketProducts, basketProducts }: Props) {
   console.log("Product details product", product);
   // const [editmode, setEditMode] = useState(false);
   let history = useHistory();
@@ -25,6 +27,11 @@ function UserGalleryProductCard({ product, readonly }: Props) {
         </Box>
       );
     })
+    .then(() => {
+      let keepItems = basketProducts.filter((p: Product) => p.id !== product.id)
+      console.log(keepItems)
+      setBasketProducts(keepItems)
+    });
   };
   return (
     <Box
@@ -61,4 +68,4 @@ function UserGalleryProductCard({ product, readonly }: Props) {
   );
 }
 
-export default UserGalleryProductCard;
+export default BasketProductCard;
