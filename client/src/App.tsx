@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import Login from "./views/Login";
@@ -13,6 +13,7 @@ import "./App.css";
 import CategoryPage from "./views/CategoryPage";
 import Basket from "./views/Basket";
 import SuccessfulPayment from "./views/SuccessfulPayment";
+import PurchaseHistory from "./views/PurchaseHistory";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ApiService from "./ApiService/ApiService";
@@ -35,6 +36,7 @@ type Props = {
     bd: string,
     g: string,
     a: string,
+    ud: string,
     b: boolean
   ) => void;
 };
@@ -54,6 +56,7 @@ function App({ setUserData }: Props): JSX.Element {
         res.birthdate,
         res.gender,
         res.address,
+        res.description,
         true
       );
     });
@@ -90,6 +93,9 @@ function App({ setUserData }: Props): JSX.Element {
           </Route>
           <Route path="/successful_payment">
             <SuccessfulPayment />
+          </Route>
+          <Route path="/purchase_history">
+            <PurchaseHistory isAuthenticated />
           </Route>
           <Route path={`/products`} component={CategoryPage} />
           <Route path="/productdetails">
@@ -133,6 +139,7 @@ const mapDispatchToProps = (dispatch: any) => {
       birthdate: string,
       gender: string,
       address: string,
+      userDescription: string,
       isAuthenticated: boolean
     ) =>
       dispatch({
@@ -146,6 +153,7 @@ const mapDispatchToProps = (dispatch: any) => {
           birthdate,
           gender,
           address,
+          userDescription,
           isAuthenticated,
         },
       }),

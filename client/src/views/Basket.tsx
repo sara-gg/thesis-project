@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import CategoriesBar from "../components/CategoriesBar";
 import "../styles/Basket.scss";
 import ApiService from "../ApiService/ApiService";
-import UserGalleryProductCard from "../components/UserGalleryProductCard";
+import BasketProductCard from "../components/BasketProductCard";
 import { Product } from "../models/product";
 import { Box, Text } from "grommet";
 import { useHistory } from "react-router-dom";
@@ -14,24 +14,30 @@ type Props = {
   isAuthenticated: boolean;
 };
 
-const renderProducts = (productList: Product[]) => {
-  let productsResult: JSX.Element[] = [];
-
-  productList.forEach((product, index) => {
-    productsResult.push(
-      <UserGalleryProductCard product={product} key={index} />
-    );
-  });
-  return productsResult;
-};
-
 function Basket({ isAuthenticated }: Props): JSX.Element {
   const [basketProducts, setBasketProducts] = useState<Product[]>([]);
   const [amoutToPay, setAmoutToPay] = useState(0);
   let history = useHistory();
 
+  const renderProducts = (productList: Product[]) => {
+    let productsResult: JSX.Element[] = [];
+
+    productList.forEach((product, index) => {
+      productsResult.push(
+        <BasketProductCard
+          product={product}
+          key={index}
+          basketProducts={basketProducts}
+          setBasketProducts={setBasketProducts}
+        />
+      );
+    });
+    return productsResult;
+  };
+
   useEffect(() => {
-    ApiService.getBasketProducts().then((res) => setBasketProducts(res)).then(() => console.log(basketProducts));
+    ApiService.getBasketProducts()
+      .then((res) => setBasketProducts(res))
   }, []);
 
   useEffect(() => {
@@ -39,8 +45,6 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
     basketProducts.forEach((product) => (total += product.price));
     setAmoutToPay(total);
   }, [basketProducts]);
-
-  console.log(`isAuthenticated: ${isAuthenticated}`);
 
   return (
     <div>
@@ -54,11 +58,14 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
             </div>
             <Text margin="large"> · · · </Text>
             <Text>Almost There!</Text>
-            <PaymentForm amoutToPay={amoutToPay} />
+            <PaymentForm
+              amoutToPay={amoutToPay}
+              basketProducts={basketProducts}
+            />
           </Box>
         ) : (
-          "No products on your basket"
-        )}
+            "No products on your basket"
+          )}
       </div>
     </div>
   );

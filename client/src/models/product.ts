@@ -12,4 +12,5 @@ export interface Product {
   depth?: number;
   width?: number;
   updatedAt?: any;
+  basket_quantity?: number;
 }
