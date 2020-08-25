@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, DropButton, Heading, Image } from "grommet";
 import { Cart } from "grommet-icons";
 import logo from "../assets/logo.png";
@@ -11,10 +11,18 @@ import "../styles/AppBar.scss";
 
 type Props = {
   isAuthenticated: boolean;
+  productsInBasket: [];
 };
 
-const AppBar = ({ isAuthenticated }: Props): JSX.Element => {
+const AppBar = ({ isAuthenticated, productsInBasket }: any): JSX.Element => {
+  let [totalBasket, setTotalBasket] = useState(0);
   let history = useHistory();
+
+  useEffect(() => {
+    let total = 0;
+    productsInBasket.forEach((product: any) => total++);
+    setTotalBasket(total);
+  }, [productsInBasket]);
 
   const handleRenderRegister = () => {
     if (!isAuthenticated) {
@@ -71,10 +79,10 @@ const AppBar = ({ isAuthenticated }: Props): JSX.Element => {
         {/* TODO: add logic for badge to check basket */}
         <Button
           onClick={() => {
-            history.push("/login");
+            history.push("/basket_products");
           }}
           className="badge"
-          data-badge="6"
+          data-badge={totalBasket}
         >
           <Cart />
         </Button>
@@ -86,6 +94,7 @@ const AppBar = ({ isAuthenticated }: Props): JSX.Element => {
 const mapStateToProps = (state: any) => {
   return {
     isAuthenticated: state.isAuthenticated,
+    productsInBasket: state.productsInBasket,
   };
 };
 

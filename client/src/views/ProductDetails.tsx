@@ -14,9 +14,11 @@ import { Cart, Location } from "grommet-icons";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ApiService from "../ApiService/ApiService";
+import { connect } from "react-redux";
+import { postBasketProducts } from "../actions";
 import CategoriesBar from "../components/CategoriesBar";
 import { Product } from "../models/product";
-import ReactImageMagnify from 'react-image-magnify';
+import ReactImageMagnify from "react-image-magnify";
 import "../styles/ProductDetails.scss";
 import {
   FacebookShareButton,
@@ -27,7 +29,17 @@ import {
   WhatsappIcon,
 } from "react-share";
 
-function ProductDetails() {
+interface StateProps {
+  id: number;
+}
+
+interface DispatchProps {
+  postBasketProducts: (product: Product) => any;
+}
+
+type Props = StateProps & DispatchProps;
+
+function ProductDetails({ postBasketProducts, id }: Props) {
   const [product, setProduct] = useState<any>(null);
   const [currenQuantity, setCurrentQuantity] = useState<number>(0);
   const url = window.location.href;
@@ -50,10 +62,12 @@ function ProductDetails() {
   }, []);
 
   const handleAddItemToBasket = () => {
-    toast.dark(
-      <Box margin="20px">
-        {product.title} has been added to your basket! 🛒 🎉
-      </Box>
+    postBasketProducts(product).then(() =>
+      toast.dark(
+        <Box margin="20px">
+          {product.title} has been added to your basket! 🛒 🎉
+        </Box>
+      )
     );
   };
 
@@ -267,4 +281,12 @@ function ProductDetails() {
   );
 }
 
-export default ProductDetails;
+const mapStateToProps = (state: StateProps) => {
+  return {
+    id: state.id,
+  };
+};
+
+export default connect(mapStateToProps, {
+  postBasketProducts,
+})(ProductDetails);

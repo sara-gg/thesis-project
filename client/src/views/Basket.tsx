@@ -31,7 +31,7 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
   let history = useHistory();
 
   useEffect(() => {
-    ApiService.getBasketProducts().then((res) => setBasketProducts(res));
+    ApiService.getBasketProducts().then((res) => setBasketProducts(res)).then(() => console.log(basketProducts));
   }, []);
 
   useEffect(() => {
@@ -46,10 +46,10 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
     <div>
       <CategoriesBar />
       <h1>Your basket</h1>
-      <div className="category-dashboard">
+      <div className="basket-dashbaord">
         {basketProducts && basketProducts.length > 0 ? (
           <Box margin="xlarge" pad="medium" align="center">
-            <div className="category-dashboard">
+            <div className="basket-container">
               {renderProducts(basketProducts)}
             </div>
             <Text margin="large"> · · · </Text>

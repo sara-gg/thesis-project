@@ -228,3 +228,34 @@ export function SortProductsForCategory(
       .catch((err) => console.error);
   };
 }
+
+export function setBasketProducts(payload: any) {
+  return {
+    type: "SET_BASKET_PRODUCTS",
+    payload,
+  };
+}
+
+
+export function postBasketProducts(product: any): any {
+  return function (dispatch: any): Promise<any> {
+    const token = localStorage.getItem("accessToken");
+    console.log(token);
+    console.log(product);
+    return fetch(`${BASE_URL}/basket_products/${product.id}`, {
+      method: "POST",
+      credentials: "include",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then(() => {
+        console.log("disapth", product);
+        dispatch(setBasketProducts(product));
+      })
+      .catch((err) => console.error(err));
+  };
+}
+
