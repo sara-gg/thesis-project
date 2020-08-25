@@ -27,6 +27,7 @@ function ProductDetails() {
   const [product, setProduct] = useState<any>(null);
   const url = window.location.href;
   console.log("url", url, "window.location", window.location);
+
   // TODO: fetch a single product with /product?id=1
   useEffect(() => {
     ApiService.getAllProducts().then((res) => {

@@ -81,8 +81,8 @@ const getBasketProducts = (): Promise<any> => {
       Authorization: `Bearer ${token}`,
     },
   })
-    .then(res => res.json())
-    .catch(err => console.error(err));
+    .then((res) => res.json())
+    .catch((err) => console.error(err));
 };
 
 const getProductsForUser = (id: Number): Promise<any> => {
@@ -140,6 +140,16 @@ const getUserData = (id: Number): Promise<any> => {
     .catch((err) => console.error(err));
 };
 
+const getPublicUserData = (id: Number): Promise<any> => {
+  return fetch(`${BASE_URL}/user_public_data/${id}`, {
+    method: "GET",
+    credentials: "include",
+    mode: "cors",
+  })
+    .then((res) => res.json())
+    .catch((err) => console.error(err));
+};
+
 export default {
   login,
   createNewProduct,
@@ -150,5 +160,6 @@ export default {
   getProductsForUser,
   deleteBasketProduct,
   deleteProduct,
-  getUserData
+  getUserData,
+  getPublicUserData,
 };

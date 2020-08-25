@@ -66,6 +66,7 @@ function App({ setUserData }: Props): JSX.Element {
   return (
     <Router>
       <Elements stripe={stripePromise}>
+        <ToastContainer />
         <AppBar isAuthenticated />
         <Switch>
           <Route path="/login">
@@ -77,9 +78,13 @@ function App({ setUserData }: Props): JSX.Element {
           <Route path="/newproduct">
             <NewProduct />
           </Route>
-          <Route path="/usergallery">
-            <UserGallery />
+          <Route path="/me">
+            <UserGallery id="me" />
           </Route>
+          <Route
+            path="/usergallery/:id"
+            render={({ match }) => <UserGallery id={match.params.id} />}
+          ></Route>
           <Route path="/basket_products">
             <Basket isAuthenticated />
           </Route>
