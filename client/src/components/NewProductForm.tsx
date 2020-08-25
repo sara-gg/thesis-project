@@ -108,7 +108,7 @@ const NewProductForm = ({
     material,
     category_id,
   });
-  const [productImage, setProductImage] = useState<File>()
+  const [productImage, setProductImage] = useState<File>();
 
   let history = useHistory();
 
@@ -272,7 +272,7 @@ const NewProductForm = ({
       <Box width="medium">
         <ImageUploader
           withIcon={true}
-          onChange={onDrop}    // comentedfor MVP
+          onChange={onDrop} // comentedfor MVP
           buttonText={"Upload image"}
           withLabel={true}
           label={"Upload images of your product here, accepted: jpg, gif, png"}

@@ -72,7 +72,8 @@ const getAllProducts = (): Promise<any> => {
 
 const getBasketProducts = (): Promise<any> => {
   const token = localStorage.getItem("accessToken");
-  return fetch(`${BASE_URL}/basket_products`, {
+  console.log(token)
+  return fetch(`${BASE_URL}/basket_products`, { 
     method: "GET",
     credentials: "include",
     mode: "cors",

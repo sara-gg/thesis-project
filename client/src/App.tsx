@@ -10,7 +10,7 @@ import Foot from "./views/Footer";
 import ProductDetails from "./views/ProductDetails";
 import Home from "./views/Home";
 import "./App.css";
-import CategoryPage from "./components/CategoryPage";
+import CategoryPage from "./views/CategoryPage";
 import Basket from "./views/Basket";
 import SuccessfulPayment from "./views/SuccessfulPayment";
 import { ToastContainer } from "react-toastify";
@@ -66,7 +66,7 @@ function App({ setUserData }: Props): JSX.Element {
   return (
     <Router>
       <Elements stripe={stripePromise}>
-        <AppBar isAuthenticated />
+        <AppBar />
         <Switch>
           <Route path="/login">
             <Login />

@@ -1,5 +1,5 @@
-import React from "react";
-import { Box, Button, Heading, Image } from "grommet";
+import React, { useEffect, useState } from "react";
+import { Box, Button, DropButton, Heading, Image } from "grommet";
 import { Cart } from "grommet-icons";
 import logo from "../assets/logo.png";
 import { useHistory } from "react-router-dom";
@@ -12,10 +12,18 @@ import "../styles/AppBar.scss";
 
 type Props = {
   isAuthenticated: boolean;
+  productsInBasket: [];
 };
 
-const AppBar = ({ isAuthenticated }: Props): JSX.Element => {
+const AppBar = ({ isAuthenticated, productsInBasket }: any): JSX.Element => {
+  let [totalBasket, setTotalBasket] = useState(0);
   let history = useHistory();
+
+  useEffect(() => {
+    let total = 0;
+    productsInBasket.forEach((product: any) => total++);
+    setTotalBasket(total);
+  }, [productsInBasket]);
 
   const handleRenderRegister = () => {
     if (!isAuthenticated) {
@@ -43,38 +51,38 @@ const AppBar = ({ isAuthenticated }: Props): JSX.Element => {
       direction="row"
       width="100%"
       align="center"
-      justify="around"
-      background="offwhite"
-      pad={{ left: "medium", right: "small", vertical: "small" }}
+      justify="between"
+      background="white"
+      pad={{ left: "medium", right: "medium", vertical: "small" }}
       className="appbar"
     >
-      <Button
-        icon={<Image src={logo} />}
-        onClick={() => {
-          history.push("/");
-        }}
-      />
       <SearchBar />
+      <NavLink exact to="/">
+        <Image src={logo} height="50px" />
+      </NavLink>
+
       <Box
         direction="row"
         align="center"
-        justify="center"
+        justify="end"
         className="right-appbar"
         gap="medium"
-        margin="large"
       >
         <UserOptionsMenu />
-
-        <Button
-          icon={<Cart />}
-          onClick={() => {
-            history.push("/login");
-          }}
-        />
 
         {handleRenderRegister()}
 
         <Logout />
+        {/* TODO: add logic for badge to check basket */}
+        <Button
+          onClick={() => {
+            history.push("/basket_products");
+          }}
+          className="badge"
+          data-badge={totalBasket}
+        >
+          <Cart />
+        </Button>
       </Box>
     </Box>
   );
@@ -83,6 +91,7 @@ const AppBar = ({ isAuthenticated }: Props): JSX.Element => {
 const mapStateToProps = (state: any) => {
   return {
     isAuthenticated: state.isAuthenticated,
+    productsInBasket: state.productsInBasket,
   };
 };
 

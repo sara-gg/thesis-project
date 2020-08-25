@@ -1,3 +1,5 @@
+import { Product } from "../models/product";
+
 export interface RootState {
   id: number;
   name: string;
@@ -26,4 +28,5 @@ export interface RootState {
   category_id: string;
   categoryProducts: [];
   categoryProductsCount: number;
+  productsInBasket: Array<any>;
 }

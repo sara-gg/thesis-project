@@ -40,7 +40,7 @@ const LeftCard = () => {
         </Text>
         <Button
           onClick={() => {
-            history.push("/categories/2");
+            history.push("/products?categoryId=2");
           }}
           label="Shop living room items"
           primary
@@ -51,9 +51,13 @@ const LeftCard = () => {
           that combine form and function, and are a pleasure to use every day,
           together with storage designs you’ll be happy to display.{" "}
         </Text>
-        <Button onClick={() => {
-            history.push("/categories/1");
-          }} label="Shop bedroom items" primary></Button>
+        <Button
+          onClick={() => {
+            history.push("/products?categoryId=3");
+          }}
+          label="Shop bedroom items"
+          primary
+        ></Button>
       </Box>
     </Grid>
   );

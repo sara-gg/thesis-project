@@ -29,6 +29,7 @@ const initialState: RootState = {
   categoryName: "",
   categoryProducts: [],
   categoryProductsCount: 0,
+  productsInBasket: [],
 };
 
 const reducer = (state = initialState, action: any) => {
@@ -68,6 +69,7 @@ const reducer = (state = initialState, action: any) => {
         images: action.payload,
       };
     case "SET_USER_DATA":
+      console.log(action.payload);
       return {
         ...state,
         id: action.payload.id,
@@ -104,6 +106,12 @@ const reducer = (state = initialState, action: any) => {
       return {
         ...state,
         categoryProductsCount: action.payload,
+      };
+
+    case "SET_BASKET_PRODUCTS":
+      return {
+        ...state,
+        productsInBasket: [...state.productsInBasket, action.payload],
       };
     default:
       return state;
