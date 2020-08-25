@@ -54,7 +54,7 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
             </div>
             <Text margin="large"> · · · </Text>
             <Text>Almost There!</Text>
-            <PaymentForm amoutToPay={amoutToPay} />
+            <PaymentForm amoutToPay={amoutToPay} basketProducts={basketProducts}/>
           </Box>
         ) : (
           "No products on your basket"

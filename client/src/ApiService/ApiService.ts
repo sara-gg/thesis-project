@@ -72,8 +72,8 @@ const getAllProducts = (): Promise<any> => {
 
 const getBasketProducts = (): Promise<any> => {
   const token = localStorage.getItem("accessToken");
-  console.log(token)
-  return fetch(`${BASE_URL}/basket_products`, { 
+  console.log(token);
+  return fetch(`${BASE_URL}/basket_products`, {
     method: "GET",
     credentials: "include",
     mode: "cors",
@@ -82,8 +82,8 @@ const getBasketProducts = (): Promise<any> => {
       Authorization: `Bearer ${token}`,
     },
   })
-    .then(res => res.json())
-    .catch(err => console.error(err));
+    .then((res) => res.json())
+    .catch((err) => console.error(err));
 };
 
 const getProductsForUser = (id: Number): Promise<any> => {
@@ -126,6 +126,22 @@ const deleteBasketProduct = (id: Number): Promise<any> => {
     .catch((err) => console.error);
 };
 
+const updateBasketProduct = (product: Product): Promise<any> => {
+  const token = localStorage.getItem("accessToken");
+  return fetch(`${BASE_URL}/basket_products/${product.id}`, {
+    method: "PUT",
+    credentials: "include",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(product.quantity), // TODO: need to change the logic to send new quantity instead!
+  })
+    .then((res) => res.json())
+    .catch((err) => console.error);
+};
+
 const getUserData = (id: Number): Promise<any> => {
   const token = localStorage.getItem("accessToken");
   return fetch(`${BASE_URL}/user/${id}`, {
@@ -151,5 +167,5 @@ export default {
   getProductsForUser,
   deleteBasketProduct,
   deleteProduct,
-  getUserData
+  getUserData,
 };
