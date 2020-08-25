@@ -13,6 +13,7 @@ function SuccessfulPayment() {
   // const removeBasketProducts = () => {
   //   basketProducts.forEach(product => {
   //     ApiService.deleteBasketProduct(product.id);
+  //     ApiService.addToPurchaseHistory(product);
   //   });
   // }
 

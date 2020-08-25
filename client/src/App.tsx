@@ -13,6 +13,7 @@ import "./App.css";
 import CategoryPage from "./components/CategoryPage";
 import Basket from "./views/Basket";
 import SuccessfulPayment from "./views/SuccessfulPayment";
+import PurchaseHistory from "./views/PurchaseHistory";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ApiService from "./ApiService/ApiService";
@@ -85,6 +86,9 @@ function App({ setUserData }: Props): JSX.Element {
           </Route>
           <Route path="/successful_payment">
             <SuccessfulPayment />
+          </Route>
+          <Route path="/purchase_history">
+            <PurchaseHistory isAuthenticated />
           </Route>
           <Route path={`/products`} component={CategoryPage} />
           <Route path="/productdetails">

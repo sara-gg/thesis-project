@@ -41,33 +41,32 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
     setAmoutToPay(total);
   }, [basketProducts]);
 
-  alert(`isAuthenticated: ${isAuthenticated}`)
-  if (isAuthenticated) {
-    return (
-      <div>
-        <CategoriesBar />
-        <h1>Your basket</h1>
-        <div className="category-dashboard">
-          {
-            basketProducts && basketProducts.length > 0
-              ? (
-                <Box margin="xlarge" pad="medium" align="center">
-                  <div className="category-dashboard">
-                    {renderProducts(basketProducts)}
-                  </div>
-                  <Text margin="large"> · · · </Text>
-                  <Text>Almost There!</Text>
-                  <PaymentForm amoutToPay={amoutToPay} />
-                </Box>
-              )
-              : "No products on your basket"
-          }
-        </div>
+  // if (isAuthenticated) {
+  return (
+    <div>
+      <CategoriesBar />
+      <h1>Your basket</h1>
+      <div className="category-dashboard">
+        {
+          basketProducts && basketProducts.length > 0
+            ? (
+              <Box margin="xlarge" pad="medium" align="center">
+                <div className="category-dashboard">
+                  {renderProducts(basketProducts)}
+                </div>
+                <Text margin="large"> · · · </Text>
+                <Text>Almost There!</Text>
+                <PaymentForm amoutToPay={amoutToPay} />
+              </Box>
+            )
+            : "No products on your basket"
+        }
       </div>
-    );
-  } else {
-    return <Redirect to={{ pathname: "/login" }} />;
-  }
+    </div>
+  );
+  // } else {
+  //   return <Redirect to={{ pathname: "/login" }} />;
+  // }
 }
 
 const mapStateToProps = (state: any) => {
