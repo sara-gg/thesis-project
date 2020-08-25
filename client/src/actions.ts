@@ -11,9 +11,6 @@ export function setRegisterDetails({
 }: {
   [name: string]: string;
 }) {
-  console.log("name", name);
-  console.log("value", value);
-  console.log("option", option);
   return {
     type: "SET_REGISTER_DETAILS",
     payload: value ? { name, value } : { name, option },
@@ -42,7 +39,7 @@ export function submitRegisterDetails(user: User): any {
           console.log("res.error", res.error);
           throw new Error(`${res.message}`);
         } else {
-          console.log("SII");
+          
           const accessToken = res.token;
           dispatch(setIsAuthenticated(true));
           return accessToken;
@@ -73,9 +70,9 @@ export function setProductImages(payload: string) {
 
 export function submitNewProduct(product: NewProduct): any {
   return function (dispatch: any): Promise<any> {
-    console.log("product", product);
+    
     const token = localStorage.getItem("accessToken");
-    console.log("token", token);
+    
     return fetch(`${BASE_URL}/product`, {
       method: "POST",
       credentials: "include",
@@ -114,7 +111,7 @@ export function getCategories(): any {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
+        
         dispatch(setCategories(res));
       })
       .catch((err) => console.error);
@@ -144,7 +141,7 @@ export function getProductsForCategory(categoryId: number): any {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
+       
         dispatch(setCategoryProducts(res.rows));
         dispatch(setCategoryProductsCount(res.count));
       })
@@ -166,7 +163,7 @@ export function filterCategoryProducts(
     } else if (location) {
       ApiUrl += `&location=${location}`;
     }
-    console.log(ApiUrl);
+   
     return fetch(ApiUrl, {
       method: "GET",
       credentials: "include",
@@ -174,7 +171,7 @@ export function filterCategoryProducts(
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
+   
         dispatch(setCategoryProducts(res.rows));
         dispatch(setCategoryProductsCount(res.count));
       })
@@ -190,7 +187,7 @@ export function SortProductsForCategory(
 ): any {
   return function (dispatch: any): Promise<any> {
     const id = { categoryId };
-    console.log(id);
+
     return fetch(`${BASE_URL}/products?category_id=${categoryId}`, {
       method: "GET",
       credentials: "include",
@@ -198,7 +195,7 @@ export function SortProductsForCategory(
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
+
 
         if (price && direction === "up") {
           dispatch(
@@ -240,9 +237,7 @@ export function postBasketProducts(product: any): any {
   return function (dispatch: any): Promise<any> {
     const token = localStorage.getItem("accessToken");
     const basket_quantity = { basket_quantity: product.basket_quantity };
-    console.log(token);
-    console.log(basket_quantity);
-    console.log(JSON.stringify(basket_quantity));
+   
     return fetch(`${BASE_URL}/basket_products/${product.id}`, {
       method: "POST",
       credentials: "include",
@@ -254,7 +249,7 @@ export function postBasketProducts(product: any): any {
       body: JSON.stringify(basket_quantity),
     })
       .then(() => {
-        console.log("disapth", product);
+        
         dispatch(setBasketProducts(product));
       })
       .catch((err) => console.error(err));

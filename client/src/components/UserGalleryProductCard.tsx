@@ -12,12 +12,12 @@ interface Props {
   readonly?: boolean;
 }
 function UserGalleryProductCard({ product, readonly }: Props) {
-  console.log("Product details product", product);
+  
   // const [editmode, setEditMode] = useState(false);
   let history = useHistory();
 
   const handleDelete = () => {
-    console.log("delete");
+   
     ApiService.deleteProductFromBasket(product).then(() => {
       toast(
         <Box margin="20px">

@@ -55,7 +55,7 @@ function FilterProducts({
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    console.log(categoryId, materials[0], location);
+
     filterCategoryProducts(categoryId, materials[0], location);
   };
   const handleReset = (event: any) => {

@@ -38,7 +38,6 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
   useEffect(() => {
     ApiService.getBasketProducts()
       .then((res) => setBasketProducts(res))
-      .then(() => console.log(basketProducts, "what's the quantity here"));
   }, []);
 
   useEffect(() => {
@@ -46,8 +45,6 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
     basketProducts.forEach((product) => (total += product.price));
     setAmoutToPay(total);
   }, [basketProducts]);
-
-  console.log(`isAuthenticated: ${isAuthenticated}`);
 
   return (
     <div>

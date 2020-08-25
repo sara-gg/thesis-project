@@ -14,12 +14,12 @@ interface Props {
   setBasketProducts: (p: any) => void;
 }
 function BasketProductCard({ product, readonly, setBasketProducts, basketProducts }: Props) {
-  console.log("Product details product", product);
+
   // const [editmode, setEditMode] = useState(false);
   let history = useHistory();
 
   const handleDelete = () => {
-    console.log("delete");
+
     ApiService.deleteProductFromBasket(product).then(() => {
       toast(
         <Box margin="20px">
@@ -29,7 +29,6 @@ function BasketProductCard({ product, readonly, setBasketProducts, basketProduct
     })
     .then(() => {
       let keepItems = basketProducts.filter((p: Product) => p.id !== product.id)
-      console.log(keepItems)
       setBasketProducts(keepItems)
     });
   };
