@@ -72,6 +72,7 @@ const getAllProducts = (): Promise<any> => {
 
 const getBasketProducts = (): Promise<any> => {
   const token = localStorage.getItem("accessToken");
+  console.log(token)
   return fetch(`${BASE_URL}/basket_products`, {
     method: "GET",
     credentials: "include",
@@ -81,8 +82,8 @@ const getBasketProducts = (): Promise<any> => {
       Authorization: `Bearer ${token}`,
     },
   })
-    .then(res => res.json())
-    .catch(err => console.error(err));
+    .then((res) => res.json())
+    .catch((err) => console.error(err));
 };
 
 const getProductsForUser = (id: Number): Promise<any> => {
@@ -166,6 +167,14 @@ const getAllPurchasedProducts = (): Promise<any> => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
+  });
+}
+
+const getPublicUserData = (id: Number): Promise<any> => {
+  return fetch(`${BASE_URL}/user_public_data/${id}`, {
+    method: "GET",
+    credentials: "include",
+    mode: "cors",
   })
     .then((res) => res.json())
     .catch((err) => console.error(err));
@@ -183,5 +192,6 @@ export default {
   deleteProduct,
   getUserData,
   addToPurchaseHistory,
-  getAllPurchasedProducts
+  getAllPurchasedProducts,
+  getPublicUserData
 };

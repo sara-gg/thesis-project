@@ -1,17 +1,37 @@
 .container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  background-color: white;
+  justify-content: flex-start;
   padding: 5px 10px;
-  width: 40%;
-  border: 2px solid slategrey;
-  border-radius: 50px;
+  width: 25%;
+  position: relative;
+  background: #F3EDE6;
+  border: 0;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 15px;
+  font-size: .9375rem;
+  letter-spacing: .5px;
+  letter-spacing: .03125rem;
+  line-height: 24px;
+  line-height: 1.5rem;
+  color: #504f4f;
 }
 
 input {
   border: none;
   width: 100%;
+  background: #f2f0f0;
+  border: 0;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 15px;
+  font-size: .9375rem;
+  letter-spacing: .5px;
+  letter-spacing: .03125rem;
+  line-height: 24px;
+  line-height: 1.5rem;
+  color: #504f4f;
 }
 
 input:focus {

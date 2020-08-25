@@ -10,4 +10,5 @@ export interface Product {
   height?: number;
   depth?: number;
   width?: number;
+  updatedAt?: any;
 }

@@ -11,10 +11,12 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 
 interface Props {
   product: Product;
+  visitorId: number;
+  ownerId: number;
   readonly?: boolean;
 }
 
-function UserProductCard({ product, readonly }: Props) {
+function UserProductCard({ product, visitorId, ownerId }: Props) {
   let history = useHistory();
   const deleteNotification = () =>
     toast("Your product is being deleted forever");
@@ -52,6 +54,29 @@ function UserProductCard({ product, readonly }: Props) {
     return ApiService.deleteProduct(id);
   };
 
+  const renderEditDeleteOptions = () => {
+    if (visitorId === ownerId) {
+      return (
+        <Box direction="row" alignSelf="center" gap="medium">
+          <Button
+            icon={<Edit color="brand" />}
+            onClick={(e) => {
+              handleEdit(e);
+            }}
+          />
+          <Button
+            icon={<Trash color="darkred" />}
+            onClick={(e) => {
+              handleDelete(e);
+            }}
+          />
+        </Box>
+      );
+    } else {
+      return;
+    }
+  };
+
   return (
     <Box
       height="auto"
@@ -78,20 +103,7 @@ function UserProductCard({ product, readonly }: Props) {
         <Text size="small">quantity: {product.quantity}</Text>
         <Text size="small">{product.price} €</Text>
       </Box>
-      <Box direction="row" alignSelf="center" gap="medium">
-        <Button
-          icon={<Edit color="brand" />}
-          onClick={(e) => {
-            handleEdit(e);
-          }}
-        />
-        <Button
-          icon={<Trash color="darkred" />}
-          onClick={(e) => {
-            handleDelete(e);
-          }}
-        />
-      </Box>
+      {renderEditDeleteOptions()}
     </Box>
   );
 }

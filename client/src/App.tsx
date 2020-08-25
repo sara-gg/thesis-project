@@ -10,7 +10,7 @@ import Foot from "./views/Footer";
 import ProductDetails from "./views/ProductDetails";
 import Home from "./views/Home";
 import "./App.css";
-import CategoryPage from "./components/CategoryPage";
+import CategoryPage from "./views/CategoryPage";
 import Basket from "./views/Basket";
 import SuccessfulPayment from "./views/SuccessfulPayment";
 import PurchaseHistory from "./views/PurchaseHistory";
@@ -19,12 +19,12 @@ import "react-toastify/dist/ReactToastify.css";
 import ApiService from "./ApiService/ApiService";
 
 // Stripe
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
-const stripePromise = loadStripe('pk_test_51HIYqeHvILi8NO5PWxHkN04ZQxZcdDIxVUPh5nVfaQRMXC4UJiptUx4uWyCJHWfGfih2AhoSB4wgI2xKskMCECs800otDuHmjG');
-
-
+const stripePromise = loadStripe(
+  "pk_test_51HIYqeHvILi8NO5PWxHkN04ZQxZcdDIxVUPh5nVfaQRMXC4UJiptUx4uWyCJHWfGfih2AhoSB4wgI2xKskMCECs800otDuHmjG"
+);
 
 type Props = {
   setUserData: (
@@ -67,7 +67,8 @@ function App({ setUserData }: Props): JSX.Element {
   return (
     <Router>
       <Elements stripe={stripePromise}>
-        <AppBar isAuthenticated />
+        <ToastContainer />
+        <AppBar />
         <Switch>
           <Route path="/login">
             <Login />
@@ -78,9 +79,13 @@ function App({ setUserData }: Props): JSX.Element {
           <Route path="/newproduct">
             <NewProduct />
           </Route>
-          <Route path="/usergallery">
-            <UserGallery />
+          <Route path="/me">
+            <UserGallery id="me" />
           </Route>
+          <Route
+            path="/usergallery/:id"
+            render={({ match }) => <UserGallery id={match.params.id} />}
+          ></Route>
           <Route path="/basket_products">
             <Basket isAuthenticated />
           </Route>
@@ -100,7 +105,7 @@ function App({ setUserData }: Props): JSX.Element {
         </Switch>
         <Foot />
       </Elements>
-    </Router >
+    </Router>
   );
 }
 
@@ -132,7 +137,7 @@ const mapDispatchToProps = (dispatch: any) => {
       birthdate: string,
       gender: string,
       address: string,
-      boolean: boolean
+      isAuthenticated: boolean
     ) =>
       dispatch({
         type: "SET_USER_DATA",
@@ -145,7 +150,7 @@ const mapDispatchToProps = (dispatch: any) => {
           birthdate,
           gender,
           address,
-          boolean,
+          isAuthenticated,
         },
       }),
   };

@@ -8,7 +8,7 @@ import UserGalleryProductCard from "../components/UserGalleryProductCard";
 import { Product } from "../models/product";
 import { Box, Text } from "grommet";
 import { useHistory } from "react-router-dom";
-import PaymentForm from '../components/Payment/PaymentForm';
+import PaymentForm from "../components/Payment/PaymentForm";
 
 type Props = {
   isAuthenticated: boolean;
@@ -31,42 +31,37 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
   let history = useHistory();
 
   useEffect(() => {
-    ApiService.getBasketProducts()
-      .then(res => setBasketProducts(res));
+    ApiService.getBasketProducts().then((res) => setBasketProducts(res)).then(() => console.log(basketProducts));
   }, []);
 
   useEffect(() => {
     let total = 0;
-    basketProducts.forEach(product => total += product.price);
+    basketProducts.forEach((product) => (total += product.price));
     setAmoutToPay(total);
   }, [basketProducts]);
 
-  // if (isAuthenticated) {
+  console.log(`isAuthenticated: ${isAuthenticated}`);
+
   return (
     <div>
       <CategoriesBar />
       <h1>Your basket</h1>
-      <div className="category-dashboard">
-        {
-          basketProducts && basketProducts.length > 0
-            ? (
-              <Box margin="xlarge" pad="medium" align="center">
-                <div className="category-dashboard">
-                  {renderProducts(basketProducts)}
-                </div>
-                <Text margin="large"> · · · </Text>
-                <Text>Almost There!</Text>
-                <PaymentForm amoutToPay={amoutToPay} />
-              </Box>
-            )
-            : "No products on your basket"
-        }
+      <div className="basket-dashbaord">
+        {basketProducts && basketProducts.length > 0 ? (
+          <Box margin="xlarge" pad="medium" align="center">
+            <div className="basket-container">
+              {renderProducts(basketProducts)}
+            </div>
+            <Text margin="large"> · · · </Text>
+            <Text>Almost There!</Text>
+            <PaymentForm amoutToPay={amoutToPay} />
+          </Box>
+        ) : (
+            "No products on your basket"
+          )}
       </div>
     </div>
   );
-  // } else {
-  //   return <Redirect to={{ pathname: "/login" }} />;
-  // }
 }
 
 const mapStateToProps = (state: any) => {

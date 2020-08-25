@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import "../styles/homeCard.scss";
 
 const RightCard = () => {
-  // let history = useHistory();
+  let history = useHistory();
 
   return (
     <Grid
@@ -33,7 +33,9 @@ const RightCard = () => {
           and wardrobes for a serene sanctuary that meets all of your needs.
         </Text>
         <Button
-          onClick={() => {}}
+          onClick={() => {
+            history.push("/products?categoryId=1");
+          }}
           label="Shop our bedroom collection"
           primary
         ></Button>
@@ -46,7 +48,9 @@ const RightCard = () => {
           and ambient lighting, and storage for a streamlined space.
         </Text>
         <Button
-          onClick={() => {}}
+          onClick={() => {
+            history.push("/products?categoryId=4");
+          }}
           label="Find the bathroom accessories for you"
           primary
         ></Button>

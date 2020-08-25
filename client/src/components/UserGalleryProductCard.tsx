@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import { Box, Button, Image, Text } from "grommet";
-import { Edit, Trash, Location } from "grommet-icons";
+import { Edit, Trash } from "grommet-icons";
 import { Product } from "../models/product";
 import { useHistory } from "react-router-dom";
-
 interface Props {
   product: Product;
   readonly?: boolean;
 }
-
 function UserGalleryProductCard({ product, readonly }: Props) {
+  console.log("Product details product", product);
+  // const [editmode, setEditMode] = useState(false);
   let history = useHistory();
-
   return (
     <Box
-      width="500px"
+      height="medium"
+      width="small"
+      elevation="medium"
       margin="medium"
       pad="medium"
       hoverIndicator="true"
@@ -26,25 +27,24 @@ function UserGalleryProductCard({ product, readonly }: Props) {
         });
       }}
     >
-      <Image
-        fit="cover"
-        height="360px"
-        fill="horizontal"
-        src={`${product.images}`}
-      />
-
-      <Box pad="2% 0 0 0" direction="column">
-        <Box direction="row" flex justify="between">
-          <Text>
-            <span className="product-title">{product.title} </span>(
-            {product.quantity})
-          </Text>
-          <Text>{product.price} €</Text>
-        </Box>
-        <Text size="small">
-          seller <Location /> {product.location}
-        </Text>
+      <Box height="small" width="small">
+        <Image fit="cover" src={`${product.images}`} />
       </Box>
+      <Box direction="column" gap="small">
+        <Text>{product.title}</Text>
+        <Text size="small">{product.quantity}</Text>
+        <Text size="small">{product.location}</Text>
+        <Text size="small">{product.price} €</Text>
+      </Box>
+     
+        <Box direction="row" gap="medium">
+          <Button
+            icon={<Trash />}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          />
+        </Box>
     </Box>
   );
 }

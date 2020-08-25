@@ -29,6 +29,7 @@ const initialState: RootState = {
   categoryName: "",
   categoryProducts: [],
   categoryProductsCount: 0,
+  productsInBasket: [],
 };
 
 const reducer = (state = initialState, action: any) => {
@@ -68,6 +69,7 @@ const reducer = (state = initialState, action: any) => {
         images: action.payload,
       };
     case "SET_USER_DATA":
+      console.log(action.payload);
       return {
         ...state,
         id: action.payload.id,
@@ -78,7 +80,7 @@ const reducer = (state = initialState, action: any) => {
         birthdate: action.payload.birthdate,
         gender: action.payload.gender,
         address: action.payload.address,
-        isAuthenticated: action.payload.boolean,
+        isAuthenticated: action.payload.isAuthenticated,
       };
 
     case "SET_CATEGORIES":
@@ -104,6 +106,12 @@ const reducer = (state = initialState, action: any) => {
       return {
         ...state,
         categoryProductsCount: action.payload,
+      };
+
+    case "SET_BASKET_PRODUCTS":
+      return {
+        ...state,
+        productsInBasket: [...state.productsInBasket, action.payload],
       };
     default:
       return state;

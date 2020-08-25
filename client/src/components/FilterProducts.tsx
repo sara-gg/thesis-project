@@ -84,7 +84,13 @@ function FilterProducts({
       basis="full"
       className="filter-container"
     >
-      <Box direction="row" justify="between" align="center">
+      <Box
+        direction="row"
+        justify="between"
+        align="center"
+        width="100vw"
+        margin="10px"
+      >
         <Heading level={3} margin="small">
           Filter
         </Heading>
@@ -114,7 +120,7 @@ function FilterProducts({
           value={location}
           onChange={handleLocation}
         />
-        <Box direction="column" justify="between" margin={{ top: "medium" }}>
+        <Box direction="column" justify="end" margin={{ top: "medium" }}>
           <Button label="Clear all" onClick={handleReset} />
           <Button type="submit" label="Publish" primary />
         </Box>

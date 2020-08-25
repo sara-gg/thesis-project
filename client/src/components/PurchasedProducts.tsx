@@ -18,7 +18,7 @@ const renderProducts = (productList: Product[]) => {
 };
 
 function PurchasedProducts(): JSX.Element {
-  const [purchasedProducts, setPurchasedProducts] = useState([]);
+  const [purchasedProducts, setPurchasedProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     ApiService.getAllPurchasedProducts()

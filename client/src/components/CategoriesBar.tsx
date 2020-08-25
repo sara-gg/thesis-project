@@ -27,9 +27,10 @@ const CategoriesBar = ({ getCategories, categories }: Props) => {
       align="center"
       justify="around"
       background="white"
-      pad={{ left: "medium", right: "medium", vertical: "small" }}
+      pad={{ left: "medium", right: "medium" }}
       elevation="medium"
       style={{ zIndex: 1 }}
+      className="categories-bar-container"
     >
       {categories && categories.length > 0
         ? categories.map((category) => (
