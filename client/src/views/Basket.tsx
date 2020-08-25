@@ -67,8 +67,8 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
             />
           </Box>
         ) : (
-          "No products on your basket"
-        )}
+            "No products on your basket"
+          )}
       </div>
     </div>
   );

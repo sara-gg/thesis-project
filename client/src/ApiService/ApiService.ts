@@ -150,8 +150,6 @@ const updateQuantityProduct = (product: Product): Promise<any> => {
   }
 };
 
-
-
 const deleteProductFromBasket = (product: Product): Promise<any> => {
   const token = localStorage.getItem("accessToken");
 
@@ -171,6 +169,37 @@ const deleteProductFromBasket = (product: Product): Promise<any> => {
 const getUserData = (id: Number): Promise<any> => {
   const token = localStorage.getItem("accessToken");
   return fetch(`${BASE_URL}/user/${id}`, {
+    method: "GET",
+    credentials: "include",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((res) => res.json())
+    .catch((err) => console.error(err));
+};
+
+const addToPurchaseHistory = (product: Product): Promise<any> => {
+  const token = localStorage.getItem("accessToken");
+  return fetch(`${BASE_URL}/purchase_history`, {
+    method: "POST",
+    credentials: "include",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(product),
+  })
+    .then((res) => res.json())
+    .catch((err) => console.error(err));
+};
+
+const getAllPurchasedProducts = (): Promise<any> => {
+  const token = localStorage.getItem("accessToken");
+  return fetch(`${BASE_URL}/purchase_history`, {
     method: "GET",
     credentials: "include",
     mode: "cors",
@@ -207,4 +236,6 @@ export default {
   getPublicUserData,
   updateQuantityProduct,
   deleteProductFromBasket,
+  addToPurchaseHistory,
+  getAllPurchasedProducts,
 };
