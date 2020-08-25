@@ -4,13 +4,10 @@ import {
   AccordionPanel,
   Anchor,
   Box,
-  Button,
-  Carousel,
   Image,
   Paragraph,
   Text,
 } from "grommet";
-import { Cart, Location } from "grommet-icons";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ApiService from "../ApiService/ApiService";
@@ -18,7 +15,6 @@ import { connect } from "react-redux";
 import { postBasketProducts } from "../actions";
 import CategoriesBar from "../components/CategoriesBar";
 import { Product } from "../models/product";
-import ReactImageMagnify from "react-image-magnify";
 import "../styles/ProductDetails.scss";
 import {
   FacebookShareButton,
