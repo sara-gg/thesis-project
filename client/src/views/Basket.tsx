@@ -110,7 +110,7 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
 
             <Text margin="small"> · · · </Text>
             <Heading
-              level="3"
+              level="2"
               color="text"
               alignSelf="center"
               margin={{ top: "medium" }}
