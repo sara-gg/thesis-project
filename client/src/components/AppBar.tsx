@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import Logout from "../components/Logout";
 import SearchBar from "../components/SearchBar/SearchBar";
+import ApiService from "../ApiService/ApiService";
 import UserOptionsMenu from "../components/UserOptionsMenu";
 import { connect } from "react-redux";
 import "../styles/AppBar.scss";
@@ -21,8 +22,11 @@ const AppBar = ({ isAuthenticated, productsInBasket }: any): JSX.Element => {
 
   useEffect(() => {
     let total = 0;
-    productsInBasket.forEach((product: any) => total++);
-    setTotalBasket(total);
+    ApiService.getBasketProducts().then((products) =>
+      products
+        .forEach((product: any) => total++)
+        
+    ).then(() => setTotalBasket(total))
   }, [productsInBasket]);
 
   const handleRenderRegister = () => {
@@ -42,6 +46,32 @@ const AppBar = ({ isAuthenticated, productsInBasket }: any): JSX.Element => {
       );
     } else {
       return;
+    }
+  };
+
+  const renderCart = () => {
+    if (totalBasket > 0) {
+      return (
+        <Button
+          onClick={() => {
+            history.push("/basket_products");
+          }}
+          className="badge"
+          data-badge={totalBasket}
+        >
+          <Cart />
+        </Button>
+      );
+    } else {
+      return (
+        <Button
+          onClick={() => {
+            history.push("/basket_products");
+          }}
+        >
+          <Cart />
+        </Button>
+      );
     }
   };
 
@@ -74,15 +104,7 @@ const AppBar = ({ isAuthenticated, productsInBasket }: any): JSX.Element => {
 
         <Logout />
         {/* TODO: add logic for badge to check basket */}
-        <Button
-          onClick={() => {
-            history.push("/basket_products");
-          }}
-          className="badge"
-          data-badge={totalBasket}
-        >
-          <Cart />
-        </Button>
+        {renderCart()}
       </Box>
     </Box>
   );
