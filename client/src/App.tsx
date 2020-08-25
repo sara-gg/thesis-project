@@ -17,6 +17,7 @@ import PurchaseHistory from "./views/PurchaseHistory";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ApiService from "./ApiService/ApiService";
+import SaleHistory from "./views/SaleHistory";
 
 // Stripe
 import { Elements } from "@stripe/react-stripe-js";
@@ -94,6 +95,9 @@ function App({ setUserData }: Props): JSX.Element {
           </Route>
           <Route path="/purchase_history">
             <PurchaseHistory isAuthenticated />
+          </Route>
+          <Route path="/sales_history">
+            <SaleHistory isAuthenticated />
           </Route>
           <Route path={`/products`} component={CategoryPage} />
           <Route path="/productdetails">

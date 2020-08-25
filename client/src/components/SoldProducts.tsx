@@ -16,31 +16,31 @@ const renderProducts = (productList: Product[]) => {
   return productsResult;
 };
 
-function PurchasedProducts(): JSX.Element {
-  const [purchasedProducts, setPurchasedProducts] = useState<Product[]>([]);
+function SoldProducts(): JSX.Element {
+  const [soldProducts, setSoldProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    ApiService.getAllPurchasedProducts()
-      .then(res => setPurchasedProducts(res));
+    ApiService.getAllSoldProducts()
+      .then(res => setSoldProducts(res));
   }, []);
 
   return (
     <div>
       <div className="category-dashboard">
         {
-          purchasedProducts && purchasedProducts.length > 0
+          soldProducts && soldProducts.length > 0
             ? (
               <Box margin="xlarge" pad="medium" align="center">
                 <div className="category-dashboard">
-                  {renderProducts(purchasedProducts)}
+                  {renderProducts(soldProducts)}
                 </div>
               </Box>
             )
-            : "You haven't bought any product yet"
+            : "You haven't sold any product yet"
         }
       </div>
     </div>
   );
 }
 
-export default PurchasedProducts;
+export default SoldProducts;
