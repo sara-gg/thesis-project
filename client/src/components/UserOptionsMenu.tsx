@@ -31,8 +31,7 @@ const UserOptionsMenu = ({ isAuthenticated, id, name }: Props): JSX.Element => {
           label: "My Gallery",
           onClick: () => {
             history.push({
-              pathname: "/usergallery",
-              search: `?id=${id}`,
+              pathname: `/usergallery/${id}`,
             });
           },
         },

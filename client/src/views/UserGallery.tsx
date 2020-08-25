@@ -3,10 +3,10 @@ import { Avatar, Box, Text } from "grommet";
 import { Location } from "grommet-icons";
 import UserProductsGallery from "../containers/UserProductsGallery";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 import { RootState } from "../models/rootstate";
 import ApiService from "../ApiService/ApiService";
 import ReviewList from "../containers/ReviewList";
+import renderReviewRating from "../helpers/functions";
 
 type Props = {
   id: string;
@@ -64,7 +64,7 @@ function UserGallery({ id, isAuthenticated, name }: Props): JSX.Element {
           {galleryInfo.name}'s Gallery
         </Text>
         <Text size="large" color="blue">
-          gallery rating
+          {renderReviewRating(4.5)}
         </Text>
         <Box direction="row">
           <Location />
@@ -76,13 +76,11 @@ function UserGallery({ id, isAuthenticated, name }: Props): JSX.Element {
           margin={{ vertical: "medium", horizontal: "xlarge" }}
         >
           {galleryInfo.description}
-          Welcome to Sara's Vintage Boutique Co. We create one off, unique
-          pieces of furniture using the highest grade of materials. We’ve spent
-          years combining tried and tested joinery techniques with the modern
-          mastery of technology and tools giving our final products a truly
-          untouchable finish. Take a look at our items and feel free to ask us
-          for any more information. We hope to provide you with one of our items
-          very soon!
+          I’ve spent years combining tried and tested joinery techniques with
+          the modern mastery of technology and tools giving our final products a
+          truly untouchable finish. Take a look at our items and feel free to
+          ask us for any more information. I hope to provide you with one of our
+          items very soon!
         </Text>
       </Box>
       <Box

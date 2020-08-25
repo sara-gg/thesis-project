@@ -35,6 +35,7 @@ type Props = {
     bd: string,
     g: string,
     a: string,
+    ud: string,
     b: boolean
   ) => void;
 };
@@ -54,6 +55,7 @@ function App({ setUserData }: Props): JSX.Element {
         res.birthdate,
         res.gender,
         res.address,
+        res.description,
         true
       );
     });
@@ -133,6 +135,7 @@ const mapDispatchToProps = (dispatch: any) => {
       birthdate: string,
       gender: string,
       address: string,
+      userDescription: string,
       isAuthenticated: boolean
     ) =>
       dispatch({
@@ -146,6 +149,7 @@ const mapDispatchToProps = (dispatch: any) => {
           birthdate,
           gender,
           address,
+          userDescription,
           isAuthenticated,
         },
       }),
