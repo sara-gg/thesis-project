@@ -12,7 +12,7 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 interface Props {
   product: Product;
   visitorId: number;
-  ownerId: number;
+  ownerId?: number;
   readonly?: boolean;
 }
 
