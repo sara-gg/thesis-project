@@ -64,17 +64,14 @@ function ProductDetails({ postBasketProducts, id }: Props) {
   const handleAddItemToBasket = () => {
     let currentQuantityProduct = {
       ...product,
-      quantity: currentQuantity
-    }
-     
-    
-    postBasketProducts(product).then(() =>
-      toast.dark(
-        <Box margin="20px">
-          {product.title} has been added to your basket! 🛒 🎉
-        </Box>
-      )
+      quantity: currentQuantity,
+    };
+    toast.dark(
+      <Box margin="20px">
+        {product.title} has been added to your basket! 🛒 🎉
+      </Box>
     );
+    postBasketProducts(currentQuantityProduct).then(() => console.log("here"));
   };
 
   const handleAddItemToWishlist = () => {

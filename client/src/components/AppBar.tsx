@@ -22,11 +22,13 @@ const AppBar = ({ isAuthenticated, productsInBasket }: any): JSX.Element => {
 
   useEffect(() => {
     let total = 0;
-    ApiService.getBasketProducts().then((products) =>
-      products
-        .forEach((product: any) => total++)
-        
-    ).then(() => setTotalBasket(total))
+    ApiService.getBasketProducts()
+      .then((products) => {
+        if (products) {
+          products.forEach((product: any) => total++);
+        }
+      })
+      .then(() => setTotalBasket(total));
   }, [productsInBasket]);
 
   const handleRenderRegister = () => {
