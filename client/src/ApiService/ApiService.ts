@@ -150,6 +150,8 @@ const updateQuantityProduct = (product: Product): Promise<any> => {
   }
 };
 
+
+
 const deleteProductFromBasket = (product: Product): Promise<any> => {
   const token = localStorage.getItem("accessToken");
 

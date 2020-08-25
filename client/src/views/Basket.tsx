@@ -38,7 +38,7 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
   useEffect(() => {
     ApiService.getBasketProducts()
       .then((res) => setBasketProducts(res))
-      .then(() => console.log(basketProducts));
+      .then(() => console.log(basketProducts, "what's the quantity here"));
   }, []);
 
   useEffect(() => {

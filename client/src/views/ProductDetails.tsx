@@ -82,7 +82,7 @@ function ProductDetails({ postBasketProducts, id }: Props) {
       </Box>
     );
     postBasketProducts(currentQuantityProduct).then(() =>
-      console.log("here", currentQuantityProduct)
+      console.log("here posting quantity", currentQuantityProduct)
     );
   };
 
