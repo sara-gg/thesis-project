@@ -239,7 +239,7 @@ export function setBasketProducts(payload: any) {
 export function postBasketProducts(product: any): any {
   return function (dispatch: any): Promise<any> {
     const token = localStorage.getItem("accessToken");
-    const basket_quantity = {"basket_quantity": product.basket_quantity};
+    const basket_quantity = { basket_quantity: product.basket_quantity };
     console.log(token);
     console.log(basket_quantity);
     console.log(JSON.stringify(basket_quantity));
