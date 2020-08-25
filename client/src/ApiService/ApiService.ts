@@ -82,8 +82,8 @@ const getBasketProducts = (): Promise<any> => {
       Authorization: `Bearer ${token}`,
     },
   })
-    .then(res => res.json())
-    .catch(err => console.error(err));
+    .then((res) => res.json())
+    .catch((err) => console.error(err));
 };
 
 const getProductsForUser = (id: Number): Promise<any> => {
@@ -141,12 +141,26 @@ const getUserData = (id: Number): Promise<any> => {
     .catch((err) => console.error(err));
 };
 
+const getPublicUserData = (id: Number): Promise<any> => {
+  return fetch(`${BASE_URL}/user_public_data/${id}`, {
+    method: "GET",
+    credentials: "include",
+    mode: "cors",
+  })
+    .then((res) => res.json())
+    .catch((err) => console.error(err));
+};
+
 const saveViewedProduct = async (product: Product) => {
+  const token = localStorage.getItem("accessToken");
   return fetch(`${BASE_URL}/product/view`, {
     method: "POST",
     credentials: "include",
     mode: "cors",
-    headers: { "Content-Type": "application/json" },
+    headers: { 
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+     },
     body: JSON.stringify({product_id: product.id})
   })
     .then((res) => res.json())
@@ -160,11 +174,8 @@ const getViewedProducts = async (product: Product) => {
     mode: "cors",
   })
     .then((res) => res.json())
-    .then((res) => {
-      return res;
-    })
     .catch((err) => console.error(err))
-}
+};
 
 export default {
   login,
@@ -178,5 +189,6 @@ export default {
   deleteProduct,
   getUserData,
   saveViewedProduct,
-  getViewedProducts
+  getViewedProducts,
+  getPublicUserData
 };

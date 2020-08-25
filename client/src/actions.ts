@@ -236,12 +236,13 @@ export function setBasketProducts(payload: any) {
   };
 }
 
-
 export function postBasketProducts(product: any): any {
   return function (dispatch: any): Promise<any> {
     const token = localStorage.getItem("accessToken");
+    const basket_quantity = {"basket_quantity": product.quantity};
     console.log(token);
-    console.log(product);
+    console.log(basket_quantity);
+    console.log(JSON.stringify(basket_quantity));
     return fetch(`${BASE_URL}/basket_products/${product.id}`, {
       method: "POST",
       credentials: "include",
@@ -250,6 +251,7 @@ export function postBasketProducts(product: any): any {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
+      body: JSON.stringify(basket_quantity),
     })
       .then(() => {
         console.log("disapth", product);
@@ -258,4 +260,3 @@ export function postBasketProducts(product: any): any {
       .catch((err) => console.error(err));
   };
 }
-

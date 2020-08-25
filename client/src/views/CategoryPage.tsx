@@ -35,7 +35,7 @@ export const renderProducts = (productList: Product[]) => {
   let productsResult: JSX.Element[] = [];
 
   productList.forEach((product, index) => {
-    productsResult.push(<CategoryProductCard product={product} key={index} />);
+    if (product.quantity > 0) productsResult.push(<CategoryProductCard product={product} key={index} />);
   });
   return productsResult;
 };

@@ -4,13 +4,10 @@ import {
   AccordionPanel,
   Anchor,
   Box,
-  Button,
-  Carousel,
   Image,
   Paragraph,
   Text,
 } from "grommet";
-import { Cart, Location } from "grommet-icons";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ApiService from "../ApiService/ApiService";
@@ -18,7 +15,6 @@ import { connect } from "react-redux";
 import { postBasketProducts } from "../actions";
 import CategoriesBar from "../components/CategoriesBar";
 import { Product } from "../models/product";
-import ReactImageMagnify from "react-image-magnify";
 import "../styles/ProductDetails.scss";
 import {
   FacebookShareButton,
@@ -41,9 +37,10 @@ type Props = StateProps & DispatchProps;
 
 function ProductDetails({ postBasketProducts, id }: Props) {
   const [product, setProduct] = useState<any>(null);
-  const [currenQuantity, setCurrentQuantity] = useState<number>(0);
+  const [currentQuantity, setCurrentQuantity] = useState<number>(0);
   const url = window.location.href;
   console.log("url", url, "window.location", window.location);
+
   // TODO: fetch a single product with /product?id=1
   useEffect(() => {
     ApiService.getAllProducts().then((res) => {
@@ -61,14 +58,23 @@ function ProductDetails({ postBasketProducts, id }: Props) {
     });
   }, []);
 
+  useEffect(() => {
+    if(product) {
+      ApiService.saveViewedProduct(product);
+    }
+  },[product])
+
   const handleAddItemToBasket = () => {
-    postBasketProducts(product).then(() =>
-      toast.dark(
-        <Box margin="20px">
-          {product.title} has been added to your basket! 🛒 🎉
-        </Box>
-      )
+    let currentQuantityProduct = {
+      ...product,
+      quantity: currentQuantity,
+    };
+    toast.dark(
+      <Box margin="20px">
+        {product.title} has been added to your basket! 🛒 🎉
+      </Box>
     );
+    postBasketProducts(currentQuantityProduct).then(() => console.log("here"));
   };
 
   const handleAddItemToWishlist = () => {
@@ -80,16 +86,16 @@ function ProductDetails({ postBasketProducts, id }: Props) {
   };
 
   const quantityUp = () => {
-    if (currenQuantity < product.quantity) {
-      setCurrentQuantity(currenQuantity + 1);
+    if (currentQuantity < product.quantity) {
+      setCurrentQuantity(currentQuantity + 1);
     }
 
     //this.apiClient.updateTopic(this.topic).subscribe()
   };
 
   const quantityDown = () => {
-    if (currenQuantity > 0) {
-      setCurrentQuantity(currenQuantity - 1);
+    if (currentQuantity > 0) {
+      setCurrentQuantity(currentQuantity - 1);
       //this.apiClient.updateTopic(this.topic).subscribe()
     }
   };
@@ -149,7 +155,7 @@ function ProductDetails({ postBasketProducts, id }: Props) {
                 gap="medium"
               >
                 <h3 className="product-detail-quantity-text">
-                  {currenQuantity}
+                  {currentQuantity}
                 </h3>
                 <Box
                   direction="column"

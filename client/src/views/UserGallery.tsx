@@ -1,84 +1,116 @@
-import React from "react";
-import { Box, Grommet, Text } from "grommet";
+import React, { useEffect, useState } from "react";
+import { Avatar, Box, Text } from "grommet";
 import { Location } from "grommet-icons";
 import UserProductsGallery from "../containers/UserProductsGallery";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { RootState } from "../models/rootstate";
+import ApiService from "../ApiService/ApiService";
 import ReviewList from "../containers/ReviewList";
 
 type Props = {
+  id: string;
   isAuthenticated: boolean;
   name: string;
 };
 
-function UserGallery({ isAuthenticated, name }: Props): JSX.Element {
-  if (isAuthenticated) {
-    return (
-      <Box alignSelf="center">
-        <Box
-          alignSelf="center"
-          width="90%"
-          margin="medium"
-          justify="center"
-          align="center"
-          gap="small"
-          pad="medium"
-          background="lightbeige"
-        >
-          <Text size="xlarge" color="blue">
-            {name}'s Gallery
-          </Text>
-          <Text size="large" color="blue">
-            gallery rating
-          </Text>
-          <Box direction="row">
-            <Location />
-            <Text size="medium">gallery location</Text>
-          </Box>
-          <Text
-            size="small"
-            color="darkgrey"
-            margin={{ vertical: "medium", horizontal: "xlarge" }}
-          >
-            Welcome to Sara's Vintage Boutique Co. We create one off, unique
-            pieces of furniture using the highest grade of materials. We’ve
-            spent years combining tried and tested joinery techniques with the
-            modern mastery of technology and tools giving our final products a
-            truly untouchable finish. Take a look at our items and feel free to
-            ask us for any more information. We hope to provide you with one of
-            our items very soon!
-          </Text>
+const initialGalleryInfo = {
+  name: "",
+  username: "",
+  description: "",
+  location: "",
+};
+
+function UserGallery({ id, isAuthenticated, name }: Props): JSX.Element {
+  const [galleryInfo, setGalleryInfo] = useState(initialGalleryInfo);
+
+  const visitorIdStr: any = localStorage.getItem("userId");
+  const visitorId = +visitorIdStr;
+  const ownerId = +id;
+
+  console.log("visitor id, owner id", visitorId, ownerId);
+
+  useEffect(() => {
+    ApiService.getPublicUserData(ownerId).then((res) => {
+      setGalleryInfo((prevInfo) => ({
+        ...prevInfo,
+        name: res.name,
+        username: res.username,
+        description: res.description,
+        location: res.address,
+      }));
+    });
+  }, []);
+
+  return (
+    <Box alignSelf="center">
+      <Box
+        alignSelf="center"
+        width="90%"
+        margin="medium"
+        justify="center"
+        align="center"
+        gap="small"
+        pad="medium"
+        background="lightbeige"
+      >
+        <Box direction="row" gap="small">
+          <Avatar
+            size="xlarge"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSXZmZwUr85dXnjJOdKRHI4pweV8XKRD3QMHg&usqp=CAU"
+          />
         </Box>
-        <Box
-          alignSelf="center"
-          width="90%"
-          margin="medium"
-          justify="center"
-          align="center"
-          gap="small"
-          pad="medium"
-          background="offwhite"
-        >
-          <UserProductsGallery />
+        <Text size="xlarge" color="blue">
+          {galleryInfo.name}'s Gallery
+        </Text>
+        <Text size="large" color="blue">
+          gallery rating
+        </Text>
+        <Box direction="row">
+          <Location />
+          <Text size="medium">{galleryInfo.location}</Text>
         </Box>
-        <Box
-          alignSelf="center"
-          width="90%"
-          margin="medium"
-          justify="center"
-          align="center"
-          gap="small"
-          pad="medium"
-          background="offwhite"
+        <Text
+          size="small"
+          color="darkgrey"
+          margin={{ vertical: "medium", horizontal: "xlarge" }}
         >
-          <ReviewList />
-        </Box>
+          {galleryInfo.description}
+          Welcome to Sara's Vintage Boutique Co. We create one off, unique
+          pieces of furniture using the highest grade of materials. We’ve spent
+          years combining tried and tested joinery techniques with the modern
+          mastery of technology and tools giving our final products a truly
+          untouchable finish. Take a look at our items and feel free to ask us
+          for any more information. We hope to provide you with one of our items
+          very soon!
+        </Text>
       </Box>
-    );
-  } else {
-    return <Redirect to={{ pathname: "/login" }} />;
-  }
+      <Box
+        alignSelf="center"
+        width="90%"
+        margin="medium"
+        justify="center"
+        align="center"
+        gap="small"
+        pad="medium"
+        background="offwhite"
+      >
+        <UserProductsGallery visitorId={visitorId} ownerId={ownerId} />
+      </Box>
+      <Box
+        alignSelf="center"
+        width="90%"
+        margin="medium"
+        justify="center"
+        align="center"
+        gap="small"
+        pad="medium"
+        background="offwhite"
+      >
+        <ReviewList />
+      </Box>
+    </Box>
+  );
 }
 
 const mapStateToProps = (state: RootState) => {
