@@ -141,6 +141,31 @@ const getUserData = (id: Number): Promise<any> => {
     .catch((err) => console.error(err));
 };
 
+const saveViewedProduct = async (product: Product) => {
+  return fetch(`${BASE_URL}/product/view`, {
+    method: "POST",
+    credentials: "include",
+    mode: "cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({product_id: product.id})
+  })
+    .then((res) => res.json())
+    .catch((err) => console.error(err))
+};
+
+const getViewedProducts = async (product: Product) => {
+  return fetch(`${BASE_URL}/products/view`, {
+    method: "GET",
+    credentials: "include",
+    mode: "cors",
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => console.error(err))
+}
+
 export default {
   login,
   createNewProduct,
@@ -151,5 +176,7 @@ export default {
   getProductsForUser,
   deleteBasketProduct,
   deleteProduct,
-  getUserData
+  getUserData,
+  saveViewedProduct,
+  getViewedProducts
 };
