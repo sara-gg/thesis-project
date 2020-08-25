@@ -3,14 +3,36 @@ import { Box, Button, Image, Text } from "grommet";
 import { Edit, Trash } from "grommet-icons";
 import { Product } from "../models/product";
 import { useHistory } from "react-router-dom";
+import ApiService from "../ApiService/ApiService";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 interface Props {
   product: Product;
   readonly?: boolean;
+  basketProducts: any;
+  setBasketProducts: (p: any) => void;
 }
-function UserGalleryProductCard({ product, readonly }: Props) {
+function UserGalleryProductCard({ product, readonly, setBasketProducts, basketProducts }: Props) {
   console.log("Product details product", product);
   // const [editmode, setEditMode] = useState(false);
   let history = useHistory();
+
+  const handleDelete = () => {
+    console.log("delete");
+    ApiService.deleteProductFromBasket(product).then(() => {
+      toast(
+        <Box margin="20px">
+          {product.title} has been removed from your basket
+        </Box>
+      );
+    })
+    .then(() => {
+      let keepItems = basketProducts.filter((p: Product) => p.id !== product.id)
+      console.log(keepItems)
+      setBasketProducts(keepItems)
+    });
+  };
   return (
     <Box
       height="medium"
@@ -20,31 +42,28 @@ function UserGalleryProductCard({ product, readonly }: Props) {
       pad="medium"
       hoverIndicator="true"
       round="small"
-      onClick={() => {
-        history.push({
-          pathname: "/productdetails",
-          search: `?id=${product.id}`,
-        });
-      }}
     >
-      <Box height="small" width="small">
+      <Box
+        height="small"
+        width="small"
+        onClick={() => {
+          history.push({
+            pathname: "/productdetails",
+            search: `?id=${product.id}`,
+          });
+        }}
+      >
         <Image fit="cover" src={`${product.images}`} />
       </Box>
       <Box direction="column" gap="small">
         <Text>{product.title}</Text>
-        <Text size="small">{product.quantity}</Text>
-        <Text size="small">{product.location}</Text>
+        <Text size="small">{product.basket_quantity}</Text>
         <Text size="small">{product.price} €</Text>
       </Box>
-     
-        <Box direction="row" gap="medium">
-          <Button
-            icon={<Trash />}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          />
-        </Box>
+
+      <Box direction="row" gap="medium">
+        <Button icon={<Trash />} onClick={handleDelete} />
+      </Box>
     </Box>
   );
 }

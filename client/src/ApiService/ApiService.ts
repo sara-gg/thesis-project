@@ -126,17 +126,41 @@ const deleteBasketProduct = (id: Number): Promise<any> => {
     .catch((err) => console.error);
 };
 
-const updateBasketProduct = (product: Product): Promise<any> => {
+const updateQuantityProduct = (product: Product): Promise<any> => {
   const token = localStorage.getItem("accessToken");
+  if (product.basket_quantity) {
+    const newQuantity = {
+      basket_quantity: product.quantity - product.basket_quantity,
+    };
+
+    return fetch(`${BASE_URL}/products/${product.id}`, {
+      method: "PUT",
+      credentials: "include",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(newQuantity), // TODO: need to change the logic to send new quantity instead!
+    })
+      .then((res) => res.json())
+      .catch((err) => console.error);
+  } else {
+    return Promise.resolve({});
+  }
+};
+
+const deleteProductFromBasket = (product: Product): Promise<any> => {
+  const token = localStorage.getItem("accessToken");
+
   return fetch(`${BASE_URL}/basket_products/${product.id}`, {
-    method: "PUT",
+    method: "DELETE",
     credentials: "include",
     mode: "cors",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(product.quantity), // TODO: need to change the logic to send new quantity instead!
   })
     .then((res) => res.json())
     .catch((err) => console.error);
@@ -179,4 +203,6 @@ export default {
   deleteProduct,
   getUserData,
   getPublicUserData,
+  updateQuantityProduct,
+  deleteProductFromBasket,
 };

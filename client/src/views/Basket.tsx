@@ -14,24 +14,31 @@ type Props = {
   isAuthenticated: boolean;
 };
 
-const renderProducts = (productList: Product[]) => {
-  let productsResult: JSX.Element[] = [];
-
-  productList.forEach((product, index) => {
-    productsResult.push(
-      <UserGalleryProductCard product={product} key={index} />
-    );
-  });
-  return productsResult;
-};
-
 function Basket({ isAuthenticated }: Props): JSX.Element {
   const [basketProducts, setBasketProducts] = useState<Product[]>([]);
   const [amoutToPay, setAmoutToPay] = useState(0);
   let history = useHistory();
 
+  const renderProducts = (productList: Product[]) => {
+    let productsResult: JSX.Element[] = [];
+
+    productList.forEach((product, index) => {
+      productsResult.push(
+        <UserGalleryProductCard
+          product={product}
+          key={index}
+          basketProducts={basketProducts}
+          setBasketProducts={setBasketProducts}
+        />
+      );
+    });
+    return productsResult;
+  };
+
   useEffect(() => {
-    ApiService.getBasketProducts().then((res) => setBasketProducts(res)).then(() => console.log(basketProducts));
+    ApiService.getBasketProducts()
+      .then((res) => setBasketProducts(res))
+      .then(() => console.log(basketProducts));
   }, []);
 
   useEffect(() => {
@@ -54,7 +61,10 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
             </div>
             <Text margin="large"> · · · </Text>
             <Text>Almost There!</Text>
-            <PaymentForm amoutToPay={amoutToPay} basketProducts={basketProducts}/>
+            <PaymentForm
+              amoutToPay={amoutToPay}
+              basketProducts={basketProducts}
+            />
           </Box>
         ) : (
           "No products on your basket"
