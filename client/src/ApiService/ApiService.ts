@@ -72,7 +72,6 @@ const getAllProducts = (): Promise<any> => {
 
 const getBasketProducts = (): Promise<any> => {
   const token = localStorage.getItem("accessToken");
-  console.log(token)
   return fetch(`${BASE_URL}/basket_products`, {
     method: "GET",
     credentials: "include",
@@ -170,7 +169,7 @@ const getAllPurchasedProducts = (): Promise<any> => {
   })
     .then((res) => res.json())
     .catch((err) => console.error(err));
-}
+};
 
 const getPublicUserData = (id: Number): Promise<any> => {
   return fetch(`${BASE_URL}/user_public_data/${id}`, {
@@ -179,6 +178,19 @@ const getPublicUserData = (id: Number): Promise<any> => {
     mode: "cors",
   })
     .then((res) => res.json())
+    .catch((err) => console.error(err));
+};
+
+const getAllReviews = (): Promise<any> => {
+  return fetch(`${BASE_URL}/reviews`, {
+    method: "GET",
+    credentials: "include",
+    mode: "cors",
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      return res;
+    })
     .catch((err) => console.error(err));
 };
 
@@ -195,5 +207,6 @@ export default {
   getUserData,
   addToPurchaseHistory,
   getAllPurchasedProducts,
-  getPublicUserData
+  getPublicUserData,
+  getAllReviews,
 };

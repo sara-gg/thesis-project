@@ -7,6 +7,7 @@ import {
   MaskedInput,
   Select,
   Text,
+  TextArea,
   TextInput,
 } from "grommet";
 import { Hide, View } from "grommet-icons";
@@ -28,6 +29,7 @@ type Props = {
   name: string;
   lastname: string;
   username: string;
+  description: string;
   email: string;
   password: string;
   birthdate: string;
@@ -44,6 +46,7 @@ const RegistrationForm = ({
   name,
   lastname,
   username,
+  description,
   email,
   password,
   birthdate,
@@ -73,6 +76,7 @@ const RegistrationForm = ({
       name,
       lastname,
       username,
+      description,
       email,
       password,
       birthdate,
@@ -135,6 +139,23 @@ const RegistrationForm = ({
             <TextInput
               name="username"
               value={username}
+              onChange={handleChange}
+            />
+          </FormField>
+          <FormField
+            name="userDescription"
+            label={
+              <Box direction="row">
+                <Text>Description</Text>
+                <Text color="status-critical">*</Text>
+              </Box>
+            }
+            required
+          >
+            <TextArea
+              placeholder="Type here your gallery description"
+              name="userDescription"
+              value={description}
               onChange={handleChange}
             />
           </FormField>
@@ -294,6 +315,7 @@ const mapStateToProps = (state: any) => {
     gender: state.gender,
     address: state.address,
     telephone: state.telephone,
+    description: state.userDescription,
     isAuthenticated: state.isAuthenticated,
   };
 };

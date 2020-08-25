@@ -98,7 +98,6 @@ function ProductDetails({ postBasketProducts, id }: Props) {
   };
 
   const redirectToSeller = (id: number) => {
-    // window.location.assign(`http://localhost:3000/usergallery/${id}`);
     history.push(`/usergallery/${id}`);
   };
   const props = { width: 400, height: 250, zoomWidth: 500, img: "1.jpg" };
