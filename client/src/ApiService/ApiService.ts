@@ -157,6 +157,16 @@ const getUserData = (id: Number): Promise<any> => {
     .catch((err) => console.error(err));
 };
 
+const getPublicUserData = (id: Number): Promise<any> => {
+  return fetch(`${BASE_URL}/user_public_data/${id}`, {
+    method: "GET",
+    credentials: "include",
+    mode: "cors",
+  })
+    .then((res) => res.json())
+    .catch((err) => console.error(err));
+};
+
 export default {
   login,
   createNewProduct,
@@ -168,4 +178,5 @@ export default {
   deleteBasketProduct,
   deleteProduct,
   getUserData,
+  getPublicUserData,
 };

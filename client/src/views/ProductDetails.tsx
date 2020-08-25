@@ -5,20 +5,18 @@ import {
   Anchor,
   Box,
   Button,
-  Carousel,
   Image,
   Paragraph,
   Text,
 } from "grommet";
-import { Cart, Location } from "grommet-icons";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ApiService from "../ApiService/ApiService";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { postBasketProducts } from "../actions";
 import CategoriesBar from "../components/CategoriesBar";
 import { Product } from "../models/product";
-import ReactImageMagnify from "react-image-magnify";
 import "../styles/ProductDetails.scss";
 import {
   FacebookShareButton,
@@ -40,10 +38,12 @@ interface DispatchProps {
 type Props = StateProps & DispatchProps;
 
 function ProductDetails({ postBasketProducts, id }: Props) {
+  const history = useHistory();
   const [product, setProduct] = useState<any>(null);
   const [currentQuantity, setCurrentQuantity] = useState<number>(0);
   const url = window.location.href;
   console.log("url", url, "window.location", window.location);
+
   // TODO: fetch a single product with /product?id=1
   useEffect(() => {
     ApiService.getAllProducts().then((res) => {
@@ -97,6 +97,10 @@ function ProductDetails({ postBasketProducts, id }: Props) {
     }
   };
 
+  const redirectToSeller = (id: number) => {
+    // window.location.assign(`http://localhost:3000/usergallery/${id}`);
+    history.push(`/usergallery/${id}`);
+  };
   const props = { width: 400, height: 250, zoomWidth: 500, img: "1.jpg" };
 
   return (
@@ -238,6 +242,12 @@ function ProductDetails({ postBasketProducts, id }: Props) {
                 >
                   <Box pad="large">
                     <Text>Meet the seller: {product.user_id}</Text>
+                    <Button
+                      color="darkred"
+                      onClick={() => redirectToSeller(product.user_id)}
+                    >
+                      Seller's gallery
+                    </Button>
                     <Text>
                       Insert description here and want to see more of user.name
                       products? checkout their gallery

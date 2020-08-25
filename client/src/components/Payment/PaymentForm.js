@@ -9,7 +9,7 @@ const PaymentForm = ({ amoutToPay, basketProducts }) => {
 
 
   const handlePayment = () => {
-const newQuantity = 
+const newQuantity = "todo"   //TODO
   }
 
   return (
