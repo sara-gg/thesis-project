@@ -167,11 +167,16 @@ const saveViewedProduct = async (product: Product) => {
     .catch((err) => console.error(err))
 };
 
-const getViewedProducts = async (product: Product) => {
+const getViewedProducts = async () => {
+  const token = localStorage.getItem("accessToken");
   return fetch(`${BASE_URL}/products/view`, {
     method: "GET",
     credentials: "include",
     mode: "cors",
+    headers: { 
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+     },
   })
     .then((res) => res.json())
     .catch((err) => console.error(err))

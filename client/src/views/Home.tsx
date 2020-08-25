@@ -5,9 +5,16 @@ import FavouritesCarousel from "../components/FavouritesCarousel";
 import LeftCard from "../components/LeftCard";
 import RightCard from "../components/RightCard";
 import CategoriesBar from "../components/CategoriesBar";
+import RecentViewed from "../components/RecentViewed"
 import "../styles/Home.scss";
+import { RootState } from "../models/rootstate";
+import { connect } from "react-redux";
 
 function Home() {
+
+
+  const visitorIdStr: any = localStorage.getItem("userId");
+
   return (
     <div>
       <CategoriesBar />
@@ -38,10 +45,22 @@ function Home() {
         <Heading size="medium">Our favourite products</Heading>
       </Box>
       <FavouritesCarousel />
+      {
+        visitorIdStr ? 
+        <RecentViewed />
+        : <div style={{display: "none"}}></div>
+      }
       <LeftCard />
       <RightCard />
     </div>
   );
 }
 
-export default Home;
+const mapStateToProps = (state: RootState) => {
+  return {
+    isAuthenticated: state.isAuthenticated,
+    name: state.name,
+  };
+};
+
+export default connect(mapStateToProps, {})(Home);
