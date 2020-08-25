@@ -107,7 +107,7 @@ function UserGallery({ id, isAuthenticated, name }: Props): JSX.Element {
         pad="medium"
         background="offwhite"
       >
-        <ReviewList />
+        <ReviewList ownerId={ownerId} />
       </Box>
     </Box>
   );
