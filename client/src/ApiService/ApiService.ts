@@ -167,7 +167,9 @@ const getAllPurchasedProducts = (): Promise<any> => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  });
+  })
+    .then((res) => res.json())
+    .catch((err) => console.error(err));
 }
 
 const getPublicUserData = (id: Number): Promise<any> => {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Text } from "grommet";
 import { useHistory } from "react-router-dom";
 import useWindowSize from 'react-use/lib/useWindowSize';
@@ -6,20 +6,21 @@ import Confetti from 'react-confetti';
 import ApiService from '../ApiService/ApiService';
 
 function SuccessfulPayment() {
+  const [basketProducts, setBasketProducts] = useState([]);
   let { width, height } = useWindowSize()
   let history = useHistory();
 
-  // TO USE WITH REDUX
-  // const removeBasketProducts = () => {
-  //   basketProducts.forEach(product => {
-  //     ApiService.deleteBasketProduct(product.id);
-  //     ApiService.addToPurchaseHistory(product);
-  //   });
-  // }
+  useEffect(() => {
+    ApiService.getBasketProducts()
+      .then(res => setBasketProducts(res));
+  }, []);
 
-  // useEffect(() => {
-  //   removeBasketProducts();
-  // }, []);
+  useEffect(() => {
+    basketProducts.forEach((product: any) => {
+      ApiService.deleteBasketProduct(product.id);
+      ApiService.addToPurchaseHistory(product);
+    });
+  }, [basketProducts]);
 
   return (
     <>

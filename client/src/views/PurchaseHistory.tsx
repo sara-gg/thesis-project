@@ -1,18 +1,20 @@
 import React from "react";
 import PurchasedProducts from "../components/PurchasedProducts";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 
 type Props = {
   isAuthenticated: boolean;
 };
 
-function PurchaseHistory({ isAuthenticated }: Props): JSX.Element {
-  // if (isAuthenticated) {
-  return <PurchasedProducts />
-  // } else {
-  //   return <Redirect to={{ pathname: "/login" }} />;
-  // }
+function PurchaseHistory({ isAuthenticated }: Props): any {
+  let history = useHistory();
+
+  if (isAuthenticated) {
+    return <PurchasedProducts />
+  } else {
+    return history.push("/login");
+  }
 }
 
 export default PurchaseHistory;

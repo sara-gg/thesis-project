@@ -28,7 +28,7 @@ function PurchasedProducts(): JSX.Element {
   return (
     <div>
       <CategoriesBar />
-      <h1>Your basket</h1>
+      <h1>Your Purchases</h1>
       <div className="category-dashboard">
         {
           purchasedProducts && purchasedProducts.length > 0
