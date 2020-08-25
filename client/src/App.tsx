@@ -128,7 +128,7 @@ const mapDispatchToProps = (dispatch: any) => {
       birthdate: string,
       gender: string,
       address: string,
-      boolean: boolean
+      isAuthenticated: boolean
     ) =>
       dispatch({
         type: "SET_USER_DATA",
@@ -141,7 +141,7 @@ const mapDispatchToProps = (dispatch: any) => {
           birthdate,
           gender,
           address,
-          boolean,
+          isAuthenticated,
         },
       }),
   };

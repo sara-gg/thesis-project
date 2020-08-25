@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import Logout from "../components/Logout";
 import SearchBar from "../components/SearchBar/SearchBar";
+import UserOptionsMenu from "../components/UserOptionsMenu";
 import { connect } from "react-redux";
 import "../styles/AppBar.scss";
 
@@ -67,11 +68,7 @@ const AppBar = ({ isAuthenticated, productsInBasket }: any): JSX.Element => {
         className="right-appbar"
         gap="medium"
       >
-        <NavLink exact to="/usergallery">
-          <Heading level="4" color="text" className="navbar-header">
-            User Gallery
-          </Heading>
-        </NavLink>
+        <UserOptionsMenu />
 
         {handleRenderRegister()}
 
