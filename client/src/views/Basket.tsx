@@ -57,8 +57,8 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
             <PaymentForm amoutToPay={amoutToPay} />
           </Box>
         ) : (
-          "No products on your basket"
-        )}
+            "No products on your basket"
+          )}
       </div>
     </div>
   );
