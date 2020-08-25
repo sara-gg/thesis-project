@@ -45,7 +45,6 @@ const LoginForm = (): JSX.Element => {
       const { accessToken } = res;
       const userId = res.user.id;
       const userData = await ApiService.getUserData(userId);
-      console.log({ userData });
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("userId", JSON.stringify(res.user.id));
       // we should call here the setIsAuthenticated action

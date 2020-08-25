@@ -8,6 +8,7 @@ import { getProductsForCategory } from "../actions";
 import { Product } from "../models/product";
 import { Category } from "../models/category";
 import SkeletonCategoryProductCard from "../components/SkeletonCategoryProductCard";
+import ApiService from "../ApiService/ApiService";
 import { Box, Heading } from "grommet";
 import "../styles/SkeletonCategoryProductCard.scss";
 import "../styles/CategoryPage.scss";
@@ -35,7 +36,10 @@ export const renderProducts = (productList: Product[]) => {
   let productsResult: JSX.Element[] = [];
 
   productList.forEach((product, index) => {
-    if (product.quantity > 0) productsResult.push(<CategoryProductCard product={product} key={index} />);
+    if (product.quantity > 0)
+      productsResult.push(
+        <CategoryProductCard product={product} key={index} />
+      );
   });
   return productsResult;
 };
@@ -54,9 +58,10 @@ const CategoryPage = ({
   useEffect(() => {
     setIsLoadingProducts(true);
     const timer = setTimeout(() => {
-      getProductsForCategory(categoryId).then(() => {
-        setIsLoadingProducts(false);
-      });
+      getProductsForCategory(categoryId)
+        .then(() => {
+          setIsLoadingProducts(false);
+        });
     }, 2000);
   }, [location]);
 
