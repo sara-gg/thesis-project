@@ -40,6 +40,7 @@ function ProductDetails({ postBasketProducts, id }: Props) {
   const [currentQuantity, setCurrentQuantity] = useState<number>(0);
   const url = window.location.href;
   console.log("url", url, "window.location", window.location);
+
   // TODO: fetch a single product with /product?id=1
   useEffect(() => {
     ApiService.getAllProducts().then((res) => {
