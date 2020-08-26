@@ -30,9 +30,7 @@ const UserOptionsMenu = ({ isAuthenticated, id, name }: Props): JSX.Element => {
         {
           label: "My Gallery",
           onClick: () => {
-            history.push({
-              pathname: `/usergallery/${id}`,
-            });
+            window.location.assign(`http://localhost:3000/usergallery/${id}`);
           },
         },
         {
@@ -54,13 +52,13 @@ const UserOptionsMenu = ({ isAuthenticated, id, name }: Props): JSX.Element => {
         {
           label: "Edit Profile",
           onClick: () => {
-            toast("You are being redirected to your Profile!");
+            toast.dark("You are being redirected to your Profile!");
           },
         },
         {
           label: "Settings",
           onClick: () => {
-            toast("You are being redirected to your Settings!");
+            toast.dark("You are being redirected to your Settings!");
           },
         },
       ]}

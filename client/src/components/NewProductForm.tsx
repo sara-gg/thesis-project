@@ -7,13 +7,11 @@ import {
   RangeInput,
   Text,
   TextArea,
-  TextInput,
   Select,
 } from "grommet";
 import ApiService from "../ApiService/ApiService";
 import { connect } from "react-redux";
 import ImageUploader from "react-images-upload";
-import { useHistory } from "react-router-dom";
 import { NewProduct } from "../models/newProduct";
 import { Category } from "../models/category";
 import {
@@ -93,8 +91,6 @@ const NewProductForm = ({
   const [newProduct, setNewProduct] = useState(initialState);
   const [productImage, setProductImage] = useState<File>();
   const userId: any = localStorage.getItem("userId");
-
-  let history = useHistory();
 
   useEffect(() => {
     getCategories();

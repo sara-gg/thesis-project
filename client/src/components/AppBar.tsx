@@ -1,27 +1,19 @@
 import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Button,
-  DropButton,
-  Heading,
-  Menu,
-  Image,
-  ResponsiveContext,
-} from "grommet";
+import { Box, Button, Heading, Menu, Image, ResponsiveContext } from "grommet";
 import { Cart } from "grommet-icons";
 import logo from "../assets/Furniss Logo.png";
-import croppedLogo from "../assets/logo-cropped.png";
-import logonew from "../assets/logo1.png";
+// import croppedLogo from "../assets/logo-cropped.png";
+// import logonew from "../assets/logo1.png";
 import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import Logout from "../components/Logout";
 import SearchBar from "../components/SearchBar/SearchBar";
 import ApiService from "../ApiService/ApiService";
 import UserOptionsMenu from "../components/UserOptionsMenu";
-import { Product } from "../models/product";
+// import { Product } from "../models/product";
 import { connect } from "react-redux";
 import "../styles/AppBar.scss";
-import { logRoles } from "@testing-library/react";
+// import { logRoles } from "@testing-library/react";
 
 type Props = {
   isAuthenticated: boolean;

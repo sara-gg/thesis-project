@@ -36,7 +36,7 @@ function BasketProductCard({
   const handleDelete = () => {
     ApiService.deleteProductFromBasket(product)
       .then(() => {
-        toast(
+        toast.dark(
           <Box margin="20px">
             {product.title} has been removed from your basket
           </Box>

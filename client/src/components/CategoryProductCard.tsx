@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import { Box, Button, Image, Text } from "grommet";
+import React from "react";
+import { Box, Image, Text } from "grommet";
 import { Location } from "grommet-icons";
-import Skeleton from "react-loading-skeleton";
 import { Product } from "../models/product";
 import { useHistory } from "react-router-dom";
 import "../styles/CategoryProductCard.scss";

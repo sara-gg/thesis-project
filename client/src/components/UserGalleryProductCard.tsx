@@ -12,19 +12,17 @@ interface Props {
   readonly?: boolean;
 }
 function UserGalleryProductCard({ product, readonly }: Props) {
-  
   // const [editmode, setEditMode] = useState(false);
   let history = useHistory();
 
   const handleDelete = () => {
-   
     ApiService.deleteProductFromBasket(product).then(() => {
-      toast(
+      toast.dark(
         <Box margin="20px">
           {product.title} has been removed from your basket
         </Box>
       );
-    })
+    });
   };
   return (
     <Box
