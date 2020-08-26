@@ -60,7 +60,7 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
   return (
   
     <Box>
-       <AppBar/>
+       <AppBar basketProducts={basketProducts}/>
       <CategoriesBar />
       <Heading
         level="2"

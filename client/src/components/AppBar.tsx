@@ -8,15 +8,21 @@ import Logout from "../components/Logout";
 import SearchBar from "../components/SearchBar/SearchBar";
 import ApiService from "../ApiService/ApiService";
 import UserOptionsMenu from "../components/UserOptionsMenu";
+import { Product } from "../models/product";
 import { connect } from "react-redux";
 import "../styles/AppBar.scss";
 
 type Props = {
   isAuthenticated: boolean;
   productsInBasket: [];
+  basketProducts?: any;
 };
 
-const AppBar = ({ isAuthenticated, productsInBasket }: Props): JSX.Element => {
+const AppBar = ({
+  isAuthenticated,
+  productsInBasket,
+  basketProducts,
+}: Props): JSX.Element => {
   let [totalBasket, setTotalBasket] = useState(0);
   let history = useHistory();
 
@@ -29,7 +35,7 @@ const AppBar = ({ isAuthenticated, productsInBasket }: Props): JSX.Element => {
         }
       })
       .then(() => setTotalBasket(total));
-  }, [productsInBasket]);
+  }, [basketProducts, productsInBasket]);
 
   const handleRenderRegister = () => {
     if (!isAuthenticated) {
