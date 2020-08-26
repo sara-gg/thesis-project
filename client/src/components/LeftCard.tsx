@@ -35,37 +35,40 @@ const LeftCard = () => {
 
   return (
     <div className="home-left-container">
-      <Image height="50%" src={homepageCard} className="box" />
+      <Image height="70%" src={homepageCard} className="box" />
       <Box
-        pad="medium"
+        pad={{ top: "15vh", horizontal: "5vw" }}
         gridArea="main"
-        background="white"
+        background="offwhite"
         align="center"
-        justify="center"
+        justify="start"
         className="home-card box"
         flex="grow"
       >
         <Heading className="home-card-header">Living room inspo</Heading>
-        <Text className="home-card-desc">
+        <Text size="large" className="home-card-desc">
           The living room is undeniably the heart of the home, where time is
           spent lounging and laughing with friends and family. Here you can find
           every ingredient for your living room with our extensive living room
           collection of sofas, side tables, lamps, rugs and home accessories.
         </Text>
         <Button
+          margin={{ top: "medium", bottom: "large" }}
           onClick={() => {
             history.push("/products?categoryId=2");
           }}
           label="Shop living room items"
           primary
         ></Button>
+        <hr style={{height:"2px", color: "gray", backgroundColor: "gray"}}/>
         <Heading className="home-card-header">All kitchen</Heading>
-        <Text className="home-card-desc">
+        <Text size="large" className="home-card-desc">
           Cook up a storm in the kitchen with quality cookware and accessories
           that combine form and function, and are a pleasure to use every day,
           together with storage designs you’ll be happy to display.{" "}
         </Text>
         <Button
+          margin={{ top: "medium", bottom: "medium" }}
           onClick={() => {
             history.push("/products?categoryId=3");
           }}

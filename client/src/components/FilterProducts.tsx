@@ -84,14 +84,8 @@ function FilterProducts({
       basis="full"
       className="filter-container"
     >
-      <Box
-        direction="row"
-        justify="between"
-        align="center"
-        width="100vw"
-        margin="10px"
-      >
-        <Heading level={3} margin="small">
+      <Box direction="row" justify="between" align="center" width="100vw">
+        <Heading level={3} margin={{ left: "large" }}>
           Filter
         </Heading>
         <Button icon={<Close />} onClick={onClose} />
@@ -121,8 +115,8 @@ function FilterProducts({
           onChange={handleLocation}
         />
         <Box direction="column" justify="end" margin={{ top: "medium" }}>
-          <Button label="Clear all" onClick={handleReset} />
-          <Button type="submit" label="Publish" primary />
+          <Button label="Clear all" onClick={handleReset} primary />
+          <Button type="submit" label="Apply" primary />
         </Box>
       </Form>
     </Box>

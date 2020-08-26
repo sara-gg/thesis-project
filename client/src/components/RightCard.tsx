@@ -10,23 +10,23 @@ const RightCard = () => {
   return (
     <div className="home-right-container">
       <Box
-        pad="medium"
+        pad="large"
         gridArea="main"
-        background="white"
+        background="offwhite"
         align="center"
         justify="center"
         className="home-card box"
         flex="grow"
       >
         <Heading className="home-card-header">Bedroom inspo</Heading>
-        <Text className="home-card-desc">
-          Create the bedroom of your dreams with our sleeping beauties: lie back
-          and relax in one of our seriously seductive beds, crafted in wood or
-          metal or luxuriously upholstered, and topped with a sumptuous mattress
-          and our beautiful bedding. Add coordinating bedside tables, drawers
-          and wardrobes for a serene sanctuary that meets all of your needs.
+        <Text size="large" className="home-card-desc">
+          Create the bedroom of your dreams: lie back and relax in one of our
+          seriously seductive beds, crafted in wood or metal or luxuriously
+          upholstered. Add coordinating bedside tables, drawers and wardrobes
+          for a serene sanctuary that meets all of your needs.
         </Text>
         <Button
+          margin={{ bottom: "large" }}
           onClick={() => {
             history.push("products?categoryId=1");
           }}
@@ -34,7 +34,7 @@ const RightCard = () => {
           primary
         ></Button>
         <Heading className="home-card-header">Bathroom</Heading>
-        <Text className="home-card-desc">
+        <Text size="large" className="home-card-desc">
           Create a bathroom you’ll want to spend a long, long time in with the
           items in our collection. From quality fittings in gleaming metal and
           warm bamboo, and accessories in intriguing materials and a
