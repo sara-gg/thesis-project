@@ -20,6 +20,7 @@ import UserOptionsMenu from "../components/UserOptionsMenu";
 import { Product } from "../models/product";
 import { connect } from "react-redux";
 import "../styles/AppBar.scss";
+import { logRoles } from "@testing-library/react";
 
 type Props = {
   isAuthenticated: boolean;
@@ -99,7 +100,7 @@ const AppBar = ({
       {(responsive) =>
         responsive === "small" ? (
           <Menu
-            label={<Image src={croppedLogo} height="40px" />}
+            label={<Image src={logo} height="40px" />}
             items={[
               {
                 label: "Home",
