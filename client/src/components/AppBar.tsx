@@ -9,7 +9,7 @@ import {
   ResponsiveContext,
 } from "grommet";
 import { Cart } from "grommet-icons";
-import logo from "../assets/logo.png";
+import logo from "../assets/Furniss Logo.png";
 import croppedLogo from "../assets/logo-cropped.png";
 import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
@@ -150,7 +150,7 @@ const AppBar = ({
             <SearchBar />
 
             <NavLink exact to="/">
-              <Image src={logo} height="200px" />
+              <Image src={logo} height="60px" />
             </NavLink>
 
             <Box
