@@ -20,6 +20,7 @@ import AppBar from "../components/AppBar";
 import CategoriesBar from "../components/CategoriesBar";
 import { Product } from "../models/product";
 import "../styles/ProductDetails.scss";
+import { confirmAlert } from "react-confirm-alert";
 import {
   FacebookShareButton,
   PinterestShareButton,
@@ -49,6 +50,8 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
   const [currentQuantity, setCurrentQuantity] = useState<number>(0);
   const [userInfo, setUserInfo] = useState<any>([]);
   const url = window.location.href;
+  const token = localStorage.getItem("accessToken");
+
 
   // TODO: fetch a single product with /product?id=1
   useEffect(() => {
@@ -83,7 +86,7 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
   }, [product]);
 
   const handleAddItemToBasket = () => {
-    if (isAuthenticated) {
+    if (token) {
       let currentQuantityProduct = {
         ...product,
         basket_quantity: currentQuantity,
@@ -96,6 +99,27 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
       postBasketProducts(currentQuantityProduct).then(() =>
         console.log("here posting quantity", currentQuantityProduct)
       );
+    } else {
+      confirmAlert({
+        title: "You aren't logged in",
+        message:
+          "Only logged users can buy products",
+        buttons: [
+          {
+            label: "Register",
+            onClick: () => {
+              history.push(`/register`);
+            },
+          },
+          {
+            label: "Login",
+            onClick: () => {
+              history.push(`/login`);
+            },
+          },
+        ],
+        childrenElement: () => <div />,
+      });
     }
   };
 
