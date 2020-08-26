@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Button,
@@ -12,6 +12,8 @@ import {
 import { Close } from "grommet-icons";
 import { connect } from "react-redux";
 import { Materials } from "../models/materials";
+import { Product } from "../models/product";
+import ApiService from "../ApiService/ApiService";
 import { filterCategoryProducts, getProductsForCategory } from "../actions";
 import "../styles/FilterForm.scss";
 
@@ -49,10 +51,29 @@ function FilterProducts({
   filterCategoryProducts,
   categoryId,
   getProductsForCategory,
+  categoryProducts,
 }: any) {
   const [materials, setMaterials] = useState<Array<string>>([]);
   const [location, setLocation] = useState<string>("");
+  const [sellers, setSellers] = useState<Array<number> | undefined>([]);
+  const [publicInfo, setPublicInfo] = useState<any>([]);
 
+  useEffect(() => {
+    let categorySellers: any[] = [];
+
+    categoryProducts.forEach((product: Product) => {
+      categorySellers.push(product.user_id);
+    });
+    console.log(categorySellers);
+    setSellers(categorySellers);
+    categorySellers.forEach((id) => {
+      ApiService.getPublicUserData(id).then((res) => {
+        setPublicInfo([...publicInfo, res]);
+        
+      });
+    });
+  }, []);
+  console.log(publicInfo);
   const handleSubmit = (event: any) => {
     event.preventDefault();
 
@@ -116,6 +137,7 @@ function FilterProducts({
         />
         <Box direction="column" justify="end" margin={{ top: "medium" }}>
           <Button label="Clear all" onClick={handleReset} primary />
+          <br />
           <Button type="submit" label="Apply" primary />
         </Box>
       </Form>
@@ -124,7 +146,9 @@ function FilterProducts({
 }
 
 const mapStateToProps = (state: any) => {
-  return {};
+  return {
+    categoryProducts: state.categoryProducts,
+  };
 };
 
 export default connect(mapStateToProps, {
