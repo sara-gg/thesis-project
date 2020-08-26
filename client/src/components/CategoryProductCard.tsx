@@ -42,16 +42,19 @@ function CategoryProductCard({ product, readonly }: Props) {
         <Box direction="row" gap="medium" justify="between">
           <Box width="75%">
             <Text>
-              <span className="category-product-title">{product.title} </span>(
-              {product.quantity})
+              <span className="category-product-title">{product.title} </span>
+            </Text>
+            <Text margin={{ top: "5px" }}>
+              <span className="category-product-qty">QTY </span>
+              <span>{product.quantity} — &#x20; &#x20;</span>
+              <span color="#444444">
+                <Location size="small" /> {product.location}
+              </span>
             </Text>
           </Box>
 
           <Text>{product.price} €</Text>
         </Box>
-        <Text size="small">
-          <Location size="small" /> {product.location}
-        </Text>
       </Box>
     </Box>
   );

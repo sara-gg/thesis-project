@@ -35,6 +35,15 @@ function Home() {
           </Text>
         </Box>
       </Box>
+
+      {visitorIdStr ? (
+        <RecentViewed />
+      ) : (
+        <div style={{ display: "none" }}></div>
+      )}
+      <LeftCard />
+
+      <RightCard />
       <Box
         justify="center"
         align="center"
@@ -42,16 +51,9 @@ function Home() {
         margin-top="2%"
         margin-bottom="4%"
       >
-        <Heading size="medium">Our favourite products</Heading>
+        <Heading level="2">Our favourite products</Heading>
       </Box>
       <FavouritesCarousel />
-      {visitorIdStr ? (
-        <RecentViewed />
-      ) : (
-        <div style={{ display: "none" }}></div>
-      )}
-      <LeftCard />
-      <RightCard />
     </div>
   );
 }
