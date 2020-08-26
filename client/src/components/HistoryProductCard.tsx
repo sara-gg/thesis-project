@@ -1,18 +1,8 @@
-import React, { useState } from "react";
-import { Box, Button, Image, Text } from "grommet";
-import { Edit, Trash } from "grommet-icons";
-import { Product } from "../models/product";
-import { useHistory } from "react-router-dom";
-import ApiService from "../ApiService/ApiService";
-import { toast } from "react-toastify";
+import React from "react";
+import { Box, Image, Text } from "grommet";
 import "react-toastify/dist/ReactToastify.css";
 
-interface Props {
-  product: Product;
-  readonly?: boolean;
-}
-function UserGalleryProductCard({ product, readonly }: Props) {
-  let history = useHistory();
+function HistoryProductCard({ product }: any) {
 
   return (
     <Box
@@ -27,12 +17,6 @@ function UserGalleryProductCard({ product, readonly }: Props) {
       <Box
         height="small"
         width="small"
-        onClick={() => {
-          history.push({
-            pathname: "/productdetails",
-            search: `?id=${product.id}`,
-          });
-        }}
       >
         <Image fit="cover" src={`${product.images}`} />
       </Box>
@@ -40,9 +24,10 @@ function UserGalleryProductCard({ product, readonly }: Props) {
         <Text>{product.title}</Text>
         <Text size="small">{product.basket_quantity}</Text>
         <Text size="small">{product.price} €</Text>
+        <Text size="small">Quantity: {product.purchased_quantity}</Text>
       </Box>
     </Box>
   );
 }
 
-export default UserGalleryProductCard;
+export default HistoryProductCard;
