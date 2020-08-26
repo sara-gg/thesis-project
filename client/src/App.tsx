@@ -113,7 +113,7 @@ function App({ setUserData }: Props): JSX.Element {
           </Route>
           <Route path={`/products`} component={CategoryPage} />
           <Route path="/productdetails">
-            <ProductDetails />
+            <ProductDetails isAuthenticated />
           </Route>
           <Route path="/">
             <Home />

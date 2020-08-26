@@ -15,7 +15,7 @@ import ReactImageMagnify from "react-image-magnify";
 import ApiService from "../ApiService/ApiService";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { postBasketProducts } from "../actions";
+import { postBasketProducts, setIsAuthenticated } from "../actions";
 import CategoriesBar from "../components/CategoriesBar";
 import { Product } from "../models/product";
 import "../styles/ProductDetails.scss";
@@ -36,9 +36,13 @@ interface DispatchProps {
   postBasketProducts: (product: Product) => any;
 }
 
-type Props = StateProps & DispatchProps;
+interface isAuthenticated {
+  isAuthenticated: boolean;
+}
 
-function ProductDetails({ postBasketProducts, id }: Props) {
+type Props = DispatchProps & StateProps & isAuthenticated;
+
+function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
   const history = useHistory();
   const [product, setProduct] = useState<any>(null);
   const [currentQuantity, setCurrentQuantity] = useState<number>(0);
@@ -78,18 +82,20 @@ function ProductDetails({ postBasketProducts, id }: Props) {
   }, [product]);
 
   const handleAddItemToBasket = () => {
-    let currentQuantityProduct = {
-      ...product,
-      basket_quantity: currentQuantity,
-    };
-    toast(
-      <Box margin="20px">
-        {product.title} has been added to your basket! 🛒 🎉
+    if (isAuthenticated) {
+      let currentQuantityProduct = {
+        ...product,
+        basket_quantity: currentQuantity,
+      };
+      toast(
+        <Box margin="20px">
+          {product.title} has been added to your basket! 🛒 🎉
       </Box>
-    );
-    postBasketProducts(currentQuantityProduct).then(() =>
-      console.log("here posting quantity", currentQuantityProduct)
-    );
+      );
+      postBasketProducts(currentQuantityProduct).then(() =>
+        console.log("here posting quantity", currentQuantityProduct)
+      );
+    }
   };
 
   const handleAddItemToWishlist = () => {
