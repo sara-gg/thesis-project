@@ -1,9 +1,11 @@
 import React from "react";
 import { Box, Heading, Text } from "grommet";
 import bedroomImg from "../assets/bedroom-hero.jpeg";
+
 import FavouritesCarousel from "../components/FavouritesCarousel";
 import LeftCard from "../components/LeftCard";
 import RightCard from "../components/RightCard";
+import AppBar from "../components/AppBar";
 import CategoriesBar from "../components/CategoriesBar";
 import RecentViewed from "../components/RecentViewed"
 import "../styles/Home.scss";
@@ -17,6 +19,7 @@ function Home() {
 
   return (
     <div>
+      <AppBar/>
       <CategoriesBar />
       <Box
         justify="center"

@@ -70,7 +70,6 @@ function App({ setUserData }: Props): JSX.Element {
     <Router>
       <Elements stripe={stripePromise}>
         <ToastContainer />
-        <AppBar />
         <Switch>
           <Route path="/login">
             <Login />

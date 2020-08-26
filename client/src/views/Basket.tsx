@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import AppBar from "../components/AppBar";
 import CategoriesBar from "../components/CategoriesBar";
 import "../styles/Basket.scss";
 import ApiService from "../ApiService/ApiService";
@@ -57,7 +58,9 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
   }, [basketProducts]);
 
   return (
+  
     <Box>
+       <AppBar/>
       <CategoriesBar />
       <Heading
         level="2"
