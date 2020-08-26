@@ -78,13 +78,14 @@ function UserProductCard({ product, visitorId, ownerId }: Props) {
 
   return (
     <Box
-      height="auto"
+      height="250px"
       width="small"
       margin="small"
       pad="small"
       background="white"
       hoverIndicator="true"
       round="small"
+      justify="between"
       onClick={() => {
         history.push({
           pathname: "/productdetails",

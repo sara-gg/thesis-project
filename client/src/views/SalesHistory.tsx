@@ -1,16 +1,15 @@
 import React from "react";
-import AppBar from "../components/AppBar";
 import { useHistory } from "react-router-dom";
 import CategoriesBar from "../components/CategoriesBar";
-import PurchasedProducts from "../containers/PurchasedProducts";
+import AppBar from "../components/AppBar";
+import SoldProducts from "../components/SoldProducts";
 import { Box, Text } from "grommet";
-import "../styles/heading-title.scss";
 
 type Props = {
   isAuthenticated: boolean;
 };
 
-function PurchaseHistory({ isAuthenticated }: Props): any {
+function SalesHistory({ isAuthenticated }: Props): any {
   let history = useHistory();
 
   if (isAuthenticated) {
@@ -36,7 +35,10 @@ function PurchaseHistory({ isAuthenticated }: Props): any {
             {" "}
             · · ·{" "}
           </Text>
-          <PurchasedProducts />
+          <Text alignSelf="center">
+            Here you can find information about all your previous purchases!
+          </Text>
+          <SoldProducts />
         </Box>
       </Box>
     );
@@ -45,4 +47,4 @@ function PurchaseHistory({ isAuthenticated }: Props): any {
   }
 }
 
-export default PurchaseHistory;
+export default SalesHistory;

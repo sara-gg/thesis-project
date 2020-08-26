@@ -1,44 +1,45 @@
 import React, { useEffect, useState } from "react";
 import ApiService from "../ApiService/ApiService";
 import { Box, Button, Text } from "grommet";
-import HistoryProductCard from "./HistoryProductCard";
+import HistoryProductCard from "../components/HistoryProductCard";
 import { Product } from "../models/product";
-import soldImg from "../assets/undraw_transfer_money_rywa.svg";
 import { useHistory } from "react-router-dom";
+import img from "../assets/undraw_deliveries_131a.svg";
 
-const SoldProducts = (): JSX.Element => {
-  const [soldProducts, setSoldProducts] = useState<Product[]>([]);
+const PurchasedProducts = (): JSX.Element => {
+  const [purchasedProducts, setPurchasedProducts] = useState<Product[]>([]);
   const history = useHistory();
 
   useEffect(() => {
-    ApiService.getAllSoldProducts().then((res) => setSoldProducts(res));
+    ApiService.getAllPurchasedProducts().then((res) =>
+      setPurchasedProducts(res)
+    );
   }, []);
 
   return (
     <Box>
-      {soldProducts && soldProducts.length > 0 ? (
+      {purchasedProducts && purchasedProducts.length > 0 ? (
         <Box pad="medium" align="center">
-          {soldProducts.length !== 0 &&
-            soldProducts.map((product: Product) => {
+          {purchasedProducts.length !== 0 &&
+            purchasedProducts.map((product: Product) => {
               return <HistoryProductCard product={product} key={product.id} />;
             })}
         </Box>
       ) : (
         <Box align="center" gap="small">
-          <Text>You haven't sold any products yet!</Text>
-          <Text>
-            In the meantime, why don't you check what is trending now?
-          </Text>
+          <Text>You haven't bought any products yet!</Text>
+          <Text>Check out what is new for you: </Text>
           <Button
+            margin={{ top: "small" }}
             label="Discover New Products"
             onClick={() => history.push("/home")}
             primary
           ></Button>
-          <img width="400px" src={soldImg}></img>
+          <img width="400px" src={img}></img>
         </Box>
       )}
     </Box>
   );
 };
 
-export default SoldProducts;
+export default PurchasedProducts;
