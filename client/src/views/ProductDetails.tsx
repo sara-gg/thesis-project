@@ -41,41 +41,58 @@ function ProductDetails({ postBasketProducts, id }: Props) {
   const history = useHistory();
   const [product, setProduct] = useState<any>(null);
   const [currentQuantity, setCurrentQuantity] = useState<number>(0);
+  const [userInfo, setUserInfo] = useState<any>([]);
   const url = window.location.href;
-  console.log("url", url, "window.location", window.location);
 
   // TODO: fetch a single product with /product?id=1
   useEffect(() => {
-    ApiService.getAllProducts().then((res) => {
-      const products: Product[] = res.rows;
-      const queryString = window.location.search;
-      const urlParams = new URLSearchParams(queryString);
-      const productId = urlParams.get("id");
-      if (productId) {
-        const filteredProduct = products.filter(
-          (product) => product.id === +productId //coercing productId to type number
-        )[0];
-        setProduct(filteredProduct);
-        setCurrentQuantity(filteredProduct.quantity);
-      }
-    });
+    ApiService.getAllProducts()
+      .then((res) => {
+        const products: Product[] = res.rows;
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const productId = urlParams.get("id");
+        if (productId) {
+          const filteredProduct = products.filter(
+            (product) => product.id === +productId //coercing productId to type number
+          )[0];
+          setProduct(filteredProduct);
+          setCurrentQuantity(filteredProduct.quantity);
+          return filteredProduct;
+        }
+      })
+      .then((filteredProduct) => {
+        if (filteredProduct && filteredProduct.user_id) {
+          ApiService.getPublicUserData(filteredProduct.user_id).then((res) => {
+            setUserInfo(res);
+          });
+        }
+      });
   }, []);
+
+  useEffect(() => {
+    if(product) {
+      ApiService.saveViewedProduct(product);
+    }
+  },[product])
 
   const handleAddItemToBasket = () => {
     let currentQuantityProduct = {
       ...product,
-      quantity: currentQuantity,
+      basket_quantity: currentQuantity,
     };
-    toast.dark(
+    toast(
       <Box margin="20px">
         {product.title} has been added to your basket! 🛒 🎉
       </Box>
     );
-    postBasketProducts(currentQuantityProduct).then(() => console.log("here"));
+    postBasketProducts(currentQuantityProduct).then(() =>
+      console.log("here posting quantity", currentQuantityProduct)
+    );
   };
 
   const handleAddItemToWishlist = () => {
-    toast.dark(
+    toast(
       <Box margin="20px">
         {product.title} has been added to your wishlist! ❤️
       </Box>
@@ -100,7 +117,6 @@ function ProductDetails({ postBasketProducts, id }: Props) {
   const redirectToSeller = (id: number) => {
     history.push(`/usergallery/${id}`);
   };
-  const props = { width: 400, height: 250, zoomWidth: 500, img: "1.jpg" };
 
   return (
     <Box>
@@ -122,8 +138,8 @@ function ProductDetails({ postBasketProducts, id }: Props) {
               {/* TODO: add carousel once we have more than one image */}
               <Image fit="cover" fill="horizontal" src={`${product.images}`} />
             </Box>
-            <Box margin="medium" width="50%" align="center">
-              <Box align="center">
+            <Box margin="medium" width="50%" align="center" justify="center" className="text-container">
+              <Box align="center" justify="center">
                 <Text size="large" margin="none">
                   <span className="product-details-title">{product.title}</span>
                 </Text>
@@ -140,7 +156,7 @@ function ProductDetails({ postBasketProducts, id }: Props) {
                   size="medium"
                   className="product-details-title"
                 >
-                  user name here {product.user_id}
+                  {userInfo.username}
                 </Paragraph>
                 <Text size="medium" margin="large">
                   {product.description}
@@ -208,8 +224,8 @@ function ProductDetails({ postBasketProducts, id }: Props) {
                     </Text>
                   }
                 >
-                  <Box pad="large">
-                    <Text size="medium">
+                  <Box pad="medium" align="start">
+                    <Text size="medium" margin="small">
                       <span className="product-details-beige-subtitle">
                         MEASUREMENTS (height x depth x width):
                       </span>
@@ -218,12 +234,12 @@ function ProductDetails({ postBasketProducts, id }: Props) {
                         {product.height} x {product.depth} x {product.width} cm
                       </span>
                     </Text>
-                    <Text size="medium">
+                    <Text size="medium" margin="small">
                       <span className="product-details-beige-subtitle">
                         MATERIALS:
                       </span>
 
-                      <span color="grey">{product.material}</span>
+                      <span color="grey"> {product.material}</span>
                     </Text>
                   </Box>
                 </AccordionPanel>
@@ -234,23 +250,30 @@ function ProductDetails({ postBasketProducts, id }: Props) {
                       size="large"
                       margin="medium"
                     >
-                      {" "}
                       More about the seller
                     </Text>
                   }
                 >
-                  <Box pad="large">
-                    <Text>Meet the seller: {product.user_id}</Text>
-                    <Button
-                      color="darkred"
+                  <Box pad="medium">
+                    <Text
+                      size="xlarge"
+                      className="product-details-beige-heading"
+                    >
+                      Meet the seller: {userInfo.username}
+                    </Text>
+                    <br />
+                    <Text>{userInfo.description}</Text>
+                    <br />
+                    <Text>
+                      Want to see more of {userInfo.username}'s products?
+                    </Text>
+                    <br />
+                    <a
+                      className="gallery-button"
                       onClick={() => redirectToSeller(product.user_id)}
                     >
-                      Seller's gallery
-                    </Button>
-                    <Text>
-                      Insert description here and want to see more of user.name
-                      products? checkout their gallery
-                    </Text>
+                      Check out their gallery
+                    </a>
                   </Box>
                 </AccordionPanel>
               </Accordion>

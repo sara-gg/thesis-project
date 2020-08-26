@@ -10,14 +10,16 @@ import "react-toastify/dist/ReactToastify.css";
 interface Props {
   product: Product;
   readonly?: boolean;
+  basketProducts: any;
+  setBasketProducts: (p: any) => void;
 }
-function UserGalleryProductCard({ product, readonly }: Props) {
-  
+function BasketProductCard({ product, readonly, setBasketProducts, basketProducts }: Props) {
+
   // const [editmode, setEditMode] = useState(false);
   let history = useHistory();
 
   const handleDelete = () => {
-   
+
     ApiService.deleteProductFromBasket(product).then(() => {
       toast(
         <Box margin="20px">
@@ -25,6 +27,10 @@ function UserGalleryProductCard({ product, readonly }: Props) {
         </Box>
       );
     })
+    .then(() => {
+      let keepItems = basketProducts.filter((p: Product) => p.id !== product.id)
+      setBasketProducts(keepItems)
+    });
   };
   return (
     <Box
@@ -61,4 +67,4 @@ function UserGalleryProductCard({ product, readonly }: Props) {
   );
 }
 
-export default UserGalleryProductCard;
+export default BasketProductCard;
