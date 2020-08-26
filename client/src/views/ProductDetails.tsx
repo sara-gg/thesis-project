@@ -135,22 +135,20 @@ function ProductDetails({ postBasketProducts, id }: Props) {
             width="xxlarge"
             gap="medium"
           >
-           
-              <ReactImageMagnify
-                {...{
-                  smallImage: {
-                    alt: "Wristwatch by Ted Baker London",
-                    isFluidWidth: true,
-                    src: product.images,
-                  },
-                  largeImage: {
-                    src: product.images,
-                    width: 1200,
-                    height: 1200,
-                  },
-                }}
-              />
-         
+            <ReactImageMagnify
+              {...{
+                smallImage: {
+                  alt: "Wristwatch by Ted Baker London",
+                  isFluidWidth: true,
+                  src: product.images,
+                },
+                largeImage: {
+                  src: product.images,
+                  width: 1200,
+                  height: 1200,
+                },
+              }}
+            />
 
             <Box
               margin="medium"
@@ -274,7 +272,7 @@ function ProductDetails({ postBasketProducts, id }: Props) {
                     </Text>
                   }
                 >
-                  <Box pad="medium">
+                  <Box pad="medium" align="start">
                     <Text
                       size="xlarge"
                       className="product-details-beige-heading"
@@ -282,7 +280,7 @@ function ProductDetails({ postBasketProducts, id }: Props) {
                       Meet the seller: {userInfo.username}
                     </Text>
                     <br />
-                    <Text>{userInfo.description}</Text>
+                    <Text className="seller-description">{userInfo.description}</Text>
                     <br />
                     <Text>
                       Want to see more of {userInfo.username}'s products?
