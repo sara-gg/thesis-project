@@ -1,4 +1,6 @@
 import React from "react";
+import AppBar from "../components/AppBar";
+import { Box } from "grommet";
 import { useHistory } from "react-router-dom";
 import CategoriesBar from "../components/CategoriesBar";
 import PurchasedProducts from "../components/PurchasedProducts";
@@ -14,6 +16,7 @@ function PurchaseHistory({ isAuthenticated }: Props): any {
   if (isAuthenticated) {
     return (
       <>
+       <AppBar />
         <CategoriesBar />
         <h1>Your Purchases</h1>
         <PurchasedProducts />

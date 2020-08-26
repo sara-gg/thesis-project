@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { RootState } from "../models/rootstate";
+import AppBar from "../components/AppBar";
 import loginImg from "../assets/general-room.jpg";
 
 type Props = {
@@ -16,48 +17,51 @@ function Login({ isAuthenticated }: Props): JSX.Element {
 
   if (!isAuthenticated) {
     return (
-      <Box
-        background={{
-          opacity: "medium",
-          image: `url(${loginImg})`,
-        }}
-      >
+      <>
+        <AppBar />
         <Box
-          direction="column"
-          overflow={{ horizontal: "hidden" }}
-          margin="large"
-          flex
-          align="center"
-          justify="center"
+          background={{
+            opacity: "medium",
+            image: `url(${loginImg})`,
+          }}
         >
-          <LoginForm />
           <Box
-            margin={{ bottom: "large" }}
-            width="medium"
-            pad="medium"
+            direction="column"
+            overflow={{ horizontal: "hidden" }}
+            margin="large"
+            flex
             align="center"
-            alignSelf="center"
-            background={{ color: "white", opacity: "strong" }}
-            round="small"
+            justify="center"
           >
-            <Text weight="bold">
-              You don't have an account yet? Register here:
-            </Text>
-            <Text size="xlarge" margin="small">
-              {" "}
-              · · ·{" "}
-            </Text>
-            <Button
-              margin="small"
-              label="Register"
-              onClick={() => {
-                history.push("/register");
-              }}
-              primary
-            />
+            <LoginForm />
+            <Box
+              margin={{ bottom: "large" }}
+              width="medium"
+              pad="medium"
+              align="center"
+              alignSelf="center"
+              background={{ color: "white", opacity: "strong" }}
+              round="small"
+            >
+              <Text weight="bold">
+                You don't have an account yet? Register here:
+              </Text>
+              <Text size="xlarge" margin="small">
+                {" "}
+                · · ·{" "}
+              </Text>
+              <Button
+                margin="small"
+                label="Register"
+                onClick={() => {
+                  history.push("/register");
+                }}
+                primary
+              />
+            </Box>
           </Box>
         </Box>
-      </Box>
+      </>
     );
   } else {
     return <Redirect to={{ pathname: "/home" }} />;

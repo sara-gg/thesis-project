@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router";
 import CategoryProductCard from "../components/CategoryProductCard";
+import AppBar from "../components/AppBar";
 import CategoriesBar from "../components/CategoriesBar";
 import CategoryHeader from "../components/CategoryHeader";
 import { connect } from "react-redux";
@@ -76,6 +77,7 @@ const CategoryPage = ({
   }
   return (
     <Box className="categoryPage">
+      <AppBar/>
       <CategoriesBar />
       <CategoryHeader
         categoryName={categoryNamesToIds[categoryId]}
