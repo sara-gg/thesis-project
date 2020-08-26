@@ -1,37 +1,37 @@
 import React from "react";
 import { Box, Heading, Text } from "grommet";
-import bedroomImg from "../assets/bedroom-hero.jpeg";
+import bedroomImg from "../assets/anewseason.jpg";
+import option2 from "../assets/hmgoepprod2.jpeg";
 import FavouritesCarousel from "../components/FavouritesCarousel";
 import LeftCard from "../components/LeftCard";
 import RightCard from "../components/RightCard";
+import AppBar from "../components/AppBar";
 import CategoriesBar from "../components/CategoriesBar";
-import RecentViewed from "../components/RecentViewed"
+import RecentViewed from "../components/RecentViewed";
 import "../styles/Home.scss";
 import { RootState } from "../models/rootstate";
 import { connect } from "react-redux";
 
 function Home() {
-
-
   const visitorIdStr: any = localStorage.getItem("userId");
 
   return (
     <div>
+      <AppBar />
       <CategoriesBar />
       <Box
         justify="center"
-        height="large"
+        height="80vh"
         align="center"
         background={{
           image: `url(${bedroomImg})`,
         }}
       >
-        <Box className="home-header-container">
-          <Heading>Welcome to Furniss!</Heading>
-          <Text className="home-header-description">
-            Join our community. <br />
-            Here people come together to make, sell, buy and collect unique,
-            upcycled furniture.
+        <Box height="small" className="home-header-container">
+          <Heading level="1">Welcome to Furniss!</Heading>
+          <Text className="home-header-description" weight="bold" size="large">
+            Here people come together to make, sell, and buy unique, upcycled
+            furniture.
           </Text>
         </Box>
       </Box>
@@ -45,11 +45,11 @@ function Home() {
         <Heading size="medium">Our favourite products</Heading>
       </Box>
       <FavouritesCarousel />
-      {
-        visitorIdStr ? 
+      {visitorIdStr ? (
         <RecentViewed />
-        : <div style={{display: "none"}}></div>
-      }
+      ) : (
+        <div style={{ display: "none" }}></div>
+      )}
       <LeftCard />
       <RightCard />
     </div>

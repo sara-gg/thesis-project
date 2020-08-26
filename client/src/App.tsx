@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import Login from "./views/Login";
@@ -46,8 +46,8 @@ function App({ setUserData }: Props): JSX.Element {
   const userToken = localStorage.getItem("accessToken");
   const userId: any = localStorage.getItem("userId");
 
-  if(userId) {
-    
+  if (userId) {
+
   }
 
   const getAllUserData = (userId: number) => {
@@ -77,6 +77,7 @@ function App({ setUserData }: Props): JSX.Element {
   return (
     <Router>
       <Elements stripe={stripePromise}>
+        <ToastContainer />
         <ToastContainer
           position="top-right"
           autoClose={3000}
@@ -88,7 +89,7 @@ function App({ setUserData }: Props): JSX.Element {
           draggable
           pauseOnHover={false}
         />
-        <AppBar />
+        <div className="page">
         <Switch>
           <Route path="/login">
             <Login />
@@ -120,34 +121,18 @@ function App({ setUserData }: Props): JSX.Element {
           </Route>
           <Route path={`/products`} component={CategoryPage} />
           <Route path="/productdetails">
-            <ProductDetails />
+            <ProductDetails isAuthenticated />
           </Route>
           <Route path="/">
             <Home />
           </Route>
         </Switch>
+        </div>
         <Foot />
       </Elements>
     </Router>
   );
 }
-
-// const mapDispatchToProps = (dispatch: any) => {
-//   return {
-//     setUserData: (
-//       id: Number,
-//       name: String,
-//       lastname: String,
-//       boolean: boolean
-//     ) =>
-//       dispatch({
-//         type: "SET_USER_DATA",
-//         payload: { id, name, lastname, boolean },
-//       }),
-//   };
-// };
-
-// export default connect(null, mapDispatchToProps)(App);
 
 const mapDispatchToProps = (dispatch: any) => {
   return {

@@ -68,17 +68,12 @@ const initialState = {
   depth: 0,
   material: "",
   category_id: "",
-  categories: [],
 };
 
 type Props = StateProps & DispatchProps;
 
 const NewProductForm = ({
-  isAuthenticated,
-  setIsAuthenticated,
   setNewProductDetails,
-  submitNewProduct,
-  setProductImages,
   getCategories,
   setCategoryName,
   title,
@@ -95,25 +90,15 @@ const NewProductForm = ({
   categories,
   categoryName,
 }: Props) => {
-  const [newProduct, setNewProduct] = useState({
-    title,
-    description,
-    images,
-    location,
-    price,
-    quantity,
-    height,
-    width,
-    depth,
-    material,
-    category_id,
-  });
+  const [newProduct, setNewProduct] = useState(initialState);
   const [productImage, setProductImage] = useState<File>();
+  const userId: any = localStorage.getItem("userId");
 
   let history = useHistory();
 
   useEffect(() => {
     getCategories();
+    setNewProduct(initialState);
   }, []);
 
   const materialOptions = [
@@ -134,7 +119,6 @@ const NewProductForm = ({
   const categoryOptions = Object.keys(categoryNamesToIds);
 
   const onDrop = (files: File[], pictures: string[]) => {
-    // after MVP change -> files: File[], pictures: string[]
     setProductImage(files[0]);
   };
 
@@ -174,112 +158,164 @@ const NewProductForm = ({
     e.preventDefault();
     newProduct.category_id = category_id;
     await ApiService.createNewProduct(newProduct, e.target, productImage);
-
-    history.push("/usergallery");
+    window.location.assign(`http://localhost:3000/usergallery/${userId}`);
   };
 
   return (
-    <Box direction="row" flex align="center" justify="center">
-      <Box width="medium" margin="50px">
-        <Form
-          onChange={(value) => console.log("Change", value)}
-          onSubmit={handleSubmit}
+    <Box
+      align="center"
+      justify="center"
+      margin={{ top: "medium", bottom: "large" }}
+      background={{ color: "white", opacity: "strong" }}
+      width="75%"
+      round="small"
+    >
+      <Text
+        size="xlarge"
+        color="blue"
+        margin={{ top: "medium" }}
+        weight="bold"
+        alignSelf="center"
+      >
+        New Product
+      </Text>
+      <Text size="xlarge" alignSelf="center" margin="small">
+        {" "}
+        · · ·{" "}
+      </Text>
+      <Box direction="row" align="center">
+        <Box
+          width="40%"
+          margin={{ horizontal: "50px", vertical: "medium" }}
+          align="center"
         >
-          <FormField
-            name="title"
+          <Form onSubmit={handleSubmit}>
+            <FormField
+              name="title"
+              label={
+                <Box direction="row">
+                  <Text>Product name</Text>
+                  <Text color="status-critical"> *</Text>
+                </Box>
+              }
+              value={title}
+              onChange={handleChange}
+              required
+            ></FormField>
+            <FormField
+              label={
+                <Box direction="row">
+                  <Text>Description</Text>
+                  <Text color="status-critical"> *</Text>
+                </Box>
+              }
+              name="description"
+              value={description}
+              required
+              component={TextArea}
+              onChange={handleChange}
+            />
+            <FormField
+              label={
+                <Box direction="row">
+                  <Text>Location</Text>
+                  <Text color="status-critical"> *</Text>
+                </Box>
+              }
+              name="location"
+              value={location}
+              required
+              onChange={handleChange}
+            />
+            <FormField
+              label={
+                <Box direction="row">
+                  <Text>{`Quantity: ${quantity}`}</Text>
+                  <Text color="status-critical"> *</Text>
+                </Box>
+              }
+              name="quantity"
+              value={quantity}
+              component={RangeInput}
+              pad
+              min={1}
+              max={100}
+              onChange={handleChange}
+              required
+            />
+            <FormField
+              label={
+                <Box direction="row">
+                  <Text>Price</Text>
+                  <Text color="status-critical"> *</Text>
+                </Box>
+              }
+              name="price"
+              value={price}
+              required
+              validate={{ regexp: /\d+\.?\d*$/, message: "decimals allowed" }}
+              onChange={handleChange}
+            />
+
+            <FormField
+              label="Height(cm)"
+              name="height"
+              onChange={handleChange}
+            />
+            <FormField label="Width(cm)" name="width" onChange={handleChange} />
+            <FormField label="Depth(cm)" name="depth" onChange={handleChange} />
+
+            <Select
+              name="material"
+              placeholder="Select material"
+              closeOnChange={true}
+              value={material}
+              options={materialOptions}
+              onChange={handleSelectChange}
+              margin={{ vertical: "medium" }}
+              alignSelf="stretch"
+            />
+
+            <Select
+              name="category_id"
+              placeholder="Category"
+              closeOnChange={true}
+              value={categoryName}
+              options={categoryOptions}
+              onChange={handleCategoryChange}
+              margin={{ bottom: "small" }}
+              alignSelf="center"
+            />
+
+            <Box
+              direction="column"
+              alignSelf="end"
+              margin={{ vertical: "large" }}
+            >
+              <Button
+                size="large"
+                type="submit"
+                alignSelf="end"
+                label="Publish"
+                primary
+              />
+            </Box>
+          </Form>
+        </Box>
+        <Box width="40%">
+          <ImageUploader
+            withIcon={true}
+            onChange={onDrop}
+            buttonText={"Upload image"}
+            withLabel={true}
             label={
-              <Box direction="row">
-                <Text>Product name</Text>
-                <Text color="status-critical"> *</Text>
-              </Box>
+              "Upload images of your product here, accepted: jpg, gif, png"
             }
-            required
-          >
-            <TextInput name="title" value={title} onChange={handleChange} />
-          </FormField>
-          {/* <FormField
-            label="Product name"
-            name="title"
-            value={title}
-            required
-            validate={{ regexp: /^[a-z]/i }}
-            onChange={handleChange}
-          /> */}
-          <FormField
-            label="Description"
-            name="description"
-            value={description}
-            required
-            component={TextArea}
-            onChange={handleChange}
+            imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+            maxFileSize={5242880}
+            withPreview={true}
           />
-          <FormField
-            label="Location"
-            name="location"
-            value={location}
-            required
-            onChange={handleChange}
-          />
-          <FormField
-            label={`Quantity: ${quantity}`}
-            name="quantity"
-            value={quantity}
-            component={RangeInput}
-            pad
-            min={1}
-            max={100}
-            onChange={handleChange}
-          />
-          <FormField
-            label="Price"
-            name="price"
-            value={price}
-            required
-            validate={{ regexp: /\d+\.?\d*$/, message: "decimals allowed" }}
-            onChange={handleChange}
-          />
-
-          <FormField label="Height(cm)" name="height" onChange={handleChange} />
-          <FormField label="Width(cm)" name="width" onChange={handleChange} />
-          <FormField label="Depth(cm)" name="depth" onChange={handleChange} />
-
-          <Select
-            name="material"
-            placeholder="Select material"
-            // multiple
-            closeOnChange={true}
-            value={material}
-            options={materialOptions}
-            onChange={handleSelectChange}
-          />
-
-          <Select
-            name="category_id"
-            placeholder="category"
-            // multiple
-            closeOnChange={true}
-            value={categoryName}
-            options={categoryOptions}
-            onChange={handleCategoryChange}
-          />
-
-          <Box direction="row" justify="between" margin={{ top: "medium" }}>
-            {/* <Button label="Cancel" /> */}
-            <Button type="submit" label="Publish" primary />
-          </Box>
-        </Form>
-      </Box>
-      <Box width="medium">
-        <ImageUploader
-          withIcon={true}
-          onChange={onDrop} // comentedfor MVP
-          buttonText={"Upload image"}
-          withLabel={true}
-          label={"Upload images of your product here, accepted: jpg, gif, png"}
-          imgExtension={[".jpg", ".gif", ".png", ".gif"]}
-          maxFileSize={5242880}
-          withPreview={true}
-        />
+        </Box>
       </Box>
     </Box>
   );

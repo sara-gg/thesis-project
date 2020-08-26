@@ -7,3 +7,38 @@
 .home-card-desc {
   padding-bottom: 2%;
 }
+.home-left-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.home-right-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.box {
+  width: 50vw;
+}
+
+@media (max-width: 768px) {
+  .home-left-container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .home-right-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .box {
+    width: 100vw;
+  }
+}
+
+//   .box {
+//     flex-grow: 1;
+//     width: 100vw;
+//   }
+// }

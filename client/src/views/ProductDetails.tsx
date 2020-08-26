@@ -16,9 +16,11 @@ import ApiService from "../ApiService/ApiService";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { postBasketProducts } from "../actions";
+import AppBar from "../components/AppBar";
 import CategoriesBar from "../components/CategoriesBar";
 import { Product } from "../models/product";
 import "../styles/ProductDetails.scss";
+import { confirmAlert } from "react-confirm-alert";
 import {
   FacebookShareButton,
   PinterestShareButton,
@@ -36,14 +38,20 @@ interface DispatchProps {
   postBasketProducts: (product: Product) => any;
 }
 
-type Props = StateProps & DispatchProps;
+interface isAuthenticated {
+  isAuthenticated: boolean;
+}
 
-function ProductDetails({ postBasketProducts, id }: Props) {
+type Props = DispatchProps & StateProps & isAuthenticated;
+
+function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
   const history = useHistory();
   const [product, setProduct] = useState<any>(null);
   const [currentQuantity, setCurrentQuantity] = useState<number>(0);
   const [userInfo, setUserInfo] = useState<any>([]);
   const url = window.location.href;
+  const token = localStorage.getItem("accessToken");
+
 
   // TODO: fetch a single product with /product?id=1
   useEffect(() => {
@@ -78,18 +86,41 @@ function ProductDetails({ postBasketProducts, id }: Props) {
   }, [product]);
 
   const handleAddItemToBasket = () => {
-    let currentQuantityProduct = {
-      ...product,
-      basket_quantity: currentQuantity,
-    };
-    toast(
-      <Box margin="20px">
-        {product.title} has been added to your basket! 🛒 🎉
+    if (token) {
+      let currentQuantityProduct = {
+        ...product,
+        basket_quantity: currentQuantity,
+      };
+      toast.dark(
+        <Box margin="20px">
+          {product.title} has been added to your basket! 🛒 🎉
       </Box>
-    );
-    postBasketProducts(currentQuantityProduct).then(() =>
-      console.log("here posting quantity", currentQuantityProduct)
-    );
+      );
+      postBasketProducts(currentQuantityProduct).then(() =>
+        console.log("here posting quantity", currentQuantityProduct)
+      );
+    } else {
+      confirmAlert({
+        title: "You aren't logged in",
+        message:
+          "Only logged users can buy products",
+        buttons: [
+          {
+            label: "Register",
+            onClick: () => {
+              history.push(`/register`);
+            },
+          },
+          {
+            label: "Login",
+            onClick: () => {
+              history.push(`/login`);
+            },
+          },
+        ],
+        childrenElement: () => <div />,
+      });
+    }
   };
 
   const handleAddItemToWishlist = () => {
@@ -121,6 +152,7 @@ function ProductDetails({ postBasketProducts, id }: Props) {
 
   return (
     <Box>
+      <AppBar />
       <CategoriesBar />
       {product && (
         <Box align="center" margin="medium">

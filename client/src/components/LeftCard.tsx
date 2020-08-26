@@ -1,35 +1,49 @@
 import React from "react";
-import { Box, Button, Grid, Heading, Text } from "grommet";
+import {
+  Box,
+  Button,
+  Grid,
+  Image,
+  Heading,
+  Text,
+  ResponsiveContext,
+} from "grommet";
+import { deepMerge } from "grommet/utils";
 import homepageCard from "../assets/homepage-card.jpg";
 import { useHistory } from "react-router-dom";
 import "../styles/homeCard.scss";
+import myTheme from "../styles/theme";
 
 const LeftCard = () => {
   let history = useHistory();
 
+  const customBreakpoints = deepMerge(myTheme, {
+    global: {
+      breakpoints: {
+        small: {
+          value: 600,
+        },
+        medium: {
+          value: 900,
+        },
+        large: {
+          value: 3000,
+        },
+      },
+    },
+  });
+
   return (
-    <Grid
-      fill
-      areas={[
-        { name: "image", start: [0, 0], end: [0, 0] },
-        { name: "main", start: [1, 0], end: [1, 0] },
-      ]}
-      columns={["50%", "flex"]}
-      rows={["large"]}
-      margin="4% 0 0 0"
-    >
+    <div className="home-left-container">
+      <Image height="50%" src={homepageCard} className="box" />
       <Box
-        gridArea="image"
-        background={{
-          image: `url(${homepageCard})`,
-        }}
-      />
-      <Box
+        pad="medium"
         gridArea="main"
         background="white"
         align="center"
         justify="center"
-        className="home-card"
+        className="home-card box"
+        flex="grow"
       >
         <Heading className="home-card-header">Living room inspo</Heading>
         <Text className="home-card-desc">
@@ -55,11 +69,11 @@ const LeftCard = () => {
           onClick={() => {
             history.push("/products?categoryId=3");
           }}
-          label="Shop bedroom items"
+          label="Shop kitchen items"
           primary
         ></Button>
       </Box>
-    </Grid>
+    </div>
   );
 };
 

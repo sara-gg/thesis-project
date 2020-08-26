@@ -1,11 +1,12 @@
 import React from "react";
-import { Box, Button, Text } from "grommet";
+import { Box } from "grommet";
 import LoginForm from "../components/LoginForm";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { RootState } from "../models/rootstate";
-import loginImg from "../assets/cactus-alvin-engler.jpg";
+import AppBar from "../components/AppBar";
+import loginImg from "../assets/general-room.jpg";
 
 type Props = {
   isAuthenticated: boolean;
@@ -16,48 +17,26 @@ function Login({ isAuthenticated }: Props): JSX.Element {
 
   if (!isAuthenticated) {
     return (
-      <Box
-        background={{
-          opacity: "medium",
-          image: `url(${loginImg})`,
-        }}
-      >
+      <>
+        <AppBar />
         <Box
-          direction="column"
-          overflow={{ horizontal: "hidden" }}
-          margin="large"
-          flex
-          align="center"
-          justify="center"
+          background={{
+            opacity: "medium",
+            image: `url(${loginImg})`,
+          }}
         >
-          <LoginForm />
           <Box
-            margin={{ bottom: "large" }}
-            width="medium"
-            pad="medium"
+            direction="column"
+            overflow={{ horizontal: "hidden" }}
+            margin="large"
+            flex
             align="center"
-            alignSelf="center"
-            background={{ color: "white", opacity: "strong" }}
-            round="small"
+            justify="center"
           >
-            <Text weight="bold">
-              You don't have an account yet? Register here:
-            </Text>
-            <Text size="xlarge" margin="small">
-              {" "}
-              · · ·{" "}
-            </Text>
-            <Button
-              margin="small"
-              label="Register"
-              onClick={() => {
-                history.push("/register");
-              }}
-              primary
-            />
+            <LoginForm />
           </Box>
         </Box>
-      </Box>
+      </>
     );
   } else {
     return <Redirect to={{ pathname: "/home" }} />;
