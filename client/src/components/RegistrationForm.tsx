@@ -93,11 +93,26 @@ const RegistrationForm = ({
 
   if (!isAuthenticated) {
     return (
-      <Box width="medium">
-        <Form
-          onChange={(value) => console.log("Change", value)}
-          onSubmit={handleSubmit}
+      <Box
+        width="40%"
+        pad="medium"
+        background={{ color: "white", opacity: "strong" }}
+        round="small"
+      >
+        <Text
+          size="xlarge"
+          color="blue"
+          margin={{ top: "medium" }}
+          weight="bold"
+          alignSelf="center"
         >
+          Create Account
+        </Text>
+        <Text size="xlarge" alignSelf="center" margin="small">
+          {" "}
+          · · ·{" "}
+        </Text>
+        <Form onSubmit={handleSubmit}>
           <FormField
             name="name"
             label={
@@ -288,13 +303,17 @@ const RegistrationForm = ({
             />
           </FormField>
           <br></br>
-          <Text margin={{ left: "small" }} size="small" color="status-critical">
+          <Text margin={{ left: "small" }} size="small" color="darkred">
             * Required Field
           </Text>
           <br></br>
-          <Box direction="row" justify="between" margin={{ top: "medium" }}>
-            {/* <Button label="Cancel" /> */}
-            <Button type="submit" label="Submit" primary />
+          <Box
+            direction="row"
+            alignSelf="center"
+            align="center"
+            margin={{ top: "medium" }}
+          >
+            <Button type="submit" alignSelf="center" label="Submit" primary />
           </Box>
         </Form>
       </Box>

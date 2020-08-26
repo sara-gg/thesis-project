@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { RootState } from "../models/rootstate";
+import loginImg from "../assets/cactus-alvin-engler.jpg";
 
 type Props = {
   isAuthenticated: boolean;
@@ -16,27 +17,45 @@ function Login({ isAuthenticated }: Props): JSX.Element {
   if (!isAuthenticated) {
     return (
       <Box
-        direction="column"
-        overflow={{ horizontal: "hidden" }}
-        margin="large"
-        flex
-        align="center"
-        justify="center"
+        background={{
+          opacity: "medium",
+          image: `url(${loginImg})`,
+        }}
       >
-        <Box>
+        <Box
+          direction="column"
+          overflow={{ horizontal: "hidden" }}
+          margin="large"
+          flex
+          align="center"
+          justify="center"
+        >
           <LoginForm />
-        </Box>
-        <Box margin="xlarge" pad="medium" align="center">
-          <Text margin="large"> · · · </Text>
-          <Text>You don't have an account yet? Register here:</Text>
-          <Button
-            margin="small"
-            label="Register"
-            onClick={() => {
-              history.push("/register");
-            }}
-            primary
-          />
+          <Box
+            margin={{ bottom: "large" }}
+            width="medium"
+            pad="medium"
+            align="center"
+            alignSelf="center"
+            background={{ color: "white", opacity: "strong" }}
+            round="small"
+          >
+            <Text weight="bold">
+              You don't have an account yet? Register here:
+            </Text>
+            <Text size="xlarge" margin="small">
+              {" "}
+              · · ·{" "}
+            </Text>
+            <Button
+              margin="small"
+              label="Register"
+              onClick={() => {
+                history.push("/register");
+              }}
+              primary
+            />
+          </Box>
         </Box>
       </Box>
     );
