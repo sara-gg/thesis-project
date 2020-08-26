@@ -1,15 +1,14 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import axios from "axios";
-import React from 'react';
+import React from "react";
 
 import Row from "./prebuilt/Row";
 import BillingDetailsFields from "./prebuilt/BillingDetailsFields";
 import SubmitButton from "./prebuilt/SubmitButton";
 import CheckoutError from "./prebuilt/CheckoutError";
 
-import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 
 const CardElementContainer = styled.div`
   height: 40px;
@@ -29,7 +28,7 @@ const CheckoutForm = ({ price, onSuccessfulCheckout }) => {
   const stripe = useStripe();
   const elements = useElements();
 
-  const handleFormSubmit = async ev => {
+  const handleFormSubmit = async (ev) => {
     ev.preventDefault();
 
     const billingDetails = {
@@ -39,21 +38,23 @@ const CheckoutForm = ({ price, onSuccessfulCheckout }) => {
         city: ev.target.city.value,
         line1: ev.target.address.value,
         state: ev.target.state.value,
-        postal_code: ev.target.zip.value
-      }
+        postal_code: ev.target.zip.value,
+      },
     };
-
 
     setProcessingTo(true);
 
-    const { data: clientSecret } = await axios.post('http://localhost:3001/api/payment_intents', {
-      amount: price * 100
-    });
+    const { data: clientSecret } = await axios.post(
+      "http://localhost:3001/api/payment_intents",
+      {
+        amount: price * 100,
+      }
+    );
 
     const cardElement = elements.getElement(CardElement);
 
     const paymentMethodReq = await stripe.createPaymentMethod({
-      type: 'card',
+      type: "card",
       card: cardElement,
       billing_details: billingDetails,
     });
@@ -80,15 +81,15 @@ const CheckoutForm = ({ price, onSuccessfulCheckout }) => {
         color: "#fa755a",
         iconColor: "#fa755a",
       },
-      hidePostalCode: true
+      hidePostalCode: true,
     },
-  }
+  };
 
   const formStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  }
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  };
 
   return (
     <form onSubmit={handleFormSubmit} style={formStyle}>
