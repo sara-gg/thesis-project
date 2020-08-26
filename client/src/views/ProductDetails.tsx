@@ -280,7 +280,9 @@ function ProductDetails({ postBasketProducts, id }: Props) {
                       Meet the seller: {userInfo.username}
                     </Text>
                     <br />
-                    <Text className="seller-description">{userInfo.description}</Text>
+                    <Text className="seller-description">
+                      {userInfo.description}
+                    </Text>
                     <br />
                     <Text>
                       Want to see more of {userInfo.username}'s products?
