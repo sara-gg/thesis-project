@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, DropButton, Heading, Image } from "grommet";
+import {
+  Box,
+  Button,
+  DropButton,
+  Heading,
+  Menu,
+  Image,
+  ResponsiveContext,
+} from "grommet";
 import { Cart } from "grommet-icons";
 import logo from "../assets/logo.png";
+import croppedLogo from "../assets/logo-cropped.png";
 import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import Logout from "../components/Logout";
@@ -42,7 +51,7 @@ const AppBar = ({
       return (
         <Button
           type="reset"
-          className="login-button"
+          className="login-button hide"
           onClick={() => {
             history.push("/register");
           }}
@@ -64,7 +73,7 @@ const AppBar = ({
           onClick={() => {
             history.push("/basket_products");
           }}
-          className="badge"
+          className="badge hide"
           data-badge={totalBasket}
         >
           <Cart />
@@ -73,6 +82,7 @@ const AppBar = ({
     } else {
       return (
         <Button
+          className="hide"
           onClick={() => {
             history.push("/basket_products");
           }}
@@ -82,39 +92,86 @@ const AppBar = ({
       );
     }
   };
+  const size = React.useContext(ResponsiveContext);
 
   return (
-    <Box
-      tag="header"
-      direction="row"
-      width="100%"
-      align="center"
-      justify="between"
-      background="white"
-      pad={{ left: "medium", right: "medium", vertical: "small" }}
-      className="appbar"
-    >
-      <SearchBar />
-      <NavLink exact to="/">
-        <Image src={logo} height="50px" />
-      </NavLink>
+    <ResponsiveContext.Consumer>
+      {(responsive) =>
+        responsive === "small" ? (
+          <Menu
+            label={<Image src={croppedLogo} height="40px" />}
+            items={[
+              {
+                label: "Home",
+                onClick: () => {
+                  history.push({
+                    pathname: `/`,
+                  });
+                },
+              },
+              {
+                label: "My Gallery",
+                onClick: () => {
+                  history.push({
+                    pathname: `/usergallery/1`, // add logic for ID
+                  });
+                },
+              },
+              {
+                label: "Purchase History",
+                onClick: () => {},
+              },
+              {
+                label: "Edit Profile",
+                onClick: () => {},
+              },
+              {
+                label: "Cart",
+                onClick: () => {
+                  history.push({
+                    pathname: `/basket_products`,
+                  });
+                },
+              },
+              { label: "Component", onClick: () => {} },
+            ]}
+          />
+        ) : (
+          <Box
+            tag="header"
+            direction="row"
+            width="100%"
+            align="center"
+            justify="between"
+            background="white"
+            pad={{ left: "medium", right: "medium", vertical: "small" }}
+            className="topnav"
+          >
+            <SearchBar />
 
-      <Box
-        direction="row"
-        align="center"
-        justify="end"
-        className="right-appbar"
-        gap="medium"
-      >
-        {isAuthenticated && <UserOptionsMenu />}
+            <NavLink exact to="/">
+              <Image src={logo} height="200px" />
+            </NavLink>
 
-        {handleRenderRegister()}
+            <Box
+              direction="row"
+              align="center"
+              justify="end"
+              className="right-appbar"
+              gap="medium"
+            >
+              {isAuthenticated && <UserOptionsMenu />}
 
-        <Logout />
-        {/* TODO: add logic for badge to check basket */}
-        {renderCart()}
-      </Box>
-    </Box>
+              {handleRenderRegister()}
+
+              <Logout />
+              {/* TODO: add logic for badge to check basket */}
+              {renderCart()}
+            </Box>
+          </Box>
+        )
+      }
+    </ResponsiveContext.Consumer>
   );
 };
 
