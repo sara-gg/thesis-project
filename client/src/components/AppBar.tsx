@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box, Button, DropButton, Heading, Image } from "grommet";
 import { Cart } from "grommet-icons";
 import logo from "../assets/logo.png";
+import logonew from "../assets/logo1.png"
 import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import Logout from "../components/Logout";
@@ -90,7 +91,7 @@ const AppBar = ({ isAuthenticated, productsInBasket }: Props): JSX.Element => {
     >
       <SearchBar />
       <NavLink exact to="/">
-        <Image src={logo} height="50px" />
+        <Image src={logonew} height="50px" />
       </NavLink>
 
       <Box
