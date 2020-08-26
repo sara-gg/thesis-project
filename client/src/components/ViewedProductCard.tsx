@@ -19,11 +19,22 @@ interface Props {
 function UserProductCard({ product, visitorId, ownerId }: Props) {
   let history = useHistory();
 
-
+  return (
+    
+      <Image
+        fit="contain"
+        height="250px"
+        width="250px"
+        src={`${product.images}`}
+      />
+      
+  );
+  {
+    /* 
   return (
     <Box
-      height="auto"
-      width="small"
+      //height="15%"
+      width="100%"
       margin="small"
       pad="small"
       background="white"
@@ -36,17 +47,17 @@ function UserProductCard({ product, visitorId, ownerId }: Props) {
         });
       }}
     >
-      <Box height="xsmall" width="small">
+      <Box width="250px" height="small">
         <Image fit="cover" src={`${product.images}`} />
       </Box>
       <Box direction="column" gap="xsmall" margin={{ horizontal: "small" }}>
         <Text size="small" weight="bold">
           {product.title}
         </Text>
-        <Text size="small">{product.price} €</Text>
       </Box>
     </Box>
-  );
+  ); */
+  }
 }
 
 export default UserProductCard;
