@@ -11,6 +11,7 @@ import {
 import { Cart } from "grommet-icons";
 import logo from "../assets/Furniss Logo.png";
 import croppedLogo from "../assets/logo-cropped.png";
+import logonew from "../assets/logo1.png";
 import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import Logout from "../components/Logout";

@@ -41,7 +41,7 @@ export function submitRegisterDetails(user: User): any {
           console.log("res.error", res.error);
           throw new Error(`${res.message}`);
         } else {
-          
+
           const accessToken = res.token;
           dispatch(setIsAuthenticated(true));
           return accessToken;
@@ -74,9 +74,9 @@ export function setProductImages(payload: string) {
 
 export function submitNewProduct(product: NewProduct): any {
   return function (dispatch: any): Promise<any> {
-    
+
     const token = localStorage.getItem("accessToken");
-    
+
     return fetch(`${BASE_URL}/product`, {
       method: "POST",
       credentials: "include",
@@ -117,7 +117,7 @@ export function getCategories(): any {
     })
       .then((res) => res.json())
       .then((res) => {
-        
+
         dispatch(setCategories(res));
       })
       .catch((err) => console.error);
@@ -147,7 +147,7 @@ export function getProductsForCategory(categoryId: number): any {
     })
       .then((res) => res.json())
       .then((res) => {
-       
+
         dispatch(setCategoryProducts(res.rows));
         dispatch(setCategoryProductsCount(res.count));
       })
@@ -169,7 +169,7 @@ export function filterCategoryProducts(
     } else if (location) {
       ApiUrl += `&location=${location}`;
     }
-   
+
     return fetch(ApiUrl, {
       method: "GET",
       credentials: "include",
@@ -177,7 +177,7 @@ export function filterCategoryProducts(
     })
       .then((res) => res.json())
       .then((res) => {
-   
+
         dispatch(setCategoryProducts(res.rows));
         dispatch(setCategoryProductsCount(res.count));
       })
@@ -244,8 +244,7 @@ export function setBasketProducts(payload: any) {
 export function postBasketProducts(product: any): any {
   return function (dispatch: any): Promise<any> {
     const token = localStorage.getItem("accessToken");
-    const basket_quantity = { basket_quantity: product.basket_quantity };
-   
+
     return fetch(`${BASE_URL}/basket_products/${product.id}`, {
       method: "POST",
       credentials: "include",
@@ -254,10 +253,10 @@ export function postBasketProducts(product: any): any {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(basket_quantity),
+      body: JSON.stringify({ basket_quantity: product.basket_quantity }),
     })
       .then(() => {
-        
+
         dispatch(setBasketProducts(product));
       })
       .catch((err) => console.error(err));

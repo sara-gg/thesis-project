@@ -4,6 +4,7 @@ import { Box } from "grommet";
 import HistoryProductCard from "./HistoryProductCard";
 import { Product } from "../models/product";
 
+
 const renderProducts = (productList: Product[]) => {
   let productsResult: JSX.Element[] = [];
 
@@ -15,30 +16,31 @@ const renderProducts = (productList: Product[]) => {
   return productsResult;
 };
 
-function PurchasedProducts(): JSX.Element {
-  const [purchasedProducts, setPurchasedProducts] = useState<Product[]>([]);
+function SoldProducts(): JSX.Element {
+  const [soldProducts, setSoldProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    ApiService.getAllPurchasedProducts().then((res) =>
-      setPurchasedProducts(res)
-    );
+    ApiService.getAllSoldProducts()
+      .then(res => setSoldProducts(res));
   }, []);
 
   return (
     <div>
       <div className="category-dashboard">
-        {purchasedProducts && purchasedProducts.length > 0 ? (
-          <Box margin="xlarge" pad="medium" align="center">
-            <div className="category-dashboard">
-              {renderProducts(purchasedProducts)}
-            </div>
-          </Box>
-        ) : (
-            "You haven't bought any products yet"
-          )}
+        {
+          soldProducts && soldProducts.length > 0
+            ? (
+              <Box margin="xlarge" pad="medium" align="center">
+                <div className="category-dashboard">
+                  {renderProducts(soldProducts)}
+                </div>
+              </Box>
+            )
+            : "You haven't sold any product yet"
+        }
       </div>
     </div>
   );
 }
 
-export default PurchasedProducts;
+export default SoldProducts;
