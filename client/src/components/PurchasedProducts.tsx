@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ApiService from '../ApiService/ApiService';
 import { Box } from "grommet";
-import UserGalleryProductCard from "./UserGalleryProductCard";
+import HistoryProductCard from "./HistoryProductCard";
 import { Product } from "../models/product";
 
 const renderProducts = (productList: Product[]) => {
@@ -9,7 +9,7 @@ const renderProducts = (productList: Product[]) => {
 
   productList.forEach((product, index) => {
     productsResult.push(
-      <UserGalleryProductCard product={product} key={index} />
+      <HistoryProductCard product={product} key={index} />
     );
   });
   return productsResult;
