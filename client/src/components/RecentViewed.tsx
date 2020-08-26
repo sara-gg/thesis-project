@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import ApiService from "../ApiService/ApiService";
 import { Product } from "../models/product";
-import UserProductCard from "./UserProductCard";
+import ViewedProductCard from "./ViewedProductCard";
 import { RootState } from "../models/rootstate";
-import { Box, Text, Carousel } from "grommet";
+import { Box, Text, Carousel, Image } from "grommet";
 import { connect } from "react-redux";
 import { ReactComponent as Spinner } from '../assets/spinning.svg'
 
@@ -24,7 +24,7 @@ function RecentViewed() {
     const resultArr: JSX.Element[] = [];
     if (products) {
         for(let i = 0; i < products.length; i ++) {
-          productsArr.push(<UserProductCard
+          productsArr.push(<ViewedProductCard
             product={products[i]}
             ownerId={products[i].user_id}
             visitorId={visitorIdStr}
@@ -49,6 +49,7 @@ function RecentViewed() {
     const products = renderProducts();
     setRenderedProducts(products);
   }, [products]);
+
 
   return (
 
