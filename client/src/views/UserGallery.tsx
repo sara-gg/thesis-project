@@ -93,6 +93,9 @@ function UserGallery({ id, isAuthenticated, name }: Props): JSX.Element {
         pad="medium"
         background="offwhite"
       >
+        <Text size="xlarge" color="blue">
+          {galleryInfo.name}'s Products
+        </Text>
         <UserProductsGallery visitorId={visitorId} ownerId={ownerId} />
       </Box>
       <Box
@@ -105,6 +108,9 @@ function UserGallery({ id, isAuthenticated, name }: Props): JSX.Element {
         pad="medium"
         background="offwhite"
       >
+        <Text size="xlarge" color="blue">
+          {galleryInfo.name}'s Gallery Reviews
+        </Text>
         <ReviewList ownerId={ownerId} />
       </Box>
     </Box>

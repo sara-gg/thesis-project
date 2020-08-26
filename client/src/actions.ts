@@ -4,6 +4,8 @@ import { Category } from "./models/category";
 import { Product } from "./models/product";
 const BASE_URL = process.env.BASE_URL || "http://localhost:3001";
 
+//AUTHENITCATION ACTIONS
+
 export function setRegisterDetails({
   name,
   value,
@@ -48,6 +50,8 @@ export function submitRegisterDetails(user: User): any {
   };
 }
 
+//PRODUCT ACTIONS
+
 export function setNewProductDetails({
   name,
   value,
@@ -87,6 +91,8 @@ export function submitNewProduct(product: NewProduct): any {
       .catch((err) => console.log(err));
   };
 }
+
+//CATEGORIES ACTIONS
 
 export function setCategories(payload: Category) {
   return {
@@ -225,6 +231,8 @@ export function SortProductsForCategory(
       .catch((err) => console.error);
   };
 }
+
+//BASKET ACTIONS
 
 export function setBasketProducts(payload: any) {
   return {

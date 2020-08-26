@@ -44,16 +44,34 @@ const LoginForm = (): JSX.Element => {
     } else {
       const { accessToken } = res;
       const userId = res.user.id;
-      const userData = await ApiService.getUserData(userId);
       localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("userId", JSON.stringify(res.user.id));
+      localStorage.setItem("userId", JSON.stringify(userId));
       // we should call here the setIsAuthenticated action
       window.location.replace("http://localhost:3000/home");
     }
   };
 
   return (
-    <Box width="medium">
+    <Box
+      width="40%"
+      pad="medium"
+      background={{ color: "white", opacity: "strong" }}
+      round="small"
+      margin={{ top: "medium", bottom: "large" }}
+    >
+      <Text
+        size="xlarge"
+        color="blue"
+        margin={{ top: "medium" }}
+        weight="bold"
+        alignSelf="center"
+      >
+        Login
+      </Text>
+      <Text size="xlarge" alignSelf="center" margin="small">
+        {" "}
+        · · ·{" "}
+      </Text>
       <Form onSubmit={handleSubmit}>
         <FormField
           name="email"

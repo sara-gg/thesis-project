@@ -11,6 +11,7 @@ import {
 } from "grommet";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReactImageMagnify from "react-image-magnify";
 import ApiService from "../ApiService/ApiService";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -71,10 +72,10 @@ function ProductDetails({ postBasketProducts, id }: Props) {
   }, []);
 
   useEffect(() => {
-    if(product) {
+    if (product) {
       ApiService.saveViewedProduct(product);
     }
-  },[product])
+  }, [product]);
 
   const handleAddItemToBasket = () => {
     let currentQuantityProduct = {
@@ -134,11 +135,28 @@ function ProductDetails({ postBasketProducts, id }: Props) {
             width="xxlarge"
             gap="medium"
           >
-            <Box width="large" margin="medium" overflow="hidden" align="start">
-              {/* TODO: add carousel once we have more than one image */}
-              <Image fit="cover" fill="horizontal" src={`${product.images}`} />
-            </Box>
-            <Box margin="medium" width="50%" align="center" justify="center" className="text-container">
+            <ReactImageMagnify
+              {...{
+                smallImage: {
+                  alt: "Wristwatch by Ted Baker London",
+                  isFluidWidth: true,
+                  src: product.images,
+                },
+                largeImage: {
+                  src: product.images,
+                  width: 1200,
+                  height: 1200,
+                },
+              }}
+            />
+
+            <Box
+              margin="medium"
+              width="50%"
+              align="center"
+              justify="center"
+              className="text-container"
+            >
               <Box align="center" justify="center">
                 <Text size="large" margin="none">
                   <span className="product-details-title">{product.title}</span>
@@ -254,7 +272,7 @@ function ProductDetails({ postBasketProducts, id }: Props) {
                     </Text>
                   }
                 >
-                  <Box pad="medium">
+                  <Box pad="medium" align="start">
                     <Text
                       size="xlarge"
                       className="product-details-beige-heading"
@@ -262,7 +280,9 @@ function ProductDetails({ postBasketProducts, id }: Props) {
                       Meet the seller: {userInfo.username}
                     </Text>
                     <br />
-                    <Text>{userInfo.description}</Text>
+                    <Text className="seller-description">
+                      {userInfo.description}
+                    </Text>
                     <br />
                     <Text>
                       Want to see more of {userInfo.username}'s products?

@@ -5,12 +5,13 @@ const SubmitButton = styled.button`
   height: 50px;
   width: 60%;
   font-size: inherit;
-  background-color: ${props => (props.disabled ? "#7795f8" : "#E1BE86")};
+  background-color: ${props => (props.disabled ? "#E1BE86" : "#E1BE86")};
   border: 4px;
   border-radius: 100px;
-  color: #fff;
+  color: #ffff;
   font-weight: 600;
   cursor: pointer;
+  margin-bottom: 50px;
   &:hover {
     transform: scale(1.1);
   }

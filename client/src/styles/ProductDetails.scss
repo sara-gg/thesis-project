@@ -26,6 +26,7 @@
   background: #ad855e;
   width: 450px;
   height: 60px;
+  cursor: pointer;
 }
 
 .product-detail-wishlist-button {
@@ -43,6 +44,7 @@
   background: white;
   width: 450px;
   height: 60px;
+  cursor: pointer;
 }
 
 .product-detail-quantity {
@@ -103,4 +105,9 @@
   background: #ad855e;
   width: 350px;
   height: 50px;
+  cursor: pointer;
+}
+
+.seller-description {
+  text-align: left;
 }
