@@ -16,7 +16,7 @@ const PaymentForm = ({ amoutToPay, basketProducts }) => {
   };
 
   return (
-    <Layout title="Donut Shop">
+    <Layout title="Furniss">
       <CheckoutForm price={amoutToPay} onSuccessfulCheckout={handlePayment} />
     </Layout>
   );

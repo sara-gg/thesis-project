@@ -55,8 +55,8 @@ function BasketProductCard({
         <TableCell scope="row" border="bottom">
           <Box
             margin="medium"
-            height="small"
-            width="small"
+            height="xsmall"
+            width="xsmall"
             onClick={() => {
               history.push({
                 pathname: "/productdetails",
