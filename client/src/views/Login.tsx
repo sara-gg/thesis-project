@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { RootState } from "../models/rootstate";
-import loginImg from "../assets/cactus-alvin-engler.jpg";
+import loginImg from "../assets/general-room.jpg";
 
 type Props = {
   isAuthenticated: boolean;

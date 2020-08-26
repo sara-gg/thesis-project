@@ -68,17 +68,12 @@ const initialState = {
   depth: 0,
   material: "",
   category_id: "",
-  categories: [],
 };
 
 type Props = StateProps & DispatchProps;
 
 const NewProductForm = ({
-  isAuthenticated,
-  setIsAuthenticated,
   setNewProductDetails,
-  submitNewProduct,
-  setProductImages,
   getCategories,
   setCategoryName,
   title,
@@ -95,25 +90,15 @@ const NewProductForm = ({
   categories,
   categoryName,
 }: Props) => {
-  const [newProduct, setNewProduct] = useState({
-    title,
-    description,
-    images,
-    location,
-    price,
-    quantity,
-    height,
-    width,
-    depth,
-    material,
-    category_id,
-  });
+  const [newProduct, setNewProduct] = useState(initialState);
   const [productImage, setProductImage] = useState<File>();
+  const userId: any = localStorage.getItem("userId");
 
   let history = useHistory();
 
   useEffect(() => {
     getCategories();
+    setNewProduct(initialState);
   }, []);
 
   const materialOptions = [
@@ -134,7 +119,6 @@ const NewProductForm = ({
   const categoryOptions = Object.keys(categoryNamesToIds);
 
   const onDrop = (files: File[], pictures: string[]) => {
-    // after MVP change -> files: File[], pictures: string[]
     setProductImage(files[0]);
   };
 
@@ -174,17 +158,34 @@ const NewProductForm = ({
     e.preventDefault();
     newProduct.category_id = category_id;
     await ApiService.createNewProduct(newProduct, e.target, productImage);
-
-    history.push("/usergallery");
+    window.location.assign(`http://localhost:3000/usergallery/${userId}`);
   };
 
   return (
-    <Box direction="row" flex align="center" justify="center">
-      <Box width="medium" margin="50px">
-        <Form
-          onChange={(value) => console.log("Change", value)}
-          onSubmit={handleSubmit}
+    <Box
+      direction="row"
+      align="center"
+      justify="center"
+      background={{ color: "white", opacity: "strong" }}
+      width="70%"
+      margin="5%"
+      round="small"
+    >
+      <Box width="40%" margin="50px" align="center">
+        <Text
+          size="xlarge"
+          color="blue"
+          margin={{ top: "medium" }}
+          weight="bold"
+          alignSelf="center"
         >
+          New Product
+        </Text>
+        <Text size="xlarge" alignSelf="center" margin="small">
+          {" "}
+          · · ·{" "}
+        </Text>
+        <Form onSubmit={handleSubmit}>
           <FormField
             name="title"
             label={
@@ -193,20 +194,17 @@ const NewProductForm = ({
                 <Text color="status-critical"> *</Text>
               </Box>
             }
-            required
-          >
-            <TextInput name="title" value={title} onChange={handleChange} />
-          </FormField>
-          {/* <FormField
-            label="Product name"
-            name="title"
             value={title}
-            required
-            validate={{ regexp: /^[a-z]/i }}
             onChange={handleChange}
-          /> */}
+            required
+          ></FormField>
           <FormField
-            label="Description"
+            label={
+              <Box direction="row">
+                <Text>Description</Text>
+                <Text color="status-critical"> *</Text>
+              </Box>
+            }
             name="description"
             value={description}
             required
@@ -214,14 +212,24 @@ const NewProductForm = ({
             onChange={handleChange}
           />
           <FormField
-            label="Location"
+            label={
+              <Box direction="row">
+                <Text>Location</Text>
+                <Text color="status-critical"> *</Text>
+              </Box>
+            }
             name="location"
             value={location}
             required
             onChange={handleChange}
           />
           <FormField
-            label={`Quantity: ${quantity}`}
+            label={
+              <Box direction="row">
+                <Text>{`Quantity: ${quantity}`}</Text>
+                <Text color="status-critical"> *</Text>
+              </Box>
+            }
             name="quantity"
             value={quantity}
             component={RangeInput}
@@ -229,9 +237,15 @@ const NewProductForm = ({
             min={1}
             max={100}
             onChange={handleChange}
+            required
           />
           <FormField
-            label="Price"
+            label={
+              <Box direction="row">
+                <Text>Price</Text>
+                <Text color="status-critical"> *</Text>
+              </Box>
+            }
             name="price"
             value={price}
             required
@@ -246,25 +260,26 @@ const NewProductForm = ({
           <Select
             name="material"
             placeholder="Select material"
-            // multiple
             closeOnChange={true}
             value={material}
             options={materialOptions}
             onChange={handleSelectChange}
+            margin={{ vertical: "medium" }}
+            alignSelf="stretch"
           />
 
           <Select
             name="category_id"
-            placeholder="category"
-            // multiple
+            placeholder="Category"
             closeOnChange={true}
             value={categoryName}
             options={categoryOptions}
             onChange={handleCategoryChange}
+            margin={{ bottom: "small" }}
+            alignSelf="center"
           />
 
           <Box direction="row" justify="between" margin={{ top: "medium" }}>
-            {/* <Button label="Cancel" /> */}
             <Button type="submit" label="Publish" primary />
           </Box>
         </Form>

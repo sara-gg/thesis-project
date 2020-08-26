@@ -19,12 +19,11 @@ interface Props {
 function UserProductCard({ product, visitorId, ownerId }: Props) {
   let history = useHistory();
   const deleteNotification = () =>
-    toast("Your product is being deleted forever");
+    toast.dark("Your product is being deleted forever");
 
   const handleEdit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
     deleteNotification();
-    // history.push("/editproduct");
   };
 
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
