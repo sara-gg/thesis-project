@@ -46,8 +46,8 @@ function App({ setUserData }: Props): JSX.Element {
   const userToken = localStorage.getItem("accessToken");
   const userId: any = localStorage.getItem("userId");
 
-  if(userId) {
-    
+  if (userId) {
+
   }
 
   const getAllUserData = (userId: number) => {
