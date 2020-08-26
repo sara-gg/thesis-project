@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Box, Heading, ResponsiveContext } from "grommet";
+import React, { useEffect } from "react";
+import { Box, Heading } from "grommet";
 import "../styles/CategoriesBar.scss";
-import { NavLink, Route } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Category } from "../models/category";
 import { getCategories } from "../actions";
 import { connect } from "react-redux";
@@ -14,8 +14,6 @@ const styles = {
 type Props = StateProps & DispatchProps;
 
 const CategoriesBar = ({ getCategories, categories }: Props) => {
-  // const [categories, setCategories] = useState<Category[]>([]);
-
   useEffect(() => {
     getCategories();
   }, []);
@@ -40,7 +38,7 @@ const CategoriesBar = ({ getCategories, categories }: Props) => {
               key={category.id}
             >
               <Heading
-              responsive
+                responsive
                 level="4"
                 style={styles}
                 className="categories-navbar-header"

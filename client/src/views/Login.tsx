@@ -1,7 +1,6 @@
 import React from "react";
 import { Box } from "grommet";
 import LoginForm from "../components/LoginForm";
-import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { RootState } from "../models/rootstate";
@@ -13,8 +12,6 @@ type Props = {
 };
 
 function Login({ isAuthenticated }: Props): JSX.Element {
-  let history = useHistory();
-
   if (!isAuthenticated) {
     return (
       <>

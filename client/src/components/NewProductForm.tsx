@@ -7,13 +7,11 @@ import {
   RangeInput,
   Text,
   TextArea,
-  TextInput,
   Select,
 } from "grommet";
 import ApiService from "../ApiService/ApiService";
 import { connect } from "react-redux";
 import ImageUploader from "react-images-upload";
-import { useHistory } from "react-router-dom";
 import { NewProduct } from "../models/newProduct";
 import { Category } from "../models/category";
 import {
@@ -94,8 +92,6 @@ const NewProductForm = ({
   const [productImage, setProductImage] = useState<File>();
   const userId: any = localStorage.getItem("userId");
 
-  let history = useHistory();
-
   useEffect(() => {
     getCategories();
     setNewProduct(initialState);
@@ -170,16 +166,18 @@ const NewProductForm = ({
       width="75%"
       round="small"
     >
-      <Text
-        size="xlarge"
-        color="blue"
-        margin={{ top: "medium" }}
-        weight="bold"
-        alignSelf="center"
-      >
-        New Product
-      </Text>
-      <Text size="xlarge" alignSelf="center" margin="small">
+      <Box direction="row" align="center" justify="center">
+        <Text
+          size="xlarge"
+          color="blue"
+          margin={{ top: "medium" }}
+          weight="bold"
+          alignSelf="center"
+        >
+          <span className="heading-title">New Product</span>
+        </Text>
+      </Box>
+      <Text size="large" alignSelf="center" margin="small">
         {" "}
         · · ·{" "}
       </Text>
