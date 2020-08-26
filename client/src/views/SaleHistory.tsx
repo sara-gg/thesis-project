@@ -1,22 +1,22 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import CategoriesBar from "../components/CategoriesBar";
-import PurchasedProducts from "../components/PurchasedProducts";
+import SoldProducts from "../components/SoldProducts";
 
 
 type Props = {
   isAuthenticated: boolean;
 };
 
-function PurchaseHistory({ isAuthenticated }: Props): any {
+function SalesHistory({ isAuthenticated }: Props): any {
   let history = useHistory();
 
   if (isAuthenticated) {
     return (
       <>
         <CategoriesBar />
-        <h1>Your Purchases</h1>
-        <PurchasedProducts />
+        <h1>Your Sales</h1>
+        <SoldProducts />
       </>
     )
   } else {
@@ -24,4 +24,4 @@ function PurchaseHistory({ isAuthenticated }: Props): any {
   }
 }
 
-export default PurchaseHistory;
+export default SalesHistory;
