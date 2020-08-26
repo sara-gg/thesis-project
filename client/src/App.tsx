@@ -46,6 +46,10 @@ function App({ setUserData }: Props): JSX.Element {
   const userToken = localStorage.getItem("accessToken");
   const userId: any = localStorage.getItem("userId");
 
+  if(userId) {
+    
+  }
+
   const getAllUserData = (userId: number) => {
     ApiService.getUserData(userId).then((res) => {
       setUserData(
@@ -63,8 +67,11 @@ function App({ setUserData }: Props): JSX.Element {
     });
   };
 
-  if (userToken && userId) {
+  if (userToken && userId && userToken !== 'undefined') {
     getAllUserData(userId);
+  } else {
+    localStorage.setItem("userId", '');
+    localStorage.setItem('userToken', '')
   }
 
   return (
