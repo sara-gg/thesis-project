@@ -1,0 +1,22 @@
+.product-detail-card {
+  display: flex;
+  flex-direction: row;
+  margin: 5% 0;
+  justify-content: center;
+}
+
+.product-detail-card-p {
+  margin: 0px;
+}
+
+.product-detail-card-button {
+  margin: 25px 0 5px 0;
+}
+
+.product-detail-card-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5%;
+  flex-wrap: wrap;
+}

@@ -19,7 +19,7 @@ const myTheme = {
       },
       focus: "white",
       control: {
-        light: "#E1BE86",
+        light: "#444444",
       },
     },
     font: {
