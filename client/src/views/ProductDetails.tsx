@@ -62,13 +62,19 @@ function ProductDetails({ postBasketProducts, id }: Props) {
         }
       })
       .then((filteredProduct) => {
-        if (filteredProduct) {
+        if (filteredProduct && filteredProduct.user_id) {
           ApiService.getPublicUserData(filteredProduct.user_id).then((res) => {
             setUserInfo(res);
           });
         }
       });
   }, []);
+
+  useEffect(() => {
+    if(product) {
+      ApiService.saveViewedProduct(product);
+    }
+  },[product])
 
   const handleAddItemToBasket = () => {
     let currentQuantityProduct = {

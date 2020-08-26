@@ -236,6 +236,37 @@ const getAllSoldProducts = (): Promise<any> => {
     .catch((err) => console.error(err));
 }
 
+const saveViewedProduct = async (product: Product) => {
+  const token = localStorage.getItem("accessToken");
+  return fetch(`${BASE_URL}/product/view`, {
+    method: "POST",
+    credentials: "include",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ product_id: product.id })
+  })
+    .then((res) => res.json())
+    .catch((err) => console.error(err))
+};
+
+const getViewedProducts = async () => {
+  const token = localStorage.getItem("accessToken");
+  return fetch(`${BASE_URL}/products/view`, {
+    method: "GET",
+    credentials: "include",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((res) => res.json())
+    .catch((err) => console.error(err))
+}
+
 const getAllReviews = (): Promise<any> => {
   return fetch(`${BASE_URL}/reviews`, {
     method: "GET",
@@ -260,6 +291,8 @@ export default {
   deleteBasketProduct,
   deleteProduct,
   getUserData,
+  saveViewedProduct,
+  getViewedProducts,
   getPublicUserData,
   updateQuantityProduct,
   deleteProductFromBasket,

@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Image, Text } from "grommet";
 import "react-toastify/dist/ReactToastify.css";
+import moment from 'moment';
 
 function HistoryProductCard({ product }: any) {
 
@@ -25,6 +26,7 @@ function HistoryProductCard({ product }: any) {
         <Text size="small">{product.basket_quantity}</Text>
         <Text size="small">{product.price} €</Text>
         <Text size="small">Quantity: {product.purchased_quantity}</Text>
+        <Text size="small">Date: {moment(product.pruchase_date).format("MMM Do YYYY")}</Text>
       </Box>
     </Box>
   );

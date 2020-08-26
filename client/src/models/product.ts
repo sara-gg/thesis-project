@@ -1,5 +1,6 @@
 export interface Product {
   id?: number;
+  user_id?: number;
   category_id: string;
   title: string;
   description: string;
@@ -11,6 +12,5 @@ export interface Product {
   depth?: number;
   width?: number;
   updatedAt?: any;
-  user_id?: any;
   basket_quantity?: number;
 }

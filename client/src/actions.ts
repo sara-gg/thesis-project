@@ -236,8 +236,6 @@ export function setBasketProducts(payload: any) {
 export function postBasketProducts(product: any): any {
   return function (dispatch: any): Promise<any> {
     const token = localStorage.getItem("accessToken");
-    const basket_quantity = { basket_quantity: product.basket_quantity };
-    product.pirce = product.price * product.quantity;
 
     return fetch(`${BASE_URL}/basket_products/${product.id}`, {
       method: "POST",
@@ -247,7 +245,7 @@ export function postBasketProducts(product: any): any {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(basket_quantity),
+      body: JSON.stringify({ basket_quantity: product.basket_quantity }),
     })
       .then(() => {
 
