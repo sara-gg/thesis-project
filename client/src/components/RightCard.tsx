@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Grid, Heading, Text } from "grommet";
+import { Box, Button, Grid, Image, Heading, Text } from "grommet";
 import bedroomCard from "../assets/bedroom-card.jpg";
 import { useHistory } from "react-router-dom";
 import "../styles/homeCard.scss";
@@ -8,21 +8,15 @@ const RightCard = () => {
   let history = useHistory();
 
   return (
-    <Grid
-      fill
-      areas={[
-        { name: "main", start: [0, 0], end: [0, 0] },
-        { name: "image", start: [1, 0], end: [1, 0] },
-      ]}
-      columns={["50%", "flex"]}
-      rows={["large"]}
-    >
+    <div className="home-right-container">
       <Box
+        pad="medium"
         gridArea="main"
         background="white"
         align="center"
         justify="center"
-        className="home-card"
+        className="home-card box"
+        flex="grow"
       >
         <Heading className="home-card-header">Bedroom inspo</Heading>
         <Text className="home-card-desc">
@@ -34,7 +28,7 @@ const RightCard = () => {
         </Text>
         <Button
           onClick={() => {
-            history.push("/products?categoryId=1");
+            history.push("products?categoryId=1");
           }}
           label="Shop our bedroom collection"
           primary
@@ -55,13 +49,8 @@ const RightCard = () => {
           primary
         ></Button>
       </Box>
-      <Box
-        gridArea="image"
-        background={{
-          image: `url(${bedroomCard})`,
-        }}
-      />
-    </Grid>
+      <Image height="50%" src={bedroomCard} className="box" />
+    </div>
   );
 };
 

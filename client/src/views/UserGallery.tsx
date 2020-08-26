@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box, Text } from "grommet";
 import { Location } from "grommet-icons";
 import UserProductsGallery from "../containers/UserProductsGallery";
+import AppBar from "../components/AppBar";
 import ApiService from "../ApiService/ApiService";
 import ReviewList from "../containers/ReviewList";
 import renderReviewRating from "../helpers/renderStarRating";
@@ -39,6 +40,7 @@ const UserGallery = ({ id }: Props): JSX.Element => {
 
   return (
     <Box alignSelf="center">
+      <AppBar/>
       <Box
         alignSelf="center"
         width="90%"

@@ -15,7 +15,8 @@ import ReactImageMagnify from "react-image-magnify";
 import ApiService from "../ApiService/ApiService";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { postBasketProducts, setIsAuthenticated } from "../actions";
+import { postBasketProducts } from "../actions";
+import AppBar from "../components/AppBar";
 import CategoriesBar from "../components/CategoriesBar";
 import { Product } from "../models/product";
 import "../styles/ProductDetails.scss";
@@ -87,7 +88,7 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
         ...product,
         basket_quantity: currentQuantity,
       };
-      toast(
+      toast.dark(
         <Box margin="20px">
           {product.title} has been added to your basket! 🛒 🎉
       </Box>
@@ -127,6 +128,7 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
 
   return (
     <Box>
+      <AppBar />
       <CategoriesBar />
       {product && (
         <Box align="center" margin="medium">
