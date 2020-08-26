@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import Login from "./views/Login";
@@ -46,6 +46,10 @@ function App({ setUserData }: Props): JSX.Element {
   const userToken = localStorage.getItem("accessToken");
   const userId: any = localStorage.getItem("userId");
 
+  if(userId) {
+    
+  }
+
   const getAllUserData = (userId: number) => {
     ApiService.getUserData(userId).then((res) => {
       setUserData(
@@ -63,8 +67,11 @@ function App({ setUserData }: Props): JSX.Element {
     });
   };
 
-  if (userToken && userId) {
+  if (userToken && userId && userToken !== 'undefined') {
     getAllUserData(userId);
+  } else {
+    localStorage.setItem("userId", '');
+    localStorage.setItem('userToken', '')
   }
 
   return (
@@ -124,23 +131,6 @@ function App({ setUserData }: Props): JSX.Element {
     </Router>
   );
 }
-
-// const mapDispatchToProps = (dispatch: any) => {
-//   return {
-//     setUserData: (
-//       id: Number,
-//       name: String,
-//       lastname: String,
-//       boolean: boolean
-//     ) =>
-//       dispatch({
-//         type: "SET_USER_DATA",
-//         payload: { id, name, lastname, boolean },
-//       }),
-//   };
-// };
-
-// export default connect(null, mapDispatchToProps)(App);
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
