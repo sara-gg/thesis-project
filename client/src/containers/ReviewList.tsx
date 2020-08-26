@@ -28,8 +28,15 @@ function ReviewList({ ownerId }: Props): JSX.Element {
         reviews.map((review: Review) => {
           return <ReviewCard review={review} />;
         })}
-      <ReviewCard />
-      <ReviewCard />
+      {reviews.length !== 0 && (
+        <Box>
+          <ReviewCard />
+          <ReviewCard />{" "}
+        </Box>
+      )}
+      {reviews.length === 0 && (
+        <Text alignSelf="center">This user doesn't have any reviews yet!</Text>
+      )}
     </Box>
   );
 }

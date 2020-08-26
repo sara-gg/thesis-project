@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Avatar, Box, Text } from "grommet";
+import { Box, Text } from "grommet";
 import { Location } from "grommet-icons";
 import UserProductsGallery from "../containers/UserProductsGallery";
-import { connect } from "react-redux";
-import { RootState } from "../models/rootstate";
 import AppBar from "../components/AppBar";
 import ApiService from "../ApiService/ApiService";
 import ReviewList from "../containers/ReviewList";
-import renderReviewRating from "../helpers/functions";
+import renderReviewRating from "../helpers/renderStarRating";
+import renderUserIcon from "../helpers/renderUserIcon";
 
 type Props = {
   id: string;
-  isAuthenticated: boolean;
-  name: string;
 };
 
 const initialGalleryInfo = {
@@ -22,14 +19,12 @@ const initialGalleryInfo = {
   location: "",
 };
 
-function UserGallery({ id, isAuthenticated, name }: Props): JSX.Element {
+const UserGallery = ({ id }: Props): JSX.Element => {
   const [galleryInfo, setGalleryInfo] = useState(initialGalleryInfo);
 
   const visitorIdStr: any = localStorage.getItem("userId");
   const visitorId = +visitorIdStr;
   const ownerId = +id;
-
-  console.log("visitor id, owner id", visitorId, ownerId);
 
   useEffect(() => {
     ApiService.getPublicUserData(ownerId).then((res) => {
@@ -56,14 +51,9 @@ function UserGallery({ id, isAuthenticated, name }: Props): JSX.Element {
         pad="medium"
         background="lightbeige"
       >
-        <Box direction="row" gap="small">
-          <Avatar
-            size="xlarge"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSXZmZwUr85dXnjJOdKRHI4pweV8XKRD3QMHg&usqp=CAU"
-          />
-        </Box>
+        {renderUserIcon(ownerId, "xlarge")}
         <Text size="xlarge" color="blue">
-          {galleryInfo.name}'s Gallery
+          {galleryInfo.username}'s Gallery
         </Text>
         <Text size="large" color="blue">
           {renderReviewRating(4.5)}
@@ -96,7 +86,7 @@ function UserGallery({ id, isAuthenticated, name }: Props): JSX.Element {
         background="offwhite"
       >
         <Text size="xlarge" color="blue">
-          {galleryInfo.name}'s Products
+          {galleryInfo.username}'s Products
         </Text>
         <UserProductsGallery visitorId={visitorId} ownerId={ownerId} />
       </Box>
@@ -111,19 +101,12 @@ function UserGallery({ id, isAuthenticated, name }: Props): JSX.Element {
         background="offwhite"
       >
         <Text size="xlarge" color="blue">
-          {galleryInfo.name}'s Gallery Reviews
+          {galleryInfo.username}'s Gallery Reviews
         </Text>
         <ReviewList ownerId={ownerId} />
       </Box>
     </Box>
   );
-}
-
-const mapStateToProps = (state: RootState) => {
-  return {
-    isAuthenticated: state.isAuthenticated,
-    name: state.name,
-  };
 };
 
-export default connect(mapStateToProps, {})(UserGallery);
+export default UserGallery;

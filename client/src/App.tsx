@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import Login from "./views/Login";
@@ -131,23 +131,6 @@ function App({ setUserData }: Props): JSX.Element {
     </Router>
   );
 }
-
-// const mapDispatchToProps = (dispatch: any) => {
-//   return {
-//     setUserData: (
-//       id: Number,
-//       name: String,
-//       lastname: String,
-//       boolean: boolean
-//     ) =>
-//       dispatch({
-//         type: "SET_USER_DATA",
-//         payload: { id, name, lastname, boolean },
-//       }),
-//   };
-// };
-
-// export default connect(null, mapDispatchToProps)(App);
 
 const mapDispatchToProps = (dispatch: any) => {
   return {

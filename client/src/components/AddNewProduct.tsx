@@ -8,8 +8,9 @@ function AddNewProduct() {
 
   return (
     <Box
-      height="small"
-      width="small"
+      direction="row"
+      height="xsmall"
+      width="medium"
       elevation="medium"
       margin="medium"
       pad="medium"
@@ -21,7 +22,7 @@ function AddNewProduct() {
         history.push("/newproduct");
       }}
     >
-      <AddCircle size="xlarge" />
+      <AddCircle size="large" />
       <Text textAlign="center" margin="small">
         Add a New Product
       </Text>
