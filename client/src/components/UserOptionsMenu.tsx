@@ -1,10 +1,10 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import { Avatar, Box, Button, Image, Menu } from "grommet";
+import { Box, Menu } from "grommet";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { RootState } from "../models/rootstate";
 import { toast } from "react-toastify";
+import renderUserIcon from "../helpers/renderUserIcon";
 
 type Props = {
   isAuthenticated: boolean;
@@ -22,7 +22,7 @@ const UserOptionsMenu = ({ isAuthenticated, id, name }: Props): JSX.Element => {
       label={name}
       icon={
         <Box direction="row" gap="small">
-          <Avatar src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSv3L0Siqqs2axv5HtEUKg1uiBt0QyJZxsHLQ&usqp=CAU" />
+          {renderUserIcon(id, "medium")}
         </Box>
       }
       dropBackground={{ color: "offwhite", opacity: "medium" }}
@@ -38,7 +38,17 @@ const UserOptionsMenu = ({ isAuthenticated, id, name }: Props): JSX.Element => {
         {
           label: "Purchase History",
           onClick: () => {
-            toast("You are being redirected to your Purchase history!");
+            history.push({
+              pathname: `/purchase_history`,
+            });
+          },
+        },
+        {
+          label: "Sales History",
+          onClick: () => {
+            history.push({
+              pathname: `/sales_history`,
+            });
           },
         },
         {

@@ -1,26 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
 import { Box, Text } from "grommet";
 import UserProductCard from "../components/UserProductCard";
 import AddNewProduct from "../components/AddNewProduct";
-import { RootState } from "../models/rootstate";
 import ApiService from "../ApiService/ApiService";
+import { Product } from "../models/product";
 import "../styles/UserProductsGallery.scss";
 
 type Props = {
   visitorId: number;
   ownerId: number;
-  id: number;
 };
 
-function UserProductsGallery({ visitorId, ownerId, id }: Props): JSX.Element {
+function UserProductsGallery({ visitorId, ownerId }: Props): JSX.Element {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     ApiService.getProductsForUser(ownerId).then((res) => {
-      setProducts(res.rows);
+      setProducts(
+        res.rows.sort(
+          (a: Product, b: Product) =>
+            +new Date(b.createdAt) - +new Date(a.createdAt)
+        )
+      );
     });
-  }, []);
+  }, [products]);
 
   const addNewProduct = () => {
     if (visitorId === ownerId) {
@@ -60,9 +63,6 @@ function UserProductsGallery({ visitorId, ownerId, id }: Props): JSX.Element {
               if (product && product.quantity === 0) {
                 return (
                   <div className="soldProduct">
-                    {/* <Text size="large" color="red" className="soldProductText">
-                    SOLD
-                  </Text> */}
                     <UserProductCard
                       key={product.item_id}
                       product={product}
@@ -95,10 +95,4 @@ function UserProductsGallery({ visitorId, ownerId, id }: Props): JSX.Element {
   );
 }
 
-const mapStateToProps = (state: RootState) => {
-  return {
-    id: state.id,
-  };
-};
-
-export default connect(mapStateToProps, {})(UserProductsGallery);
+export default UserProductsGallery;

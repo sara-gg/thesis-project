@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Text } from "grommet";
-import renderReviewRating from "../helpers/functions";
+import renderReviewRating from "../helpers/renderStarRating";
 
 type Props = {
   review?: any;
