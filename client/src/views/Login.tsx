@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Text } from "grommet";
+import { Box } from "grommet";
 import LoginForm from "../components/LoginForm";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
@@ -34,31 +34,6 @@ function Login({ isAuthenticated }: Props): JSX.Element {
             justify="center"
           >
             <LoginForm />
-            <Box
-              margin={{ bottom: "large" }}
-              width="medium"
-              pad="medium"
-              align="center"
-              alignSelf="center"
-              background={{ color: "white", opacity: "strong" }}
-              round="small"
-            >
-              <Text weight="bold">
-                You don't have an account yet? Register here:
-              </Text>
-              <Text size="xlarge" margin="small">
-                {" "}
-                · · ·{" "}
-              </Text>
-              <Button
-                margin="small"
-                label="Register"
-                onClick={() => {
-                  history.push("/register");
-                }}
-                primary
-              />
-            </Box>
           </Box>
         </Box>
       </>
