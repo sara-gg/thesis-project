@@ -16,7 +16,7 @@ type Props = {
   productsInBasket: [];
 };
 
-const AppBar = ({ isAuthenticated, productsInBasket }: any): JSX.Element => {
+const AppBar = ({ isAuthenticated, productsInBasket }: Props): JSX.Element => {
   let [totalBasket, setTotalBasket] = useState(0);
   let history = useHistory();
 
@@ -100,7 +100,7 @@ const AppBar = ({ isAuthenticated, productsInBasket }: any): JSX.Element => {
         className="right-appbar"
         gap="medium"
       >
-        <UserOptionsMenu />
+        {isAuthenticated && <UserOptionsMenu />}
 
         {handleRenderRegister()}
 
@@ -119,4 +119,4 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-export default connect(mapStateToProps, null)(AppBar);
+export default connect(mapStateToProps, {})(AppBar);

@@ -13,6 +13,7 @@ const initialState: RootState = {
   address: "",
   isAuthenticated: false,
   telephone: "",
+  userDescription: "",
   title: "",
   description: "",
   // images: [] as string[],
@@ -69,7 +70,6 @@ const reducer = (state = initialState, action: any) => {
         images: action.payload,
       };
     case "SET_USER_DATA":
-      console.log(action.payload);
       return {
         ...state,
         id: action.payload.id,
@@ -80,6 +80,7 @@ const reducer = (state = initialState, action: any) => {
         birthdate: action.payload.birthdate,
         gender: action.payload.gender,
         address: action.payload.address,
+        userDescription: action.payload.userDescription,
         isAuthenticated: action.payload.isAuthenticated,
       };
 

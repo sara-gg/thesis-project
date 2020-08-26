@@ -72,7 +72,6 @@ const getAllProducts = (): Promise<any> => {
 
 const getBasketProducts = (): Promise<any> => {
   const token = localStorage.getItem("accessToken");
-  console.log(token)
   return fetch(`${BASE_URL}/basket_products`, {
     method: "GET",
     credentials: "include",
@@ -114,6 +113,46 @@ const deleteProduct = (id: Number): Promise<any> => {
 const deleteBasketProduct = (id: Number): Promise<any> => {
   const token = localStorage.getItem("accessToken");
   return fetch(`${BASE_URL}/basket_products/${id}`, {
+    method: "DELETE",
+    credentials: "include",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((res) => res.json())
+    .catch((err) => console.error);
+};
+
+const updateQuantityProduct = (product: Product): Promise<any> => {
+  const token = localStorage.getItem("accessToken");
+  if (product.basket_quantity) {
+    const newQuantity = {
+      basket_quantity: product.quantity - product.basket_quantity,
+    };
+
+    return fetch(`${BASE_URL}/products/${product.id}`, {
+      method: "PUT",
+      credentials: "include",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(newQuantity), // TODO: need to change the logic to send new quantity instead!
+    })
+      .then((res) => res.json())
+      .catch((err) => console.error);
+  } else {
+    return Promise.resolve({});
+  }
+};
+
+const deleteProductFromBasket = (product: Product): Promise<any> => {
+  const token = localStorage.getItem("accessToken");
+
+  return fetch(`${BASE_URL}/basket_products/${product.id}`, {
     method: "DELETE",
     credentials: "include",
     mode: "cors",
@@ -170,7 +209,7 @@ const getAllPurchasedProducts = (): Promise<any> => {
   })
     .then((res) => res.json())
     .catch((err) => console.error(err));
-}
+};
 
 const getPublicUserData = (id: Number): Promise<any> => {
   return fetch(`${BASE_URL}/user_public_data/${id}`, {
@@ -197,6 +236,19 @@ const getAllSoldProducts = (): Promise<any> => {
     .catch((err) => console.error(err));
 }
 
+const getAllReviews = (): Promise<any> => {
+  return fetch(`${BASE_URL}/reviews`, {
+    method: "GET",
+    credentials: "include",
+    mode: "cors",
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => console.error(err));
+};
+
 export default {
   login,
   createNewProduct,
@@ -208,8 +260,11 @@ export default {
   deleteBasketProduct,
   deleteProduct,
   getUserData,
+  getPublicUserData,
+  updateQuantityProduct,
+  deleteProductFromBasket,
   addToPurchaseHistory,
   getAllPurchasedProducts,
-  getPublicUserData,
-  getAllSoldProducts
+  getAllSoldProducts,
+  getAllReviews
 };

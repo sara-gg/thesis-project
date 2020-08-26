@@ -12,6 +12,7 @@ export interface RootState {
   address: string;
   isAuthenticated: boolean;
   telephone: string;
+  userDescription: string;
   title: string;
   description: string;
   images: string;
