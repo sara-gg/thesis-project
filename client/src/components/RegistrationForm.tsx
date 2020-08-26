@@ -40,7 +40,6 @@ type Props = {
 
 const RegistrationForm = ({
   isAuthenticated,
-  setIsAuthenticated,
   setRegisterDetails,
   submitRegisterDetails,
   name,
@@ -85,29 +84,36 @@ const RegistrationForm = ({
       telephone,
     };
 
-    submitRegisterDetails(user).then((accessToken: string) => {
-      localStorage.setItem("accessToken", accessToken);
-      history.push("/home");
-    });
+    submitRegisterDetails(user).then(
+      (accessToken: string, userId: number | string) => {
+        const strUserId = "" + userId;
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("userId", strUserId);
+        history.push("/home");
+      }
+    );
   };
 
   if (!isAuthenticated) {
     return (
       <Box
-        width="40%"
+        width="medium"
         pad="medium"
         background={{ color: "white", opacity: "strong" }}
         round="small"
+        margin={{ top: "medium", bottom: "large" }}
       >
-        <Text
-          size="xlarge"
-          color="blue"
-          margin={{ top: "medium" }}
-          weight="bold"
-          alignSelf="center"
-        >
-          Create Account
-        </Text>
+        <Box direction="row" align="center" justify="center">
+          <Text
+            size="xlarge"
+            color="blue"
+            margin={{ top: "medium" }}
+            weight="bold"
+            alignSelf="center"
+          >
+            Create Account
+          </Text>
+        </Box>
         <Text size="xlarge" alignSelf="center" margin="small">
           {" "}
           · · ·{" "}
@@ -121,10 +127,10 @@ const RegistrationForm = ({
                 <Text color="status-critical"> *</Text>
               </Box>
             }
+            value={name}
+            onChange={handleChange}
             required
-          >
-            <TextInput name="name" value={name} onChange={handleChange} />
-          </FormField>
+          ></FormField>
           <FormField
             name="lastname"
             label={
@@ -133,14 +139,10 @@ const RegistrationForm = ({
                 <Text color="status-critical"> *</Text>
               </Box>
             }
+            value={lastname}
+            onChange={handleChange}
             required
-          >
-            <TextInput
-              name="lastname"
-              value={lastname}
-              onChange={handleChange}
-            />
-          </FormField>
+          ></FormField>
           <FormField
             name="username"
             label={
@@ -150,13 +152,9 @@ const RegistrationForm = ({
               </Box>
             }
             required
-          >
-            <TextInput
-              name="username"
-              value={username}
-              onChange={handleChange}
-            />
-          </FormField>
+            value={username}
+            onChange={handleChange}
+          ></FormField>
           <FormField
             name="userDescription"
             label={
@@ -302,20 +300,43 @@ const RegistrationForm = ({
               onChange={handleSelectChange}
             />
           </FormField>
-          <br></br>
-          <Text margin={{ left: "small" }} size="small" color="darkred">
+          <Text
+            margin={{ left: "small", vertical: "medium" }}
+            size="small"
+            color="darkred"
+          >
             * Required Field
           </Text>
-          <br></br>
           <Box
-            direction="row"
+            direction="column"
             alignSelf="center"
             align="center"
-            margin={{ top: "medium" }}
+            justify="center"
+            margin={{ vertical: "large" }}
           >
-            <Button type="submit" alignSelf="center" label="Submit" primary />
+            <Button
+              type="submit"
+              alignSelf="center"
+              label="Create account"
+              primary
+            />
           </Box>
         </Form>
+        <Box margin={{ vertical: "large" }} align="center">
+          <Text size="xlarge" margin="small">
+            {" "}
+            · · ·{" "}
+          </Text>
+          <Text weight="bold">Do you already have an account?</Text>
+          <Button
+            margin="small"
+            label="Login"
+            onClick={() => {
+              history.push("/login");
+            }}
+            primary
+          />
+        </Box>
       </Box>
     );
   } else {

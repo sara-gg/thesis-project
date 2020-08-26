@@ -12,6 +12,7 @@ import {
 import { Hide, View } from "grommet-icons";
 import ApiService from "../ApiService/ApiService";
 import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 
 const initialState = {
   email: "",
@@ -21,6 +22,7 @@ const initialState = {
 const LoginForm = (): JSX.Element => {
   const [revealPassword, setRevealPassword] = useState(false);
   const [state, setState] = useState(initialState);
+  const history = useHistory();
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -37,9 +39,9 @@ const LoginForm = (): JSX.Element => {
     const res = await ApiService.login(user);
 
     if (!res) {
-      toast(`Sorry, incorrect email or password!`);
+      toast.dark(`Sorry, incorrect email or password!`);
     } else if (res.error) {
-      toast(`${res.message}`);
+      toast.dark(`${res.message}`);
       setState(initialState);
     } else {
       const { accessToken } = res;
@@ -53,7 +55,7 @@ const LoginForm = (): JSX.Element => {
 
   return (
     <Box
-      width="40%"
+      width="medium"
       pad="medium"
       background={{ color: "white", opacity: "strong" }}
       round="small"
@@ -122,15 +124,43 @@ const LoginForm = (): JSX.Element => {
             />
           </Box>
         </FormField>
-        <br />
-        <Text margin={{ left: "small" }} size="small" color="status-critical">
+        <Text
+          margin={{ left: "small", vertical: "medium" }}
+          size="small"
+          color="status-critical"
+        >
           * Required Field
         </Text>
-        <br></br>
-        <Box direction="row" justify="between" margin={{ top: "medium" }}>
-          <Button type="submit" label="Submit" primary />
+        <Box
+          direction="column"
+          alignSelf="center"
+          align="center"
+          justify="center"
+          margin={{ vertical: "large" }}
+        >
+          <Button type="submit" alignSelf="center" label="Login" primary />
         </Box>
       </Form>
+      <Box
+        margin={{ vertical: "small" }}
+        align="center"
+        justify="center"
+        pad="small"
+        gap="small"
+      >
+        <Text size="xlarge"> · · · </Text>
+        <Text weight="bold" alignSelf="center" margin="small">
+          You don't have an account with us yet? Join Furniss here:{" "}
+        </Text>
+        <Button
+          margin="small"
+          label="Register"
+          onClick={() => {
+            history.push("/register");
+          }}
+          primary
+        />
+      </Box>
     </Box>
   );
 };

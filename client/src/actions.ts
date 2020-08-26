@@ -41,8 +41,8 @@ export function submitRegisterDetails(user: User): any {
           console.log("res.error", res.error);
           throw new Error(`${res.message}`);
         } else {
-
           const accessToken = res.token;
+          const userId = res.user.id;
           dispatch(setIsAuthenticated(true));
           return accessToken;
         }
@@ -74,7 +74,6 @@ export function setProductImages(payload: string) {
 
 export function submitNewProduct(product: NewProduct): any {
   return function (dispatch: any): Promise<any> {
-
     const token = localStorage.getItem("accessToken");
 
     return fetch(`${BASE_URL}/product`, {
@@ -117,7 +116,6 @@ export function getCategories(): any {
     })
       .then((res) => res.json())
       .then((res) => {
-
         dispatch(setCategories(res));
       })
       .catch((err) => console.error);
@@ -147,7 +145,6 @@ export function getProductsForCategory(categoryId: number): any {
     })
       .then((res) => res.json())
       .then((res) => {
-
         dispatch(setCategoryProducts(res.rows));
         dispatch(setCategoryProductsCount(res.count));
       })
@@ -177,7 +174,6 @@ export function filterCategoryProducts(
     })
       .then((res) => res.json())
       .then((res) => {
-
         dispatch(setCategoryProducts(res.rows));
         dispatch(setCategoryProductsCount(res.count));
       })
@@ -201,8 +197,6 @@ export function SortProductsForCategory(
     })
       .then((res) => res.json())
       .then((res) => {
-
-
         if (price && direction === "up") {
           dispatch(
             setCategoryProducts(
@@ -256,7 +250,6 @@ export function postBasketProducts(product: any): any {
       body: JSON.stringify({ basket_quantity: product.basket_quantity }),
     })
       .then(() => {
-
         dispatch(setBasketProducts(product));
       })
       .catch((err) => console.error(err));
