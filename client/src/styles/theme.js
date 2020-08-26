@@ -13,6 +13,7 @@ const myTheme = {
       offbeige: "#F1DCA7",
       darkred: "#9A031E",
       staryellow: "#F48C06",
+      text: "#444444",
       text: {
         light: "#444444",
       },
