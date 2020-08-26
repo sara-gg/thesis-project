@@ -39,6 +39,7 @@ function UserProductCard({ product, visitorId, ownerId }: Props) {
           onClick: () => {
             deleteNotification();
             if (product.id) deleteProduct(product.id);
+            history.push(`/usergallery/${ownerId}`);
           },
         },
         {
@@ -47,7 +48,6 @@ function UserProductCard({ product, visitorId, ownerId }: Props) {
         },
       ],
     });
-    history.push("/usergallery");
   };
 
   const deleteProduct = (id: number) => {

@@ -52,7 +52,7 @@ function UserProductsGallery({ visitorId, ownerId, id }: Props): JSX.Element {
           overflow="hidden"
           wrap={true}
           flex
-          align="center"
+          align="start"
           justify="center"
         >
           {products.length !== 0 &&
