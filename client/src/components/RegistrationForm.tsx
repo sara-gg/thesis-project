@@ -20,6 +20,7 @@ import {
 } from "../actions";
 import { useHistory } from "react-router-dom";
 import { Redirect } from "react-router-dom";
+import "../styles/heading-title.scss";
 
 type Props = {
   isAuthenticated: boolean;
@@ -111,10 +112,10 @@ const RegistrationForm = ({
             weight="bold"
             alignSelf="center"
           >
-            Create Account
+            <span className="heading-title">register</span>
           </Text>
         </Box>
-        <Text size="xlarge" alignSelf="center" margin="small">
+        <Text size="large" alignSelf="center" margin="small">
           {" "}
           · · ·{" "}
         </Text>

@@ -5,6 +5,8 @@ import AddNewProduct from "../components/AddNewProduct";
 import ApiService from "../ApiService/ApiService";
 import { Product } from "../models/product";
 import "../styles/UserProductsGallery.scss";
+import noProductsImg from "../assets/undraw_empty_xct9.svg";
+import addProductsImg from "../assets/undraw_Freelancer_re_irh4.svg";
 
 type Props = {
   visitorId: number;
@@ -37,14 +39,22 @@ function UserProductsGallery({ visitorId, ownerId }: Props): JSX.Element {
     if (products.length === 0) {
       if (visitorId === ownerId) {
         return (
-          <Box>
-            <Text> Add products to your gallery to start to sell! </Text>
+          <Box gap="medium">
+            <Text alignSelf="center">
+              {" "}
+              Add products to your gallery to start to sell!{" "}
+            </Text>
+            <img src={addProductsImg} width="400px"></img>
           </Box>
         );
       } else {
         return (
-          <Box>
-            <Text> This user doesn't have any products to sell! </Text>
+          <Box gap="medium">
+            <Text alignSelf="center">
+              {" "}
+              This user doesn't currently have any products in their gallery!{" "}
+            </Text>
+            <img src={noProductsImg} width="400px"></img>
           </Box>
         );
       }

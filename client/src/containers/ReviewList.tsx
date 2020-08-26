@@ -3,6 +3,7 @@ import { Box, Text } from "grommet";
 import ReviewCard from "../components/ReviewCard";
 import ApiService from "../ApiService/ApiService";
 import { Review } from "../models/review";
+import reviewImg from "../assets/undraw_reviews_lp8w.svg";
 
 type Props = {
   ownerId: number;
@@ -35,7 +36,12 @@ function ReviewList({ ownerId }: Props): JSX.Element {
         </Box>
       )}
       {reviews.length === 0 && (
-        <Text alignSelf="center">This user doesn't have any reviews yet!</Text>
+        <Box align="center" gap="medium">
+          <Text alignSelf="center">
+            This user doesn't have any reviews yet!
+          </Text>
+          <img width="400px" src={reviewImg}></img>
+        </Box>
       )}
     </Box>
   );

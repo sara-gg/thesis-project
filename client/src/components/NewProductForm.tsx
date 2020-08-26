@@ -170,16 +170,18 @@ const NewProductForm = ({
       width="75%"
       round="small"
     >
-      <Text
-        size="xlarge"
-        color="blue"
-        margin={{ top: "medium" }}
-        weight="bold"
-        alignSelf="center"
-      >
-        New Product
-      </Text>
-      <Text size="xlarge" alignSelf="center" margin="small">
+      <Box direction="row" align="center" justify="center">
+        <Text
+          size="xlarge"
+          color="blue"
+          margin={{ top: "medium" }}
+          weight="bold"
+          alignSelf="center"
+        >
+          <span className="heading-title">New Product</span>
+        </Text>
+      </Box>
+      <Text size="large" alignSelf="center" margin="small">
         {" "}
         · · ·{" "}
       </Text>
