@@ -54,7 +54,6 @@ function Home() {
         <Heading level="2">Our favourite products</Heading>
       </Box>
       <FavouritesCarousel />
-<<<<<<< HEAD
       {visitorIdStr ? (
         <RecentViewed />
       ) : (
@@ -62,8 +61,6 @@ function Home() {
       )}
       <LeftCard />
       <RightCard />
-=======
->>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
     </div>
   );
 }
