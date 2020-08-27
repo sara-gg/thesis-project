@@ -34,7 +34,7 @@ const Foot = () => {
 
         <Grid className="find-us">
           <h3>Find Us</h3>
-          <Box flex>
+          <Box direction="row">
             <Instagram color="offwhite" className="icon" />
             <Twitter color="offwhite" className="icon" />
             <Facebook color="offwhite" className="icon" />

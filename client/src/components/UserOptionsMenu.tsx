@@ -45,17 +45,6 @@ const UserOptionsMenu = ({ isAuthenticated, id, name }: Props): JSX.Element => {
           label: "Sales History",
           onClick: () => {
             history.push({
-<<<<<<< HEAD
-              pathname: `/purchase_history`,
-            });
-          },
-        },
-        {
-          label: "Sales History",
-          onClick: () => {
-            history.push({
-=======
->>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
               pathname: `/sales_history`,
             });
           },
