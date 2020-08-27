@@ -54,6 +54,10 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
   const [isLoadingProduct, setIsLoadingProduct] = useState(false);
   const url = window.location.href;
   const token = localStorage.getItem("accessToken");
+<<<<<<< HEAD
+
+=======
+>>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
 
   // TODO: fetch a single product with /product?id=1
   useEffect(() => {
@@ -97,13 +101,26 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
         ...product,
         basket_quantity: currentQuantity,
       };
+<<<<<<< HEAD
+      toast.dark(
+        <Box margin="20px">
+          {product.title} has been added to your basket! 🛒 🎉
+      </Box>
+      );
+=======
+>>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
       postBasketProducts(currentQuantityProduct).then(() =>
         console.log("here posting quantity", currentQuantityProduct)
       );
     } else {
       confirmAlert({
         title: "You aren't logged in",
+<<<<<<< HEAD
+        message:
+          "Only logged users can buy products",
+=======
         message: "Only logged users can buy products",
+>>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
         buttons: [
           {
             label: "Register",

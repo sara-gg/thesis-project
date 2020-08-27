@@ -91,6 +91,11 @@ const NewProductForm = ({
   const [newProduct, setNewProduct] = useState(initialState);
   const [productImage, setProductImage] = useState<File>();
   const userId: any = localStorage.getItem("userId");
+<<<<<<< HEAD
+
+  let history = useHistory();
+=======
+>>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
 
   useEffect(() => {
     getCategories();
@@ -166,6 +171,27 @@ const NewProductForm = ({
       width="75%"
       round="small"
     >
+<<<<<<< HEAD
+      <Text
+        size="xlarge"
+        color="blue"
+        margin={{ top: "medium" }}
+        weight="bold"
+        alignSelf="center"
+      >
+        New Product
+      </Text>
+      <Text size="xlarge" alignSelf="center" margin="small">
+        {" "}
+        · · ·{" "}
+      </Text>
+      <Box direction="row" align="center">
+        <Box
+          width="40%"
+          margin={{ horizontal: "50px", vertical: "medium" }}
+          align="center"
+        >
+=======
       <Box direction="row" align="center" justify="center">
         <Text
           size="xlarge"
@@ -187,6 +213,7 @@ const NewProductForm = ({
           margin={{ horizontal: "50px", vertical: "medium" }}
           align="center"
         >
+>>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
           <Form onSubmit={handleSubmit}>
             <FormField
               name="title"

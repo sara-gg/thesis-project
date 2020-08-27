@@ -112,10 +112,17 @@ const RegistrationForm = ({
             weight="bold"
             alignSelf="center"
           >
+<<<<<<< HEAD
+            Create Account
+          </Text>
+        </Box>
+        <Text size="xlarge" alignSelf="center" margin="small">
+=======
             <span className="heading-title">register</span>
           </Text>
         </Box>
         <Text size="large" alignSelf="center" margin="small">
+>>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
           {" "}
           · · ·{" "}
         </Text>

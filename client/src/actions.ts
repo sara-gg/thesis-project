@@ -145,7 +145,10 @@ export function getProductsForCategory(categoryId: number): any {
     })
       .then((res) => res.json())
       .then((res) => {
+<<<<<<< HEAD
+=======
         console.log(res);
+>>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
         dispatch(setCategoryProducts(res.rows));
         dispatch(setCategoryProductsCount(res.count));
       })
