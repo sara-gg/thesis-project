@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Box, Heading } from "grommet";
+import React, { useEffect, useState } from "react";
+import { Box, Heading, ResponsiveContext } from "grommet";
 import "../styles/CategoriesBar.scss";
 import { NavLink } from "react-router-dom";
 import { Category } from "../models/category";

@@ -73,9 +73,8 @@ function App({ setUserData }: Props): JSX.Element {
   return (
     <Router>
       <Elements stripe={stripePromise}>
-        <ToastContainer />
         <ToastContainer
-          position="top-right"
+          position="bottom-right"
           autoClose={3000}
           hideProgressBar={false}
           newestOnTop={false}
@@ -86,47 +85,47 @@ function App({ setUserData }: Props): JSX.Element {
           pauseOnHover={false}
         />
         <div className="page">
-        <Switch>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/register">
-            <Register />
-          </Route>
-          <Route path="/newproduct">
-            <NewProduct />
-          </Route>
-          <Route path="/me">
-            <UserGallery id="me" />
-          </Route>
-          <Route
-            path="/usergallery/:id"
-            render={({ match }) => <UserGallery id={match.params.id} />}
-          ></Route>
-          <Route path="/basket_products">
-            <Basket isAuthenticated />
-          </Route>
-          <Route path="/successful_payment">
-            <SuccessfulPayment />
-          </Route>
-          <Route path="/purchase_history">
-            <PurchaseHistory isAuthenticated />
-          </Route>
-          <Route path="/sales_history">
-            <SalesHistory isAuthenticated />
-          </Route>
-          <Route path={`/products`} component={CategoryPage} />
-          <Route path="/productdetails">
-            <ProductDetails isAuthenticated />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
+          <Switch>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/register">
+              <Register />
+            </Route>
+            <Route path="/newproduct">
+              <NewProduct />
+            </Route>
+            <Route path="/me">
+              <UserGallery id="me" />
+            </Route>
+            <Route
+              path="/usergallery/:id"
+              render={({ match }) => <UserGallery id={match.params.id} />}
+            ></Route>
+            <Route path="/basket_products">
+              <Basket isAuthenticated />
+            </Route>
+            <Route path="/successful_payment">
+              <SuccessfulPayment />
+            </Route>
+            <Route path="/purchase_history">
+              <PurchaseHistory isAuthenticated />
+            </Route>
+            <Route path="/sales_history">
+              <SalesHistory isAuthenticated />
+            </Route>
+            <Route path={`/products`} component={CategoryPage} />
+            <Route path="/productdetails">
+              <ProductDetails isAuthenticated />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
         </div>
         <Foot />
       </Elements>
-    </Router >
+    </Router>
   );
 }
 

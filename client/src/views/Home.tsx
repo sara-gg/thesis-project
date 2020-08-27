@@ -54,13 +54,6 @@ function Home() {
         <Heading level="2">Our favourite products</Heading>
       </Box>
       <FavouritesCarousel />
-      {visitorIdStr ? (
-        <RecentViewed />
-      ) : (
-        <div style={{ display: "none" }}></div>
-      )}
-      <LeftCard />
-      <RightCard />
     </div>
   );
 }

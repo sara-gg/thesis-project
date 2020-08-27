@@ -112,10 +112,10 @@ const RegistrationForm = ({
             weight="bold"
             alignSelf="center"
           >
-            Create Account
+            <span className="heading-title">register</span>
           </Text>
         </Box>
-        <Text size="xlarge" alignSelf="center" margin="small">
+        <Text size="large" alignSelf="center" margin="small">
           {" "}
           · · ·{" "}
         </Text>
@@ -136,7 +136,7 @@ const RegistrationForm = ({
             name="lastname"
             label={
               <Box direction="row">
-                <Text>Lastname</Text>
+                <Text>Last Name</Text>
                 <Text color="status-critical"> *</Text>
               </Box>
             }
