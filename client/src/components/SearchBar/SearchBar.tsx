@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, NavLink } from "react-router-dom";
 
 import { Search } from "grommet-icons";
 
@@ -22,11 +22,11 @@ const SearchBar = () => {
   };
 
   const redirectToGallery = () => {
-    history.push(searchValue);
+    history.push(`/products?title=${searchValue}`);
   };
 
   return (
-    <div className="container">
+    <form className="container">
       <input
         placeholder="eg: wooden table"
         value={searchValue}
@@ -34,7 +34,7 @@ const SearchBar = () => {
         onKeyDown={searchOnEnterHandler}
       />
       <Search onClick={searchHandler} size="medium" className="search-icon" />
-    </div>
+    </form>
   );
 };
 

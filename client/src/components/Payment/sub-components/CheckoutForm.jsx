@@ -92,11 +92,11 @@ const CheckoutForm = ({ price, onSuccessfulCheckout }) => {
 
   return (
     <form onSubmit={handleFormSubmit} style={formStyle}>
-      <Row>
+      <Row >
         <BillingDetailsFields />
       </Row>
       <Row>
-        <CardElementContainer>
+        <CardElementContainer style={{ background: 'white' }}>
           <CardElement options={CardElementOptions} />
         </CardElementContainer>
       </Row>

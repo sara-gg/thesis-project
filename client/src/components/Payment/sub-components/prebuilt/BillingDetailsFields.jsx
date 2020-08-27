@@ -3,50 +3,50 @@ import React from 'react';
 
 const BillingDetailsFields = () => {
   return (
-    <>
+    <div style={{}}>
       <FormField
         name="name"
         label="Name"
         type="text"
-        placeholder="Jane Doe"
+        placeholder="your name"
         required
       />
       <FormField
         name="email"
         label="Email"
         type="email"
-        placeholder="jane.doe@example.com"
+        placeholder="your email"
         required
       />
       <FormField
         name="address"
         label="Address"
         type="text"
-        placeholder="185 Berry St. Suite 550"
+        placeholder="your address"
         required
       />
       <FormField
         name="city"
         label="City"
         type="text"
-        placeholder="San Francisco"
+        placeholder="your city"
         required
       />
       <FormField
         name="state"
         label="State"
         type="text"
-        placeholder="California"
+        placeholder="your state"
         required
       />
       <FormField
         name="zip"
         label="ZIP"
         type="text"
-        placeholder="94103"
+        placeholder="your zip"
         required
       />
-    </>
+    </div>
   );
 };
 
