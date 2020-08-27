@@ -14,12 +14,9 @@ const myTheme = {
       darkred: "#9A031E",
       staryellow: "#F48C06",
       text: "#444444",
-      text: {
-        light: "#444444",
-      },
       focus: "white",
       control: {
-        light: "#E1BE86",
+        light: "#444444",
       },
     },
     font: {

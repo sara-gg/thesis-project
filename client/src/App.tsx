@@ -17,7 +17,7 @@ import PurchaseHistory from "./views/PurchaseHistory";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ApiService from "./ApiService/ApiService";
-import SaleHistory from "./views/SaleHistory";
+import SalesHistory from "./views/SalesHistory";
 
 // Stripe
 import { Elements } from "@stripe/react-stripe-js";
@@ -47,7 +47,10 @@ function App({ setUserData }: Props): JSX.Element {
   const userId: any = localStorage.getItem("userId");
 
   if (userId) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
   }
 
   const getAllUserData = (userId: number) => {
@@ -67,11 +70,11 @@ function App({ setUserData }: Props): JSX.Element {
     });
   };
 
-  if (userToken && userId && userToken !== 'undefined') {
+  if (userToken && userId && userToken !== "undefined") {
     getAllUserData(userId);
   } else {
-    localStorage.setItem("userId", '');
-    localStorage.setItem('userToken', '')
+    localStorage.setItem("userId", "");
+    localStorage.setItem("userToken", "");
   }
 
   return (
@@ -89,7 +92,10 @@ function App({ setUserData }: Props): JSX.Element {
           draggable
           pauseOnHover={false}
         />
+<<<<<<< HEAD
         <div className="page">
+=======
+>>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
         <Switch>
           <Route path="/login">
             <Login />
@@ -117,7 +123,7 @@ function App({ setUserData }: Props): JSX.Element {
             <PurchaseHistory isAuthenticated />
           </Route>
           <Route path="/sales_history">
-            <SaleHistory isAuthenticated />
+            <SalesHistory isAuthenticated />
           </Route>
           <Route path={`/products`} component={CategoryPage} />
           <Route path="/productdetails">

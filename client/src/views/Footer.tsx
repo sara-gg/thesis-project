@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Box, Grommet, Footer, Grid } from "grommet";
+import React from "react";
+import { Box, Footer, Grid } from "grommet";
 import {
   Instagram,
   Twitter,
@@ -34,7 +34,7 @@ const Foot = () => {
 
         <Grid className="find-us">
           <h3>Find Us</h3>
-          <Box direction="row">
+          <Box flex>
             <Instagram color="offwhite" className="icon" />
             <Twitter color="offwhite" className="icon" />
             <Facebook color="offwhite" className="icon" />

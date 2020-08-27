@@ -3,9 +3,9 @@ import styled from "@emotion/styled";
 const SubmitButton = styled.button`
   display: block;
   height: 50px;
-  width: 60%;
+  width: 20%;
   font-size: inherit;
-  background-color: ${props => (props.disabled ? "#E1BE86" : "#E1BE86")};
+  background-color: ${(props) => (props.disabled ? "#E1BE86" : "#E1BE86")};
   border: 4px;
   border-radius: 100px;
   color: #ffff;

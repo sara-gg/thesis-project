@@ -1,46 +1,44 @@
-import React, { useEffect, useState } from 'react';
-import ApiService from '../ApiService/ApiService';
-import { Box } from "grommet";
+import React, { useEffect, useState } from "react";
+import ApiService from "../ApiService/ApiService";
+import { Box, Button, Text } from "grommet";
 import HistoryProductCard from "./HistoryProductCard";
 import { Product } from "../models/product";
+import soldImg from "../assets/undraw_transfer_money_rywa.svg";
+import { useHistory } from "react-router-dom";
 
-
-const renderProducts = (productList: Product[]) => {
-  let productsResult: JSX.Element[] = [];
-
-  productList.forEach((product, index) => {
-    productsResult.push(
-      <HistoryProductCard product={product} key={index} />
-    );
-  });
-  return productsResult;
-};
-
-function SoldProducts(): JSX.Element {
+const SoldProducts = (): JSX.Element => {
   const [soldProducts, setSoldProducts] = useState<Product[]>([]);
+  const history = useHistory();
 
   useEffect(() => {
-    ApiService.getAllSoldProducts()
-      .then(res => setSoldProducts(res));
+    ApiService.getAllSoldProducts().then((res) => setSoldProducts(res));
   }, []);
 
   return (
-    <div>
-      <div className="category-dashboard">
-        {
-          soldProducts && soldProducts.length > 0
-            ? (
-              <Box margin="xlarge" pad="medium" align="center">
-                <div className="category-dashboard">
-                  {renderProducts(soldProducts)}
-                </div>
-              </Box>
-            )
-            : "You haven't sold any product yet"
-        }
-      </div>
-    </div>
+    <Box>
+      {soldProducts && soldProducts.length > 0 ? (
+        <Box pad="medium" align="center">
+          {soldProducts.length !== 0 &&
+            soldProducts.map((product: Product) => {
+              return <HistoryProductCard product={product} key={product.id} />;
+            })}
+        </Box>
+      ) : (
+        <Box align="center" gap="small">
+          <Text>You haven't sold any products yet!</Text>
+          <Text>
+            In the meantime, why don't you check what is trending now?
+          </Text>
+          <Button
+            label="Discover New Products"
+            onClick={() => history.push("/home")}
+            primary
+          ></Button>
+          <img width="400px" src={soldImg}></img>
+        </Box>
+      )}
+    </Box>
   );
-}
+};
 
 export default SoldProducts;

@@ -23,7 +23,7 @@ const Logout = ({ isAuthenticated, setUserData }: Props): JSX.Element => {
   let history = useHistory();
 
   const handleLogoutClick = () => {
-    toast("You are being logged out");
+    toast.dark("You are being logged out");
     setTimeout(() => {
       removeToken();
       handleAuth();

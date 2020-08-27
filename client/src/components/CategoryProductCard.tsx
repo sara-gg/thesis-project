@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import { Box, Button, Image, Text } from "grommet";
+import React from "react";
+import { Box, Image, Text } from "grommet";
 import { Location } from "grommet-icons";
-import Skeleton from "react-loading-skeleton";
 import { Product } from "../models/product";
 import { useHistory } from "react-router-dom";
 import "../styles/CategoryProductCard.scss";
@@ -42,16 +41,19 @@ function CategoryProductCard({ product, readonly }: Props) {
         <Box direction="row" gap="medium" justify="between">
           <Box width="75%">
             <Text>
-              <span className="category-product-title">{product.title} </span>(
-              {product.quantity})
+              <span className="category-product-title">{product.title} </span>
+            </Text>
+            <Text margin={{ top: "5px" }}>
+              <span className="category-product-qty">QTY </span>
+              <span>{product.quantity} — &#x20; &#x20;</span>
+              <span color="#444444">
+                <Location size="small" /> {product.location}
+              </span>
             </Text>
           </Box>
 
           <Text>{product.price} €</Text>
         </Box>
-        <Text size="small">
-          <Location size="small" /> {product.location}
-        </Text>
       </Box>
     </Box>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Button,
@@ -12,6 +12,8 @@ import {
 import { Close } from "grommet-icons";
 import { connect } from "react-redux";
 import { Materials } from "../models/materials";
+import { Product } from "../models/product";
+import ApiService from "../ApiService/ApiService";
 import { filterCategoryProducts, getProductsForCategory } from "../actions";
 import "../styles/FilterForm.scss";
 
@@ -49,14 +51,39 @@ function FilterProducts({
   filterCategoryProducts,
   categoryId,
   getProductsForCategory,
+  categoryProducts,
 }: any) {
   const [materials, setMaterials] = useState<Array<string>>([]);
   const [location, setLocation] = useState<string>("");
+  const [sellers, setSellers] = useState<Array<number> | undefined>([]);
+  const [sellerNames, setSellerNames] = useState<Array<any>>([]);
+  const [selectedSellers, setSelectedSellers] = useState<any>([]);
 
+  useEffect(() => {
+    let categorySellers: any[] = [];
+
+    categoryProducts.forEach((product: Product) => {
+      categorySellers.push(product.user_id);
+    });
+    console.log(categorySellers);
+    setSellers(categorySellers);
+    let uniqueSellers = [...new Set(categorySellers)];
+    uniqueSellers.forEach((id) => {
+      ApiService.getPublicUserData(id).then((res) => {
+        setSellerNames((sellerNames: any) => [...sellerNames, res]);
+      });
+    });
+  }, []);
+
+  const sellerNamesToLabels: any = [];
+
+  sellerNames.forEach((seller: any) => {
+    sellerNamesToLabels.push({ label: seller.username, value: seller.id });
+  });
   const handleSubmit = (event: any) => {
     event.preventDefault();
 
-    filterCategoryProducts(categoryId, materials[0], location);
+    filterCategoryProducts(categoryId, materials[0], location, selectedSellers);
   };
   const handleReset = (event: any) => {
     event.preventDefault();
@@ -65,6 +92,12 @@ function FilterProducts({
   const handleMaterials = (event: any) => {
     const { value, option } = event;
     setMaterials(value);
+  };
+
+  const handleSellers = (event: any) => {
+    const { value, option } = event;
+    console.log(value);
+    setSelectedSellers(value);
   };
 
   const handleLocation = (event: any) => {
@@ -84,14 +117,8 @@ function FilterProducts({
       basis="full"
       className="filter-container"
     >
-      <Box
-        direction="row"
-        justify="between"
-        align="center"
-        width="100vw"
-        margin="10px"
-      >
-        <Heading level={3} margin="small">
+      <Box direction="row" justify="between" align="center" width="100vw">
+        <Heading level={3} margin={{ left: "large" }}>
           Filter
         </Heading>
         <Button icon={<Close />} onClick={onClose} />
@@ -120,9 +147,23 @@ function FilterProducts({
           value={location}
           onChange={handleLocation}
         />
+        <FormField
+          label="Sellers"
+          name="checkboxgroup"
+          htmlFor="check-box-group"
+        >
+          <Box pad={{ horizontal: "small", vertical: "xsmall" }}>
+            <CheckBoxGroup
+              options={sellerNamesToLabels}
+              onChange={handleSellers}
+              value={selectedSellers}
+            />
+          </Box>
+        </FormField>
         <Box direction="column" justify="end" margin={{ top: "medium" }}>
-          <Button label="Clear all" onClick={handleReset} />
-          <Button type="submit" label="Publish" primary />
+          <Button label="Clear all" onClick={handleReset} primary />
+          <br />
+          <Button type="submit" label="Apply" primary />
         </Box>
       </Form>
     </Box>
@@ -130,7 +171,9 @@ function FilterProducts({
 }
 
 const mapStateToProps = (state: any) => {
-  return {};
+  return {
+    categoryProducts: state.categoryProducts,
+  };
 };
 
 export default connect(mapStateToProps, {

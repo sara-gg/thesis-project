@@ -30,9 +30,7 @@ const UserOptionsMenu = ({ isAuthenticated, id, name }: Props): JSX.Element => {
         {
           label: "My Gallery",
           onClick: () => {
-            history.push({
-              pathname: `/usergallery/${id}`,
-            });
+            window.location.assign(`http://localhost:3000/usergallery/${id}`);
           },
         },
         {
@@ -47,6 +45,17 @@ const UserOptionsMenu = ({ isAuthenticated, id, name }: Props): JSX.Element => {
           label: "Sales History",
           onClick: () => {
             history.push({
+<<<<<<< HEAD
+              pathname: `/purchase_history`,
+            });
+          },
+        },
+        {
+          label: "Sales History",
+          onClick: () => {
+            history.push({
+=======
+>>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
               pathname: `/sales_history`,
             });
           },
@@ -54,13 +63,13 @@ const UserOptionsMenu = ({ isAuthenticated, id, name }: Props): JSX.Element => {
         {
           label: "Edit Profile",
           onClick: () => {
-            toast("You are being redirected to your Profile!");
+            toast.dark("You are being redirected to your Profile!");
           },
         },
         {
           label: "Settings",
           onClick: () => {
-            toast("You are being redirected to your Settings!");
+            toast.dark("You are being redirected to your Settings!");
           },
         },
       ]}

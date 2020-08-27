@@ -3,9 +3,13 @@ import ApiService from "../ApiService/ApiService";
 import { Product } from "../models/product";
 import ViewedProductCard from "./ViewedProductCard";
 import { RootState } from "../models/rootstate";
+<<<<<<< HEAD
 import { Box, Text, Carousel, Image } from "grommet";
+=======
+import { Box, Text, Carousel, Heading, Image } from "grommet";
+>>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
 import { connect } from "react-redux";
-import { ReactComponent as Spinner } from '../assets/spinning.svg'
+import { ReactComponent as Spinner } from "../assets/spinning.svg";
 
 function RecentViewed() {
   const [products, setProducts] = useState<Product[]>();
@@ -19,6 +23,7 @@ function RecentViewed() {
     });
   }, []);
 
+<<<<<<< HEAD
   const renderProducts = (): JSX.Element[] => {
     let productsArr: JSX.Element[] = [];
     const resultArr: JSX.Element[] = [];
@@ -40,25 +45,105 @@ function RecentViewed() {
           } 
         }
       return resultArr;
+=======
+  const View0 = () => {
+    if (products && products.length > 0) {
+      const newProducts = products.slice(0, 3);
+      return (
+        <Box direction="row" width="100%" margin="0 0 4% 0">
+          {newProducts.map((viewedProduct, i) => (
+            <ViewedProductCard
+              product={viewedProduct}
+              ownerId={viewedProduct.user_id}
+              visitorId={visitorIdStr}
+              key={i}
+            />
+          ))}
+        </Box>
+      );
+>>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
     } else {
-      return [<div></div>];
+      return <div></div>;
     }
   };
 
-  useEffect(() => {
-    const products = renderProducts();
-    setRenderedProducts(products);
-  }, [products]);
+  const View1 = () => {
+    if (products && products.length > 3) {
+      const newProducts = products.slice(3, 6);
+      return (
+        <Box direction="row" width="100%" margin="0 0 4% 0">
+          {newProducts.map((viewedProduct, i) => (
+            <ViewedProductCard
+              product={viewedProduct}
+              ownerId={viewedProduct.user_id}
+              visitorId={visitorIdStr}
+              key={i}
+            />
+          ))}
+        </Box>
+      );
+    } else {
+      return <div></div>;
+    }
+  };
 
+<<<<<<< HEAD
 
   return (
+=======
+  // const renderProducts = (): JSX.Element[] => {
+  //   let productsArr: JSX.Element[] = [];
+  //   const resultArr: JSX.Element[] = [];
+  //   if (products) {
+  //     for (let i = 0; i < products.length; i++) {
+  //       productsArr.push(
+  //         <ViewedProductCard
+  //           product={products[i]}
+  //           ownerId={products[i].user_id}
+  //           visitorId={visitorIdStr}
+  //           key={i}
+  //         />
+  //       );
+  //       if ((products.length < 4 && i === products.length - 1) || i % 4 === 3) {
+  //         resultArr.push(
+  //           <Box
+  //             direction="row"
+  //             width="100%"
+  //             margin="0 0 4% 0"
+  //             key={i * i}
+  //             justify="center"
+  //           >
+  //             {productsArr}
+  //           </Box>
+  //         );
+  //         productsArr = [];
+  //       }
+  //     }
+  //     return resultArr;
+  //   } else {
+  //     return [<div></div>];
+  //   }
+  // };
 
+  // useEffect(() => {
+  //   const products = renderProducts();
+  //   setRenderedProducts(products);
+  // }, [products]);
+>>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
+
+  return (
     <Box>
       <Box justify="center">
-        <Text alignSelf="center" size="medium" weight="bold">
-          Recently Viewed
-        </Text>
-        <Box
+      <Box
+        justify="center"
+        align="center"
+        background="white"
+        margin-top="2%"
+        margin-bottom="4%"
+      >
+        <Heading level="2">You've recently viewed</Heading>
+      </Box>
+        {/* <Box
           overflow="scroll"
           justify="center"
           direction="row-responsive"
@@ -66,17 +151,18 @@ function RecentViewed() {
           height="auto"
           width="100%"
           alignSelf="center"
-        >
-          {products && renderedProducts ? (
-            <Carousel fill>
-            {renderedProducts}
-            </Carousel>
-          ) : (
+        > */}
+        {/* {products && renderedProducts ? ( */}
+        <Carousel>
+        { products && products.length > 0 ? <View0 /> : null }
+        { products && products.length > 3 ? <View1 /> : null }
+        </Carousel>
+        {/* ) : (
             <Box align="center" justify="center">
-              <Spinner />              
+              <Spinner />
             </Box>
-          )}
-        </Box>
+          )} */}
+        {/* </Box> */}
       </Box>
     </Box>
   );

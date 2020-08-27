@@ -8,9 +8,8 @@ import { connect } from "react-redux";
 import { getProductsForCategory } from "../actions";
 import { Product } from "../models/product";
 import { Category } from "../models/category";
-import SkeletonCategoryProductCard from "../components/SkeletonCategoryProductCard";
-import ApiService from "../ApiService/ApiService";
 import { Box, Heading } from "grommet";
+import SkeletonCategoryProductCard from "../components/SkeletonCategoryProductCard";
 import "../styles/SkeletonCategoryProductCard.scss";
 import "../styles/CategoryPage.scss";
 
