@@ -71,10 +71,12 @@ const LoginForm = (): JSX.Element => {
       >
         <span className="heading-title">Login</span>
       </Text>
-      <Text size="xlarge" alignSelf="center" margin="small">
-        {" "}
-        · · ·{" "}
-      </Text>
+      <Box
+        width="medium"
+        border="bottom"
+        alignSelf="center"
+        margin={{ bottom: "medium", top: "small" }}
+      ></Box>
       <Form onSubmit={handleSubmit}>
         <FormField
           name="email"

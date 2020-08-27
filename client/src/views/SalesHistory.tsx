@@ -31,10 +31,12 @@ function SalesHistory({ isAuthenticated }: Props): any {
             <span className="heading-title">Sales history</span>
           </Text>
 
-          <Text size="large" alignSelf="center" margin="small">
-            {" "}
-            · · ·{" "}
-          </Text>
+          <Box
+            width="medium"
+            border="bottom"
+            alignSelf="center"
+            margin={{ bottom: "medium", top: "small" }}
+          ></Box>
           <Text alignSelf="center">
             Here you can find information about all your previous sales!
           </Text>
