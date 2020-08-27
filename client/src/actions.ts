@@ -145,6 +145,7 @@ export function getProductsForCategory(categoryId: number): any {
     })
       .then((res) => res.json())
       .then((res) => {
+        console.log(res);
         dispatch(setCategoryProducts(res.rows));
         dispatch(setCategoryProductsCount(res.count));
       })
@@ -155,16 +156,19 @@ export function getProductsForCategory(categoryId: number): any {
 export function filterCategoryProducts(
   category_id: number,
   material: String,
-  location: String
+  location: String,
+  selectedSeller: number,
 ): any {
   return function (dispatch: any): Promise<any> {
     let ApiUrl = `${BASE_URL}/products?category_id=${category_id}`;
     if (material && location) {
-      ApiUrl += `&material=${material}`;
+      ApiUrl += `&material=${material}&location=${location}`;
     } else if (material) {
       ApiUrl += `&material=${material}`;
     } else if (location) {
       ApiUrl += `&location=${location}`;
+    } else if (selectedSeller) {
+      ApiUrl += `&user_id=${selectedSeller}`;
     }
 
     return fetch(ApiUrl, {
