@@ -6,7 +6,6 @@ import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import FilterProducts from "./FilterProducts";
 import { SortProductsForCategory } from "../actions";
-import { Product } from "../models/product";
 import "../styles/CategoryHeader.scss";
 
 interface Props {

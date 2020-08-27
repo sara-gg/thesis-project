@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Heading, Menu, Image, ResponsiveContext } from "grommet";
 import { Cart } from "grommet-icons";
-import logo from "../assets/Furniss Logo.png";
-// import croppedLogo from "../assets/logo-cropped.png";
-// import logonew from "../assets/logo1.png";
+import logo from "../assets/logo.png";
 import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import Logout from "../components/Logout";
@@ -86,7 +84,6 @@ const AppBar = ({
       );
     }
   };
-  const size = React.useContext(ResponsiveContext);
 
   return (
     <ResponsiveContext.Consumer>

@@ -58,10 +58,9 @@ const CategoryPage = ({
   useEffect(() => {
     setIsLoadingProducts(true);
     const timer = setTimeout(() => {
-      getProductsForCategory(categoryId)
-        .then(() => {
-          setIsLoadingProducts(false);
-        });
+      getProductsForCategory(categoryId).then(() => {
+        setIsLoadingProducts(false);
+      });
     }, 2000);
   }, [location]);
 
@@ -91,9 +90,15 @@ const CategoryPage = ({
       </Box>
       <Box className="category-dashboard" direction="row" justify="around" wrap>
         {isLoadingProducts && <SkeletonCategoryProductCard duration={2} />}
-        {!isLoadingProducts && categoryProducts && categoryProducts.length > 0
-          ? renderProducts(categoryProducts)
-          : "no products"}
+        {!isLoadingProducts ? (
+          categoryProducts && categoryProducts.length > 0 ? (
+            renderProducts(categoryProducts)
+          ) : (
+            "no products"
+          )
+        ) : (
+          <></>
+        )}
       </Box>
     </Box>
   );

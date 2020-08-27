@@ -3,14 +3,12 @@ import ApiService from "../ApiService/ApiService";
 import { Product } from "../models/product";
 import ViewedProductCard from "./ViewedProductCard";
 import { RootState } from "../models/rootstate";
-import { Box, Text, Carousel, Heading, Image } from "grommet";
+import { Box, Carousel, Heading,} from "grommet";
 import { connect } from "react-redux";
-import { ReactComponent as Spinner } from "../assets/spinning.svg";
+
 
 function RecentViewed() {
   const [products, setProducts] = useState<Product[]>();
-
-  const [renderedProducts, setRenderedProducts] = useState<JSX.Element[]>();
   const visitorIdStr: any = localStorage.getItem("userId");
 
   useEffect(() => {

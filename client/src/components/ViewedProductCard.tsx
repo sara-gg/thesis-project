@@ -1,13 +1,7 @@
-import React, { useState } from "react";
-import { Box, Button, Image, Text } from "grommet";
-import { Edit, Trash } from "grommet-icons";
+import React from "react";
+import {  Image,  } from "grommet";
 import { Product } from "../models/product";
-import { useHistory } from "react-router-dom";
-import ApiService from "../ApiService/ApiService";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { confirmAlert } from "react-confirm-alert";
-import "react-confirm-alert/src/react-confirm-alert.css";
+
 
 interface Props {
   product: Product;

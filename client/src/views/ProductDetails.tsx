@@ -4,8 +4,6 @@ import {
   AccordionPanel,
   Anchor,
   Box,
-  Button,
-  Image,
   Paragraph,
   Text,
 } from "grommet";
@@ -69,7 +67,7 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
             (product) => product.id === +productId //coercing productId to type number
           )[0];
           setProduct(filteredProduct);
-          setCurrentQuantity(filteredProduct.quantity);
+          setCurrentQuantity(1);
           return filteredProduct;
         }
       })
@@ -102,9 +100,7 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
           {product.title} has been added to your basket! 🛒 🎉
         </Box>
       );
-      postBasketProducts(currentQuantityProduct).then(() =>
-        console.log("here posting quantity", currentQuantityProduct)
-      );
+      postBasketProducts(currentQuantityProduct)
     } else {
       confirmAlert({
         title: "You aren't logged in",

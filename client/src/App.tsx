@@ -5,7 +5,6 @@ import Login from "./views/Login";
 import Register from "./views/Register";
 import NewProduct from "./views/NewProduct";
 import UserGallery from "./views/UserGallery";
-import AppBar from "./components/AppBar";
 import Foot from "./views/Footer";
 import ProductDetails from "./views/ProductDetails";
 import Home from "./views/Home";

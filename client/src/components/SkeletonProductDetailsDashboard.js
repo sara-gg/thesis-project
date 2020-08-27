@@ -1,6 +1,6 @@
 import React from "react";
 import Skeleton from "react-loading-skeleton";
-import { Box, Button, Image, Text } from "grommet";
+import { Box,  } from "grommet";
 
 const SkeletonProductDetailsDashboard = (duration) => {
   return (

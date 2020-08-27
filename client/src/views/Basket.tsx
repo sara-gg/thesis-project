@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
+
 import { connect } from "react-redux";
 import AppBar from "../components/AppBar";
 import CategoriesBar from "../components/CategoriesBar";
@@ -8,12 +8,12 @@ import ApiService from "../ApiService/ApiService";
 import BasketProductCard from "../components/BasketProductCard";
 import { Product } from "../models/product";
 import basketImg from "../assets/undraw_empty_cart_co35 (1).svg";
+import SkeletonBasketRow from "../components/SkeletonBasketRow";
+import "../styles/SkeletonBasketRow.scss";
 
 import {
   Box,
   Collapsible,
-  Tabs,
-  Tab,
   Heading,
   Paragraph,
   Table,
@@ -33,6 +33,7 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
   const [basketProducts, setBasketProducts] = useState<Product[]>([]);
   const [amoutToPay, setAmoutToPay] = useState(0);
   const [openPayment, setOpenPayment] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   let history = useHistory();
 
   const renderProducts = (productList: Product[]) => {
@@ -52,7 +53,11 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
   };
 
   useEffect(() => {
-    ApiService.getBasketProducts().then((res) => setBasketProducts(res));
+    ApiService.getBasketProducts()
+      .then((res) => setBasketProducts(res))
+      .then(() => {
+        setIsLoading(false);
+      });
   }, []);
 
   useEffect(() => {
@@ -62,7 +67,6 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
   }, [basketProducts]);
 
   return (
-  
     <Box>
       <AppBar basketProducts={basketProducts} />
       <CategoriesBar />
@@ -75,83 +79,92 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
         Your basket
       </Heading>
       <Box direction="column" className="basket-dashbaord">
-        {basketProducts && basketProducts.length > 0 ? (
-          <Box width="100%" align="center">
-            <Box className="basket-container" direction="column" gap="medium">
-              <Table margin={{ horizontal: "20%" }}>
-                <TableHeader>
-                  <TableRow>
-                    <TableCell scope="col" border="bottom">
-                      <Text className="basket-table-heading">Item</Text>
-                    </TableCell>
-                    <TableCell scope="col" border="bottom"></TableCell>
-                    <TableCell scope="col" border="bottom">
-                      <Text className="basket-table-heading">Qty</Text>
-                    </TableCell>
-                    <TableCell scope="col" border="bottom">
-                      <Text className="basket-table-heading"> Unit price</Text>
-                    </TableCell>
-                    <TableCell scope="col" border="bottom"></TableCell>
-                  </TableRow>
-                </TableHeader>
-                {renderProducts(basketProducts)}
-              </Table>
-              <Box
-                pad={{ top: "2%" }}
-                justify="center"
-                width="100vw"
-                background="offwhite"
-                align="center"
-                margin="medium"
-              >
-                <p color="headings" className="basket-total-number">
-                  {amoutToPay}€
-                </p>
-                <Paragraph color="grey" className="basket-total-text">
-                  TOTAL
-                </Paragraph>
-                <a
-                  className="basket-total-btn"
-                  onClick={() => setOpenPayment(!openPayment)}
+        {isLoading && <SkeletonBasketRow duration={10} />}
+        {!isLoading ? (
+          basketProducts && basketProducts.length > 0 ? (
+            <Box width="100%" align="center">
+              <Box className="basket-container" direction="column" gap="medium">
+                <Table margin={{ horizontal: "20%" }}>
+                  <TableHeader>
+                    <TableRow>
+                      <TableCell scope="col" border="bottom">
+                        <Text className="basket-table-heading">Item</Text>
+                      </TableCell>
+                      <TableCell scope="col" border="bottom"></TableCell>
+                      <TableCell scope="col" border="bottom">
+                        <Text className="basket-table-heading">Qty</Text>
+                      </TableCell>
+                      <TableCell scope="col" border="bottom">
+                        <Text className="basket-table-heading">
+                          {" "}
+                          Unit price
+                        </Text>
+                      </TableCell>
+                      <TableCell scope="col" border="bottom"></TableCell>
+                    </TableRow>
+                  </TableHeader>
+                  {renderProducts(basketProducts)}
+                </Table>
+                <Box
+                  pad={{ top: "2%" }}
+                  justify="center"
+                  width="100vw"
+                  background="offwhite"
+                  align="center"
+                  margin="medium"
                 >
-                  CHECKOUT NOW
-                </a>
+                  <p color="headings" className="basket-total-number">
+                    {amoutToPay}€
+                  </p>
+                  <Paragraph color="grey" className="basket-total-text">
+                    TOTAL
+                  </Paragraph>
+                  <a
+                    className="basket-total-btn"
+                    onClick={() => setOpenPayment(!openPayment)}
+                  >
+                    CHECKOUT NOW
+                  </a>
+                </Box>
               </Box>
+              <Collapsible direction="horizontal" open={openPayment}>
+                <Box
+                  flex
+                  width="100vw"
+                  background="offwhite"
+                  //pad="small"
+                  elevation="small"
+                >
+                  <Heading
+                    level="2"
+                    color="text"
+                    alignSelf="center"
+                    margin={{ top: "medium" }}
+                  >
+                    Almost there...
+                  </Heading>
+                  <PaymentForm
+                    amoutToPay={amoutToPay}
+                    basketProducts={basketProducts}
+                  />
+                </Box>
+              </Collapsible>
             </Box>
-            <Collapsible direction="horizontal" open={openPayment}>
-              <Box
-                flex
-                width="100vw"
-                background="offwhite"
-                //pad="small"
-                elevation="small"
+          ) : (
+            <Box align="center">
+              <Heading
+                level="3"
+                color="text"
+                alignSelf="center"
+                margin={{ top: "medium" }}
               >
-                <Heading
-                  level="2"
-                  color="text"
-                  alignSelf="center"
-                  margin={{ top: "medium" }}
-                >
-                  Almost there...
-                </Heading>
-                <PaymentForm
-                  amoutToPay={amoutToPay}
-                  basketProducts={basketProducts}
-                />
-              </Box>
-            </Collapsible>
-          </Box>
+                You don't have any products in your basket yet
+              </Heading>
+              <img width="400px" src={basketImg}></img>
+            </Box>
+          )
         ) : (
-          <Box align="center">
-          <Heading
-            level="3"
-            color="text"
-            alignSelf="center"
-            margin={{ top: "medium" }}
-          >
-            You don't have any products in your basket yet
-          </Heading>
-        <img width="400px" src={basketImg}></img></Box>
+          <></>
         )}
       </Box>
     </Box>

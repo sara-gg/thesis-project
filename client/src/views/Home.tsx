@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, Heading, Text } from "grommet";
 import bedroomImg from "../assets/anewseason.jpg";
-import option2 from "../assets/hmgoepprod2.jpeg";
 import FavouritesCarousel from "../components/FavouritesCarousel";
 import LeftCard from "../components/LeftCard";
 import RightCard from "../components/RightCard";
