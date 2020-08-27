@@ -46,13 +46,6 @@ function App({ setUserData }: Props): JSX.Element {
   const userToken = localStorage.getItem("accessToken");
   const userId: any = localStorage.getItem("userId");
 
-  if (userId) {
-<<<<<<< HEAD
-
-=======
->>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
-  }
-
   const getAllUserData = (userId: number) => {
     ApiService.getUserData(userId).then((res) => {
       setUserData(
@@ -92,10 +85,7 @@ function App({ setUserData }: Props): JSX.Element {
           draggable
           pauseOnHover={false}
         />
-<<<<<<< HEAD
         <div className="page">
-=======
->>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
         <Switch>
           <Route path="/login">
             <Login />
