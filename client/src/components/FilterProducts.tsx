@@ -56,7 +56,8 @@ function FilterProducts({
   const [materials, setMaterials] = useState<Array<string>>([]);
   const [location, setLocation] = useState<string>("");
   const [sellers, setSellers] = useState<Array<number> | undefined>([]);
-  const [publicInfo, setPublicInfo] = useState<any>([]);
+  const [sellerNames, setSellerNames] = useState<Array<any>>([]);
+  const [selectedSellers, setSelectedSellers] = useState<any>([]);
 
   useEffect(() => {
     let categorySellers: any[] = [];
@@ -66,18 +67,23 @@ function FilterProducts({
     });
     console.log(categorySellers);
     setSellers(categorySellers);
-    categorySellers.forEach((id) => {
+    let uniqueSellers = [...new Set(categorySellers)];
+    uniqueSellers.forEach((id) => {
       ApiService.getPublicUserData(id).then((res) => {
-        setPublicInfo([...publicInfo, res]);
-        
+        setSellerNames((sellerNames: any) => [...sellerNames, res]);
       });
     });
   }, []);
-  console.log(publicInfo);
+
+  const sellerNamesToLabels: any = [];
+
+  sellerNames.forEach((seller: any) => {
+    sellerNamesToLabels.push({ label: seller.username, value: seller.id });
+  });
   const handleSubmit = (event: any) => {
     event.preventDefault();
 
-    filterCategoryProducts(categoryId, materials[0], location);
+    filterCategoryProducts(categoryId, materials[0], location, selectedSellers);
   };
   const handleReset = (event: any) => {
     event.preventDefault();
@@ -86,6 +92,12 @@ function FilterProducts({
   const handleMaterials = (event: any) => {
     const { value, option } = event;
     setMaterials(value);
+  };
+
+  const handleSellers = (event: any) => {
+    const { value, option } = event;
+    console.log(value);
+    setSelectedSellers(value);
   };
 
   const handleLocation = (event: any) => {
@@ -135,6 +147,19 @@ function FilterProducts({
           value={location}
           onChange={handleLocation}
         />
+        <FormField
+          label="Sellers"
+          name="checkboxgroup"
+          htmlFor="check-box-group"
+        >
+          <Box pad={{ horizontal: "small", vertical: "xsmall" }}>
+            <CheckBoxGroup
+              options={sellerNamesToLabels}
+              onChange={handleSellers}
+              value={selectedSellers}
+            />
+          </Box>
+        </FormField>
         <Box direction="column" justify="end" margin={{ top: "medium" }}>
           <Button label="Clear all" onClick={handleReset} primary />
           <br />

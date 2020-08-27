@@ -10,7 +10,7 @@ const RightCard = () => {
   return (
     <div className="home-right-container">
       <Box
-        pad="large"
+        pad="medium"
         gridArea="main"
         background="offwhite"
         align="center"

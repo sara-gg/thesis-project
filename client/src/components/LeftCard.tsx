@@ -37,7 +37,7 @@ const LeftCard = () => {
     <div className="home-left-container">
       <Image height="70%" src={homepageCard} className="box" />
       <Box
-        pad={{ top: "15vh", horizontal: "5vw" }}
+        pad={{ top: "medium", horizontal: "5vw" }}
         gridArea="main"
         background="offwhite"
         align="center"
@@ -53,14 +53,14 @@ const LeftCard = () => {
           collection of sofas, side tables, lamps, rugs and home accessories.
         </Text>
         <Button
-          margin={{ top: "medium", bottom: "large" }}
+          margin={{ top: "small", bottom: "small" }}
           onClick={() => {
             history.push("/products?categoryId=2");
           }}
           label="Shop living room items"
           primary
         ></Button>
-        <hr style={{height:"2px", color: "gray", backgroundColor: "gray"}}/>
+        {/* <hr style={{height:"2px", color: "gray", backgroundColor: "gray"}}/> */}
         <Heading className="home-card-header">All kitchen</Heading>
         <Text size="large" className="home-card-desc">
           Cook up a storm in the kitchen with quality cookware and accessories
@@ -68,7 +68,7 @@ const LeftCard = () => {
           together with storage designs you’ll be happy to display.{" "}
         </Text>
         <Button
-          margin={{ top: "medium", bottom: "medium" }}
+          margin={{ top: "small", bottom: "large" }}
           onClick={() => {
             history.push("/products?categoryId=3");
           }}
