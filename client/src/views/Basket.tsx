@@ -60,8 +60,13 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
   }, [basketProducts]);
 
   return (
+  
     <Box>
+<<<<<<< HEAD
+       <AppBar basketProducts={basketProducts}/>
+=======
       <AppBar basketProducts={basketProducts} />
+>>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
       <CategoriesBar />
       <Heading
         level="2"

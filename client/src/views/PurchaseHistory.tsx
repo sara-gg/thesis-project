@@ -1,5 +1,9 @@
 import React from "react";
 import AppBar from "../components/AppBar";
+<<<<<<< HEAD
+import { Box } from "grommet";
+=======
+>>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
 import { useHistory } from "react-router-dom";
 import CategoriesBar from "../components/CategoriesBar";
 import PurchasedProducts from "../containers/PurchasedProducts";
@@ -15,8 +19,13 @@ function PurchaseHistory({ isAuthenticated }: Props): any {
 
   if (isAuthenticated) {
     return (
+<<<<<<< HEAD
+      <>
+       <AppBar />
+=======
       <Box>
         <AppBar />
+>>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
         <CategoriesBar />
         <Box
           direction="column"

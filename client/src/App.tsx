@@ -46,9 +46,6 @@ function App({ setUserData }: Props): JSX.Element {
   const userToken = localStorage.getItem("accessToken");
   const userId: any = localStorage.getItem("userId");
 
-  if (userId) {
-  }
-
   const getAllUserData = (userId: number) => {
     ApiService.getUserData(userId).then((res) => {
       setUserData(
@@ -76,6 +73,7 @@ function App({ setUserData }: Props): JSX.Element {
   return (
     <Router>
       <Elements stripe={stripePromise}>
+        <ToastContainer />
         <ToastContainer
           position="top-right"
           autoClose={3000}
@@ -87,6 +85,7 @@ function App({ setUserData }: Props): JSX.Element {
           draggable
           pauseOnHover={false}
         />
+        <div className="page">
         <Switch>
           <Route path="/login">
             <Login />
@@ -124,6 +123,7 @@ function App({ setUserData }: Props): JSX.Element {
             <Home />
           </Route>
         </Switch>
+        </div>
         <Foot />
       </Elements>
     </Router >

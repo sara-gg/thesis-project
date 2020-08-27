@@ -19,6 +19,13 @@ interface Props {
 function UserProductCard({ product, visitorId, ownerId }: Props) {
   let history = useHistory();
 
+<<<<<<< HEAD
+
+  return (
+    <Box
+      height="auto"
+      width="small"
+=======
   return (
     <Image
       fit="contain"
@@ -33,6 +40,7 @@ function UserProductCard({ product, visitorId, ownerId }: Props) {
     <Box
       //height="15%"
       width="100%"
+>>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
       margin="small"
       pad="small"
       background="white"
@@ -45,13 +53,26 @@ function UserProductCard({ product, visitorId, ownerId }: Props) {
         });
       }}
     >
+<<<<<<< HEAD
+      <Box height="xsmall" width="small">
+=======
       <Box width="250px" height="small">
+>>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
         <Image fit="cover" src={`${product.images}`} />
       </Box>
       <Box direction="column" gap="xsmall" margin={{ horizontal: "small" }}>
         <Text size="small" weight="bold">
           {product.title}
         </Text>
+<<<<<<< HEAD
+        <Text size="small">{product.price} €</Text>
+      </Box>
+    </Box>
+  );
+}
+
+export default UserProductCard;
+=======
       </Box>
     </Box>
   ); */
@@ -59,3 +80,4 @@ function UserProductCard({ product, visitorId, ownerId }: Props) {
 }
 
 export default UserProductCard;
+>>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
