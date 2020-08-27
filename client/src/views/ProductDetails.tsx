@@ -69,7 +69,7 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
             (product) => product.id === +productId //coercing productId to type number
           )[0];
           setProduct(filteredProduct);
-          setCurrentQuantity(filteredProduct.quantity);
+          setCurrentQuantity(1);
           return filteredProduct;
         }
       })
@@ -100,7 +100,7 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
       toast.dark(
         <Box margin="20px">
           {product.title} has been added to your basket! 🛒 🎉
-      </Box>
+        </Box>
       );
       postBasketProducts(currentQuantityProduct).then(() =>
         console.log("here posting quantity", currentQuantityProduct)
