@@ -4,14 +4,13 @@ import { Cart } from "grommet-icons";
 import logo from "../assets/logo.png";
 import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import Logout from "../components/Logout";
+import LoginButton from "./LoginButton";
 import SearchBar from "../components/SearchBar/SearchBar";
 import ApiService from "../ApiService/ApiService";
 import UserOptionsMenu from "../components/UserOptionsMenu";
 import { Product } from "../models/product";
 import { connect } from "react-redux";
 import "../styles/AppBar.scss";
-// import { logRoles } from "@testing-library/react";
 
 type Props = {
   isAuthenticated: boolean;
@@ -59,7 +58,7 @@ const AppBar = ({
   };
 
   const renderCart = () => {
-    if (totalBasket > 0) {
+    if (isAuthenticated && totalBasket > 0) {
       return (
         <Button
           onClick={() => {
@@ -71,7 +70,7 @@ const AppBar = ({
           <Cart />
         </Button>
       );
-    } else {
+    } else if (isAuthenticated && totalBasket <= 0) {
       return (
         <Button
           className="hide"
@@ -151,13 +150,10 @@ const AppBar = ({
               className="right-appbar"
               gap="medium"
             >
-              {isAuthenticated && <UserOptionsMenu />}
-
+              <LoginButton />
               {handleRenderRegister()}
-
-              <Logout />
-              {/* TODO: add logic for badge to check basket */}
               {renderCart()}
+              {isAuthenticated && <UserOptionsMenu />}
             </Box>
           </Box>
         )

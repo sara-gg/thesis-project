@@ -10,10 +10,44 @@ type Props = {
   isAuthenticated: boolean;
   name: string;
   id: number;
+  setUserData: (
+    i: number,
+    n: string,
+    l: string,
+    u: string,
+    e: string,
+    bd: string,
+    g: string,
+    a: string,
+    b: boolean
+  ) => void;
 };
-
-const UserOptionsMenu = ({ isAuthenticated, id, name }: Props): JSX.Element => {
+const UserOptionsMenu = ({
+  isAuthenticated,
+  id,
+  name,
+  setUserData,
+}: Props): JSX.Element => {
   const history = useHistory();
+
+  const handleLogoutClick = () => {
+    toast.dark("You are being logged out");
+    setTimeout(() => {
+      removeToken();
+      handleAuth();
+    }, 3000);
+  };
+
+  const removeToken = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("userId");
+  };
+
+  const handleAuth = () => {
+    setUserData(0, "", "", "", "", "", "", "", false);
+    window.location.assign("http://localhost:3000/home");
+  };
+
   if (isAuthenticated) {
   }
   return (
@@ -61,6 +95,10 @@ const UserOptionsMenu = ({ isAuthenticated, id, name }: Props): JSX.Element => {
             toast.dark("You are being redirected to your Settings!");
           },
         },
+        {
+          label: "Logout",
+          onClick: () => handleLogoutClick(),
+        },
       ]}
     />
   );
@@ -73,4 +111,35 @@ const mapStateToProps = (state: RootState) => {
     id: state.id,
   };
 };
-export default connect(mapStateToProps, {})(UserOptionsMenu);
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    setUserData: (
+      id: number,
+      name: string,
+      lastname: string,
+      username: string,
+      email: string,
+      birthdate: string,
+      gender: string,
+      address: string,
+      boolean: boolean
+    ) =>
+      dispatch({
+        type: "SET_USER_DATA",
+        payload: {
+          id,
+          name,
+          lastname,
+          username,
+          email,
+          birthdate,
+          gender,
+          address,
+          boolean,
+        },
+      }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserOptionsMenu);
