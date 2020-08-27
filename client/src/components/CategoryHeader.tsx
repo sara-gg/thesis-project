@@ -43,8 +43,8 @@ const CategoryHeader = ({
     SortProductsForCategory(categoryId, direction, price);
   };
 
-  const handleDateSort = (direction: "up" | "down", updatedAt: "updatedAt" ) => {
-    SortProductsForCategory( categoryId, direction, updatedAt);
+  const handleDateSort = (direction: "up" | "down", createdAt: "createdAt") => {
+    SortProductsForCategory(categoryId, direction, createdAt);
   };
 
   return (
@@ -103,7 +103,7 @@ const CategoryHeader = ({
             {
               label: "Most recent",
               onClick: (e: any) => {
-                handleDateSort("down", "updatedAt");
+                handleDateSort("down", "createdAt");
               },
             },
           ]}
