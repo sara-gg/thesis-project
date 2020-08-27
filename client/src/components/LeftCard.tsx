@@ -35,23 +35,13 @@ const LeftCard = () => {
 
   return (
     <div className="home-left-container">
-<<<<<<< HEAD
-      <Image height="50%" src={homepageCard} className="box" />
-      <Box
-        pad="medium"
-=======
       <Image height="70%" src={homepageCard} className="box" />
       <Box
         pad={{ top: "medium", horizontal: "5vw" }}
->>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
         gridArea="main"
         background="offwhite"
         align="center"
-<<<<<<< HEAD
-        justify="center"
-=======
         justify="start"
->>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
         className="home-card box"
         flex="grow"
       >

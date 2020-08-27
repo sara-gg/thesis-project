@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import { Box, Heading, ResponsiveContext } from "grommet";
-=======
-import React, { useEffect } from "react";
-import { Box, Heading } from "grommet";
->>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
 import "../styles/CategoriesBar.scss";
 import { NavLink } from "react-router-dom";
 import { Category } from "../models/category";
@@ -43,11 +38,7 @@ const CategoriesBar = ({ getCategories, categories }: Props) => {
               key={category.id}
             >
               <Heading
-<<<<<<< HEAD
               responsive
-=======
-                responsive
->>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
                 level="4"
                 style={styles}
                 className="categories-navbar-header"
