@@ -17,7 +17,7 @@ import PurchaseHistory from "./views/PurchaseHistory";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ApiService from "./ApiService/ApiService";
-import SaleHistory from "./views/SaleHistory";
+import SalesHistory from "./views/SalesHistory";
 
 // Stripe
 import { Elements } from "@stripe/react-stripe-js";
@@ -47,7 +47,6 @@ function App({ setUserData }: Props): JSX.Element {
   const userId: any = localStorage.getItem("userId");
 
   if (userId) {
-
   }
 
   const getAllUserData = (userId: number) => {
@@ -67,17 +66,16 @@ function App({ setUserData }: Props): JSX.Element {
     });
   };
 
-  if (userToken && userId && userToken !== 'undefined') {
+  if (userToken && userId && userToken !== "undefined") {
     getAllUserData(userId);
   } else {
-    localStorage.setItem("userId", '');
-    localStorage.setItem('userToken', '')
+    localStorage.setItem("userId", "");
+    localStorage.setItem("userToken", "");
   }
 
   return (
     <Router>
       <Elements stripe={stripePromise}>
-        <ToastContainer />
         <ToastContainer
           position="top-right"
           autoClose={3000}
@@ -116,7 +114,7 @@ function App({ setUserData }: Props): JSX.Element {
             <PurchaseHistory isAuthenticated />
           </Route>
           <Route path="/sales_history">
-            <SaleHistory isAuthenticated />
+            <SalesHistory isAuthenticated />
           </Route>
           <Route path={`/products`} component={CategoryPage} />
           <Route path="/productdetails">

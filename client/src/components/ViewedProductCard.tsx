@@ -20,14 +20,12 @@ function UserProductCard({ product, visitorId, ownerId }: Props) {
   let history = useHistory();
 
   return (
-    
-      <Image
-        fit="contain"
-        height="250px"
-        width="250px"
-        src={`${product.images}`}
-      />
-      
+    <Image
+      fit="contain"
+      height="250px"
+      width="250px"
+      src={`${product.images}`}
+    />
   );
   {
     /* 

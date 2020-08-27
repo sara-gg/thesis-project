@@ -234,7 +234,7 @@ const getAllSoldProducts = (): Promise<any> => {
   })
     .then((res) => res.json())
     .catch((err) => console.error(err));
-}
+};
 
 const saveViewedProduct = async (product: Product) => {
   const token = localStorage.getItem("accessToken");
@@ -246,10 +246,10 @@ const saveViewedProduct = async (product: Product) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ product_id: product.id })
+    body: JSON.stringify({ product_id: product.id }),
   })
     .then((res) => res.json())
-    .catch((err) => console.error(err))
+    .catch((err) => console.error(err));
 };
 
 const getViewedProducts = async () => {
@@ -264,8 +264,8 @@ const getViewedProducts = async () => {
     },
   })
     .then((res) => res.json())
-    .catch((err) => console.error(err))
-}
+    .catch((err) => console.error(err));
+};
 
 const getAllReviews = (): Promise<any> => {
   return fetch(`${BASE_URL}/reviews`, {
@@ -299,5 +299,5 @@ export default {
   addToPurchaseHistory,
   getAllPurchasedProducts,
   getAllSoldProducts,
-  getAllReviews
+  getAllReviews,
 };

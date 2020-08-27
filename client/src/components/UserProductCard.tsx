@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Button, Image, Text } from "grommet";
 import { Edit, Trash } from "grommet-icons";
 import { Product } from "../models/product";
@@ -78,13 +78,14 @@ function UserProductCard({ product, visitorId, ownerId }: Props) {
 
   return (
     <Box
-      height="auto"
+      height="250px"
       width="small"
       margin="small"
       pad="small"
       background="white"
       hoverIndicator="true"
       round="small"
+      justify="between"
       onClick={() => {
         history.push({
           pathname: "/productdetails",

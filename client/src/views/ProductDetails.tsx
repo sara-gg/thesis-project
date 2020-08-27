@@ -124,7 +124,7 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
   };
 
   const handleAddItemToWishlist = () => {
-    toast(
+    toast.dark(
       <Box margin="20px">
         {product.title} has been added to your wishlist! ❤️
       </Box>

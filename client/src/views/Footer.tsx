@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Box, Grommet, Footer, Grid } from "grommet";
+import React from "react";
+import { Box, Footer, Grid } from "grommet";
 import {
   Instagram,
   Twitter,

@@ -13,6 +13,7 @@ import { Hide, View } from "grommet-icons";
 import ApiService from "../ApiService/ApiService";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
+import "../styles/heading-title.scss";
 
 const initialState = {
   email: "",
@@ -68,7 +69,7 @@ const LoginForm = (): JSX.Element => {
         weight="bold"
         alignSelf="center"
       >
-        Login
+        <span className="heading-title">Login</span>
       </Text>
       <Text size="xlarge" alignSelf="center" margin="small">
         {" "}

@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Text } from "grommet";
 import { useHistory } from "react-router-dom";
-import useWindowSize from 'react-use/lib/useWindowSize';
-import Confetti from 'react-confetti';
+import useWindowSize from "react-use/lib/useWindowSize";
+import Confetti from "react-confetti";
 import AppBar from "../components/AppBar";
-import ApiService from '../ApiService/ApiService';
+import ApiService from "../ApiService/ApiService";
 
 function SuccessfulPayment() {
   const [basketProducts, setBasketProducts] = useState([]);
-  let { width, height } = useWindowSize()
+  let { width, height } = useWindowSize();
   let history = useHistory();
 
   useEffect(() => {
-    ApiService.getBasketProducts()
-      .then(res => setBasketProducts(res));
+    ApiService.getBasketProducts().then((res) => setBasketProducts(res));
   }, []);
 
   useEffect(() => {
@@ -25,18 +24,16 @@ function SuccessfulPayment() {
 
   return (
     <>
-    <AppBar />
-      <Confetti
-        width={width - 17}
-        height={height - 17}
-      />
+      <AppBar />
+      <Confetti width={width - 17} height={height - 17} />
       <Box margin="xlarge" pad="medium" align="center">
-        
-        <Text size='xxlarge' color='#E1BE86'>Congratulations!</Text>
-        <Text margin='small'>You successfully bought the products!</Text>
+        <Text size="xxlarge" color="#E1BE86">
+          Congratulations!
+        </Text>
+        <Text margin="small">You successfully bought the products!</Text>
         <Button
           margin="large"
-          label="Continue"
+          label="Continue shopping"
           onClick={() => {
             history.push("/home");
           }}
