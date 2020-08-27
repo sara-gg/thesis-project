@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-<<<<<<< HEAD
 import {
   Box,
   Button,
@@ -13,30 +12,16 @@ import { Cart } from "grommet-icons";
 import logo from "../assets/Furniss Logo.png";
 import croppedLogo from "../assets/logo-cropped.png";
 import logonew from "../assets/logo1.png";
-=======
-import { Box, Button, Heading, Menu, Image, ResponsiveContext } from "grommet";
-import { Cart } from "grommet-icons";
-import logo from "../assets/Furniss Logo.png";
-// import croppedLogo from "../assets/logo-cropped.png";
-// import logonew from "../assets/logo1.png";
->>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
 import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import Logout from "../components/Logout";
 import SearchBar from "../components/SearchBar/SearchBar";
 import ApiService from "../ApiService/ApiService";
 import UserOptionsMenu from "../components/UserOptionsMenu";
-<<<<<<< HEAD
 import { Product } from "../models/product";
-import { connect } from "react-redux";
-import "../styles/AppBar.scss";
 import { logRoles } from "@testing-library/react";
-=======
-// import { Product } from "../models/product";
 import { connect } from "react-redux";
 import "../styles/AppBar.scss";
-// import { logRoles } from "@testing-library/react";
->>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
 
 type Props = {
   isAuthenticated: boolean;
@@ -57,7 +42,7 @@ const AppBar = ({
     ApiService.getBasketProducts()
       .then((products) => {
         if (products) {
-          products.forEach((product: any) => total++);
+          products.forEach((product: Product) => total++);
         }
       })
       .then(() => setTotalBasket(total));
