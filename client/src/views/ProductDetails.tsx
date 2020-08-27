@@ -19,6 +19,8 @@ import { postBasketProducts } from "../actions";
 import AppBar from "../components/AppBar";
 import CategoriesBar from "../components/CategoriesBar";
 import { Product } from "../models/product";
+import SkeletonProductDetailsDashboard from "../components/SkeletonProductDetailsDashboard";
+import "../styles/SkeletonProductDetailsDashboard.scss";
 import "../styles/ProductDetails.scss";
 import { confirmAlert } from "react-confirm-alert";
 import {
@@ -49,12 +51,13 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
   const [product, setProduct] = useState<any>(null);
   const [currentQuantity, setCurrentQuantity] = useState<number>(0);
   const [userInfo, setUserInfo] = useState<any>([]);
+  const [isLoadingProduct, setIsLoadingProduct] = useState(false);
   const url = window.location.href;
   const token = localStorage.getItem("accessToken");
 
-
   // TODO: fetch a single product with /product?id=1
   useEffect(() => {
+    setIsLoadingProduct(true);
     ApiService.getAllProducts()
       .then((res) => {
         const products: Product[] = res.rows;
@@ -76,6 +79,9 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
             setUserInfo(res);
           });
         }
+      })
+      .then(() => {
+        setIsLoadingProduct(false);
       });
   }, []);
 
@@ -91,19 +97,13 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
         ...product,
         basket_quantity: currentQuantity,
       };
-      toast.dark(
-        <Box margin="20px">
-          {product.title} has been added to your basket! 🛒 🎉
-      </Box>
-      );
       postBasketProducts(currentQuantityProduct).then(() =>
         console.log("here posting quantity", currentQuantityProduct)
       );
     } else {
       confirmAlert({
         title: "You aren't logged in",
-        message:
-          "Only logged users can buy products",
+        message: "Only logged users can buy products",
         buttons: [
           {
             label: "Register",
@@ -135,14 +135,11 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
     if (currentQuantity < product.quantity) {
       setCurrentQuantity(currentQuantity + 1);
     }
-
-    //this.apiClient.updateTopic(this.topic).subscribe()
   };
 
   const quantityDown = () => {
     if (currentQuantity > 0) {
       setCurrentQuantity(currentQuantity - 1);
-      //this.apiClient.updateTopic(this.topic).subscribe()
     }
   };
 
@@ -154,10 +151,9 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
     <Box>
       <AppBar />
       <CategoriesBar />
-      {product && (
+      {isLoadingProduct && <SkeletonProductDetailsDashboard duration={10} />}
+      {!isLoadingProduct && product && (
         <Box align="center" margin="medium">
-          {console.log(product)}
-
           <Box
             direction="row"
             overflow={{ horizontal: "hidden" }}
@@ -206,7 +202,12 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
                   size="medium"
                   className="product-details-title"
                 >
-                  {userInfo.username}
+                  <a
+                    className="product-details-seller-1"
+                    onClick={() => redirectToSeller(product.user_id)}
+                  >
+                    {userInfo.username}
+                  </a>
                 </Paragraph>
                 <Text size="medium" margin="large">
                   {product.description}

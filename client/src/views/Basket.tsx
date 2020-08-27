@@ -9,6 +9,7 @@ import BasketProductCard from "../components/BasketProductCard";
 import { Product } from "../models/product";
 import {
   Box,
+  Collapsible,
   Tabs,
   Tab,
   Heading,
@@ -29,6 +30,7 @@ type Props = {
 function Basket({ isAuthenticated }: Props): JSX.Element {
   const [basketProducts, setBasketProducts] = useState<Product[]>([]);
   const [amoutToPay, setAmoutToPay] = useState(0);
+  const [openPayment, setOpenPayment] = useState(false);
   let history = useHistory();
 
   const renderProducts = (productList: Product[]) => {
@@ -58,9 +60,8 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
   }, [basketProducts]);
 
   return (
-  
     <Box>
-       <AppBar basketProducts={basketProducts}/>
+      <AppBar basketProducts={basketProducts} />
       <CategoriesBar />
       <Heading
         level="2"
@@ -73,8 +74,8 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
       <Box direction="column" className="basket-dashbaord">
         {basketProducts && basketProducts.length > 0 ? (
           <Box width="100%" align="center">
-            <Box className="basket-container" direction="row" gap="medium">
-              <Table>
+            <Box className="basket-container" direction="column" gap="medium">
+              <Table margin={{ horizontal: "20%" }}>
                 <TableHeader>
                   <TableRow>
                     <TableCell scope="col" border="bottom">
@@ -92,14 +93,13 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
                 </TableHeader>
                 {renderProducts(basketProducts)}
               </Table>
-              {/* <Box
-                margin="medium"
+              <Box
+                pad={{ top: "2%" }}
                 justify="center"
-                height="100%"
-                width="medium"
+                width="100vw"
                 background="offwhite"
                 align="center"
-                pad="small"
+                margin="medium"
               >
                 <p color="headings" className="basket-total-number">
                   {amoutToPay}€
@@ -107,23 +107,36 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
                 <Paragraph color="grey" className="basket-total-text">
                   TOTAL
                 </Paragraph>
-                <a className="basket-total-btn">CHECKOUT NOW</a>
-              </Box> */}
+                <a
+                  className="basket-total-btn"
+                  onClick={() => setOpenPayment(!openPayment)}
+                >
+                  CHECKOUT NOW
+                </a>
+              </Box>
             </Box>
-
-            <Text margin="small"> · · · </Text>
-            <Heading
-              level="2"
-              color="text"
-              alignSelf="center"
-              margin={{ top: "medium" }}
-            >
-              Almost there
-            </Heading>
-            <PaymentForm
-              amoutToPay={amoutToPay}
-              basketProducts={basketProducts}
-            />
+            <Collapsible direction="horizontal" open={openPayment}>
+              <Box
+                flex
+                width="100vw"
+                background="offwhite"
+                //pad="small"
+                elevation="small"
+              >
+                <Heading
+                  level="2"
+                  color="text"
+                  alignSelf="center"
+                  margin={{ top: "medium" }}
+                >
+                  Almost there...
+                </Heading>
+                <PaymentForm
+                  amoutToPay={amoutToPay}
+                  basketProducts={basketProducts}
+                />
+              </Box>
+            </Collapsible>
           </Box>
         ) : (
           <Heading
