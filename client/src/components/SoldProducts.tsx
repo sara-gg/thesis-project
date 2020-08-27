@@ -32,7 +32,7 @@ const SoldProducts = (): JSX.Element => {
             })}
         </Box>
       ) : (
-        <Box align="center" gap="small">
+        <Box align="center" gap="medium">
           <Text>You haven't sold any products yet!</Text>
           <Text>
             In the meantime, why don't you check what is trending now?

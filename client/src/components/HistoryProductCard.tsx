@@ -13,7 +13,7 @@ type Props = {
 
 const HistoryProductCard = ({ product, sold }: Props) => {
   const renderSoldOptions = () => {
-    if (sold) {
+    if (!sold) {
       return (
         <Box alignSelf="center" gap="xsmall" width="50%" align="end">
           <Box

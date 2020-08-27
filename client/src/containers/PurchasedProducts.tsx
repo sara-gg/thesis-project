@@ -19,7 +19,7 @@ const PurchasedProducts = (): JSX.Element => {
   return (
     <Box>
       {purchasedProducts && purchasedProducts.length > 0 ? (
-        <Box>
+        <Box pad="medium" align="center">
           {purchasedProducts.length !== 0 &&
             purchasedProducts.map((product: Product) => {
               return (
@@ -32,7 +32,7 @@ const PurchasedProducts = (): JSX.Element => {
             })}
         </Box>
       ) : (
-        <Box align="center" gap="small">
+        <Box align="center" gap="medium">
           <Text>You haven't bought any products yet!</Text>
           <Text>Check out what is new for you: </Text>
           <Button

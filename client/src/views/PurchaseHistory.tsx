@@ -21,7 +21,9 @@ function PurchaseHistory({ isAuthenticated }: Props): any {
         <Box
           direction="column"
           alignSelf="center"
-          pad={{ top: "medium" }}
+          align="center"
+          justify="center"
+          pad="medium"
           margin={{ vertical: "large" }}
           background="offwhite"
           width="90%"
@@ -36,6 +38,10 @@ function PurchaseHistory({ isAuthenticated }: Props): any {
             alignSelf="center"
             margin={{ bottom: "medium", top: "small" }}
           ></Box>
+
+          <Text alignSelf="center">
+            Here you can find information about all your previous purchases!
+          </Text>
           <PurchasedProducts />
         </Box>
       </Box>
