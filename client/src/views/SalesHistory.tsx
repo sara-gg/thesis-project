@@ -28,7 +28,7 @@ function SalesHistory({ isAuthenticated }: Props): any {
           width="90%"
         >
           <Text size="xlarge" color="blue" weight="bold" alignSelf="center">
-            <span className="heading-title">purchase history</span>
+            <span className="heading-title">Sales history</span>
           </Text>
 
           <Text size="large" alignSelf="center" margin="small">
@@ -36,7 +36,7 @@ function SalesHistory({ isAuthenticated }: Props): any {
             · · ·{" "}
           </Text>
           <Text alignSelf="center">
-            Here you can find information about all your previous purchases!
+            Here you can find information about all your previous sales!
           </Text>
           <SoldProducts />
         </Box>

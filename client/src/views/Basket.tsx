@@ -7,6 +7,8 @@ import "../styles/Basket.scss";
 import ApiService from "../ApiService/ApiService";
 import BasketProductCard from "../components/BasketProductCard";
 import { Product } from "../models/product";
+import basketImg from "../assets/undraw_empty_cart_co35 (1).svg";
+
 import {
   Box,
   Collapsible,
@@ -62,11 +64,7 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
   return (
   
     <Box>
-<<<<<<< HEAD
-       <AppBar basketProducts={basketProducts}/>
-=======
       <AppBar basketProducts={basketProducts} />
->>>>>>> 04059edfbd80ec752d957a6f9a90ac82a039fe6a
       <CategoriesBar />
       <Heading
         level="2"
@@ -144,6 +142,7 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
             </Collapsible>
           </Box>
         ) : (
+          <Box align="center">
           <Heading
             level="3"
             color="text"
@@ -152,6 +151,7 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
           >
             You don't have any products in your basket yet
           </Heading>
+        <img width="400px" src={basketImg}></img></Box>
         )}
       </Box>
     </Box>

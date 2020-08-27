@@ -73,9 +73,8 @@ function App({ setUserData }: Props): JSX.Element {
   return (
     <Router>
       <Elements stripe={stripePromise}>
-        <ToastContainer />
         <ToastContainer
-          position="top-right"
+          position="bottom-right"
           autoClose={3000}
           hideProgressBar={false}
           newestOnTop={false}
