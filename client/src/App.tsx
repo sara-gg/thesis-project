@@ -126,7 +126,7 @@ function App({ setUserData }: Props): JSX.Element {
         </div>
         <Foot />
       </Elements>
-    </Router>
+    </Router >
   );
 }
 

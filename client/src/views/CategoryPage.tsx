@@ -76,7 +76,7 @@ const CategoryPage = ({
   }
   return (
     <Box className="categoryPage">
-      <AppBar/>
+      <AppBar />
       <CategoriesBar />
       <CategoryHeader
         categoryName={categoryNamesToIds[categoryId]}
