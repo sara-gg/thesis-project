@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Box } from "grommet";
+import { Avatar } from "grommet";
 import iconGaga from "../assets/ladygagaicon.jpeg";
 import iconLeo from "../assets/iconleo.jpeg";
 import iconThor from "../assets/adminicon.jpeg";

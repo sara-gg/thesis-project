@@ -145,7 +145,6 @@ export function getProductsForCategory(categoryId: number): any {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         dispatch(setCategoryProducts(res.rows));
         dispatch(setCategoryProductsCount(res.count));
       })

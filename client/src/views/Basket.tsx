@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
+
 import { connect } from "react-redux";
 import AppBar from "../components/AppBar";
 import CategoriesBar from "../components/CategoriesBar";
@@ -14,8 +14,6 @@ import "../styles/SkeletonBasketRow.scss";
 import {
   Box,
   Collapsible,
-  Tabs,
-  Tab,
   Heading,
   Paragraph,
   Table,

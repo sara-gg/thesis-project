@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text } from "grommet";
+import { Box, } from "grommet";
 import NewProductForm from "../components/NewProductForm";
 import AppBar from "../components/AppBar";
 import newProductImg from "../assets/general-room.jpg";

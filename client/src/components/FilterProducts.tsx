@@ -2,12 +2,10 @@ import React, { useState, useEffect } from "react";
 import {
   Box,
   Button,
-  CheckBox,
   CheckBoxGroup,
   Heading,
   Form,
   FormField,
-  Text,
 } from "grommet";
 import { Close } from "grommet-icons";
 import { connect } from "react-redux";
@@ -65,7 +63,7 @@ function FilterProducts({
     categoryProducts.forEach((product: Product) => {
       categorySellers.push(product.user_id);
     });
-    console.log(categorySellers);
+
     setSellers(categorySellers);
     let uniqueSellers = [...new Set(categorySellers)];
     uniqueSellers.forEach((id) => {
@@ -96,7 +94,7 @@ function FilterProducts({
 
   const handleSellers = (event: any) => {
     const { value, option } = event;
-    console.log(value);
+
     setSelectedSellers(value);
   };
 

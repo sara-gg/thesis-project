@@ -1,9 +1,8 @@
 import React from "react";
 import Skeleton from "react-loading-skeleton";
-import { Box, Button, Image, Text } from "grommet";
+import { Box } from "grommet";
 
 const SkeletonCard = (duration) => {
-
   return (
     <Box>
       <ul className="list">

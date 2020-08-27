@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Button, Image, Text } from "grommet";
-import { Edit, Trash } from "grommet-icons";
+import { Trash } from "grommet-icons";
 import { Product } from "../models/product";
 import { useHistory } from "react-router-dom";
 import ApiService from "../ApiService/ApiService";

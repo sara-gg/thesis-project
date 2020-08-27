@@ -8,6 +8,7 @@ import Logout from "../components/Logout";
 import SearchBar from "../components/SearchBar/SearchBar";
 import ApiService from "../ApiService/ApiService";
 import UserOptionsMenu from "../components/UserOptionsMenu";
+import { Product } from "../models/product";
 import { connect } from "react-redux";
 import "../styles/AppBar.scss";
 // import { logRoles } from "@testing-library/react";
@@ -31,7 +32,7 @@ const AppBar = ({
     ApiService.getBasketProducts()
       .then((products) => {
         if (products) {
-          products.forEach((product: any) => total++);
+          products.forEach((product: Product) => total++);
         }
       })
       .then(() => setTotalBasket(total));
@@ -83,7 +84,6 @@ const AppBar = ({
       );
     }
   };
-  const size = React.useContext(ResponsiveContext);
 
   return (
     <ResponsiveContext.Consumer>

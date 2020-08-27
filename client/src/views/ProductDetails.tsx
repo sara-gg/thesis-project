@@ -4,8 +4,6 @@ import {
   AccordionPanel,
   Anchor,
   Box,
-  Button,
-  Image,
   Paragraph,
   Text,
 } from "grommet";
@@ -102,9 +100,7 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
           {product.title} has been added to your basket! 🛒 🎉
         </Box>
       );
-      postBasketProducts(currentQuantityProduct).then(() =>
-        console.log("here posting quantity", currentQuantityProduct)
-      );
+      postBasketProducts(currentQuantityProduct)
     } else {
       confirmAlert({
         title: "You aren't logged in",

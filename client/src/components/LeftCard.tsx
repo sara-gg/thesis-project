@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Button,
-  Grid,
-  Image,
-  Heading,
-  Text,
-  ResponsiveContext,
-} from "grommet";
+import { Box, Button, Image, Heading, Text } from "grommet";
 import { deepMerge } from "grommet/utils";
 import homepageCard from "../assets/homepage-card.jpg";
 import { useHistory } from "react-router-dom";
@@ -16,22 +8,6 @@ import myTheme from "../styles/theme";
 
 const LeftCard = () => {
   let history = useHistory();
-
-  const customBreakpoints = deepMerge(myTheme, {
-    global: {
-      breakpoints: {
-        small: {
-          value: 600,
-        },
-        medium: {
-          value: 900,
-        },
-        large: {
-          value: 3000,
-        },
-      },
-    },
-  });
 
   return (
     <div className="home-left-container">
