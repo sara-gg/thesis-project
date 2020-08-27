@@ -115,10 +115,12 @@ const RegistrationForm = ({
             <span className="heading-title">register</span>
           </Text>
         </Box>
-        <Text size="large" alignSelf="center" margin="small">
-          {" "}
-          · · ·{" "}
-        </Text>
+        <Box
+          width="medium"
+          border="bottom"
+          alignSelf="center"
+          margin={{ bottom: "medium", top: "small" }}
+        ></Box>
         <Form onSubmit={handleSubmit}>
           <FormField
             name="name"

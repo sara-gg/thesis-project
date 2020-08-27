@@ -19,10 +19,16 @@ const PurchasedProducts = (): JSX.Element => {
   return (
     <Box>
       {purchasedProducts && purchasedProducts.length > 0 ? (
-        <Box pad="medium" align="center">
+        <Box>
           {purchasedProducts.length !== 0 &&
             purchasedProducts.map((product: Product) => {
-              return <HistoryProductCard product={product} key={product.id} />;
+              return (
+                <HistoryProductCard
+                  product={product}
+                  key={product.id}
+                  sold={false}
+                />
+              );
             })}
         </Box>
       ) : (

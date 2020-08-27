@@ -166,7 +166,7 @@ const NewProductForm = ({
       justify="center"
       margin={{ top: "medium", bottom: "large" }}
       background={{ color: "white", opacity: "strong" }}
-      width="75%"
+      width="70%"
       round="small"
     >
       <Box direction="row" align="center" justify="center">
@@ -180,10 +180,12 @@ const NewProductForm = ({
           <span className="heading-title">New Product</span>
         </Text>
       </Box>
-      <Text size="large" alignSelf="center" margin="small">
-        {" "}
-        · · ·{" "}
-      </Text>
+      <Box
+        width="medium"
+        border="bottom"
+        alignSelf="center"
+        margin={{ bottom: "medium", top: "small" }}
+      ></Box>
       <Box direction="row" align="center">
         <Box
           width="40%"

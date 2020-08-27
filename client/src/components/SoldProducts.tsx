@@ -11,7 +11,9 @@ const SoldProducts = (): JSX.Element => {
   const history = useHistory();
 
   useEffect(() => {
-    ApiService.getAllSoldProducts().then((res) => setSoldProducts(res));
+    ApiService.getAllSoldProducts().then((res) => {
+      setSoldProducts(res);
+    });
   }, []);
 
   return (
@@ -20,7 +22,13 @@ const SoldProducts = (): JSX.Element => {
         <Box pad="medium" align="center">
           {soldProducts.length !== 0 &&
             soldProducts.map((product: Product) => {
-              return <HistoryProductCard product={product} key={product.id} />;
+              return (
+                <HistoryProductCard
+                  product={product}
+                  key={product.id}
+                  sold={true}
+                />
+              );
             })}
         </Box>
       ) : (
