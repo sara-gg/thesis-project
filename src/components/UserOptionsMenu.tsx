@@ -6,6 +6,9 @@ import { RootState } from "../models/rootstate";
 import { toast } from "react-toastify";
 import renderUserIcon from "../helpers/renderUserIcon";
 
+
+const URL = process.env.URL || "http://localhost:3000"
+
 type Props = {
   isAuthenticated: boolean;
   name: string;
@@ -45,7 +48,7 @@ const UserOptionsMenu = ({
 
   const handleAuth = () => {
     setUserData(0, "", "", "", "", "", "", "", false);
-    window.location.assign("http://localhost:3000/home");
+    window.location.assign(`${URL}/home`);
   };
 
   if (isAuthenticated) {
@@ -64,7 +67,7 @@ const UserOptionsMenu = ({
         {
           label: "My Gallery",
           onClick: () => {
-            window.location.assign(`http://localhost:3000/usergallery/${id}`);
+            window.location.assign(`${URL}/usergallery/${id}`);
           },
         },
         {

@@ -95,6 +95,8 @@ const NewProductForm = ({
 
   let history = useHistory();
 
+const URL = process.env.URL || "http://localhost:3000"
+
   useEffect(() => {
     getCategories();
     setNewProduct(initialState);
@@ -157,7 +159,7 @@ const NewProductForm = ({
     e.preventDefault();
     newProduct.category_id = category_id;
     await ApiService.createNewProduct(newProduct, e.target, productImage);
-    window.location.assign(`http://localhost:3000/usergallery/${userId}`);
+    window.location.assign(`${URL}/usergallery/${userId}`);
   };
 
   return (

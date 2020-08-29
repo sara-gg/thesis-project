@@ -21,6 +21,8 @@ const CardElementContainer = styled.div`
   }
 `;
 
+const BASE_URL = process.env.BASE_URL || "http://localhost:3001";
+
 const CheckoutForm = ({ price, onSuccessfulCheckout }) => {
   const [isProcessing, setProcessingTo] = useState(false);
   const [checkoutError, setCheckoutError] = useState();
@@ -45,7 +47,7 @@ const CheckoutForm = ({ price, onSuccessfulCheckout }) => {
     setProcessingTo(true);
 
     const { data: clientSecret } = await axios.post(
-      "http://localhost:3001/api/payment_intents",
+      `${BASE_URL}/api/payment_intents`,
       {
         amount: price * 100,
       }
