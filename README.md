@@ -1,18 +1,15 @@
-## Furniss - Front-end
+# Furniss - Front-end
 
 </br>
 
 This repository contains only the front-end side, back-end can be found [here](https://github.com/juansp92/thesisProjectBackend)
 
-### About Furniss 🛋
+## About Furniss 🛋
 
-</br>
 Furniss is a marketplace where registered users can buy and sell upcycled and preloved furniture. </br>
 Users can create an account, publish new products to their gallery, check their reviews and ratings, check the most popular items, search, filter and sort products, process payments and access their sales and purchase history. </br>
 
-### Getting started 🚀
-
-</br>
+## Getting started 🚀
 
 **What you need:**
 
@@ -51,9 +48,7 @@ Now the client will run locally [here](http://localhost:3000) (or at port 3000)
 
 And you are all set! 🎉
 
-### Tech stack 👩‍💻
-
-</br>
+## Tech stack 👩‍💻
 
 HabitUp has been created using:
 
@@ -71,18 +66,14 @@ HabitUp has been created using:
 - PostgresQL
 - Sequelize
 
-### Dependencies 💻
-
-</br>
+## Dependencies 💻
 
 - [NodeJs](https://nodejs.org/en/) (v10 or above)
 - [Postgresql](https://www.postgresql.org/)
 - [Stripe](https://stripe.com/en-gb) account
 - [Cloudinary](https://cloudinary.com/) account
 
-### Testing 🧪
-
-</br>
+## Testing 🧪
 
 This project uses the [Jest](https://jestjs.io/) library for unit test cases, to run the unit tests please do the following:
 
@@ -96,9 +87,8 @@ To add a unit test simply create a file with the file to be tested followed by `
 ./myFile.js -> test/myFile.test.js
 ```
 
-### Contributors 🍍
+## Contributors 🍍
 
-</br>
 - [Amina Antoniazzi](https://github.com/amantoniazzi)
 - [Aneesa Zafri](https://github.com/neesafarza)
 - [Juan Ignacio Sánchez Plastic](https://github.com/juan-ignacio-sanchez-plastic)
@@ -106,4 +96,4 @@ To add a unit test simply create a file with the file to be tested followed by `
 
 </br>
 
-🌳
+Enjoy! 🐣
