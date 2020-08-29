@@ -5,7 +5,7 @@ import logo from "../assets/logo.png";
 import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import LoginButton from "./LoginButton";
-import SearchBar from "../components/SearchBar/SearchBar";
+import SearchBar from "./SearchBar/SearchBar";
 import ApiService from "../ApiService/ApiService";
 import UserOptionsMenu from "../components/UserOptionsMenu";
 import { Product } from "../models/product";
