@@ -15,6 +15,8 @@ import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 import "../styles/heading-title.scss";
 
+const URL = process.env.URL || "http://localhost:3000"
+
 const initialState = {
   email: "",
   password: "",
@@ -50,7 +52,7 @@ const LoginForm = (): JSX.Element => {
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("userId", JSON.stringify(userId));
       // we should call here the setIsAuthenticated action
-      window.location.replace("http://localhost:3000/home");
+      window.location.replace(`${URL}/home`);
     }
   };
 

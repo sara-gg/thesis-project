@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import LoginButton from "./LoginButton";
 import SearchBar from "./SearchBar/SearchBar";
 import ApiService from "../ApiService/ApiService";
-import UserOptionsMenu from "../components/UserOptionsMenu";
+import UserOptionsMenu from "./UserOptionsMenu";
 import { Product } from "../models/product";
 import { connect } from "react-redux";
 import "../styles/AppBar.scss";
