@@ -23,7 +23,7 @@ import {
   Text,
 } from "grommet";
 import { useHistory } from "react-router-dom";
-import PaymentForm from "../components/Payment/PaymentForm";
+import PaymentForm from "../components/PaymentForm";
 
 type Props = {
   isAuthenticated: boolean;
@@ -31,7 +31,7 @@ type Props = {
 
 function Basket({ isAuthenticated }: Props): JSX.Element {
   const [basketProducts, setBasketProducts] = useState<Product[]>([]);
-  const [amoutToPay, setAmoutToPay] = useState(0);
+  const [amountToPay, setAmountToPay] = useState(0);
   const [openPayment, setOpenPayment] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   let history = useHistory();
@@ -63,7 +63,7 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
   useEffect(() => {
     let total = 0;
     basketProducts.forEach((product) => (total += product.price));
-    setAmoutToPay(total);
+    setAmountToPay(total);
   }, [basketProducts]);
 
   return (
@@ -114,7 +114,7 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
                   margin="medium"
                 >
                   <p color="headings" className="basket-total-number">
-                    {amoutToPay}€
+                    {amountToPay}€
                   </p>
                   <Paragraph color="grey" className="basket-total-text">
                     TOTAL
@@ -144,7 +144,7 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
                     Almost there...
                   </Heading>
                   <PaymentForm
-                    amoutToPay={amoutToPay}
+                    amountToPay={amountToPay}
                     basketProducts={basketProducts}
                   />
                 </Box>

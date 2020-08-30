@@ -5,6 +5,7 @@ import useWindowSize from "react-use/lib/useWindowSize";
 import Confetti from "react-confetti";
 import AppBar from "../components/AppBar";
 import ApiService from "../ApiService/ApiService";
+import successfulImg from "../assets/undraw_successful_purchase.svg";
 
 function SuccessfulPayment() {
   const [basketProducts, setBasketProducts] = useState([]);
@@ -39,6 +40,9 @@ function SuccessfulPayment() {
           }}
           primary
         />
+        <Box margin={{ bottom: "medium" }}>
+          <img width="400px" src={successfulImg}></img>
+        </Box>
       </Box>
     </>
   );

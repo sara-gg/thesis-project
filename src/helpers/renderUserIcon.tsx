@@ -17,7 +17,6 @@ const renderUserIcon = (id: number, avatarSize: string) => {
       <Avatar
         size={avatarSize}
         background={{
-          opacity: "medium",
           image: `url(${iconHedge})`,
         }}
       />
@@ -27,7 +26,6 @@ const renderUserIcon = (id: number, avatarSize: string) => {
       <Avatar
         size={avatarSize}
         background={{
-          opacity: "medium",
           image: `url(${iconPuppy})`,
         }}
       />
@@ -47,7 +45,6 @@ const renderUserIcon = (id: number, avatarSize: string) => {
       <Avatar
         size={avatarSize}
         background={{
-          opacity: "medium",
           image: `url(${iconChick})`,
         }}
       />
@@ -57,7 +54,6 @@ const renderUserIcon = (id: number, avatarSize: string) => {
       <Avatar
         size={avatarSize}
         background={{
-          opacity: "medium",
           image: `url(${iconKitten})`,
         }}
       />
@@ -67,7 +63,6 @@ const renderUserIcon = (id: number, avatarSize: string) => {
       <Avatar
         size={avatarSize}
         background={{
-          opacity: "medium",
           image: `url(${iconJane})`,
         }}
       />
@@ -77,7 +72,6 @@ const renderUserIcon = (id: number, avatarSize: string) => {
       <Avatar
         size={avatarSize}
         background={{
-          opacity: "medium",
           image: `url(${iconGaga})`,
         }}
       />
@@ -87,7 +81,6 @@ const renderUserIcon = (id: number, avatarSize: string) => {
       <Avatar
         size={avatarSize}
         background={{
-          opacity: "medium",
           image: `url(${iconLeo})`,
         }}
       />
@@ -97,7 +90,6 @@ const renderUserIcon = (id: number, avatarSize: string) => {
       <Avatar
         size={avatarSize}
         background={{
-          opacity: "medium",
           image: `url(${iconThor})`,
         }}
       />
@@ -107,7 +99,6 @@ const renderUserIcon = (id: number, avatarSize: string) => {
       <Avatar
         size={avatarSize}
         background={{
-          opacity: "medium",
           image: `url(${iconSalad})`,
         }}
       />
