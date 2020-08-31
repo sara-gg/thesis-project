@@ -7,7 +7,15 @@ This repository contains only the front-end side, back-end can be found [here](h
 ## About Furniss 🛋
 
 Furniss is a marketplace where registered users can buy and sell upcycled and preloved furniture. </br>
-Users can create an account, publish new products to their gallery, check their reviews and ratings, check the most popular items, search, filter and sort products, process payments and access their sales and purchase history. </br>
+<img src="./screenshots/mockup-home.png" alt="furniss-home" width="800"/>
+
+Users can create an account, publish new products to their gallery, check their reviews and ratings, find the most popular items, search, filter and sort products, process payments for their shopping and access their sales and purchase history. </br>
+
+<img src="./screenshots/mockup-category.png" alt="furniss-category" width="500"/></br>
+<img src="./screenshots/mockup-details.png" alt="furniss-details" width="500"/>
+<img src="./screenshots/mockup-zoom.png" alt="furniss-zoom" width="500"/></br>
+<img src="./screenshots/mockup-gallery.png" alt="furniss-category" width="500"/>
+<img src="./screenshots/mockup-history.png" alt="furniss-category" width="500"/></br>
 
 ## Getting started 🚀
 
