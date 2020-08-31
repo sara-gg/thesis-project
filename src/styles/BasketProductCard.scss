@@ -1,0 +1,24 @@
+.soldProduct {
+  opacity: 0.5;
+  display: flex;
+  align-items: center;
+}
+
+.soldProductText {
+  background-color: beige;
+}
+
+.product-title {
+  text-transform: lowercase;
+  font-variant: small-caps;
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
+.table-product-title {
+  text-transform: lowercase;
+  font-variant: small-caps;
+  font-size: 40px;
+  letter-spacing: 2px;
+  font-weight: 700;
+}

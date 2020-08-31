@@ -1,0 +1,37 @@
+.list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+}
+
+.card {
+  width: 500px;
+  //elevation="medium"
+  margin: 24px;
+  pad: 24px;
+}
+.card-link {
+  color: inherit;
+  text-decoration: none;
+}
+.card-image {
+  width: 100%;
+  height: 360px;
+}
+.channel-image {
+  border-radius: 100%;
+  padding: 0, 10px, 0, 0;
+  width: 40px;
+  height: 40px;
+}
+.card-title {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+.card-channel {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
