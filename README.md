@@ -1,25 +1,107 @@
-# thesis-project
+# Furniss - Front-end
 
-NOTE: This is the client-side, server can be found at: https://github.com/juansp92/thesisProjectBackend
+</br>
 
-Our Thesis Project Web App (name still to be decided) consist of a marketplace for upcycled and second hand furniture, where users can register to buy and/or sell.
-For our MVP our goal is that users are able to:
--Authenticate and have access to private routes.
--Create their own gallery of products to sell.
--Add new products to the gallery through a form.
--Browse different categories of products to buy.
--Add products to cart.
--Process payments and arrange delivery.
+This repository contains only the front-end side, back-end can be found [here](https://github.com/juansp92/thesisProjectBackend)
 
-This project was bootstrapped with Create React App and uses Typescript.
-Latest changes can be found in branch "develop".
+## About Furniss 🛋
 
-Run "npm i" to install node modules.
-To run the app from the the client folder with : "npm start", which runs the app in the development mode.
-Open http://localhost:3000 to view it in the browser.
-The page will reload if you make edits.
+Furniss is a marketplace where registered users can buy and sell upcycled and preloved furniture. </br>
+<img src="./screenshots/mockup-home.png" alt="furniss-home" width="800"/>
 
-Currently in progress: 
--branch auth-testing is making changes in history and in Login to fix rendering issues (path changes correctly with history.push() but it needs manual reloading to render the page, which makes app lose the isAuthenticated state). 
--product categories page
--AppBar component has been placed temporarily and has no functionality. 
+Users can create an account, publish new products to their gallery, check their reviews and ratings, find the most popular items, search, filter and sort products, process payments for their shopping and access their sales and purchase history. </br>
+
+<img src="./screenshots/mockup-category.png" alt="furniss-category" width="500"/></br>
+<img src="./screenshots/mockup-details.png" alt="furniss-details" width="500"/>
+<img src="./screenshots/mockup-zoom.png" alt="furniss-zoom" width="500"/></br>
+<img src="./screenshots/mockup-gallery.png" alt="furniss-category" width="500"/>
+<img src="./screenshots/mockup-history.png" alt="furniss-category" width="500"/></br>
+
+## Getting started 🚀
+
+**What you need:**
+
+- Code editor (ex. Visual Studio Code)
+- Web browser (ex. Chrome)
+
+#### Back-end
+
+Make sure you have installed NodeJS and Postgres, with Postgres open in your machine's terminal.
+To start creating the de database and populate it with mock data run the next commands on your project terminal:
+
+```bash
+npm i
+npm run createDB_and_mockData
+npm start
+```
+
+Now the server will run locally [here](http://localhost:3001) (or at port 3001)
+
+If you want to remove the database just run:
+
+```bash
+npm run removeDB
+```
+
+#### Front-end
+
+To launch the app, open the **client** folder in your code editor, and type the following commands in the project terminal:
+
+```bash
+npm i
+npm start
+```
+
+Now the client will run locally [here](http://localhost:3000) (or at port 3000)
+
+And you are all set! 🎉
+
+## Tech stack 👩‍💻
+
+HabitUp has been created using:
+
+#### Front-end:
+
+- React
+- Redux
+- TypeScript
+
+#### Back-end:
+
+- Express
+- Node.js
+- Jest
+- PostgresQL
+- Sequelize
+
+## Dependencies 💻
+
+- [NodeJs](https://nodejs.org/en/) (v10 or above)
+- [Postgresql](https://www.postgresql.org/)
+- [Stripe](https://stripe.com/en-gb) account
+- [Cloudinary](https://cloudinary.com/) account
+
+## Testing 🧪
+
+This project uses the [Jest](https://jestjs.io/) library for unit test cases, to run the unit tests please do the following:
+
+```bash
+npm test
+```
+
+To add a unit test simply create a file with the file to be tested followed by `.test` within the `/test` directory. For example:
+
+```bash
+./myFile.js -> test/myFile.test.js
+```
+
+## Contributors 🍍
+
+- [Amina Antoniazzi](https://github.com/amantoniazzi)
+- [Aneesa Zafri](https://github.com/neesafarza)
+- [Juan Ignacio Sánchez Plastic](https://github.com/juan-ignacio-sanchez-plastic)
+- [Sara Samain](https://github.com/sarasamain)
+
+</br>
+
+Enjoy! 🐣
