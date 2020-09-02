@@ -11,12 +11,11 @@ Furniss is a marketplace where registered users can buy and sell upcycled and pr
 
 Users can create an account, publish new products to their gallery, check their reviews and ratings, find the most popular items, search, filter and sort products, process payments for their shopping and access their sales and purchase history. </br>
 
-![Furniss User Gallery](./screenshots/mockup-usergallery-small.png)
+![Furniss Category](./screenshots/mockup-category-small.png)
+![Furniss Product Details](./screenshots/mockup-details-small.png)
 ![Furniss Zoom](./screenshots/mockup-zoom-small.png)
-
-<img src="./screenshots/mockup-zoom.png" alt="furniss-zoom" width="400"/>
-<img src="./screenshots/mockup-gallery.png" alt="furniss-category" width="400"/>
-<img src="./screenshots/mockup-history.png" alt="furniss-category" width="400"/></br>
+![Furniss User Gallery](./screenshots/mockup-usergallery-small.png)
+![Furniss Zoom](./screenshots/mockup-history-small.png)
 
 ## Getting started 🚀
 
