@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 import "../styles/heading-title.scss";
 
-const URL = process.env.URL || "http://localhost:3000"
+const URL = process.env.REACT_APP_URL || "http://localhost:3000"
 
 const initialState = {
   email: "",

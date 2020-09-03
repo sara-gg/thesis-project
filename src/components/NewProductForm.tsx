@@ -95,7 +95,7 @@ const NewProductForm = ({
 
   let history = useHistory();
 
-const URL = process.env.URL || "http://localhost:3000"
+const URL = process.env.REACT_APP_URL || "http://localhost:3000"
 
   useEffect(() => {
     getCategories();

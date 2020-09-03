@@ -2,7 +2,7 @@ import { NewProduct } from "./models/newProduct";
 import { User } from "./models/user";
 import { Category } from "./models/category";
 import { Product } from "./models/product";
-const BASE_URL = process.env.BASE_URL || "http://localhost:3001";
+const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
 //AUTHENITCATION ACTIONS
 

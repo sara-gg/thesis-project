@@ -1,6 +1,6 @@
 import { Product } from "../models/product";
 
-const BASE_URL = process.env.BASE_URL || "http://localhost:3001";
+const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
 const login = async (user: any) => {
   return fetch(`${BASE_URL}/login`, {
