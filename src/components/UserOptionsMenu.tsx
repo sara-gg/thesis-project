@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import renderUserIcon from "../helpers/renderUserIcon";
 
 
-const URL = process.env.URL || "http://localhost:3000"
+const URL = process.env.REACT_APP_URL || "http://localhost:3000"
 
 type Props = {
   isAuthenticated: boolean;
