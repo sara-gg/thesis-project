@@ -100,7 +100,7 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
           {product.title} has been added to your basket! 🛒 🎉
         </Box>
       );
-      postBasketProducts(currentQuantityProduct)
+      postBasketProducts(currentQuantityProduct);
     } else {
       confirmAlert({
         title: "You aren't logged in",
@@ -334,7 +334,7 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
 
               <Box pad="medium" direction="row" margin="medium" gap="small">
                 <FacebookShareButton
-                  url="http://furnissweb.com/" // TODO: localhost doesn't work as valid url. need to change after deploy
+                  url={url} 
                   quote={`Checkout this amazing ${product.title} I found on Furniss 👇🔥`}
                   className="Demo__some-network__share-button"
                   windowHeight={700}
@@ -343,7 +343,7 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
                   <FacebookIcon size={32} round />
                 </FacebookShareButton>
                 <PinterestShareButton
-                  url="http://furnissweb.com/" // TODO: localhost doesn't work as valid url. need to change after deploy
+                  url={url}
                   media={product.images}
                   description={product.title}
                   className="Demo__some-network__share-button"
@@ -353,7 +353,7 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
                   <PinterestIcon size={32} round />
                 </PinterestShareButton>
                 <WhatsappShareButton
-                  url="http://furnissweb.com/" // TODO: localhost doesn't work as valid url. need to change after deploy
+                  url={url} 
                   title={`Checkout this amazing ${product.title} I found on Furniss 👇🔥`}
                   className="Demo__some-network__share-button"
                   windowHeight={700}
