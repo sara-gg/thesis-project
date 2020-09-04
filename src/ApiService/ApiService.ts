@@ -45,7 +45,7 @@ const getProductsForCategory = (categoryId: number): Promise<any> => {
 };
 
 const getCategories = (): Promise<any[]> => {
-  return fetch(`${BASE_URL}/categories`, {
+  return fetch(`${BASE_URL}categories`, {
     method: "GET",
     credentials: "include",
     mode: "cors",
