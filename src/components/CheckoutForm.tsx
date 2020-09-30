@@ -23,7 +23,12 @@ const CardElementContainer = styled.div`
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
-const CheckoutForm = ({ price, onSuccessfulCheckout }) => {
+interface Props {
+  price: number;
+  onSuccessfulCheckout: Function;
+}
+
+const CheckoutForm = ({ price, onSuccessfulCheckout }: Props) => {
   const [isProcessing, setProcessingTo] = useState(false);
   const [checkoutError, setCheckoutError] = useState();
 
