@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 import "../styles/heading-title.scss";
 
-const URL = process.env.REACT_APP_URL || "http://localhost:3000"
+const URL = process.env.REACT_APP_URL || "http://localhost:3000";
 
 const initialState = {
   email: "",
@@ -80,16 +80,7 @@ const LoginForm = (): JSX.Element => {
         margin={{ bottom: "medium", top: "small" }}
       ></Box>
       <Form onSubmit={handleSubmit}>
-        <FormField
-          name="email"
-          label={
-            <Box direction="row">
-              <Text>Email</Text>
-              <Text color="status-critical"> *</Text>
-            </Box>
-          }
-          required
-        >
+        <FormField name="email" label={<Text>Email</Text>} required>
           <MaskedInput
             name="email"
             mask={[
@@ -103,16 +94,7 @@ const LoginForm = (): JSX.Element => {
             onChange={handleChange}
           />
         </FormField>
-        <FormField
-          name="password"
-          label={
-            <Box direction="row">
-              <Text>Password</Text>
-              <Text color="status-critical"> *</Text>
-            </Box>
-          }
-          required
-        >
+        <FormField name="password" label={<Text>Password</Text>} required>
           <Box direction="row">
             <TextInput
               plain
@@ -129,13 +111,6 @@ const LoginForm = (): JSX.Element => {
             />
           </Box>
         </FormField>
-        <Text
-          margin={{ left: "small", vertical: "medium" }}
-          size="small"
-          color="status-critical"
-        >
-          * Required Field
-        </Text>
         <Box
           direction="column"
           alignSelf="center"

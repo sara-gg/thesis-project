@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   Box,
   Button,
+  CheckBox,
   Form,
   FormField,
   MaskedInput,
@@ -55,6 +56,7 @@ const RegistrationForm = ({
   telephone,
 }: Props): JSX.Element => {
   const [revealPassword, setRevealPassword] = useState(false);
+  const [checked, setChecked] = useState(false);
   let history = useHistory();
 
   const daysInMonth = (month: any) => new Date(2019, month, 0).getDate();
@@ -70,29 +72,38 @@ const RegistrationForm = ({
     setRegisterDetails({ name, option });
   };
 
+  const isPasswordAllowed = (pwd: string): boolean => {
+    return pwd.length > 7 && /\d/.test(pwd) && /\D/.test(pwd);
+  };
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const user = {
-      name,
-      lastname,
-      username,
-      description,
-      email,
-      password,
-      birthdate,
-      gender,
-      address,
-      telephone,
-    };
-
-    submitRegisterDetails(user).then(
-      (accessToken: string, userId: number | string) => {
-        const strUserId = "" + userId;
-        localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("userId", strUserId);
-        history.push("/home");
-      }
-    );
+    if (isPasswordAllowed(password) && checked === true) {
+      const user = {
+        name,
+        lastname,
+        username,
+        description,
+        email,
+        password,
+        birthdate,
+        gender,
+        address,
+        telephone,
+      };
+      submitRegisterDetails(user).then(
+        (accessToken: string, userId: number | string) => {
+          const strUserId = "" + userId;
+          localStorage.setItem("accessToken", accessToken);
+          localStorage.setItem("userId", strUserId);
+          history.push("/home");
+        }
+      );
+    } else if (!isPasswordAllowed(password)) {
+      alert("You must enter a valid password");
+    } else if (checked === false) {
+      alert("You must confirm you accept Furniss' terms and conditions");
+    }
   };
 
   if (!isAuthenticated) {
@@ -228,6 +239,9 @@ const RegistrationForm = ({
               />
             </Box>
           </FormField>
+          <Text size="xsmall" color="slategrey">
+            Must contain at least eight characters, one letter and one number{" "}
+          </Text>
           <FormField
             name="telephone"
             label={
@@ -255,9 +269,13 @@ const RegistrationForm = ({
             <TextInput name="address" value={address} onChange={handleChange} />
           </FormField>
           <Box>
-            <Text margin={{ horizontal: "small", vertical: "small" }}>
-              Date of birth
-            </Text>
+            <Box
+              direction="row"
+              margin={{ horizontal: "small", vertical: "small" }}
+            >
+              <Text>Date of birth</Text>
+              <Text color="status-critical"> *</Text>
+            </Box>
             <Box margin={{ vertical: "small" }} width="medium">
               <MaskedInput
                 mask={[
@@ -295,7 +313,17 @@ const RegistrationForm = ({
               />
             </Box>
           </Box>
-          <FormField label="Gender" name="gender">
+          <FormField
+            label={
+              <Box direction="row">
+                <Text>Gender</Text>
+                <Text color="status-critical"> *</Text>
+              </Box>
+            }
+            name="gender"
+            margin={{ bottom: "small" }}
+            required
+          >
             <Select
               name="gender"
               options={["Female", "Male", "Prefer not to say"]}
@@ -303,13 +331,11 @@ const RegistrationForm = ({
               onChange={handleSelectChange}
             />
           </FormField>
-          <Text
-            margin={{ left: "small", vertical: "medium" }}
-            size="small"
-            color="darkred"
-          >
-            * Required Field
-          </Text>
+          <CheckBox
+            checked={checked}
+            label={`I confirm I accept Furniss' terms and conditions.`}
+            onChange={(event) => setChecked(event.target.checked)}
+          />
           <Box
             direction="column"
             alignSelf="center"
