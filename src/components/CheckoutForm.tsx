@@ -32,10 +32,10 @@ const CheckoutForm = ({ price, onSuccessfulCheckout }: Props) => {
   const [isProcessing, setProcessingTo] = useState(false);
   const [checkoutError, setCheckoutError] = useState();
 
-  const stripe = useStripe();
-  const elements = useElements();
+  const stripe: any = useStripe();
+  const elements: any = useElements();
 
-  const handleFormSubmit = async (ev) => {
+  const handleFormSubmit = async (ev: any) => {
     ev.preventDefault();
 
     const billingDetails = {
@@ -92,14 +92,14 @@ const CheckoutForm = ({ price, onSuccessfulCheckout }: Props) => {
     },
   };
 
-  const formStyle = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  };
+  // const formStyle = {
+  //   display: "flex",
+  //   flexDirection: "column",
+  //   alignItems: "center",
+  // };
 
   return (
-    <form onSubmit={handleFormSubmit} style={formStyle}>
+    <form onSubmit={handleFormSubmit}>
       <Row>
         <BillingDetailsFields />
       </Row>
