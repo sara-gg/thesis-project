@@ -74,7 +74,7 @@ const LoginForm = (): JSX.Element => {
         <span className="heading-title">Login</span>
       </Text>
       <Box
-        width="medium"
+        width="small"
         border="bottom"
         alignSelf="center"
         margin={{ bottom: "medium", top: "small" }}
@@ -121,6 +121,12 @@ const LoginForm = (): JSX.Element => {
           <Button type="submit" alignSelf="center" label="Login" primary />
         </Box>
       </Form>
+      <Box alignSelf="center" pad="small">
+        <Text size="small">
+          Are you having trouble logging in? Email us at furniss.shop@gmail.com
+          for help solving your issue.
+        </Text>
+      </Box>
       <Box
         margin={{ vertical: "small" }}
         align="center"

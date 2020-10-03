@@ -2,7 +2,6 @@ import React from "react";
 import { Box, DropButton, Menu, Text } from "grommet";
 import { Filter, Descend } from "grommet-icons";
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import FilterProducts from "./FilterProducts";
 import { SortProductsForCategory } from "../actions";
@@ -28,8 +27,6 @@ const CategoryHeader = ({
   categoryId,
   SortProductsForCategory,
 }: any): JSX.Element => {
-  let history = useHistory();
-
   const [open, setOpen] = React.useState<boolean>();
   const onOpen = () => {
     setOpen(true);

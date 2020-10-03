@@ -1,13 +1,13 @@
 import React from "react";
 import { Box, Image, Text } from "grommet";
-import "react-toastify/dist/ReactToastify.css";
-import moment from "moment";
-import "../styles/heading-title.scss";
 import { Product } from "../models/product";
+import moment from "moment";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../styles/heading-title.scss";
 
 type Props = {
-  product: any;
+  product: Product;
   sold: boolean;
 };
 

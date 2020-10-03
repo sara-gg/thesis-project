@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Box,
-  Button,
-  CheckBoxGroup,
-  Heading,
-  Form,
-  FormField,
-} from "grommet";
+import { Box, Button, CheckBoxGroup, Heading, Form, FormField } from "grommet";
 import { Close } from "grommet-icons";
 import { connect } from "react-redux";
 import { Materials } from "../models/materials";
@@ -15,17 +8,17 @@ import ApiService from "../ApiService/ApiService";
 import { filterCategoryProducts, getProductsForCategory } from "../actions";
 import "../styles/FilterForm.scss";
 
-interface DispatchProps {
+type Props = {
+  onClose: () => void;
   filterCategoryProducts: (
     category_id: number,
     material?: string,
-    location?: string
+    location?: string,
+    otherProperty?: any
   ) => Promise<any>;
-  getProductsForCategory: (id: number) => Promise<any>;
-}
-type Props = {
-  onClose: () => void;
   categoryId: number;
+  getProductsForCategory: (id: number) => Promise<any>;
+  categoryProducts: Product[];
 };
 
 const materialOptions: Array<Materials> = [
@@ -44,13 +37,13 @@ materialOptions.forEach((material) => {
   materialNamesToLabels.push({ label: material, value: material });
 });
 
-function FilterProducts({
+const FilterProducts = ({
   onClose,
   filterCategoryProducts,
   categoryId,
   getProductsForCategory,
   categoryProducts,
-}: any) {
+}: any) => {
   const [materials, setMaterials] = useState<Array<string>>([]);
   const [location, setLocation] = useState<string>("");
   const [sellers, setSellers] = useState<Array<number> | undefined>([]);
@@ -71,7 +64,7 @@ function FilterProducts({
         setSellerNames((sellerNames: any) => [...sellerNames, res]);
       });
     });
-  }, []);
+  }, [categoryProducts]);
 
   const sellerNamesToLabels: any = [];
 
@@ -166,7 +159,7 @@ function FilterProducts({
       </Form>
     </Box>
   );
-}
+};
 
 const mapStateToProps = (state: any) => {
   return {

@@ -15,4 +15,6 @@ export interface Product {
   createdAt?: any;
   updatedAt?: any;
   basket_quantity?: number;
+  purchased_quantity?: number;
+  purchase_date?: Date | number;
 }
