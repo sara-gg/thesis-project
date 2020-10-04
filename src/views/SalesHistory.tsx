@@ -9,7 +9,7 @@ type Props = {
   isAuthenticated: boolean;
 };
 
-function SalesHistory({ isAuthenticated }: Props): any {
+const SalesHistory = ({ isAuthenticated }: Props): any => {
   let history = useHistory();
 
   if (isAuthenticated) {
@@ -47,6 +47,6 @@ function SalesHistory({ isAuthenticated }: Props): any {
   } else {
     return history.push("/login");
   }
-}
+};
 
 export default SalesHistory;

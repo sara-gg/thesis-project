@@ -9,7 +9,7 @@ type Props = {
   ownerId: number;
 };
 
-function ReviewList({ ownerId }: Props): JSX.Element {
+const ReviewList = ({ ownerId }: Props): JSX.Element => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ function ReviewList({ ownerId }: Props): JSX.Element {
         setReviews(filteredReviews);
       }
     });
-  }, []);
+  }, [ownerId]);
 
   return (
     <Box width="100%" alignSelf="center">
@@ -45,6 +45,6 @@ function ReviewList({ ownerId }: Props): JSX.Element {
       )}
     </Box>
   );
-}
+};
 
 export default ReviewList;

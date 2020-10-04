@@ -1,7 +1,6 @@
 import React from "react";
-import {  Image,  } from "grommet";
+import { Image } from "grommet";
 import { Product } from "../models/product";
-
 
 interface Props {
   product: Product;
@@ -10,9 +9,7 @@ interface Props {
   readonly?: boolean;
 }
 
-function UserProductCard({ product, visitorId, ownerId }: Props) {
-
-
+const UserProductCard = ({ product, visitorId, ownerId }: Props) => {
   return (
     <Image
       fit="contain"

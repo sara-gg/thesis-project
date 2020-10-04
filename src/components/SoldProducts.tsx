@@ -42,7 +42,11 @@ const SoldProducts = (): JSX.Element => {
             onClick={() => history.push("/home")}
             primary
           ></Button>
-          <img width="400px" src={soldImg}></img>
+          <img
+            width="400px"
+            src={soldImg}
+            alt="No sold items in your basket"
+          ></img>
         </Box>
       )}
     </Box>

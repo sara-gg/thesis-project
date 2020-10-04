@@ -4,7 +4,7 @@ import registerImg from "../assets/flowers-eea-ikeda.jpg";
 import RegistrationForm from "../components/RegistrationForm";
 import AppBar from "../components/AppBar";
 
-function Register() {
+const Register = () => {
   return (
     <>
       <AppBar />
@@ -26,6 +26,6 @@ function Register() {
       </Box>
     </>
   );
-}
+};
 
 export default Register;

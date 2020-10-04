@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Grid, Image, Heading, Text } from "grommet";
+import { Box, Button, Image, Heading, Text } from "grommet";
 import bedroomCard from "../assets/bedroom-card.jpg";
 import { useHistory } from "react-router-dom";
 import "../styles/homeCard.scss";

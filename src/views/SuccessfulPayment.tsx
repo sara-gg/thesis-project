@@ -7,7 +7,7 @@ import AppBar from "../components/AppBar";
 import ApiService from "../ApiService/ApiService";
 import successfulImg from "../assets/undraw_successful_purchase.svg";
 
-function SuccessfulPayment() {
+const SuccessfulPayment = () => {
   const [basketProducts, setBasketProducts] = useState([]);
   let { width, height } = useWindowSize();
   let history = useHistory();
@@ -41,11 +41,11 @@ function SuccessfulPayment() {
           primary
         />
         <Box margin={{ bottom: "medium" }}>
-          <img width="400px" src={successfulImg}></img>
+          <img width="400px" src={successfulImg} alt="Successful payment"></img>
         </Box>
       </Box>
     </>
   );
-}
+};
 
 export default SuccessfulPayment;

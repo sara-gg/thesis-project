@@ -3,11 +3,10 @@ import ApiService from "../ApiService/ApiService";
 import { Product } from "../models/product";
 import ViewedProductCard from "./ViewedProductCard";
 import { RootState } from "../models/rootstate";
-import { Box, Carousel, Heading,} from "grommet";
+import { Box, Carousel, Heading } from "grommet";
 import { connect } from "react-redux";
 
-
-function RecentViewed() {
+const RecentViewed = () => {
   const [products, setProducts] = useState<Product[]>();
   const visitorIdStr: any = localStorage.getItem("userId");
 
@@ -57,29 +56,27 @@ function RecentViewed() {
     }
   };
 
-
   return (
     <Box>
       <Box justify="center">
-      <Box
-        justify="center"
-        align="center"
-        background="white"
-        margin-top="2%"
-        margin-bottom="4%"
-      >
-        <Heading level="2">You've recently viewed</Heading>
-      </Box>
-        
+        <Box
+          justify="center"
+          align="center"
+          background="white"
+          margin-top="2%"
+          margin-bottom="4%"
+        >
+          <Heading level="2">You've recently viewed</Heading>
+        </Box>
+
         <Carousel>
-        { products && products.length > 0 ? <View0 /> : null }
-        { products && products.length > 3 ? <View1 /> : null }
+          {products && products.length > 0 ? <View0 /> : null}
+          {products && products.length > 3 ? <View1 /> : null}
         </Carousel>
-  
       </Box>
     </Box>
   );
-}
+};
 
 const mapStateToProps = (state: RootState) => {
   return {

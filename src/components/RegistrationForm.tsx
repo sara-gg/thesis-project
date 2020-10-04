@@ -40,6 +40,10 @@ type Props = {
   telephone: string;
 };
 
+const isPasswordAllowed = (pwd: string): boolean => {
+  return pwd.length > 7 && /\d/.test(pwd) && /\D/.test(pwd);
+};
+
 const RegistrationForm = ({
   isAuthenticated,
   setRegisterDetails,
@@ -70,10 +74,6 @@ const RegistrationForm = ({
     const { name } = e.target;
     const { option } = e;
     setRegisterDetails({ name, option });
-  };
-
-  const isPasswordAllowed = (pwd: string): boolean => {
-    return pwd.length > 7 && /\d/.test(pwd) && /\D/.test(pwd);
   };
 
   const handleSubmit = async (e: any) => {

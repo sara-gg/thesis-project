@@ -29,7 +29,7 @@ type Props = {
   isAuthenticated: boolean;
 };
 
-function Basket({ isAuthenticated }: Props): JSX.Element {
+const Basket = ({ isAuthenticated }: Props): JSX.Element => {
   const [basketProducts, setBasketProducts] = useState<Product[]>([]);
   const [amountToPay, setAmountToPay] = useState(0);
   const [openPayment, setOpenPayment] = useState(false);
@@ -169,7 +169,7 @@ function Basket({ isAuthenticated }: Props): JSX.Element {
       </Box>
     </Box>
   );
-}
+};
 
 const mapStateToProps = (state: any) => {
   return {

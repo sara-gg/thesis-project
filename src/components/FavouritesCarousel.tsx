@@ -30,13 +30,13 @@ const View1 = () => {
   );
 };
 
-function FavouritesCarousel() {
+const FavouritesCarousel = () => {
   return (
     <Carousel>
       <View0 />
       <View1 />
     </Carousel>
   );
-}
+};
 
 export default FavouritesCarousel;

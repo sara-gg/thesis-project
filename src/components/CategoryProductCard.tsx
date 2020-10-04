@@ -10,7 +10,7 @@ interface Props {
   readonly?: boolean;
 }
 
-function CategoryProductCard({ product, readonly }: Props) {
+const CategoryProductCard = ({ product, readonly }: Props) => {
   let history = useHistory();
 
   return (
@@ -57,6 +57,6 @@ function CategoryProductCard({ product, readonly }: Props) {
       </Box>
     </Box>
   );
-}
+};
 
 export default CategoryProductCard;

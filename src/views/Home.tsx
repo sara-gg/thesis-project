@@ -11,7 +11,7 @@ import "../styles/Home.scss";
 import { RootState } from "../models/rootstate";
 import { connect } from "react-redux";
 
-function Home() {
+const Home = () => {
   const visitorIdStr: any = localStorage.getItem("userId");
 
   return (
@@ -55,7 +55,7 @@ function Home() {
       <FavouritesCarousel />
     </div>
   );
-}
+};
 
 const mapStateToProps = (state: RootState) => {
   return {

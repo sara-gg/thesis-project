@@ -22,11 +22,11 @@ interface Props {
   basketProducts: any;
   setBasketProducts: (p: any) => void;
 }
-function BasketProductCard({
+const BasketProductCard = ({
   product,
   setBasketProducts,
   basketProducts,
-}: Props) {
+}: Props) => {
   // const [editmode, setEditMode] = useState(false);
   let history = useHistory();
 
@@ -85,6 +85,6 @@ function BasketProductCard({
       </TableRow>
     </TableBody>
   );
-}
+};
 
 export default BasketProductCard;

@@ -3,7 +3,7 @@ import { Box, Text } from "grommet";
 import { AddCircle } from "grommet-icons";
 import { useHistory } from "react-router-dom";
 
-function AddNewProduct() {
+const AddNewProduct = () => {
   let history = useHistory();
 
   return (
@@ -28,6 +28,6 @@ function AddNewProduct() {
       </Text>
     </Box>
   );
-}
+};
 
 export default AddNewProduct;

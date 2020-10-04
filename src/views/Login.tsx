@@ -11,7 +11,7 @@ type Props = {
   isAuthenticated: boolean;
 };
 
-function Login({ isAuthenticated }: Props): JSX.Element {
+const Login = ({ isAuthenticated }: Props): JSX.Element => {
   if (!isAuthenticated) {
     return (
       <>
@@ -38,7 +38,7 @@ function Login({ isAuthenticated }: Props): JSX.Element {
   } else {
     return <Redirect to={{ pathname: "/home" }} />;
   }
-}
+};
 
 const mapStateToProps = (state: RootState) => {
   return {

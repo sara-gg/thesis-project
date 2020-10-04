@@ -13,7 +13,7 @@ type Props = {
   ownerId: number;
 };
 
-function UserProductsGallery({ visitorId, ownerId }: Props): JSX.Element {
+const UserProductsGallery = ({ visitorId, ownerId }: Props): JSX.Element => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ function UserProductsGallery({ visitorId, ownerId }: Props): JSX.Element {
         )
       );
     });
-  }, [products]);
+  }, [ownerId, products]);
 
   const addNewProduct = () => {
     if (visitorId === ownerId) {
@@ -103,6 +103,6 @@ function UserProductsGallery({ visitorId, ownerId }: Props): JSX.Element {
       {productList()}
     </Box>
   );
-}
+};
 
 export default UserProductsGallery;

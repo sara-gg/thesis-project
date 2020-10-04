@@ -6,7 +6,7 @@ type Props = {
   review?: any;
 };
 
-function ReviewCard({ review }: Props): JSX.Element {
+const ReviewCard = ({ review }: Props): JSX.Element => {
   let rating = 0;
   let content = "";
 
@@ -40,6 +40,6 @@ function ReviewCard({ review }: Props): JSX.Element {
       <Text size="small">{content}</Text>
     </Box>
   );
-}
+};
 
 export default ReviewCard;

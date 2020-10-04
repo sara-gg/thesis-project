@@ -11,7 +11,7 @@ interface Props {
   product: Product;
   readonly?: boolean;
 }
-function UserGalleryProductCard({ product, readonly }: Props) {
+const UserGalleryProductCard = ({ product, readonly }: Props) => {
   // const [editmode, setEditMode] = useState(false);
   let history = useHistory();
 
@@ -57,6 +57,6 @@ function UserGalleryProductCard({ product, readonly }: Props) {
       </Box>
     </Box>
   );
-}
+};
 
 export default UserGalleryProductCard;

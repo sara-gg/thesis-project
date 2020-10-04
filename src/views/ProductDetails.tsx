@@ -44,7 +44,7 @@ interface isAuthenticated {
 
 type Props = DispatchProps & StateProps & isAuthenticated;
 
-function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
+const ProductDetails = ({ postBasketProducts, id, isAuthenticated }: Props) => {
   const history = useHistory();
   const [product, setProduct] = useState<any>(null);
   const [currentQuantity, setCurrentQuantity] = useState<number>(0);
@@ -53,7 +53,6 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
   const url = window.location.href;
   const token = localStorage.getItem("accessToken");
 
-  // TODO: fetch a single product with /product?id=1
   useEffect(() => {
     setIsLoadingProduct(true);
     ApiService.getAllProducts()
@@ -334,7 +333,7 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
 
               <Box pad="medium" direction="row" margin="medium" gap="small">
                 <FacebookShareButton
-                  url={url} 
+                  url={url}
                   quote={`Checkout this amazing ${product.title} I found on Furniss 👇🔥`}
                   className="Demo__some-network__share-button"
                   windowHeight={700}
@@ -353,7 +352,7 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
                   <PinterestIcon size={32} round />
                 </PinterestShareButton>
                 <WhatsappShareButton
-                  url={url} 
+                  url={url}
                   title={`Checkout this amazing ${product.title} I found on Furniss 👇🔥`}
                   className="Demo__some-network__share-button"
                   windowHeight={700}
@@ -368,7 +367,7 @@ function ProductDetails({ postBasketProducts, id, isAuthenticated }: Props) {
       )}
     </Box>
   );
-}
+};
 
 const mapStateToProps = (state: StateProps) => {
   return {

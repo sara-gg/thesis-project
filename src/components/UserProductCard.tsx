@@ -16,7 +16,7 @@ interface Props {
   readonly?: boolean;
 }
 
-function UserProductCard({ product, visitorId, ownerId }: Props) {
+const UserProductCard = ({ product, visitorId, ownerId }: Props) => {
   let history = useHistory();
   const deleteNotification = () =>
     toast.dark("Your product is being deleted forever");
@@ -106,6 +106,6 @@ function UserProductCard({ product, visitorId, ownerId }: Props) {
       {renderEditDeleteOptions()}
     </Box>
   );
-}
+};
 
 export default UserProductCard;
