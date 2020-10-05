@@ -21,7 +21,7 @@ import {
 } from "../actions";
 import { useHistory } from "react-router-dom";
 import { Redirect } from "react-router-dom";
-import "../styles/heading-title.scss";
+// import "../styles/heading-title.scss";
 
 type Props = {
   isAuthenticated: boolean;
@@ -63,7 +63,7 @@ const RegistrationForm = ({
   const [checked, setChecked] = useState(false);
   let history = useHistory();
 
-  const daysInMonth = (month: any) => new Date(2019, month, 0).getDate();
+  const daysInMonth = (month: number) => new Date(2019, month, 0).getDate();
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -394,3 +394,5 @@ export default connect(mapStateToProps, {
   setRegisterDetails,
   submitRegisterDetails,
 })(RegistrationForm);
+
+export { isPasswordAllowed };

@@ -57,12 +57,12 @@ const CategoryPage = ({
 
   useEffect(() => {
     setIsLoadingProducts(true);
-    const timer = setTimeout(() => {
+    const timer: NodeJS.Timeout = setTimeout(() => {
       getProductsForCategory(categoryId).then(() => {
         setIsLoadingProducts(false);
       });
     }, 2000);
-  }, [location]);
+  }, [categoryId, getProductsForCategory, location]);
 
   const categoryNamesToIds: { [categoryId: number]: string } = {};
 

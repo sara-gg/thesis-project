@@ -41,7 +41,7 @@ const PurchasedProducts = (): JSX.Element => {
             onClick={() => history.push("/home")}
             primary
           ></Button>
-          <img width="400px" src={img}></img>
+          <img width="400px" src={img} alt="No products bought yet"></img>
         </Box>
       )}
     </Box>

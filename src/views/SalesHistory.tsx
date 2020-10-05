@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import CategoriesBar from "../components/CategoriesBar";
 import AppBar from "../components/AppBar";
 import SoldProducts from "../components/SoldProducts";
@@ -9,9 +9,7 @@ type Props = {
   isAuthenticated: boolean;
 };
 
-const SalesHistory = ({ isAuthenticated }: Props): any => {
-  let history = useHistory();
-
+const SalesHistory = ({ isAuthenticated }: Props): JSX.Element => {
   if (isAuthenticated) {
     return (
       <Box>
@@ -45,7 +43,7 @@ const SalesHistory = ({ isAuthenticated }: Props): any => {
       </Box>
     );
   } else {
-    return history.push("/login");
+    return <Redirect to={{ pathname: "/login" }} />;
   }
 };
 

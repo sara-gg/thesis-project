@@ -1,6 +1,6 @@
 import React from "react";
 import AppBar from "../components/AppBar";
-import { useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import CategoriesBar from "../components/CategoriesBar";
 import PurchasedProducts from "../containers/PurchasedProducts";
 import { Box, Text } from "grommet";
@@ -10,9 +10,7 @@ type Props = {
   isAuthenticated: boolean;
 };
 
-const PurchaseHistory = ({ isAuthenticated }: Props): any => {
-  let history = useHistory();
-
+const PurchaseHistory = ({ isAuthenticated }: Props): JSX.Element => {
   if (isAuthenticated) {
     return (
       <Box>
@@ -47,7 +45,7 @@ const PurchaseHistory = ({ isAuthenticated }: Props): any => {
       </Box>
     );
   } else {
-    return history.push("/login");
+    return <Redirect to={{ pathname: "/login" }} />;
   }
 };
 

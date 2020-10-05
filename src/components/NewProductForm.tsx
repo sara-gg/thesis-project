@@ -10,7 +10,6 @@ import {
   Select,
 } from "grommet";
 import ApiService from "../ApiService/ApiService";
-import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import ImageUploader from "react-images-upload";
 import { NewProduct } from "../models/newProduct";
@@ -93,14 +92,12 @@ const NewProductForm = ({
   const [productImage, setProductImage] = useState<File>();
   const userId: any = localStorage.getItem("userId");
 
-  let history = useHistory();
-
-const URL = process.env.REACT_APP_URL || "http://localhost:3000"
+  const URL = process.env.REACT_APP_URL || "http://localhost:3000";
 
   useEffect(() => {
     getCategories();
     setNewProduct(initialState);
-  }, []);
+  }, [getCategories]);
 
   const materialOptions = [
     "wood",

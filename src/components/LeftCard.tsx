@@ -1,10 +1,8 @@
 import React from "react";
 import { Box, Button, Image, Heading, Text } from "grommet";
-import { deepMerge } from "grommet/utils";
 import homepageCard from "../assets/homepage-card.jpg";
 import { useHistory } from "react-router-dom";
 import "../styles/homeCard.scss";
-import myTheme from "../styles/theme";
 
 const LeftCard = () => {
   let history = useHistory();

@@ -40,7 +40,7 @@ const ReviewList = ({ ownerId }: Props): JSX.Element => {
           <Text alignSelf="center">
             This user doesn't have any reviews yet!
           </Text>
-          <img width="400px" src={reviewImg}></img>
+          <img width="400px" src={reviewImg} alt="No reviews yet"></img>
         </Box>
       )}
     </Box>

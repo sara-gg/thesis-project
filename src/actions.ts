@@ -191,8 +191,6 @@ export function SortProductsForCategory(
   updatedAt?: "updatedAt" | null
 ): any {
   return function (dispatch: any): Promise<any> {
-    const id = { categoryId };
-
     return fetch(`${BASE_URL}/products?category_id=${categoryId}`, {
       method: "GET",
       credentials: "include",

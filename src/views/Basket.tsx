@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import { connect } from "react-redux";
 import AppBar from "../components/AppBar";
 import CategoriesBar from "../components/CategoriesBar";
@@ -22,7 +21,6 @@ import {
   TableRow,
   Text,
 } from "grommet";
-import { useHistory } from "react-router-dom";
 import PaymentForm from "../components/PaymentForm";
 
 type Props = {
@@ -34,7 +32,6 @@ const Basket = ({ isAuthenticated }: Props): JSX.Element => {
   const [amountToPay, setAmountToPay] = useState(0);
   const [openPayment, setOpenPayment] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  let history = useHistory();
 
   const renderProducts = (productList: Product[]) => {
     let productsResult: JSX.Element[] = [];
@@ -160,7 +157,7 @@ const Basket = ({ isAuthenticated }: Props): JSX.Element => {
               >
                 You don't have any products in your basket yet
               </Heading>
-              <img width="400px" src={basketImg}></img>
+              <img width="400px" src={basketImg} alt="User basket"></img>
             </Box>
           )
         ) : (
