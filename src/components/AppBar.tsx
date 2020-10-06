@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Heading, Menu, Image, ResponsiveContext } from "grommet";
+import { Box, Button, Menu, Image, ResponsiveContext } from "grommet";
 import { Cart } from "grommet-icons";
 import logo from "../assets/logo.png";
 import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import RegisterButton from "./RegisterButton";
 import LoginButton from "./LoginButton";
 import SearchBar from "./SearchBar";
 import ApiService from "../ApiService/ApiService";
@@ -39,19 +40,7 @@ const AppBar = ({
 
   const handleRenderRegister = () => {
     if (!isAuthenticated) {
-      return (
-        <Button
-          type="reset"
-          className="login-button hide"
-          onClick={() => {
-            history.push("/register");
-          }}
-        >
-          <Heading level="4" color="text" className="navbar-header">
-            Register
-          </Heading>
-        </Button>
-      );
+      return <RegisterButton />;
     } else {
       return;
     }
